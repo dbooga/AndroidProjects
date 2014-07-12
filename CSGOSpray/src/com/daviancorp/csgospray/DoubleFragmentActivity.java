@@ -1,6 +1,6 @@
 package com.daviancorp.csgospray;
 
-import com.example.csgospray.R;
+import com.daviancorp.csgospray.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

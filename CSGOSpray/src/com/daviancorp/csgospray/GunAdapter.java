@@ -3,7 +3,7 @@ package com.daviancorp.csgospray;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.example.csgospray.R;
+import com.daviancorp.csgospray.R;
 
 import android.content.Context;
 import android.util.Log;

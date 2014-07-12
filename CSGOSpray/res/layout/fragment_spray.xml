@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WebView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:gravity="center"
-    android:padding="32dp"/>
+    android:background="#da4040">
+
+    <WebView
+        android:id="@+id/webviewActionView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minHeight="200dp"
+        android:minWidth="200dp"
+        android:scrollbars="none" />
+
+</RelativeLayout>

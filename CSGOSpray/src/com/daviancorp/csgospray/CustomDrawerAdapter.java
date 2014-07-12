@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.csgospray.R;
+import com.daviancorp.csgospray.R;
 
 public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 
