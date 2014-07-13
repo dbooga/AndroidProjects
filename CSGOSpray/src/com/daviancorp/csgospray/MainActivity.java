@@ -6,12 +6,12 @@ public class MainActivity extends DoubleFragmentActivity {
 
 	@Override
 	protected Fragment createFragmentOne(){
-		return new DrawerFragment();
+		return new DetailFragment();
 	}
 
 	@Override
 	protected Fragment createFragmentTwo() {
-		return new DetailFragment();
+		return new DrawerFragment();
 
 	}
 

@@ -14,8 +14,9 @@ import android.widget.ListView;
 import com.daviancorp.csgospray.R;
 
 public class DrawerFragment extends Fragment {
-	private DrawerLayout mDrawerLayout;
 	private static final String TAG = "DrawerFragment";
+	
+	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	CustomDrawerAdapter adapter;
 	List<DrawerItem> dataList;
@@ -23,6 +24,7 @@ public class DrawerFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		dataList = new ArrayList<DrawerItem>();
 		dataList.add(new DrawerItem("p90", R.drawable.p90));
 		dataList.add(new DrawerItem("ppbizon", R.drawable.ppbizon));
@@ -35,6 +37,7 @@ public class DrawerFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_drawer, parent, false);
+		
 		mDrawerLayout = (DrawerLayout) v.findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) v.findViewById(R.id.list_drawer);
 		mDrawerList.setAdapter(adapter);

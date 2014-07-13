@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class GunAdapter extends ArrayAdapter<String> {
-
 	private static final String TAG = "GunAdapter";
 
 	private final Context context;
@@ -32,17 +31,16 @@ public class GunAdapter extends ArrayAdapter<String> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Log.d(TAG, "hey1");
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
 		View rowView = inflater.inflate(R.layout.list_item, parent,
 				false);
-		Log.d(TAG, "hey2");
 		TextView textView = (TextView) rowView
 				.findViewById(R.id.text_item);
+		
 		String s = values[position];
 		textView.setText(s);
-		Log.d(TAG, "hey3");
 		textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, guns.get(s));
 
 		return rowView;

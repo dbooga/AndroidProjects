@@ -13,6 +13,7 @@ import android.view.View;
 
 public class GifWebView extends View {
 	private static final String TAG = "GifWebView";
+	
     private Movie mMovie = null;
     InputStream mStream = null;
     long mMoviestart = 0;
@@ -40,8 +41,6 @@ public class GifWebView extends View {
         mMovie.setTime(relTime);
         canvas.scale((float)this.getWidth()/(float)mMovie.width(), (float)this.getHeight()/(float)mMovie.height());
         mMovie.draw(canvas, 0 ,0);
-        Log.d(TAG, "suck4");
         this.invalidate();
-        Log.d(TAG, "suck5");
     }
 }
