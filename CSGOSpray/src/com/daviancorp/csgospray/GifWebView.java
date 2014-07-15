@@ -20,7 +20,7 @@ public class GifWebView extends View {
 
     public GifWebView(Context context, InputStream stream) {
         super(context);
-        mStream = context.getResources().openRawResource(R.drawable.p90recoil);
+        mStream = stream;
         mMovie = Movie.decodeStream(mStream);
     }
 
