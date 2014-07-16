@@ -16,7 +16,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class DetailFragment extends Fragment {
-	
+
 	private static int REQUEST_GUN = 0;
 	private GifWebView mGifWebView;
 	WebView webviewActionView;
@@ -26,7 +26,7 @@ public class DetailFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		gunList = GunData.getInstance().getData();
-		
+
 	}
 
 	@SuppressLint("SetJavaScriptEnabled")
@@ -34,55 +34,56 @@ public class DetailFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_spray, parent, false);
-		
-        webviewActionView = (WebView)v.findViewById(R.id.webviewActionView);
-        webviewActionView.setWebViewClient(new MyWebViewClient());
-        webviewActionView.getSettings().setJavaScriptEnabled(true);
-        setGunView(gunList.get(0).getPFile());
-        
-        ((MainActivity) getActivity()).getDrawer().setTargetFragment(this, REQUEST_GUN);
-        
+
+		webviewActionView = (WebView) v.findViewById(R.id.webviewActionView);
+		webviewActionView.setWebViewClient(new MyWebViewClient());
+		webviewActionView.getSettings().setJavaScriptEnabled(true);
+
+		setGunView(gunList.get(0).getPFile());
+
+		((MainActivity) getActivity()).getDrawer().setTargetFragment(this,
+				REQUEST_GUN);
+
 		return v;
 
 	}
-	
+
 	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data){
-		if (resultCode != Activity.RESULT_OK) return;
-		if (requestCode == REQUEST_GUN){
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode != Activity.RESULT_OK)
+			return;
+		if (requestCode == REQUEST_GUN) {
 			int gun = data.getIntExtra(DrawerFragment.EXTRA_GUN, 0);
 			setGunView(gunList.get(gun).getPFile());
 		}
 	}
-	
-	//@SuppressLint("SetJavaScriptEnabled")
-	private void setGunView(String filename){
-		
+
+	private void setGunView(String filename) {
+
 		InputStream stream = null;
-        try {
-            stream = getActivity().getResources().getAssets().open(filename);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		try {
+			stream = getActivity().getResources().getAssets().open(filename);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		webviewActionView.removeView(mGifWebView);
 
-
-
-        mGifWebView = null;
-        System.gc();
-        mGifWebView = new GifWebView(getActivity(), stream);
-        webviewActionView.addView(mGifWebView);
-        try {
+		mGifWebView = null;
+		System.gc();
+		mGifWebView = new GifWebView(getActivity(), stream);
+		webviewActionView.addView(mGifWebView);
+		try {
 			stream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-    private class MyWebViewClient extends WebViewClient {
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
-    }
+
+	private class MyWebViewClient extends WebViewClient {
+		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			view.loadUrl(url);
+			return true;
+		}
+	}
 }
