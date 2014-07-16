@@ -16,23 +16,23 @@ public class Gun {
 		this.gDrawable = gdrawable;
 	}
 
-	public String getgName() {
+	public String getName() {
 		return gName;
 	}
 
-	public String getpFile() {
+	public String getPFile() {
 		return pFile;
 	}
 
-	public String getcFile() {
+	public String getCFile() {
 		return cFile;
 	}
 
-	public String getnFile() {
+	public String getNFile() {
 		return nFile;
 	}
 
-	public Integer getgDrawable() {
+	public Integer getDrawable() {
 		return gDrawable;
 	}
 

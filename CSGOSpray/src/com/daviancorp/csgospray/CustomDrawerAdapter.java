@@ -12,14 +12,14 @@ import android.widget.TextView;
 
 import com.daviancorp.csgospray.R;
 
-public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
+public class CustomDrawerAdapter extends ArrayAdapter<Gun> {
 
 	Context context;
-	List<DrawerItem> drawerItemList;
+	List<Gun> drawerItemList;
 	int layoutResID;
 
 	public CustomDrawerAdapter(Context context, int layoutResourceID,
-			List<DrawerItem> listItems) {
+			List<Gun> listItems) {
 		super(context, layoutResourceID, listItems);
 		this.context = context;
 		this.drawerItemList = listItems;
@@ -48,11 +48,11 @@ public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {
 
 		}
 
-		DrawerItem dItem = (DrawerItem) this.drawerItemList.get(position);
+		Gun dItem = (Gun) this.drawerItemList.get(position);
 
-		drawerHolder.ItemName.setText(dItem.getItemName());
+		drawerHolder.ItemName.setText(dItem.getName());
 		drawerHolder.ItemName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0,
-				dItem.getImgResID());
+				dItem.getDrawable());
 
 		return view;
 	}
