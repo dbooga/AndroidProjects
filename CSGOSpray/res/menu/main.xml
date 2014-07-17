@@ -1,12 +1,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.csgospray.MainActivity" >
+    tools:context="com.daviancorp.csgospray.MainActivity" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:id="@+id/pattern"
+        android:title="@string/spray_pattern"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/compensation"
+        android:title="@string/spray_compensation"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/inverted"
+        android:title="@string/spray_inverted"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/about"
+        android:title="@string/spray_about"
         app:showAsAction="never"/>
 
 </menu>

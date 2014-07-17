@@ -21,6 +21,7 @@ public class DetailFragment extends Fragment {
 	private GifWebView mGifWebView;
 	WebView webviewActionView;
 	private ArrayList<Gun> gunList;
+	private Gun currGun;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class DetailFragment extends Fragment {
 		webviewActionView.setWebViewClient(new MyWebViewClient());
 		webviewActionView.getSettings().setJavaScriptEnabled(true);
 
-		setGunView(gunList.get(0).getPFile());
+		setGunView(gunList.get(0));
 
 		((MainActivity) getActivity()).getDrawer().setTargetFragment(this,
 				REQUEST_GUN);
@@ -54,12 +55,32 @@ public class DetailFragment extends Fragment {
 			return;
 		if (requestCode == REQUEST_GUN) {
 			int gun = data.getIntExtra(DrawerFragment.EXTRA_GUN, 0);
-			setGunView(gunList.get(gun).getPFile());
+			setGunView(gunList.get(gun));
 		}
 	}
+	
+	public void updateGunView(){
+		setGunView(currGun);
+	}
 
-	private void setGunView(String filename) {
+	private void setGunView(Gun gunName) {
+		currGun = gunName;
+		String filename;
 
+		switch (((MainActivity) getActivity()).getOption()) {
+		case MainActivity.OPTION_PATTERN:
+			filename = currGun.getPFile();
+			break;
+		case MainActivity.OPTION_COMPENSATION:
+			filename = currGun.getCFile();
+			break;
+		case MainActivity.OPTION_INVERTED:
+			filename = currGun.getNFile();
+			break;
+		default:
+			filename = currGun.getPFile();
+			break;
+		}
 		InputStream stream = null;
 		try {
 			stream = getActivity().getResources().getAssets().open(filename);
@@ -86,4 +107,5 @@ public class DetailFragment extends Fragment {
 			return true;
 		}
 	}
+	
 }
