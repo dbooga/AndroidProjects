@@ -1,7 +1,7 @@
 package com.daviancorp.csgospray;
 
 import java.io.InputStream;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Movie;
@@ -9,9 +9,8 @@ import android.graphics.Paint;
 import android.os.SystemClock;
 import android.view.View;
 
+@SuppressLint("ViewConstructor")
 public class GifWebView extends View {
-	private static final String TAG = "GifWebView";
-
 	private Movie mMovie = null;
 	InputStream mStream = null;
 	long mMoviestart = 0;
@@ -22,6 +21,7 @@ public class GifWebView extends View {
 		mMovie = Movie.decodeStream(mStream);
 	}
 
+	@SuppressLint("DrawAllocation")
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);

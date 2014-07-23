@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class DrawerFragment extends Fragment {
-	private static final String TAG = "DrawerFragment";
-
 	public static final String EXTRA_GUN = "com.daviancorp.csgospray.gun";
 
 	private ListView mDrawerList;
+	private DrawerLayout mDrawerLayout;
 	CustomDrawerAdapter adapter;
 	List<Gun> dataList;
 
@@ -39,8 +39,9 @@ public class DrawerFragment extends Fragment {
 
 		mDrawerList = (ListView) v.findViewById(R.id.list_drawer);
 		mDrawerList.setAdapter(adapter);
-
 		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+		mDrawerLayout = (DrawerLayout) v.findViewById(R.id.drawer_layout);
 
 		return v;
 	}
@@ -62,7 +63,16 @@ public class DrawerFragment extends Fragment {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			sendResult(Activity.RESULT_OK, position);
-
+			mDrawerLayout.closeDrawers();
 		}
 	}
+
+	public DrawerLayout getDrawerLayout() {
+		return mDrawerLayout;
+	}
+
+	public ListView getDrawerList() {
+		return mDrawerList;
+	}
+
 }
