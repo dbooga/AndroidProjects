@@ -3,9 +3,8 @@ package com.daviancorp.csgospray;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,7 +14,10 @@ public class MainActivity extends DoubleFragmentActivity {
 	public static final int OPTION_PATTERN = 0;
 	public static final int OPTION_COMPENSATION = 1;
 	public static final int OPTION_INVERTED = 2;
+	
+	private static final String DIALOG_ABOUT = "about";
 	private int option;
+	
 
 	private Fragment detail;
 	private Fragment drawer;
@@ -58,6 +60,10 @@ public class MainActivity extends DoubleFragmentActivity {
 			setTitle(R.string.spray_inverted);
 			return true;
 		case R.id.about:
+			FragmentManager fm = getSupportFragmentManager();
+			AboutDialogFragment dialog = new AboutDialogFragment();
+			dialog.show(fm, DIALOG_ABOUT);
+		
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
