@@ -858,10 +858,12 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f060002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f070003;
+        public static final int abc_search_url_text_holo=0x7f070005;
         public static final int abc_search_url_text_normal=0x7f070000;
         public static final int abc_search_url_text_pressed=0x7f070002;
         public static final int abc_search_url_text_selected=0x7f070001;
+        public static final int black=0x7f070004;
+        public static final int orange=0x7f070003;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1296,11 +1298,13 @@ containing a value of this type.
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
         
 
         Base application theme for API 11+. This theme completely replaces
@@ -1319,6 +1323,22 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b008c;
+        /**  the theme applied to the application or activity 
+         */
+        public static final int CustomActionBarTheme=0x7f0b008d;
+        public static final int MyActionBar=0x7f0b0090;
+        public static final int MyActionBar_MenuTextStyle=0x7f0b008f;
+        /**  ActionBar tabs text 
+ The textColor property is backward compatible with the Support Library 
+         */
+        public static final int MyActionBarTabText=0x7f0b0092;
+        /**  ActionBar title text 
+ The textColor property is backward compatible with the Support Library 
+         */
+        public static final int MyActionBarTitleText=0x7f0b0091;
+        /**  ActionBar styles 
+         */
+        public static final int TextAppearance=0x7f0b008e;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f0b0063;
