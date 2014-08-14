@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.Monster;
-import com.daviancorp.android.database.MonsterHunterDatabaseHelper.MonsterListCursor;
+import com.daviancorp.android.database.MonsterListCursor;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
 
 public class MonsterListFragment extends ListFragment implements LoaderCallbacks<Cursor> {

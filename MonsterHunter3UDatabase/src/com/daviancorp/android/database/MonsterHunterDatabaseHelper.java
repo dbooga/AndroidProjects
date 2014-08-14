@@ -3,15 +3,12 @@ package com.daviancorp.android.database;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.daviancorp.android.data.Monster;
-import com.daviancorp.android.monsterhunter3udatabase.R;
-
 import android.content.Context;
 import android.database.Cursor;
-import android.database.CursorWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
+import com.daviancorp.android.monsterhunter3udatabase.R;
 
 //
 //   QUERY REFERENCE:
