@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.Monster;
-import com.daviancorp.android.database.MonsterHunterDatabaseHelper.MonsterCursor;
+import com.daviancorp.android.database.MonsterHunterDatabaseHelper.MonsterListCursor;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
 
-public class MonsterLIstFragment extends ListFragment implements LoaderCallbacks<Cursor> {
+public class MonsterListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,8 @@ public class MonsterLIstFragment extends ListFragment implements LoaderCallbacks
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Create an adapter to point at this cursor
-		MonsterCursorAdapter adapter =
-				new MonsterCursorAdapter(getActivity(), (MonsterCursor) cursor);
+		MonsterListCursorAdapter adapter =
+				new MonsterListCursorAdapter(getActivity(), (MonsterListCursor) cursor);
 		setListAdapter(adapter);
 		
 	}
@@ -47,11 +47,11 @@ public class MonsterLIstFragment extends ListFragment implements LoaderCallbacks
 		setListAdapter(null);
 	}
 	
-	private static class MonsterCursorAdapter extends CursorAdapter {
+	private static class MonsterListCursorAdapter extends CursorAdapter {
 		
-		private MonsterCursor mMonsterCursor;
+		private MonsterListCursor mMonsterCursor;
 		
-		public MonsterCursorAdapter(Context context, MonsterCursor cursor) {
+		public MonsterListCursorAdapter(Context context, MonsterListCursor cursor) {
 			super(context, cursor, 0);
 			mMonsterCursor = cursor;
 		}

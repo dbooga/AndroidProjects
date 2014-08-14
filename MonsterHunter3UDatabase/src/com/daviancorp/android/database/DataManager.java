@@ -3,8 +3,6 @@ package com.daviancorp.android.database;
 import android.content.Context;
 import android.util.Log;
 
-import com.daviancorp.android.database.MonsterHunterDatabaseHelper.MonsterCursor;
-
 public class DataManager {
 	private static final String TAG = "DataManager";
 
@@ -30,7 +28,7 @@ public class DataManager {
 		return sDataManager;
 	}
 	
-	public MonsterCursor queryMonsters() {
+	public MonsterListCursor queryMonsters() {
 		return mHelper.queryMonsters();
 	}
 	

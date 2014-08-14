@@ -8,9 +8,10 @@ public class Monster {
 	private String trait;
 	
 	public Monster() {
-		id = -1;
-		name = "";
-		trait = "";
+		this.id = -1;
+		this.name = "";
+		this.monsterClass = "";
+		this.trait = "";
 	}
 	
 	public Monster(long id, String name, String monsterClass, String trait) {
