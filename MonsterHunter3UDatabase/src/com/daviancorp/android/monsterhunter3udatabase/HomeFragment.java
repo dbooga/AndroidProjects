@@ -4,18 +4,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
 
 	private ImageView mLogo;
+	private LinearLayout content;
 
 	GridView gridView;
 
@@ -31,7 +33,15 @@ public class HomeFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_home, parent, false);
+		View v = inflater.inflate(R.layout.fragment_drawer, parent, false);
+		content = (LinearLayout) v.findViewById(R.id.content_frame);
+		content.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(), "clicked", Toast.LENGTH_LONG).show();
+			}
+		});
 		mLogo = (ImageView) v.findViewById(R.id.logo);
 		mLogo.setImageResource(R.drawable.mh3);
 
@@ -45,7 +55,17 @@ public class HomeFragment extends Fragment {
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
+					
+				Toast.makeText(getActivity(), "Position = " + position, Toast.LENGTH_LONG).show();
 
+			}
+		});
+		mLogo.setClickable(true);
+		mLogo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(), "clicked", Toast.LENGTH_LONG).show();
 			}
 		});
 

@@ -10,23 +10,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.daviancorp.android.monsterhunter3udatabase.SingleFragmentActivity;
-
-/*
- * Any subclass needs to:
- *  - override onCreate() to set title
- *  - override createFragmentOne() for detail fragments
- */
-
-public abstract class GenericActivity extends SingleFragmentActivity {
+public class MainActivity extends SingleFragmentActivity {
 	
 	private static final String DIALOG_ABOUT = "about";
-	protected Fragment drawer;
+
+	private Fragment detail;
+	private Fragment drawer;
 
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle(R.string.app_name);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
@@ -54,7 +49,6 @@ public abstract class GenericActivity extends SingleFragmentActivity {
 		}
 	}
 
-	// Drawer Fragment
 	@Override
 	protected Fragment createFragment() {
 		drawer = new DrawerFragment();
@@ -69,8 +63,13 @@ public abstract class GenericActivity extends SingleFragmentActivity {
 		return true;
 	}
 
+	public Fragment getDetail() {
+		return detail;
+	}
+
 	public Fragment getDrawer() {
 		return drawer;
 	}
 
 }
+
