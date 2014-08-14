@@ -1,5 +1,6 @@
 package com.daviancorp.android.monsterhunter3udatabase;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -47,6 +48,12 @@ public class HomeFragment extends Fragment {
 					
 				Toast.makeText(getActivity(), "Position = " + position, Toast.LENGTH_LONG).show();
 
+				switch(position) {
+					case 0:
+						Intent intent = new Intent(getActivity(), MonsterListActivity.class);
+						startActivity(intent);
+						break;
+				}
 			}
 		});
 		

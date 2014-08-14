@@ -1,6 +1,7 @@
 package com.daviancorp.android.monsterhunter3udatabase;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -60,8 +61,11 @@ public abstract class GenericActivity extends SingleFragmentActivity {
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				//sendResult(Activity.RESULT_OK, position);
-				Toast.makeText(GenericActivity.this, "Position = " + position,
-						Toast.LENGTH_LONG).show();
+				switch(position) {
+					case 0:
+						Intent intent = new Intent(GenericActivity.this, MonsterListActivity.class);
+						startActivity(intent);
+				}
 				mDrawerLayout.closeDrawers();
 			}
 		});
