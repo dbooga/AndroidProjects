@@ -4,22 +4,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
 
 	private ImageView mLogo;
-	private LinearLayout content;
-
-	GridView gridView;
+	private GridView gridView;
 
 	static final String[] numbers = new String[] { "Monsters", "Weapons",
 			"Armors", "Quests", "Items", "Combining", "Decorations", "Skills",
@@ -33,15 +29,8 @@ public class HomeFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_drawer, parent, false);
-		content = (LinearLayout) v.findViewById(R.id.content_frame);
-		content.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getActivity(), "clicked", Toast.LENGTH_LONG).show();
-			}
-		});
+		View v = inflater.inflate(R.layout.fragment_home, parent, false);
+		
 		mLogo = (ImageView) v.findViewById(R.id.logo);
 		mLogo.setImageResource(R.drawable.mh3);
 
@@ -60,15 +49,7 @@ public class HomeFragment extends Fragment {
 
 			}
 		});
-		mLogo.setClickable(true);
-		mLogo.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getActivity(), "clicked", Toast.LENGTH_LONG).show();
-			}
-		});
-
+		
 		return v;
 	}
 

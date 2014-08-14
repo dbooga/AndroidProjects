@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.widget.TextView;
 
 public class AboutDialogFragment extends DialogFragment {
@@ -17,7 +16,6 @@ public class AboutDialogFragment extends DialogFragment {
 		
 		final SpannableString s =
 				new SpannableString(getActivity().getText(R.string.about_message));
-		Linkify.addLinks(s, Linkify.WEB_URLS);
 		
 		message.setText(s);
 		message.setMovementMethod(LinkMovementMethod.getInstance());;

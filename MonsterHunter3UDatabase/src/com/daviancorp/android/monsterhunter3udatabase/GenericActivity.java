@@ -8,9 +8,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.daviancorp.android.monsterhunter3udatabase.SingleFragmentActivity;
+import android.widget.Toast;
 
 /*
  * Any subclass needs to:
@@ -19,29 +22,61 @@ import com.daviancorp.android.monsterhunter3udatabase.SingleFragmentActivity;
  */
 
 public abstract class GenericActivity extends SingleFragmentActivity {
-	
+
 	private static final String DIALOG_ABOUT = "about";
-	protected Fragment drawer;
+	
+	String[] values = new String[] { "Monsters", "Weapons", "Armors",
+			"Quests", "Items", "Combining", "Decorations", "Skills",
+			"Locations", "Hunting Fleet" };
+	
+	private ListView mDrawerList;
+	private DrawerLayout mDrawerLayout;
+	
+	protected Fragment detail;
 
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setTitle(R.string.app_name);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
+		
+		setContentView(R.layout.activity_main);
+		
+		// Getting reference to the DrawerLayout
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+		mDrawerList = (ListView) findViewById(R.id.drawer_list);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				R.layout.drawer_list_item, values);
+		
+		mDrawerList.setAdapter(adapter);
+		mDrawerList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				//sendResult(Activity.RESULT_OK, position);
+				Toast.makeText(GenericActivity.this, "Position = " + position,
+						Toast.LENGTH_LONG).show();
+				mDrawerLayout.closeDrawers();
+			}
+		});
+		
+		
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			DrawerLayout dLayout = ((DrawerFragment) drawer).getDrawerLayout();
-			ListView dList = ((DrawerFragment) drawer).getDrawerList();
-			if (dLayout.isDrawerVisible(dList)) {
-				dLayout.closeDrawers();
+			if (mDrawerLayout.isDrawerVisible(mDrawerList)) {
+				mDrawerLayout.closeDrawers();
 			}
-			else dLayout.openDrawer(dList);
+			else mDrawerLayout.openDrawer(mDrawerList);
 			return true;
 		case R.id.about:
 			FragmentManager fm = getSupportFragmentManager();
@@ -54,13 +89,6 @@ public abstract class GenericActivity extends SingleFragmentActivity {
 		}
 	}
 
-	// Drawer Fragment
-	@Override
-	protected Fragment createFragment() {
-		drawer = new DrawerFragment();
-		return drawer;
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
@@ -69,8 +97,15 @@ public abstract class GenericActivity extends SingleFragmentActivity {
 		return true;
 	}
 
-	public Fragment getDrawer() {
-		return drawer;
+	public Fragment getDetail() {
+		return detail;
 	}
 
+	public DrawerLayout getDrawerLayout() {
+		return mDrawerLayout;
+	}
+
+	public ListView getDrawerList() {
+		return mDrawerList;
+	}
 }

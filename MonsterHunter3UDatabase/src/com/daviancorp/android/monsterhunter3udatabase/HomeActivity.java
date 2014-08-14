@@ -13,8 +13,8 @@ public class HomeActivity extends GenericActivity {
 	
 	@Override
 	protected Fragment createFragment() {
-		super.drawer = new DrawerFragment();
-		return super.drawer;
+		super.detail = new HomeFragment();
+		return super.detail;
 	}
 
 }
