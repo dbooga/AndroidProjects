@@ -98,7 +98,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 				null);
 
 		return new MonsterListCursor(wrapped);
-		
 	}
 	
 	
