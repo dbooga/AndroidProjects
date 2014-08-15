@@ -23,6 +23,7 @@ public class MonsterListCursor extends CursorWrapper {
 	public Monster getMonster() {
 		if (isBeforeFirst() || isAfterLast())
 			return null;
+		
 		Monster monster = new Monster();
 
 		long monsterId = getLong(getColumnIndex(S.COLUMN_MONSTER_ID));

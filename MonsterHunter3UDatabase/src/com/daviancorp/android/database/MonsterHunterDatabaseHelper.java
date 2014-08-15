@@ -86,11 +86,8 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 * Get all monsters
 	 */
 	public MonsterListCursor queryMonsters() {
-		// "SELECT * FROM monsters "
-		Cursor wrapped = getReadableDatabase().
-//				query(TABLE_MONSTERS,
-//				null, null, null, null, null, null);
-		query(true, 
+		// "SELECT DISTINCT * FROM monsters GROUP BY name"
+		Cursor wrapped = getReadableDatabase().query(true, 
 				S.TABLE_MONSTERS, 
 				null, 
 				null, 

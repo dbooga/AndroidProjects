@@ -4,22 +4,50 @@ package com.daviancorp.android.data;
  * Note: No constructor with fields
  * Note: Add skills
  */
-public class Decoration extends Item{
+public class Decoration{
 
+	private long id;
+	private String name;
 	private int num_slots;
+	private int price;
 	private String skill_1;
 	private int skill_1_point;
 	private String skill_2;
 	private int skill_2_point;
 	
 	public Decoration() {
-		super();
 		
+		this.id = -1;
+		this.name = "";
 		this.num_slots = -1;
-		skill_1 = "";
-		skill_1_point = -1;
-		skill_2 = "";
-		skill_2_point = -1;
+		this.skill_1 = "";
+		this.skill_1_point = -1;
+		this.skill_2 = "";
+		this.skill_2_point = -1;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public int getPrice() {
+		return price;
+	}
+	
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public int getNumSlots() {
