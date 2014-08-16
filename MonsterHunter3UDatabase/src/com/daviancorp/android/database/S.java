@@ -134,10 +134,10 @@ public class S {
 	
 	// Monster
 	static final String TABLE_MONSTERS = "monsters";
-	static final String COLUMN_MONSTER_ID = "_id";
-	static final String COLUMN_MONSTER_NAME = "name";
-	static final String COLUMN_MONSTER_CLASS = "class";
-	static final String COLUMN_MONSTER_TRAIT = "trait";
+	static final String COLUMN_MONSTERS_ID = "_id";
+	static final String COLUMN_MONSTERS_NAME = "name";
+	static final String COLUMN_MONSTERS_CLASS = "class";
+	static final String COLUMN_MONSTERS_TRAIT = "trait";
 	
 	// Monster to Quest
 	static final String TABLE_MONSTER_TO_QUEST = "monster_to_quest";
