@@ -24,14 +24,14 @@ import android.widget.Toast;
 
 public abstract class GenericActivity extends SingleFragmentActivity {
 
-	private static final String DIALOG_ABOUT = "about";
+	protected static final String DIALOG_ABOUT = "about";
 	
 	String[] values = new String[] { "Monsters", "Weapons", "Armors",
 			"Quests", "Items", "Combining", "Decorations", "Skills",
 			"Locations", "Hunting Fleet" };
 	
-	private ListView mDrawerList;
-	private DrawerLayout mDrawerLayout;
+	protected ListView mDrawerList;
+	protected DrawerLayout mDrawerLayout;
 	
 	protected Fragment detail;
 

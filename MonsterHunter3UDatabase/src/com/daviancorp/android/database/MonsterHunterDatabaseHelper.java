@@ -7,7 +7,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
@@ -63,27 +62,15 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		}
 
 		String[] str = text.split(";");
-		String temp = "";
 		
 		try {
-			Log.d(TAG, "s0 =" + str[0]);
-			Log.d(TAG, "s1 =" + str[1]);
-			Log.d(TAG, "s2 =" + str[2]);
-			Log.d(TAG, "s3 =" + str[3]);
-			Log.d(TAG, "s4 =" + str[4]);
-		
 			for (String s : str) {
-				temp = s;
 				if (!s.equals("") && !s.startsWith("-") && !s.startsWith("/")
-						&& !s.startsWith("\n") && !s.startsWith("\r")) {
-					if(s == "/n"){
-						Log.d(TAG, "s is newline");
-					}
+						&& !s.startsWith("\n")) {
 					db.execSQL(s);
 				}
 			}
 		} catch (Exception e) {
-			Log.d(TAG, "ASCII = " + (int)temp.charAt(0));
 			throw e;
 		}
 

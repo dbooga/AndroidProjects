@@ -26,4 +26,5 @@ public abstract class DataLoader<D> extends AsyncTaskLoader<D> {
 		if (isStarted())
 			super.deliverResult(data);
 	}
+	
 }
