@@ -5,15 +5,15 @@ import android.database.Cursor;
 
 import com.daviancorp.android.database.DataManager;
 
-public class MonsterListCursorLoader extends DataLoader<Cursor> {
+public class MonsterListCursorLoader extends SQLiteCursorLoader {
 	
 	public MonsterListCursorLoader(Context context) {
 		super(context);
 	}
 	
 	@Override
-	public Cursor loadInBackground() {
-		// Query the list of monsters
+	protected Cursor loadCursor() {
+		// Query the list of all monsters
 		return DataManager.get(getContext()).queryMonsters();
 	}
 }

@@ -46,8 +46,6 @@ public class HomeFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
 					
-				Toast.makeText(getActivity(), "Position = " + position, Toast.LENGTH_LONG).show();
-
 				switch(position) {
 					case 0:
 						Intent intent = new Intent(getActivity(), MonsterListActivity.class);

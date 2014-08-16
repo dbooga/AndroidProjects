@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.daviancorp.android.data.Monster;
 import com.daviancorp.android.database.MonsterListCursor;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
+import com.daviancorp.android.loader.MonsterListLargeCursorLoader;
+import com.daviancorp.android.loader.MonsterListSmallCursorLoader;
 
 public class MonsterListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 	

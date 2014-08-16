@@ -32,5 +32,11 @@ public class DataManager {
 		return mHelper.queryMonsters();
 	}
 	
+	public MonsterListCursor querySmallMonsters() {
+		return mHelper.querySmallMonsters();
+	}
 	
+	public MonsterListCursor queryLargeMonsters() {
+		return mHelper.queryLargeMonsters();
+	}
 }

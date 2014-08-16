@@ -100,6 +100,40 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return new MonsterListCursor(wrapped);
 	}
 	
+	/*
+	 * Get all small monsters
+	 */
+	public MonsterListCursor querySmallMonsters() {
+		// "SELECT DISTINCT * FROM monsters WHERE class = 'Minion' GROUP BY name"
+		Cursor wrapped = getReadableDatabase().query(true, 
+				S.TABLE_MONSTERS, 
+				null, 
+				S.COLUMN_MONSTER_CLASS + "=?", 
+				new String[] {"Minion"}, 
+				S.COLUMN_MONSTER_NAME, 
+				null, 
+				null, 
+				null);
+
+		return new MonsterListCursor(wrapped);
+	}
 	
+	/*
+	 * Get all large monsters
+	 */
+	public MonsterListCursor queryLargeMonsters() {
+		// "SELECT DISTINCT * FROM monsters WHERE class = 'Boss' GROUP BY name"
+		Cursor wrapped = getReadableDatabase().query(true, 
+				S.TABLE_MONSTERS, 
+				null, 
+				S.COLUMN_MONSTER_CLASS + "=?", 
+				new String[] {"Boss"}, 
+				S.COLUMN_MONSTER_NAME, 
+				null, 
+				null, 
+				null);
+
+		return new MonsterListCursor(wrapped);
+	}
 	
 }
