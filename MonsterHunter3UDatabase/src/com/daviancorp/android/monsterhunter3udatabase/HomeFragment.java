@@ -17,6 +17,16 @@ public class HomeFragment extends Fragment {
 
 	private ImageView mLogo;
 	private GridView gridView;
+	private final static int MONSTERS = 0;
+	private final static int WEAPONS = 1;
+	private final static int ARMORS = 2;
+	private final static int QUESTS = 3;
+	private final static int ITEMS = 4;
+	private final static int COMBINING = 5;
+	private final static int DECORATIONS = 6;
+	private final static int SKILLS = 7;
+	private final static int LOCATIONS = 8;
+	private final static int HUNTINGFLEET = 9;
 
 	static final String[] numbers = new String[] { "Monsters", "Weapons",
 			"Armors", "Quests", "Items", "Combining", "Decorations", "Skills",
@@ -47,13 +57,34 @@ public class HomeFragment extends Fragment {
 					int position, long id) {
 					
 				switch(position) {
-					case 0:
-						Intent intent = new Intent(getActivity(), MonsterListActivity.class);
-						startActivity(intent);
+					case MONSTERS:
+						Intent monster_intent = new Intent(getActivity(), MonsterListActivity.class);
+						startActivity(monster_intent);
+						break;
+					case WEAPONS:
+						break;
+					case ARMORS:
+						break;
+					case QUESTS:
+						break;
+					case ITEMS:
+						Intent item_intent = new Intent(getActivity(), ItemListActivity.class);
+						startActivity(item_intent);
+						break;
+					case COMBINING:
+						break;
+					case DECORATIONS:
+						break;
+					case SKILLS:
+						break;
+					case LOCATIONS:
+						Intent location_intent = new Intent(getActivity(), LocationListActivity.class);
+						startActivity(location_intent);
+						break;
+					case HUNTINGFLEET:
 						break;
 				}
-			}
-		});
+			}	});
 		
 		return v;
 	}
