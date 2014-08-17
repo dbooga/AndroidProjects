@@ -482,7 +482,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public QuestCursor queryQuest(long id) {
 
 		_Columns = null;
-		_Selection = "i._id" + " = ?";
+		_Selection = "q." + S.COLUMN_QUESTS_ID + " = ?";
 		_SelectionArgs = new String[]{ String.valueOf(id) };
 		_GroupBy = null;
 		_Having = null;
@@ -491,6 +491,39 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		return new QuestCursor(wrapJoinHelper(builderQuest()));
 	}	
+	
+	/*
+	 * Get a specific quest based on hub
+	 */
+	public QuestCursor queryQuestHub(String hub) {
+
+		_Columns = null;
+		_Selection = "q." + S.COLUMN_QUESTS_HUB + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(hub) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new QuestCursor(wrapJoinHelper(builderQuest()));
+	}
+	
+	/*
+	 * Get a specific quest based on hub and stars
+	 */
+	public QuestCursor queryQuestHubStar(String hub, String stars) {
+
+		_Columns = null;
+		_Selection = "q." + S.COLUMN_QUESTS_HUB + " = ?" + " AND " +
+					"q." + S.COLUMN_QUESTS_STARS + " = ?";
+		_SelectionArgs = new String[]{ hub, stars };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new QuestCursor(wrapJoinHelper(builderQuest()));
+	}
 
 	/*
 	 * Helper method to query for quests
@@ -570,8 +603,5 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return new SkillTreeCursor(wrapHelper());
 	}	
 	
-	
-	
-	
-	
+
 }

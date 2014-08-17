@@ -145,6 +145,14 @@ public class DataManager {
 		return quest;
 	}
 	
+	public QuestCursor queryQuestHub(String hub) {
+		return mHelper.queryQuestHub(hub);
+	}
+
+	public QuestCursor queryQuestHubStar(String hub, String stars) {
+		return mHelper.queryQuestHubStar(hub, stars);
+	}
+	
 /********************************* SKILL TREE QUERIES ******************************************/	
 	
 	public SkillTreeCursor querySkillTrees() {
