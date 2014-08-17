@@ -1,11 +1,10 @@
 package com.daviancorp.android.adapter;
 
-import com.daviancorp.android.monsterhunter3udatabase.MonsterListFragment;
-import com.daviancorp.android.monsterhunter3udatabase.MonsterListSmallFragment;
-import com.daviancorp.android.monsterhunter3udatabase.MonsterListLargeFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.daviancorp.android.monsterhunter3udatabase.MonsterListFragment;
  
 public class MonsterListPagerAdapter extends FragmentPagerAdapter {
  
@@ -19,13 +18,13 @@ public class MonsterListPagerAdapter extends FragmentPagerAdapter {
         switch (index) {
         case 0:
             // MonsterList fragment activity
-            return new MonsterListFragment();
+            return MonsterListFragment.newInstance(null);
         case 1:
             // MonsterListSmall activity
-            return new MonsterListSmallFragment();
+            return MonsterListFragment.newInstance("small");
         case 2:
             // MonsterListLarge fragment activity
-            return new MonsterListLargeFragment();
+            return MonsterListFragment.newInstance("large");
         default:
         	return null;
         }

@@ -15,23 +15,35 @@ import android.widget.TextView;
 import com.daviancorp.android.data.Monster;
 import com.daviancorp.android.database.MonsterCursor;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
-import com.daviancorp.android.loader.MonsterListLargeCursorLoader;
-import com.daviancorp.android.loader.MonsterListSmallCursorLoader;
 
 public class MonsterListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
+	private static final String ARG_TAB = "MONSTER_TAB";
+	
+	public static MonsterListFragment newInstance(String tab) {
+		Bundle args = new Bundle();
+		args.putString(ARG_TAB, tab);
+		MonsterListFragment f = new MonsterListFragment();
+		f.setArguments(args);
+		return f;
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, null, this);
+		getLoaderManager().initLoader(0, getArguments(), this);
 	}
 	
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
-		return new MonsterListCursorLoader(getActivity());
+		String mTab = null;
+		if (args != null) {
+			mTab = args.getString(ARG_TAB);
+		}
+		
+		return new MonsterListCursorLoader(getActivity(), mTab);
 	}
 
 	@Override
