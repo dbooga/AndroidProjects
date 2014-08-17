@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /*
  * Any subclass needs to:
@@ -25,6 +24,17 @@ import android.widget.Toast;
 public abstract class GenericActivity extends SingleFragmentActivity {
 
 	protected static final String DIALOG_ABOUT = "about";
+	
+	private final static int MONSTERS = 0;
+	private final static int WEAPONS = 1;
+	private final static int ARMORS = 2;
+	private final static int QUESTS = 3;
+	private final static int ITEMS = 4;
+	private final static int COMBINING = 5;
+	private final static int DECORATIONS = 6;
+	private final static int SKILLS = 7;
+	private final static int LOCATIONS = 8;
+	private final static int HUNTINGFLEET = 9;
 	
 	String[] values = new String[] { "Monsters", "Weapons", "Armors",
 			"Quests", "Items", "Combining", "Decorations", "Skills",
@@ -62,10 +72,35 @@ public abstract class GenericActivity extends SingleFragmentActivity {
 					long id) {
 				//sendResult(Activity.RESULT_OK, position);
 				switch(position) {
-					case 0:
-						Intent intent = new Intent(GenericActivity.this, MonsterListActivity.class);
-						startActivity(intent);
-				}
+				case MONSTERS:
+					Intent monster_intent = new Intent(GenericActivity.this, MonsterListActivity.class);
+					startActivity(monster_intent);
+					break;
+				case WEAPONS:
+					break;
+				case ARMORS:
+					break;
+				case QUESTS:
+					break;
+				case ITEMS:
+					Intent item_intent = new Intent(GenericActivity.this, ItemListActivity.class);
+					startActivity(item_intent);
+					break;
+				case COMBINING:
+					Intent combining_intent = new Intent(GenericActivity.this, CombiningListActivity.class);
+					startActivity(combining_intent);
+					break;
+				case DECORATIONS:
+					break;
+				case SKILLS:
+					break;
+				case LOCATIONS:
+					Intent location_intent = new Intent(GenericActivity.this, LocationListActivity.class);
+					startActivity(location_intent);
+					break;
+				case HUNTINGFLEET:
+					break;
+			}
 				mDrawerLayout.closeDrawers();
 			}
 		});

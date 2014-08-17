@@ -16,7 +16,7 @@ import com.daviancorp.android.adapter.MonsterListPagerAdapter;
 
 
 
-public class MonsterListActivity extends ActionBarActivity implements ActionBar.TabListener{
+public class MonsterListActivity extends GenericTabActivity implements ActionBar.TabListener{
 	
 	private ViewPager viewPager;
     private MonsterListPagerAdapter mAdapter;
@@ -29,7 +29,6 @@ public class MonsterListActivity extends ActionBarActivity implements ActionBar.
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle(R.string.monsters);
-		setContentView(R.layout.activity_monsterlist);
 		
 		// Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
