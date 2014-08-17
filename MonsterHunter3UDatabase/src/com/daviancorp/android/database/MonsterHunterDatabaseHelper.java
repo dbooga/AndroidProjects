@@ -128,10 +128,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 * Get all combinings
 	 */
 	public CombiningCursor queryCombinings() {
-		// "SELECT DISTINCT * FROM combining"
 		
-		_Distinct = true;
-		_Table = S.TABLE_COMBINING;
 		_Columns = null;
 		_Selection = null;
 		_SelectionArgs = null;
@@ -140,27 +137,84 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_OrderBy = null;
 		_Limit = null;
 		
-		return new CombiningCursor(wrapHelper());
+		return new CombiningCursor(wrapJoinHelper(builderCursor()));
 	}
 	
 	/*
 	 * Get a specific combining
 	 */
 	public CombiningCursor queryCombining(long id) {
-		// "SELECT DISTINCT * FROM combining WHERE _id = id LIMIT 1"
 		
-		_Distinct = false;
-		_Table = S.TABLE_COMBINING;
 		_Columns = null;
-		_Selection = S.COLUMN_COMBINING_ID + " = ?";
+		_Selection = "c._id" + " = ?";
 		_SelectionArgs = new String[]{ String.valueOf(id) };
 		_GroupBy = null;
 		_Having = null;
 		_OrderBy = null;
 		_Limit = "1";
 		
-		return new CombiningCursor(wrapHelper());
+		return new CombiningCursor(wrapJoinHelper(builderCursor()));
 	}	
+	
+	private SQLiteQueryBuilder builderCursor()  {
+//		SELECT c._id AS _id, c.amount_made_min,  c.amount_made_max, c.percentage, 
+//		crt._id AS crt__id, crt.name AS crt_name, crt.jpn_name AS crt_jpn_name, crt.type AS crt_type, crt.rarity AS crt_rarity, 
+//		crt.carry_capacity AS crt_carry_capacity, crt.buy AS crt_buy, crt.sell AS crt_sell, crt.description AS crt_description, 
+//		crt.icon_name AS crt_icon_name, crt.armor_dupe_name_fix AS crt_armor_dupe_name, 
+//
+//		mat1._id AS mat1__id, mat1.name AS mat1_name, mat1.jpn_name AS mat1_jpn_name, mat1.type AS mat1_type, mat1.rarity AS mat1_rarity, 
+//		mat1.carry_capacity AS mat1_carry_capacity, mat1.buy AS mat1_buy, mat1.sell AS mat1_sell, mat1.description AS mat1_description, 
+//		mat1.icon_name AS mat1_icon_name, mat1.armor_dupe_name_fix AS mat1_armor_dupe_name,
+//
+//
+//		mat2._id AS mat2__id, mat2.name AS mat2_name, mat2.jpn_name AS mat2_jpn_name, mat2.type AS mat2_type, mat2.rarity AS mat2_rarity, 
+//		mat2.carry_capacity AS mat2_carry_capacity, mat2.buy AS mat2_buy, mat2.sell AS mat2_sell, mat2.description AS mat2_description, 
+//		mat2.icon_name AS mat2_icon_name, mat2.armor_dupe_name_fix AS mat2_armor_dupe_name
+//
+//		FROM combining AS c LEFT OUTER JOIN items AS crt ON c.created_item_id = crt._id
+//		LEFT OUTER JOIN items AS mat1 ON c.item_1_id = mat1._id
+//		LEFT OUTER JOIN items AS mat2 ON c.item_2_id = mat2._id;
+		
+		String comb = "c.";
+		String[] items = new String[] {"crt", "mat1", "mat2"};
+
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		projectionMap.put("_id", comb + S.COLUMN_ITEMS_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_COMBINING_AMOUNT_MADE_MIN, comb + S.COLUMN_COMBINING_AMOUNT_MADE_MIN);
+		projectionMap.put(S.COLUMN_COMBINING_AMOUNT_MADE_MAX, comb + S.COLUMN_COMBINING_AMOUNT_MADE_MAX);
+		projectionMap.put(S.COLUMN_COMBINING_PERCENTAGE, comb + S.COLUMN_COMBINING_PERCENTAGE);
+		
+		for (String i : items) {
+			projectionMap.put(i + S.COLUMN_ITEMS_ID, i + "." + S.COLUMN_ITEMS_ID + " AS " + i + S.COLUMN_ITEMS_ID);
+			
+			projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
+			projectionMap.put(i + S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME + " AS " + i + S.COLUMN_ITEMS_JPN_NAME);
+			projectionMap.put(i + S.COLUMN_ITEMS_TYPE, i + "." + S.COLUMN_ITEMS_TYPE + " AS " + i + S.COLUMN_ITEMS_TYPE);
+			projectionMap.put(i + S.COLUMN_ITEMS_RARITY, i + "." + S.COLUMN_ITEMS_RARITY + " AS " + i + S.COLUMN_ITEMS_RARITY);
+			projectionMap.put(i + S.COLUMN_ITEMS_CARRY_CAPACITY, i + "." + S.COLUMN_ITEMS_CARRY_CAPACITY + " AS " + i + S.COLUMN_ITEMS_CARRY_CAPACITY);
+			projectionMap.put(i + S.COLUMN_ITEMS_BUY, i + "." + S.COLUMN_ITEMS_BUY + " AS " + i + S.COLUMN_ITEMS_BUY);
+			projectionMap.put(i + S.COLUMN_ITEMS_SELL, i + "." + S.COLUMN_ITEMS_SELL + " AS " + i + S.COLUMN_ITEMS_SELL);
+			projectionMap.put(i + S.COLUMN_ITEMS_DESCRIPTION, i + "." + S.COLUMN_ITEMS_DESCRIPTION + " AS " + i + S.COLUMN_ITEMS_DESCRIPTION);
+			projectionMap.put(i + S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME + " AS " + i + S.COLUMN_ITEMS_ICON_NAME);
+			projectionMap.put(i + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX + " AS " + i + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
+		}
+		
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		 
+		_QB.setTables(S.TABLE_COMBINING + " AS c" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS crt" + " ON " + "c." +
+				S.COLUMN_COMBINING_CREATED_ITEM_ID + " = " + "crt." + S.COLUMN_ITEMS_ID +
+				" LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS mat1" + " ON " + "c." +
+				S.COLUMN_COMBINING_ITEM_1_ID + " = " + "mat1." + S.COLUMN_ITEMS_ID +
+				" LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS mat2" + " ON " + "c." +
+				S.COLUMN_COMBINING_ITEM_2_ID + " = " + "mat2." + S.COLUMN_ITEMS_ID);
+				
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+		
+	}
+	
+	
 	
 /********************************* DECORATION QUERIES ******************************************/
 	

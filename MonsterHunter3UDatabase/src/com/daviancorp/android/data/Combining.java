@@ -51,7 +51,7 @@ public class Combining {
 		return item_2;
 	}
 	
-	public void setItem_2(Item item_2) {
+	public void setItem2(Item item_2) {
 		this.item_2 = item_2;
 	}
 	

@@ -351,6 +351,7 @@ int string about_message 0x7f0b0010
 int string action_settings 0x7f0b000f
 int string alert_button 0x7f0b0011
 int string app_name 0x7f0b000d
+int string combining 0x7f0b0017
 int string items 0x7f0b0015
 int string locations 0x7f0b0016
 int string monsters 0x7f0b0014

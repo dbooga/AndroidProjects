@@ -72,6 +72,8 @@ public class HomeFragment extends Fragment {
 						startActivity(item_intent);
 						break;
 					case COMBINING:
+						Intent combining_intent = new Intent(getActivity(), CombiningListActivity.class);
+						startActivity(combining_intent);
 						break;
 					case DECORATIONS:
 						break;

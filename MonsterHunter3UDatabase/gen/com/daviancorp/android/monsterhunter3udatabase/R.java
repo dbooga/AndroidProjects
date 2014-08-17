@@ -1167,6 +1167,7 @@ containing a value of this type.
         public static final int action_settings=0x7f0b000f;
         public static final int alert_button=0x7f0b0011;
         public static final int app_name=0x7f0b000d;
+        public static final int combining=0x7f0b0017;
         public static final int items=0x7f0b0015;
         public static final int locations=0x7f0b0016;
         public static final int monsters=0x7f0b0014;

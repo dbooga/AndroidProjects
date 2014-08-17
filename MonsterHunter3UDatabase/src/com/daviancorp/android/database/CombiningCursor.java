@@ -25,6 +25,10 @@ public class CombiningCursor extends CursorWrapper {
 		if (isBeforeFirst() || isAfterLast())
 			return null;
 		
+		String created = "crt";
+		String mat1 = "mat1";
+		String mat2 = "mat2";
+		
 		Combining combining = new Combining();
 
 		long combiningId = getLong(getColumnIndex(S.COLUMN_COMBINING_ID));
@@ -36,93 +40,43 @@ public class CombiningCursor extends CursorWrapper {
 		int percentage = getInt(getColumnIndex(S.COLUMN_COMBINING_PERCENTAGE));
 		combining.setPercentage(percentage);
 		
-		
-		Item created_item = new Item();
+		Item created_item = itemHelper(created);	
+		Item item1 = itemHelper(mat1);	
+		Item item2 = itemHelper(mat2);
 
-		long created_itemId = getLong(getColumnIndex(S.COLUMN_ITEMS_ID));
-		created_item.setId(created_itemId);
-		String created_name = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
-		created_item.setName(created_name);
-		String created_jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
-		created_item.setJpnName(created_jpnName);
-		String created_type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
-		created_item.setType(created_type);
-		int created_rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
-		created_item.setRarity(created_rarity);
-		int created_carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
-		created_item.setCarryCapacity(created_carry_capacity);
-		int created_buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
-		created_item.setBuy(created_buy);
-		int created_sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
-		created_item.setSell(created_sell);
-		String created_description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-		created_item.setDescription(created_description);
-		String created_fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
-		created_item.setFileLocation(created_fileLocation);
-		String created_armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
-		created_item.setArmorDupeNameFix(created_armor_dupe_name_fix);
-
-		
-		Item item1 = new Item();
-
-		long item1_id = getLong(getColumnIndex(S.COLUMN_ITEMS_ID));
-		item1.setId(item1_id);
-		String item1_name = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
-		item1.setName(item1_name);
-		String item1_jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
-		item1.setJpnName(item1_jpnName);
-		String item1_type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
-		item1.setType(item1_type);
-		int item1_rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
-		item1.setRarity(item1_rarity);
-		int item1_carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
-		item1.setCarryCapacity(item1_carry_capacity);
-		int item1_buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
-		item1.setBuy(item1_buy);
-		int item1_sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
-		item1.setSell(item1_sell);
-		String item1_description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-		item1.setDescription(item1_description);
-		String item1_fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
-		item1.setFileLocation(item1_fileLocation);
-		String item1_armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
-		item1.setArmorDupeNameFix(item1_armor_dupe_name_fix);
-
-		
-		Item item2 = new Item();
-
-		long item2_id = getLong(getColumnIndex(S.COLUMN_ITEMS_ID));
-		item2.setId(item2_id);
-		String item2_name = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
-		item2.setName(item2_name);
-		String item2_jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
-		item2.setJpnName(item2_jpnName);
-		String item2_type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
-		item2.setType(item2_type);
-		int item2_rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
-		item2.setRarity(item2_rarity);
-		int item2_carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
-		item2.setCarryCapacity(item2_carry_capacity);
-		int item2_buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
-		item2.setBuy(item2_buy);
-		int item2_sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
-		item2.setSell(item2_sell);
-		String item2_description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-		item2.setDescription(item2_description);
-		String item2_fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
-		item2.setFileLocation(item2_fileLocation);
-		String item2_armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
-		item2.setArmorDupeNameFix(item2_armor_dupe_name_fix);
-
-		
-//		long locationId = getLong(getColumnIndex(S.COLUMN_LOCATIONS_ID));
-//		location.setId(locationId);
-//		String name = getString(getColumnIndex(S.COLUMN_LOCATIONS_NAME));
-//		location.setName(name);
-//		String fileLocation = getString(getColumnIndex(S.COLUMN_LOCATIONS_MAP));
-//		location.setFileLocation(fileLocation);
-
+		combining.setCreatedItem(created_item);
+		combining.setItem1(item1);
+		combining.setItem2(item2);
 
 		return combining;
+	}
+	
+	private Item itemHelper(String prefix) {
+		Item item = new Item();
+
+		long item_id = getLong(getColumnIndex(prefix + S.COLUMN_ITEMS_ID));
+		item.setId(item_id);
+		String item_name = getString(getColumnIndex(prefix + S.COLUMN_ITEMS_NAME));
+		item.setName(item_name);
+		String item_jpnName = getString(getColumnIndex(prefix + S.COLUMN_ITEMS_JPN_NAME));
+		item.setJpnName(item_jpnName);
+		String item_type = getString(getColumnIndex(prefix + S.COLUMN_ITEMS_TYPE));
+		item.setType(item_type);
+		int item_rarity = getInt(getColumnIndex(prefix + S.COLUMN_ITEMS_RARITY));
+		item.setRarity(item_rarity);
+		int item_carry_capacity = getInt(getColumnIndex(prefix + S.COLUMN_ITEMS_CARRY_CAPACITY));
+		item.setCarryCapacity(item_carry_capacity);
+		int item_buy = getInt(getColumnIndex(prefix + S.COLUMN_ITEMS_BUY));
+		item.setBuy(item_buy);
+		int item_sell = getInt(getColumnIndex(prefix + S.COLUMN_ITEMS_SELL));
+		item.setSell(item_sell);
+		String item_description = getString(getColumnIndex(prefix + S.COLUMN_ITEMS_DESCRIPTION));
+		item.setDescription(item_description);
+		String item_fileLocation = getString(getColumnIndex(prefix + S.COLUMN_ITEMS_ICON_NAME));
+		item.setFileLocation(item_fileLocation);
+		String item_armor_dupe_name_fix = getString(getColumnIndex(prefix + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
+		item.setArmorDupeNameFix(item_armor_dupe_name_fix);
+		
+		return item;
 	}
 }

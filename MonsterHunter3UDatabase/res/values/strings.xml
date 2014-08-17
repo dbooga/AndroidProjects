@@ -11,5 +11,6 @@
     <string name="monsters">Monsters</string>
     <string name="items">Items</string>
     <string name="locations">Locations</string>
+    <string name="combining">Combining</string>
 
 </resources>
