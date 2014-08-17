@@ -6,20 +6,18 @@ public class HuntingFleet {
 	private String type;
 	private int level;
 	private String location;
+	private Item item;
+	private int amount;
+	private int percentage;
 	
 	public HuntingFleet() {
 		this.id = -1;
 		this.type = "";
 		this.level = -1;
 		this.location = "";
-	}
-	
-	public HuntingFleet(long id, String type, int level,
-			String location) {
-		this.id = id;
-		this.type = type;
-		this.level = level;
-		this.location = location;
+		this.item = null;
+		this.amount = -1;
+		this.percentage = -1;
 	}
 
 	public long getId() {
@@ -53,6 +51,29 @@ public class HuntingFleet {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public int getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(int percentage) {
+		this.percentage = percentage;
+	}
 	
 }

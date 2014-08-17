@@ -431,6 +431,116 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return _QB;
 	}
 	
+/********************************* HUNTING FLEET QUERIES ******************************************/
+	
+	/*
+	 * Get all hunting fleets
+	 */
+	public HuntingFleetCursor queryHuntingFleets() {
+
+		_Columns = null;
+		_Selection = null;
+		_SelectionArgs = null;
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+
+		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet()));
+	}
+	
+	/*
+	 * Get a specific hunting fleet
+	 */
+	public HuntingFleetCursor queryHuntingFleet(long id) {
+
+		_Columns = null;
+		_Selection = "h." + S.COLUMN_HUNTING_FLEET_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = "1";
+		
+		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet()));
+	}	
+	
+	/*
+	 * Get a specific hunting fleet based on type
+	 */
+	public HuntingFleetCursor queryHuntingFleetType(String type) {
+
+		_Columns = null;
+		_Selection = "h." + S.COLUMN_HUNTING_FLEET_TYPE + " = ?";
+		_SelectionArgs = new String[]{ type };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet()));
+	}
+	
+	/*
+	 * Get a specific hunting fleet based on location
+	 */
+	public HuntingFleetCursor queryHuntingFleetLocation(String location) {
+
+		_Columns = null;
+		_Selection = "h." + S.COLUMN_HUNTING_FLEET_LOCATION + " = ?";
+		_SelectionArgs = new String[]{ location };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet()));
+	}
+	
+	/*
+	 * Helper method to query for hunting fleets
+	 */
+	private SQLiteQueryBuilder builderHuntingFleet() {
+//		SELECT h._id AS _id, h.type AS htype, h.level, h.location, h.amount, h.percentage, h.rank,
+//		h.item_id, i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell,
+//		i.description, i.icon_name, i.armor_dupe_name_fix
+//		FROM hunting_fleet AS h LEFT OUTER JOIN items AS i ON h.item_id = i._id;
+
+		String h = "h";
+		String i = "i";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", h + "." + S.COLUMN_HUNTING_FLEET_ID + " AS " + "_id");
+		projectionMap.put(h + S.COLUMN_HUNTING_FLEET_TYPE, h + "." + S.COLUMN_HUNTING_FLEET_TYPE + " AS " + h + S.COLUMN_HUNTING_FLEET_TYPE);
+		projectionMap.put(S.COLUMN_HUNTING_FLEET_LEVEL, h + "." + S.COLUMN_HUNTING_FLEET_LEVEL);
+		projectionMap.put(S.COLUMN_HUNTING_FLEET_LOCATION, h + "." + S.COLUMN_HUNTING_FLEET_LOCATION);
+		projectionMap.put(S.COLUMN_HUNTING_FLEET_AMOUNT, h + "." + S.COLUMN_HUNTING_FLEET_AMOUNT);
+		projectionMap.put(S.COLUMN_HUNTING_FLEET_PERCENTAGE, h + "." + S.COLUMN_HUNTING_FLEET_PERCENTAGE);
+		projectionMap.put(S.COLUMN_HUNTING_FLEET_RANK, h + "." + S.COLUMN_HUNTING_FLEET_RANK);
+		projectionMap.put(S.COLUMN_HUNTING_FLEET_ITEM_ID, h + "." + S.COLUMN_HUNTING_FLEET_ITEM_ID);
+		
+		projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);
+		projectionMap.put(i + S.COLUMN_ITEMS_TYPE, i + "." + S.COLUMN_ITEMS_TYPE + " AS " + i + S.COLUMN_ITEMS_TYPE);
+		projectionMap.put(S.COLUMN_ITEMS_RARITY, i + "." + S.COLUMN_ITEMS_RARITY);
+		projectionMap.put(S.COLUMN_ITEMS_CARRY_CAPACITY, i + "." + S.COLUMN_ITEMS_CARRY_CAPACITY);
+		projectionMap.put(S.COLUMN_ITEMS_BUY, i + "." + S.COLUMN_ITEMS_BUY);
+		projectionMap.put(S.COLUMN_ITEMS_SELL, i + "." + S.COLUMN_ITEMS_SELL);
+		projectionMap.put(S.COLUMN_ITEMS_DESCRIPTION, i + "." + S.COLUMN_ITEMS_DESCRIPTION);
+		projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
+		
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		 
+		_QB.setTables(S.TABLE_HUNTING_FLEET + " AS h" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "h." +
+				S.COLUMN_HUNTING_FLEET_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
 /********************************* ITEM QUERIES ******************************************/
 	
 	/*

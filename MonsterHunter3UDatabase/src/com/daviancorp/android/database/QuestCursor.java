@@ -56,6 +56,8 @@ public class QuestCursor extends CursorWrapper {
 		String fileLocation = getString(getColumnIndex(S.COLUMN_LOCATIONS_MAP));
 		location.setFileLocation(fileLocation);
 		
+		quest.setLocation(location);
+		
 		return quest;
 	}
 

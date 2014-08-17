@@ -8,7 +8,7 @@ public class Quest {
 	private String hub;
 	private String type;
 	private String stars;
-	private Location location_id;
+	private Location location;
 	private int time_limit;
 	private int fee;
 	private int reward;
@@ -21,7 +21,7 @@ public class Quest {
 		this.hub = "";
 		this.type = "";
 		this.stars = "";
-		this.location_id = null;
+		this.location = null;
 		this.time_limit = -1;
 		this.fee = -1;
 		this.reward = -1;
@@ -76,12 +76,12 @@ public class Quest {
 		this.stars = stars;
 	}
 
-	public Location getLocationId() {
-		return location_id;
+	public Location getLocation() {
+		return location;
 	}
 
-	public void setLocationId(Location location_id) {
-		this.location_id = location_id;
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 
 	public int getTimeLimit() {

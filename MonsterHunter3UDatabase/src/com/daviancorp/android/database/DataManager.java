@@ -2,14 +2,7 @@ package com.daviancorp.android.database;
 
 import android.content.Context;
 
-import com.daviancorp.android.data.Armor;
-import com.daviancorp.android.data.Combining;
-import com.daviancorp.android.data.Decoration;
-import com.daviancorp.android.data.Item;
-import com.daviancorp.android.data.Location;
-import com.daviancorp.android.data.Monster;
-import com.daviancorp.android.data.Quest;
-import com.daviancorp.android.data.SkillTree;
+import com.daviancorp.android.data.*;
 
 public class DataManager {
 	private static final String TAG = "DataManager";
@@ -93,6 +86,31 @@ public class DataManager {
 			decoration = cursor.getDecoration();
 		cursor.close();
 		return decoration;
+	}
+	
+/********************************* HUNTING FLEET QUERIES ******************************************/	
+	
+	public HuntingFleetCursor queryHuntingFleets() {
+		return mHelper.queryHuntingFleets();
+	}
+	
+	public HuntingFleet getHuntingFleet(long id) {
+		HuntingFleet huntingFleet = null;
+		HuntingFleetCursor cursor = mHelper.queryHuntingFleet(id);
+		cursor.moveToFirst();
+		
+		if (!cursor.isAfterLast())
+			huntingFleet = cursor.getHuntingFleet();
+		cursor.close();
+		return huntingFleet;
+	}
+	
+	public HuntingFleetCursor queryHuntingFleetType(String type) {
+		return mHelper.queryHuntingFleetType(type);
+	}
+
+	public HuntingFleetCursor queryHuntingFleetLocation(String location) {
+		return mHelper.queryHuntingFleetLocation(location);
 	}
 	
 /********************************* ITEM QUERIES ******************************************/
@@ -194,5 +212,7 @@ public class DataManager {
 		cursor.close();
 		return skillTree;
 	}
+	
+	
 	
 }
