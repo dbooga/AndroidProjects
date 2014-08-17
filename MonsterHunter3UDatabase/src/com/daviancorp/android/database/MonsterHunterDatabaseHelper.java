@@ -122,6 +122,139 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return qb.query(getReadableDatabase(), _Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit);
 	}
 	
+/********************************* ARMOR QUERIES ******************************************/
+	
+	/*
+	 * Get all armor
+	 */
+	public ArmorCursor queryArmor() {
+
+		_Columns = null;
+		_Selection = null;
+		_SelectionArgs = null;
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+
+		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+	}
+	
+	/*
+	 * Get a specific armor
+	 */
+	public ArmorCursor queryArmor(long id) {
+
+		_Columns = null;
+		_Selection = "a." + S.COLUMN_ARMOR_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = "1";
+		
+		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+	}	
+	
+	/*
+	 * Get a specific armor based on hunter type
+	 */
+	public ArmorCursor queryArmorType(String type) {
+
+		_Columns = null;
+		_Selection = "a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = ? " + " OR " +
+					"a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = 'Both'";
+		_SelectionArgs = new String[]{type};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+	}
+	
+	/*
+	 * Get a specific armor based on slot
+	 */
+	public ArmorCursor queryArmorSlot(String slot) {
+
+		_Columns = null;
+		_Selection = "a." + S.COLUMN_ARMOR_SLOT + " = ?";
+		_SelectionArgs = new String[]{slot};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+	}
+	
+	/*
+	 * Get a specific armor based on hunter type and slot
+	 */
+	public ArmorCursor queryArmorTypeSlot(String type, String slot) {
+
+		_Columns = null;
+		_Selection = "(a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = ?" + " OR " +
+				"a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = 'Both') " + " AND " + 
+				"a." + S.COLUMN_ARMOR_SLOT + " = ?";
+		_SelectionArgs = new String[]{type, slot};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+	}
+
+	/*
+	 * Helper method to query for armor
+	 */
+	private SQLiteQueryBuilder builderArmor() {
+//		SELECT a._id AS _id, a.slot, a.defense, a.max_defense, a.fire_res, a.thunder_res,
+//		a.dragon_res, a.water_res, a.ice_res, a.gender, a.hunter_type, a.num_slots,
+//		i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell, i.description,
+//		i.icon_name, i.armor_dupe_name_fix
+//		FROM armor AS a LEFT OUTER JOIN	items AS i ON a._id = i._id;
+
+		String a = "a";
+		String i = "i";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", a + "." + S.COLUMN_ARMOR_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_ARMOR_SLOT, a + "." + S.COLUMN_ARMOR_SLOT);
+		projectionMap.put(S.COLUMN_ARMOR_DEFENSE, a + "." + S.COLUMN_ARMOR_DEFENSE);
+		projectionMap.put(S.COLUMN_ARMOR_MAX_DEFENSE, a + "." + S.COLUMN_ARMOR_MAX_DEFENSE);
+		projectionMap.put(S.COLUMN_ARMOR_FIRE_RES, a + "." + S.COLUMN_ARMOR_FIRE_RES);
+		projectionMap.put(S.COLUMN_ARMOR_THUNDER_RES, a + "." + S.COLUMN_ARMOR_THUNDER_RES);
+		projectionMap.put(S.COLUMN_ARMOR_DRAGON_RES, a + "." + S.COLUMN_ARMOR_DRAGON_RES);
+		projectionMap.put(S.COLUMN_ARMOR_WATER_RES, a + "." + S.COLUMN_ARMOR_WATER_RES);
+		projectionMap.put(S.COLUMN_ARMOR_ICE_RES, a + "." + S.COLUMN_ARMOR_ICE_RES);
+		projectionMap.put(S.COLUMN_ARMOR_GENDER, a + "." + S.COLUMN_ARMOR_GENDER);
+		projectionMap.put(S.COLUMN_ARMOR_HUNTER_TYPE, a + "." + S.COLUMN_ARMOR_HUNTER_TYPE);
+		projectionMap.put(S.COLUMN_ARMOR_NUM_SLOTS, a + "." + S.COLUMN_ARMOR_NUM_SLOTS);
+		projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_TYPE, i + "." + S.COLUMN_ITEMS_TYPE);
+		projectionMap.put(S.COLUMN_ITEMS_RARITY, i + "." + S.COLUMN_ITEMS_RARITY);
+		projectionMap.put(S.COLUMN_ITEMS_CARRY_CAPACITY, i + "." + S.COLUMN_ITEMS_CARRY_CAPACITY);
+		projectionMap.put(S.COLUMN_ITEMS_BUY, i + "." + S.COLUMN_ITEMS_BUY);
+		projectionMap.put(S.COLUMN_ITEMS_SELL, i + "." + S.COLUMN_ITEMS_SELL);
+		projectionMap.put(S.COLUMN_ITEMS_DESCRIPTION, i + "." + S.COLUMN_ITEMS_DESCRIPTION);
+		projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
+		
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_ARMOR + " AS a" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "a." +
+				S.COLUMN_ARMOR_ID + " = " + "i." + S.COLUMN_ITEMS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
 /********************************* COMBINING QUERIES ******************************************/
 	
 	/*
@@ -499,7 +632,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 
 		_Columns = null;
 		_Selection = "q." + S.COLUMN_QUESTS_HUB + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(hub) };
+		_SelectionArgs = new String[]{ hub };
 		_GroupBy = null;
 		_Having = null;
 		_OrderBy = null;

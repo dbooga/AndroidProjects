@@ -11,7 +11,9 @@ public class Armor extends Item{
 	private int max_defense;
 	private int fire_res;
 	private int thunder_res;
+	private int dragon_res;
 	private int water_res;
+	private int ice_res;
 	private String gender;
 	private String hunter_type;
 	private int num_slots;
@@ -70,12 +72,28 @@ public class Armor extends Item{
 		this.thunder_res = thunder_res;
 	}
 
+	public int getDragonRes() {
+		return dragon_res;
+	}
+
+	public void setDragonRes(int dragon_res) {
+		this.dragon_res = dragon_res;
+	}
+
 	public int getWaterRes() {
 		return water_res;
 	}
 
 	public void setWaterRes(int water_res) {
 		this.water_res = water_res;
+	}
+
+	public int getIceRes() {
+		return ice_res;
+	}
+
+	public void setIceRes(int ice_res) {
+		this.ice_res = ice_res;
 	}
 
 	public String getGender() {

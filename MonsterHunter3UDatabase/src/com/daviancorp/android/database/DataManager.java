@@ -1,8 +1,8 @@
 package com.daviancorp.android.database;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.daviancorp.android.data.Armor;
 import com.daviancorp.android.data.Combining;
 import com.daviancorp.android.data.Decoration;
 import com.daviancorp.android.data.Item;
@@ -32,6 +32,35 @@ public class DataManager {
 		return sDataManager;
 	}
 	
+/********************************* ARMOR QUERIES ******************************************/	
+	
+	public ArmorCursor queryArmor() {
+		return mHelper.queryArmor();
+	}
+	
+	public Armor getArmor(long id) {
+		Armor armor = null;
+		ArmorCursor cursor = mHelper.queryArmor(id);
+		cursor.moveToFirst();
+		
+		if (!cursor.isAfterLast())
+			armor = cursor.getArmor();
+		cursor.close();
+		return armor;
+	}
+	
+	public ArmorCursor queryArmorType(String type) {
+		return mHelper.queryArmorType(type);
+	}
+
+	public ArmorCursor queryArmorSlot(String slot) {
+		return mHelper.queryArmorSlot(slot);
+	}
+
+	public ArmorCursor queryArmorTypeSlot(String type, String slot) {
+		return mHelper.queryArmorTypeSlot(type, slot);
+	}
+		
 /********************************* COMBINING QUERIES ******************************************/
 	public CombiningCursor queryCombinings() {
 		return mHelper.queryCombinings();
