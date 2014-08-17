@@ -31,23 +31,23 @@ public class Combining {
 		this.id = id;
 	}
 	
-	public Item getCreated_item() {
+	public Item getCreatedItem() {
 		return created_item;
 	}
 	
-	public void setCreated_item(Item created_item) {
+	public void setCreatedItem(Item created_item) {
 		this.created_item = created_item;
 	}
 	
-	public Item getItem_1() {
+	public Item getItem1() {
 		return item_1;
 	}
 	
-	public void setItem_1(Item item_1) {
+	public void setItem1(Item item_1) {
 		this.item_1 = item_1;
 	}
 	
-	public Item getItem_2() {
+	public Item getItem2() {
 		return item_2;
 	}
 	
@@ -55,19 +55,19 @@ public class Combining {
 		this.item_2 = item_2;
 	}
 	
-	public int getAmount_made_min() {
+	public int getAmountMadeMin() {
 		return amount_made_min;
 	}
 	
-	public void setAmount_made_min(int amount_made_min) {
+	public void setAmountMadeMin(int amount_made_min) {
 		this.amount_made_min = amount_made_min;
 	}
 	
-	public int getAmount_made_max() {
+	public int getAmountMadeMax() {
 		return amount_made_max;
 	}
 	
-	public void setAmount_made_max(int amount_made_max) {
+	public void setAmountMadeMax(int amount_made_max) {
 		this.amount_made_max = amount_made_max;
 	}
 	

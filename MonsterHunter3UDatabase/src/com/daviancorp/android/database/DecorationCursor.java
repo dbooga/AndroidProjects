@@ -26,21 +26,44 @@ public class DecorationCursor extends CursorWrapper {
 		
 		Decoration decoration = new Decoration();
 
-		long decorationId = getLong(getColumnIndex(S.COLUMN_DECORATIONS_ID));
+		long decorationId = getLong(getColumnIndex("_id"));
 		decoration.setId(decorationId);
-		String name = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
+		String name = getString(getColumnIndex("item_name"));
 		decoration.setName(name);
-		int num_slots = getInt(getColumnIndex());
+		String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
+		decoration.setJpnName(jpnName);
+		String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
+		decoration.setType(type);
+		int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
+		decoration.setRarity(rarity);
+		int carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
+		decoration.setCarryCapacity(carry_capacity);
+		int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
+		decoration.setBuy(buy);
+		int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
+		decoration.setSell(sell);
+		String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
+		decoration.setDescription(description);
+		String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
+		decoration.setFileLocation(fileLocation);
+		String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
+		decoration.setArmorDupeNameFix(armor_dupe_name_fix);		
+		
+		int num_slots = getInt(getColumnIndex(S.COLUMN_DECORATIONS_NUM_SLOTS));
 		decoration.setNumSlots(num_slots);
-		int price = getInt(getColumnIndex());
-		decoration.setPrice(price);
-		String skill_1 = getString(getColumnIndex());
-		decoration.setSkill1(skill_1);
-		int skill_1_point = getString(getColumnIndex());
+		
+		long skill_1_id = getLong(getColumnIndex("skill_1_id"));
+		decoration.setSkill1Id(skill_1_id);
+		String skill_1_name = getString(getColumnIndex("skill_1_name"));
+		decoration.setSkill1Name(skill_1_name);
+		int skill_1_point = getInt(getColumnIndex("skill_1_point_value"));
 		decoration.setSkill1Point(skill_1_point);
-		String skill_2 = getString(getColumnIndex());
-		decoration.setSkill2(skill_2);
-		int skill_2_point = getString(getColumnIndex());
+		
+		long skill_2_id = getLong(getColumnIndex("skill_2_id"));
+		decoration.setSkill1Id(skill_2_id);
+		String skill_2_name = getString(getColumnIndex("skill_2_name"));
+		decoration.setSkill2Name(skill_2_name);
+		int skill_2_point = getInt(getColumnIndex("skill_2_point_value"));
 		decoration.setSkill1Point(skill_2_point);
 
 		return decoration;
