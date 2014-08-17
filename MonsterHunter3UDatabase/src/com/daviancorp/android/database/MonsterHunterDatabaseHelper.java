@@ -255,7 +255,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		// "SELECT DISTINCT * FROM items GROUP BY name LIMIT 1114"
 		
 		_Distinct = true;
-		_Table = S.TABLE_LOCATIONS;
+		_Table = S.TABLE_ITEMS;
 		_Columns = null;
 		_Selection = null;
 		_SelectionArgs = null;
