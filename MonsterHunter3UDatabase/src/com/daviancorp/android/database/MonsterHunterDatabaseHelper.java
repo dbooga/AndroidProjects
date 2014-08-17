@@ -214,12 +214,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 	}
 	
-	
-	
 /********************************* DECORATION QUERIES ******************************************/
 	
 	/*
-	 * Get all decoration
+	 * Get all decorations
 	 */
 	public DecorationCursor queryDecorations() {
 
@@ -459,7 +457,79 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		return new MonsterCursor(wrapHelper());
 	}
+	
+/********************************* QUEST QUERIES ******************************************/
+	
+	/*
+	 * Get all quests
+	 */
+	public QuestCursor queryQuests() {
 
+		_Columns = null;
+		_Selection = null;
+		_SelectionArgs = null;
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+
+		return new QuestCursor(wrapJoinHelper(builderQuest()));
+	}
+	
+	/*
+	 * Get a specific quest
+	 */
+	public QuestCursor queryQuest(long id) {
+
+		_Columns = null;
+		_Selection = "i._id" + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = "1";
+		
+		return new QuestCursor(wrapJoinHelper(builderQuest()));
+	}	
+
+	/*
+	 * Helper method to query for quests
+	 */
+	private SQLiteQueryBuilder builderQuest() {
+//		SELECT q._id AS _id, q.name AS qname, q.goal, q.hub, q.type, q.stars, q.location_id, q.time_limit, 
+//		q.fee, q.reward, q.hrp,	l.name AS lname, l.map
+//		FROM quests AS q LEFT OUTER JOIN locations AS l ON q.location_id = l._id;
+
+		String q = "q";
+		String l = "l";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", q + "." + S.COLUMN_QUESTS_ID + " AS " + "_id");
+		projectionMap.put(q + S.COLUMN_QUESTS_NAME, q + "." + S.COLUMN_QUESTS_NAME + " AS " + q + S.COLUMN_QUESTS_NAME);
+		projectionMap.put(S.COLUMN_QUESTS_GOAL, q + "." + S.COLUMN_QUESTS_GOAL);
+		projectionMap.put(S.COLUMN_QUESTS_HUB, q + "." + S.COLUMN_QUESTS_HUB);
+		projectionMap.put(S.COLUMN_QUESTS_TYPE, q + "." + S.COLUMN_QUESTS_TYPE);
+		projectionMap.put(S.COLUMN_QUESTS_STARS, q + "." + S.COLUMN_QUESTS_STARS);
+		projectionMap.put(S.COLUMN_QUESTS_LOCATION_ID, q + "." + S.COLUMN_QUESTS_LOCATION_ID);
+		projectionMap.put(S.COLUMN_QUESTS_TIME_LIMIT, q + "." + S.COLUMN_QUESTS_TIME_LIMIT);
+		projectionMap.put(S.COLUMN_QUESTS_FEE, q + "." + S.COLUMN_QUESTS_FEE);
+		projectionMap.put(S.COLUMN_QUESTS_REWARD, q + "." + S.COLUMN_QUESTS_REWARD);
+		projectionMap.put(S.COLUMN_QUESTS_HRP, q + "." + S.COLUMN_QUESTS_HRP);
+		
+		projectionMap.put(l + S.COLUMN_LOCATIONS_NAME, l + "." + S.COLUMN_LOCATIONS_NAME + " AS " + l + S.COLUMN_LOCATIONS_NAME);
+		projectionMap.put(S.COLUMN_LOCATIONS_MAP, l + "." + S.COLUMN_LOCATIONS_MAP);
+		
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		 
+		_QB.setTables(S.TABLE_QUESTS + " AS q" + " LEFT OUTER JOIN " + S.TABLE_LOCATIONS + " AS l" + " ON " + "q." +
+				S.COLUMN_QUESTS_LOCATION_ID + " = " + "l." + S.COLUMN_LOCATIONS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
 /********************************* SKILL TREE QUERIES ******************************************/	
 
 	/*

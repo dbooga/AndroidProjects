@@ -8,6 +8,7 @@ import com.daviancorp.android.data.Decoration;
 import com.daviancorp.android.data.Item;
 import com.daviancorp.android.data.Location;
 import com.daviancorp.android.data.Monster;
+import com.daviancorp.android.data.Quest;
 import com.daviancorp.android.data.SkillTree;
 
 public class DataManager {
@@ -125,6 +126,23 @@ public class DataManager {
 			monster = cursor.getMonster();
 		cursor.close();
 		return monster;
+	}
+	
+/********************************* QUEST QUERIES ******************************************/	
+	
+	public QuestCursor queryQuests() {
+		return mHelper.queryQuests();
+	}
+	
+	public Quest getQuest(long id) {
+		Quest quest = null;
+		QuestCursor cursor = mHelper.queryQuest(id);
+		cursor.moveToFirst();
+		
+		if (!cursor.isAfterLast())
+			quest = cursor.getQuest();
+		cursor.close();
+		return quest;
 	}
 	
 /********************************* SKILL TREE QUERIES ******************************************/	

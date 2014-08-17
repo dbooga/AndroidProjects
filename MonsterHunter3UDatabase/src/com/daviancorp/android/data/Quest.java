@@ -8,7 +8,7 @@ public class Quest {
 	private String hub;
 	private String type;
 	private String stars;
-	private int location_id;
+	private Location location_id;
 	private int time_limit;
 	private int fee;
 	private int reward;
@@ -21,27 +21,11 @@ public class Quest {
 		this.hub = "";
 		this.type = "";
 		this.stars = "";
-		this.location_id = -1;
+		this.location_id = null;
 		this.time_limit = -1;
 		this.fee = -1;
 		this.reward = -1;
 		this.hrp = -1;
-	}
-
-	public Quest(long id, String name, String goal, String hub, String type,
-			String stars, int location_id, int time_limit, int fee, int reward,
-			int hrp) {
-		this.id = id;
-		this.name = name;
-		this.goal = goal;
-		this.hub = hub;
-		this.type = type;
-		this.stars = stars;
-		this.location_id = location_id;
-		this.time_limit = time_limit;
-		this.fee = fee;
-		this.reward = reward;
-		this.hrp = hrp;
 	}
 
 	public long getId() {
@@ -92,11 +76,11 @@ public class Quest {
 		this.stars = stars;
 	}
 
-	public int getLocationId() {
+	public Location getLocationId() {
 		return location_id;
 	}
 
-	public void setLocationId(int location_id) {
+	public void setLocationId(Location location_id) {
 		this.location_id = location_id;
 	}
 
