@@ -21,14 +21,10 @@ public class DataManager {
 	
 	private DataManager(Context appContext) {
 		mAppContext = appContext;
-		
 		mHelper = new MonsterHunterDatabaseHelper(mAppContext);
-
-		Log.d(TAG, "MHDH created");
 	}
 	
 	public static DataManager get(Context c) {
-		Log.d(TAG, "DataManager created");
 		if (sDataManager == null) {
 			// Use the application context to avoid leaking activities
 			sDataManager = new DataManager(c.getApplicationContext());

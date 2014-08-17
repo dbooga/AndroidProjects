@@ -5,16 +5,25 @@ import android.database.Cursor;
 
 import com.daviancorp.android.database.DataManager;
 
+/*
+ *  Refer to MonsterListPagerAdapter and MonsterListFragment on 
+ *  how to call this loader
+ */
 public class QuestListCursorLoader extends SQLiteCursorLoader {
+	private String hub;		// "Village", "Port", or "DLC"
+	private String stars;	// "1", "2", "3", "4", "5", "6", "7", "8", or 
+							// "9" (Only use 9 if hub = "Port")
 	
-	public QuestListCursorLoader(Context context) {
+	public QuestListCursorLoader(Context context, String hub, String stars) {
 		super(context);
+		this.hub = hub;
+		this.stars = stars;
 	}
 	
 	@Override
 	protected Cursor loadCursor() {
 		// Query the list of all quests
-		return DataManager.get(getContext()).queryQuests();
+		return DataManager.get(getContext()).queryQuestHubStar(hub, stars);
 	}
 }
 
