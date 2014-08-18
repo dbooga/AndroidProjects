@@ -10,20 +10,24 @@ import com.daviancorp.android.database.DataManager;
  *  how to call this loader
  */
 public class QuestListCursorLoader extends SQLiteCursorLoader {
-	private String hub;		// "Village", "Port", or "DLC"
-	private String stars;	// "1", "2", "3", "4", "5", "6", "7", "8", or 
+	private String hub; // "Village", "Port", or "DLC"
+	private String stars; // "1", "2", "3", "4", "5", "6", "7", "8", or
 							// "9" (Only use 9 if hub = "Port")
-	
+
 	public QuestListCursorLoader(Context context, String hub, String stars) {
 		super(context);
 		this.hub = hub;
 		this.stars = stars;
 	}
-	
+
 	@Override
 	protected Cursor loadCursor() {
-		// Query the list of all quests
-		return DataManager.get(getContext()).queryQuestHubStar(hub, stars);
+		if (hub == null && stars == null) {
+			return DataManager.get(getContext()).queryQuests();
+		} else if (stars == null) {
+			return DataManager.get(getContext()).queryQuestHub(hub);
+		} else {
+			return DataManager.get(getContext()).queryQuestHubStar(hub, stars);
+		}
 	}
 }
-

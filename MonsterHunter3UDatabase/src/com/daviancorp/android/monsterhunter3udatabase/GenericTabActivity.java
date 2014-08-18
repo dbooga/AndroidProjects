@@ -55,7 +55,7 @@ public abstract class GenericTabActivity extends ActionBarActivity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 		
-		setContentView(R.layout.activity_monsterlist);
+		setContentView(R.layout.activity_tab_list);
 		
 		// Getting reference to the DrawerLayout
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

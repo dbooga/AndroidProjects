@@ -66,6 +66,8 @@ public class HomeFragment extends Fragment {
 					case ARMORS:
 						break;
 					case QUESTS:
+						Intent quest_intent = new Intent(getActivity(), QuestListActivity.class);
+						startActivity(quest_intent);
 						break;
 					case ITEMS:
 						Intent item_intent = new Intent(getActivity(), ItemListActivity.class);
