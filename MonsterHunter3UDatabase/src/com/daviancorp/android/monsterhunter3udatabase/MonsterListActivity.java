@@ -1,18 +1,18 @@
 package com.daviancorp.android.monsterhunter3udatabase;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import com.daviancorp.android.adapter.MonsterListPagerAdapter;
+import com.daviancorp.android.adapter.QuestListPagerAdapter;
 
 
 
@@ -20,7 +20,9 @@ public class MonsterListActivity extends GenericTabActivity implements ActionBar
 	
 	private ViewPager viewPager;
     private MonsterListPagerAdapter mAdapter;
+    private QuestListPagerAdapter qAdapter;
     private ActionBar actionBar;
+    private int toggle;
     
  // Tab titles
     private String[] tabs = { "All", "Small", "Large" };
@@ -30,9 +32,12 @@ public class MonsterListActivity extends GenericTabActivity implements ActionBar
 		super.onCreate(savedInstanceState);
 		setTitle(R.string.monsters);
 		
+		toggle = 0;
+		
 		// Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
         mAdapter = new MonsterListPagerAdapter(getSupportFragmentManager());
+        qAdapter = new QuestListPagerAdapter(getSupportFragmentManager());
  
         viewPager.setAdapter(mAdapter);
         
@@ -84,6 +89,9 @@ public class MonsterListActivity extends GenericTabActivity implements ActionBar
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
+		Fragment newFragment;
+		FragmentTransaction transaction;
+		
 		switch (item.getItemId()) {
 		case R.id.monster_listview:
 //			FragmentManager fm = getSupportFragmentManager();
@@ -91,8 +99,8 @@ public class MonsterListActivity extends GenericTabActivity implements ActionBar
 //			dialog.show(fm, DIALOG_ABOUT);
 		
 			// Create new fragment and transaction
-			Fragment newFragment = new HomeFragment();
-			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+			newFragment = new HomeFragment();
+			transaction = getSupportFragmentManager().beginTransaction();
 
 			// Replace whatever is in the fragment_container view with this fragment,
 			// and add the transaction to the back stack
@@ -105,10 +113,21 @@ public class MonsterListActivity extends GenericTabActivity implements ActionBar
 			
 			return true;
 		case R.id.monster_gridview:
+			toggle = 1;
+			Intent intent = new Intent(this, MonsterGridActivity.class);
+			startActivity(intent);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	@Override
+	public void onPause() {
+	    super.onPause(); 
+	    if(toggle == 1){
+	    	finish();
+	    }
 	}
 
 	@Override

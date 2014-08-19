@@ -1083,7 +1083,7 @@ containing a value of this type.
         public static final int mh3=0x7f020058;
     }
     public static final class id {
-        public static final int about=0x7f060043;
+        public static final int about=0x7f060044;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1113,6 +1113,7 @@ containing a value of this type.
         public static final int expanded_menu=0x7f06002c;
         public static final int fragment_container=0x7f06003d;
         public static final int grid_home=0x7f060042;
+        public static final int grid_monsters=0x7f060043;
         public static final int home=0x7f060014;
         public static final int homeAsUp=0x7f060005;
         public static final int icon=0x7f06002a;
@@ -1122,8 +1123,8 @@ containing a value of this type.
         public static final int list_item=0x7f060029;
         public static final int logo=0x7f060041;
         public static final int middle=0x7f060012;
-        public static final int monster_gridview=0x7f060045;
-        public static final int monster_listview=0x7f060044;
+        public static final int monster_gridview=0x7f060046;
+        public static final int monster_listview=0x7f060045;
         public static final int never=0x7f060009;
         public static final int none=0x7f060010;
         public static final int normal=0x7f060000;
@@ -1208,7 +1209,8 @@ containing a value of this type.
         public static final int activity_tab_list=0x7f030019;
         public static final int drawer_list_item=0x7f03001a;
         public static final int fragment_home=0x7f03001b;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
+        public static final int fragment_monster_grid=0x7f03001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;

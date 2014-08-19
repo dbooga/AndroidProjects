@@ -43,7 +43,10 @@
             android:name="com.daviancorp.android.monsterhunter3udatabase.QuestListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-        
+        <activity
+            android:name="com.daviancorp.android.monsterhunter3udatabase.MonsterGridActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
