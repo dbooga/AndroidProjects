@@ -1266,13 +1266,17 @@ containing a value of this type.
         public static final int action_settings=0x7f0b000f;
         public static final int alert_button=0x7f0b0011;
         public static final int app_name=0x7f0b000d;
+        public static final int armor=0x7f0b001c;
         public static final int combining=0x7f0b0017;
+        public static final int decorations=0x7f0b001b;
+        public static final int hunting_fleet=0x7f0b0019;
         public static final int items=0x7f0b0015;
         public static final int locations=0x7f0b0016;
         public static final int monsters=0x7f0b0014;
         public static final int option_grid=0x7f0b0013;
         public static final int option_list=0x7f0b0012;
         public static final int quests=0x7f0b0018;
+        public static final int skill_trees=0x7f0b001a;
     }
     public static final class style {
         /** 

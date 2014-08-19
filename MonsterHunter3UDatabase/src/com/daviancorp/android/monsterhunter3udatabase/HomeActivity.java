@@ -7,10 +7,10 @@ public class HomeActivity extends GenericActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState) ;
+		super.onCreate(savedInstanceState);
 		setTitle(R.string.app_name);
 	}
-	
+
 	@Override
 	protected Fragment createFragment() {
 		super.detail = new HomeFragment();
@@ -18,4 +18,3 @@ public class HomeActivity extends GenericActivity {
 	}
 
 }
-

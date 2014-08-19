@@ -10,9 +10,9 @@ public abstract class SQLiteCursorLoader extends AsyncTaskLoader<Cursor> {
 	public SQLiteCursorLoader(Context context) {
 		super(context);
 	}
-	
+
 	protected abstract Cursor loadCursor();
-	
+
 	@Override
 	public Cursor loadInBackground() {
 		Cursor cursor = loadCursor();
@@ -22,21 +22,21 @@ public abstract class SQLiteCursorLoader extends AsyncTaskLoader<Cursor> {
 		}
 		return cursor;
 	}
-	
+
 	@Override
 	public void deliverResult(Cursor data) {
 		Cursor oldCursor = mCursor;
 		mCursor = data;
-		
+
 		if (isStarted()) {
 			super.deliverResult(data);
 		}
-		
+
 		if (oldCursor != null && oldCursor != data && !oldCursor.isClosed()) {
 			oldCursor.close();
 		}
 	}
-	
+
 	@Override
 	protected void onStartLoading() {
 		if (mCursor != null) {
@@ -46,27 +46,27 @@ public abstract class SQLiteCursorLoader extends AsyncTaskLoader<Cursor> {
 			forceLoad();
 		}
 	}
-	
+
 	@Override
 	protected void onStopLoading() {
 		// Attempt to cancel the current load task if possible.
 		cancelLoad();
 	}
-	
+
 	@Override
 	public void onCanceled(Cursor cursor) {
 		if (cursor != null && !cursor.isClosed()) {
 			cursor.close();
 		}
 	}
-	
+
 	@Override
 	protected void onReset() {
 		super.onReset();
-		
+
 		// Ensure the loader is stopped
 		onStopLoading();
-		
+
 		if (mCursor != null && !mCursor.isClosed()) {
 			mCursor.close();
 		}

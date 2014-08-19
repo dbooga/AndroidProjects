@@ -7,10 +7,10 @@ public class ItemListActivity extends GenericActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState) ;
+		super.onCreate(savedInstanceState);
 		setTitle(R.string.items);
 	}
-	
+
 	@Override
 	protected Fragment createFragment() {
 		super.detail = new ItemListFragment();
@@ -18,4 +18,3 @@ public class ItemListActivity extends GenericActivity {
 	}
 
 }
-

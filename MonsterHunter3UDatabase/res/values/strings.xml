@@ -13,5 +13,9 @@
     <string name="locations">Locations</string>
     <string name="combining">Combining</string>
     <string name="quests">Quests</string>
+    <string name="hunting_fleet">Hunting Fleet</string>
+    <string name="skill_trees">Skill Trees</string>
+    <string name="decorations">Decorations</string>
+    <string name="armor">Armor</string>
 
 </resources>

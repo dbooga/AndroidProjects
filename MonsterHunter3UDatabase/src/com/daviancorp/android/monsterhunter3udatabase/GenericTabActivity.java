@@ -25,7 +25,7 @@ import android.widget.ListView;
 public abstract class GenericTabActivity extends ActionBarActivity {
 
 	protected static final String DIALOG_ABOUT = "about";
-	
+
 	private final static int MONSTERS = 0;
 	private final static int WEAPONS = 1;
 	private final static int ARMORS = 2;
@@ -36,14 +36,14 @@ public abstract class GenericTabActivity extends ActionBarActivity {
 	private final static int SKILLS = 7;
 	private final static int LOCATIONS = 8;
 	private final static int HUNTINGFLEET = 9;
-	
-	String[] values = new String[] { "Monsters", "Weapons", "Armors",
-			"Quests", "Items", "Combining", "Decorations", "Skills",
-			"Locations", "Hunting Fleet" };
-	
+
+	String[] values = new String[] { "Monsters", "Weapons", "Armors", "Quests",
+			"Items", "Combining", "Decorations", "Skills", "Locations",
+			"Hunting Fleet" };
+
 	protected ListView mDrawerList;
 	protected DrawerLayout mDrawerLayout;
-	
+
 	protected Fragment detail;
 
 	@SuppressLint("NewApi")
@@ -54,59 +54,79 @@ public abstract class GenericTabActivity extends ActionBarActivity {
 		setTitle(R.string.app_name);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
-		
+
 		setContentView(R.layout.activity_tab_list);
-		
+
 		// Getting reference to the DrawerLayout
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 		mDrawerList = (ListView) findViewById(R.id.drawer_list);
-		
+
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				R.layout.drawer_list_item, values);
-		
+
 		mDrawerList.setAdapter(adapter);
 		mDrawerList.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,
-					long id) {
-				//sendResult(Activity.RESULT_OK, position);
-				switch(position) {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// sendResult(Activity.RESULT_OK, position);
+				Intent intent;
+
+				switch (position) {
 				case MONSTERS:
-					Intent monster_intent = new Intent(GenericTabActivity.this, MonsterListActivity.class);
-					startActivity(monster_intent);
+					intent = new Intent(GenericTabActivity.this,
+							MonsterListActivity.class);
+					startActivity(intent);
 					break;
 				case WEAPONS:
 					break;
 				case ARMORS:
+					intent = new Intent(GenericTabActivity.this,
+							ArmorListActivity.class);
+					startActivity(intent);
 					break;
 				case QUESTS:
+					intent = new Intent(GenericTabActivity.this,
+							QuestListActivity.class);
+					startActivity(intent);
 					break;
 				case ITEMS:
-					Intent item_intent = new Intent(GenericTabActivity.this, ItemListActivity.class);
-					startActivity(item_intent);
+					intent = new Intent(GenericTabActivity.this,
+							ItemListActivity.class);
+					startActivity(intent);
 					break;
 				case COMBINING:
-					Intent combining_intent = new Intent(GenericTabActivity.this, CombiningListActivity.class);
-					startActivity(combining_intent);
+					intent = new Intent(GenericTabActivity.this,
+							CombiningListActivity.class);
+					startActivity(intent);
 					break;
 				case DECORATIONS:
+					intent = new Intent(GenericTabActivity.this,
+							DecorationListActivity.class);
+					startActivity(intent);
 					break;
 				case SKILLS:
+					intent = new Intent(GenericTabActivity.this,
+							SkillTreeListActivity.class);
+					startActivity(intent);
 					break;
 				case LOCATIONS:
-					Intent location_intent = new Intent(GenericTabActivity.this, LocationListActivity.class);
-					startActivity(location_intent);
+					intent = new Intent(GenericTabActivity.this,
+							LocationListActivity.class);
+					startActivity(intent);
 					break;
 				case HUNTINGFLEET:
+					intent = new Intent(GenericTabActivity.this,
+							HuntingFleetListActivity.class);
+					startActivity(intent);
 					break;
-			}
+				}
 				mDrawerLayout.closeDrawers();
 			}
 		});
-		
-		
+
 	}
 
 	@Override
@@ -115,15 +135,15 @@ public abstract class GenericTabActivity extends ActionBarActivity {
 		case android.R.id.home:
 			if (mDrawerLayout.isDrawerVisible(mDrawerList)) {
 				mDrawerLayout.closeDrawers();
-			}
-			else mDrawerLayout.openDrawer(mDrawerList);
+			} else
+				mDrawerLayout.openDrawer(mDrawerList);
 			return true;
-//		case R.id.about:
-//			FragmentManager fm = getSupportFragmentManager();
-//			AboutDialogFragment dialog = new AboutDialogFragment();
-//			dialog.show(fm, DIALOG_ABOUT);
-//		
-//			return true;
+		case R.id.about:
+			FragmentManager fm = getSupportFragmentManager();
+			AboutDialogFragment dialog = new AboutDialogFragment();
+			dialog.show(fm, DIALOG_ABOUT);
+
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
