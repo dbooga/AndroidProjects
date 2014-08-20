@@ -93,7 +93,7 @@ public class HuntingFleetListFragment extends ListFragment implements
 
 			// Set up the text view
 			TextView HuntingFleetNameTextView = (TextView) view;
-			String cellText = huntingfleet.getLocation();
+			String cellText = huntingfleet.getLocation() + "\t\t" + huntingfleet.getItem().getName();
 			HuntingFleetNameTextView.setText(cellText);
 		}
 	}

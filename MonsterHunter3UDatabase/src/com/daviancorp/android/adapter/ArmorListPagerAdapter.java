@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.daviancorp.android.monsterhunter3udatabase.QuestListFragment;
+import com.daviancorp.android.monsterhunter3udatabase.ArmorListFragment;
 
 public class ArmorListPagerAdapter extends FragmentPagerAdapter {
 
@@ -17,11 +17,11 @@ public class ArmorListPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
-			return QuestListFragment.newInstance("Both", null);
+			return ArmorListFragment.newInstance("Both", null);
 		case 1:
-			return QuestListFragment.newInstance("Blade", null);
+			return ArmorListFragment.newInstance("Blade", null);
 		case 2:
-			return QuestListFragment.newInstance("Gunner", null);
+			return ArmorListFragment.newInstance("Gunner", null);
 		default:
 			return null;
 		}
