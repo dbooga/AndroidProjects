@@ -10,25 +10,28 @@ import com.daviancorp.android.database.DataManager;
  * For constructor, pass in either "Small", "Large", or null
  */
 public class MonsterListCursorLoader extends SQLiteCursorLoader {
-	private String tab; // "Small", "Large", or null
-
+	private String tab;		// "Small", "Large", or null
+	
 	public MonsterListCursorLoader(Context context, String tab) {
 		super(context);
 		this.tab = tab;
 	}
-
+	
 	@Override
 	protected Cursor loadCursor() {
 		// Query the list of all monsters
-
-		if (tab == null) {
+		
+		if (tab == null){
 			return DataManager.get(getContext()).queryMonsters();
-		} else if (tab.equals("Small")) {
+		}
+		else if (tab.equals("Small")){
 			Log.d("hoooooo", "SMALLS");
 			return DataManager.get(getContext()).querySmallMonsters();
-		} else if (tab.equals("Large")) {
+		}
+		else if (tab.equals("Large")) {
 			return DataManager.get(getContext()).queryLargeMonsters();
-		} else {
+		}
+		else {
 			return DataManager.get(getContext()).queryMonsters();
 		}
 	}

@@ -6,11 +6,11 @@ import android.database.Cursor;
 import com.daviancorp.android.database.DataManager;
 
 public class ItemListCursorLoader extends SQLiteCursorLoader {
-
+	
 	public ItemListCursorLoader(Context context) {
 		super(context);
 	}
-
+	
 	@Override
 	protected Cursor loadCursor() {
 		// Query the list of all items

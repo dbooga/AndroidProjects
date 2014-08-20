@@ -47,22 +47,6 @@
             android:name="com.daviancorp.android.monsterhunter3udatabase.MonsterGridActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.daviancorp.android.monsterhunter3udatabase.HuntingFleetListActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.daviancorp.android.monsterhunter3udatabase.SkillTreeListActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.daviancorp.android.monsterhunter3udatabase.DecorationListActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.daviancorp.android.monsterhunter3udatabase.ArmorListActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
