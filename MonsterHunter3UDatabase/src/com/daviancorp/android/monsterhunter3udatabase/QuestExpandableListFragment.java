@@ -27,8 +27,12 @@ public class QuestExpandableListFragment extends Fragment {
 	private String mHub;
 	private static final String ARG_HUB = "QUEST_HUB";
 	private ArrayList<Quest> quests;
-	private String[] groups = { "1 Star", "2 Star", "3 Star", "4 Star",
+	private String[] village = { "1 Star", "2 Star", "3 Star", "4 Star",
 			"5 Star", "6 Star", "7 Star", "8 Star", "9 Star" };
+	
+	private String[] port_dlc = { "1 Star", "2 Star", "3 Star", "4 Star",
+			"5 Star", "6 Star", "7 Star", "8 Star"};
+
 	private ArrayList<ArrayList<Quest>> children;
 
 	public static QuestExpandableListFragment newInstance(String hub) {
@@ -120,7 +124,12 @@ public class QuestExpandableListFragment extends Fragment {
 		View v = inflater.inflate(R.layout.quest, null);
 		ExpandableListView elv = (ExpandableListView) v
 				.findViewById(R.id.expandableListView);
-		elv.setAdapter(new QuestListAdapter());
+		if(mHub.equals("Village")){
+			elv.setAdapter(new QuestListAdapter(village));
+		}
+		else{
+			elv.setAdapter(new QuestListAdapter(port_dlc));
+		}
 		return v;
 	}
 
@@ -135,10 +144,17 @@ public class QuestExpandableListFragment extends Fragment {
 		// { "Fluffy", "Snuggles" },
 		// { "Goldy", "Bubbles" }
 		// };
+		private String[] quests;
+		
+		public QuestListAdapter(String[] quests){
+			super();
+			this.quests = quests;
+			
+		}
 
 		@Override
 		public int getGroupCount() {
-			return groups.length;
+			return quests.length;
 		}
 
 		@Override
@@ -148,7 +164,7 @@ public class QuestExpandableListFragment extends Fragment {
 
 		@Override
 		public Object getGroup(int i) {
-			return groups[i];
+			return quests[i];
 		}
 
 		@Override
