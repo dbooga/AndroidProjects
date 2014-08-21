@@ -138,12 +138,14 @@ public class S {
 	static final String COLUMN_MONSTERS_NAME = "name";
 	static final String COLUMN_MONSTERS_CLASS = "class";
 	static final String COLUMN_MONSTERS_TRAIT = "trait";
+	static final String COLUMN_MONSTERS_FILE_LOCATION = "icon_name"; 
 	
 	// Monster to Quest
 	static final String TABLE_MONSTER_TO_QUEST = "monster_to_quest";
 	static final String COLUMN_MONSTER_TO_QUEST_ID = "_id";
 	static final String COLUMN_MONSTER_TO_QUEST_MONSTER_ID = "monster_id";
 	static final String COLUMN_MONSTER_TO_QUEST_QUEST_ID = "quest_id";
+	static final String COLUMN_MONSTER_TO_QUEST_UNSTABLE = "unstable"; 
 	
 	// Planting
 	static final String TABLE_PLANTING = "planting";
