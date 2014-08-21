@@ -1,7 +1,6 @@
 package com.daviancorp.android.monsterhunter3udatabase;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,9 +10,6 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -51,7 +47,6 @@ public class MonsterGridFragment extends Fragment implements
 				.inflate(R.layout.fragment_monster_grid, parent, false);
 
 		mGridView = (GridView) v.findViewById(R.id.grid_monsters);
-
 		mGridView.setAdapter(mAdapter);
 
 		return v;
@@ -73,7 +68,7 @@ public class MonsterGridFragment extends Fragment implements
 		// Create an adapter to point at this cursor
 		mAdapter = new MonsterGridCursorAdapter(getActivity(),
 				(MonsterCursor) cursor);
-		if (mGridView != null){
+		if (mGridView != null) {
 			mGridView.setAdapter(mAdapter);
 		}
 	}

@@ -7,10 +7,10 @@ public class CombiningListActivity extends GenericActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState) ;
+		super.onCreate(savedInstanceState);
 		setTitle(R.string.combining);
 	}
-	
+
 	@Override
 	protected Fragment createFragment() {
 		super.detail = new CombiningListFragment();
@@ -18,4 +18,3 @@ public class CombiningListActivity extends GenericActivity {
 	}
 
 }
-

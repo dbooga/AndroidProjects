@@ -12,17 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.daviancorp.android.data.Monster;
 import com.daviancorp.android.data.Quest;
-import com.daviancorp.android.database.MonsterCursor;
 import com.daviancorp.android.database.QuestCursor;
-import com.daviancorp.android.loader.MonsterListCursorLoader;
 import com.daviancorp.android.loader.QuestListCursorLoader;
 
-public class QuestListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
+public class QuestListFragment extends ListFragment implements
+		LoaderCallbacks<Cursor> {
 	private static final String ARG_HUB = "QUEST_HUB";
 	private static final String ARG_STARS = "QUEST_STARS";
-	
+
 	public static QuestListFragment newInstance(String hub, String stars) {
 		Bundle args = new Bundle();
 		args.putString(ARG_HUB, hub);
@@ -31,15 +29,15 @@ public class QuestListFragment extends ListFragment implements LoaderCallbacks<C
 		f.setArguments(args);
 		return f;
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		// Initialize the loader to load the list of runs
 		getLoaderManager().initLoader(0, getArguments(), this);
 	}
-	
+
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
@@ -49,17 +47,17 @@ public class QuestListFragment extends ListFragment implements LoaderCallbacks<C
 			mHub = args.getString(ARG_HUB);
 			mStars = args.getString(ARG_STARS);
 		}
-		
+
 		return new QuestListCursorLoader(getActivity(), mHub, mStars);
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Create an adapter to point at this cursor
-		QuestListCursorAdapter adapter =
-				new QuestListCursorAdapter(getActivity(), (QuestCursor) cursor);
+		QuestListCursorAdapter adapter = new QuestListCursorAdapter(
+				getActivity(), (QuestCursor) cursor);
 		setListAdapter(adapter);
-		
+
 	}
 
 	@Override
@@ -67,36 +65,35 @@ public class QuestListFragment extends ListFragment implements LoaderCallbacks<C
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
 	}
-	
+
 	private static class QuestListCursorAdapter extends CursorAdapter {
-		
+
 		private QuestCursor mQuestCursor;
-		
+
 		public QuestListCursorAdapter(Context context, QuestCursor cursor) {
 			super(context, cursor, 0);
 			mQuestCursor = cursor;
 		}
-		
+
 		@Override
 		public View newView(Context context, Cursor cursor, ViewGroup parent) {
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater
-					.inflate(android.R.layout.simple_list_item_1, parent, false);
+			return inflater.inflate(android.R.layout.simple_list_item_1,
+					parent, false);
 		}
-		
+
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
-			// Get the monster for the current row
+			// Get the quest for the current row
 			Quest quest = mQuestCursor.getQuest();
-			
+
 			// Set up the text view
 			TextView questNameTextView = (TextView) view;
 			String cellText = quest.getName();
 			questNameTextView.setText(cellText);
 		}
 	}
-	
-	
+
 }

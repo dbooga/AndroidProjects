@@ -6,22 +6,19 @@ public class Monster {
 	private String name;
 	private String monsterClass;
 	private String trait;
-	private String file_location;
 	
 	public Monster() {
 		this.id = -1;
 		this.name = "";
 		this.monsterClass = "";
 		this.trait = "";
-		this.file_location = "";
 	}
 	
-	public Monster(long id, String name, String monsterClass, String trait, String location) {
+	public Monster(long id, String name, String monsterClass, String trait) {
 		this.id = id;
 		this.name = name;
 		this.monsterClass = monsterClass;
 		this.trait = trait;
-		this.file_location = location;
 	}
 
 	public long getId() {
@@ -56,11 +53,4 @@ public class Monster {
 		this.trait = trait;
 	}
 	
-	public String getFileLocation() {
-		return file_location;
-	}
-
-	public void setFileLocation(String file_location) {
-		this.file_location = file_location;
-	}
 }

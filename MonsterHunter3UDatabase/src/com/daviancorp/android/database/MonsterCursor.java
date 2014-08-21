@@ -34,8 +34,6 @@ public class MonsterCursor extends CursorWrapper {
 		monster.setMonsterClass(monsterClass);
 		String trait = getString(getColumnIndex(S.COLUMN_MONSTERS_TRAIT));
 		monster.setTrait(trait);
-		String file_location = getString(getColumnIndex(S.COLUMN_MONSTERS_FILE_LOCATION));
-		monster.setFileLocation(file_location);
 
 		return monster;
 	}

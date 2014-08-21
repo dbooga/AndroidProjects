@@ -23,9 +23,9 @@ public class ArmorCursor extends CursorWrapper {
 	public Armor getArmor() {
 		if (isBeforeFirst() || isAfterLast())
 			return null;
-		
+
 		Armor armor = new Armor();
-		
+
 		String slot = getString(getColumnIndex(S.COLUMN_ARMOR_SLOT));
 		armor.setSlot(slot);
 		int defense = getInt(getColumnIndex(S.COLUMN_ARMOR_DEFENSE));
@@ -48,7 +48,7 @@ public class ArmorCursor extends CursorWrapper {
 		armor.setHunterType(hunter_type);
 		int num_slots = getInt(getColumnIndex(S.COLUMN_ARMOR_NUM_SLOTS));
 		armor.setNumSlots(num_slots);
-		
+
 		long itemId = getLong(getColumnIndex(S.COLUMN_ITEMS_ID));
 		armor.setId(itemId);
 		String name = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
@@ -71,7 +71,7 @@ public class ArmorCursor extends CursorWrapper {
 		armor.setFileLocation(fileLocation);
 		String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
 		armor.setArmorDupeNameFix(armor_dupe_name_fix);
-		
+
 		return armor;
 	}
 

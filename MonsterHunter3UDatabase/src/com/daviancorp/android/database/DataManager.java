@@ -1,5 +1,7 @@
 package com.daviancorp.android.database;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 
 import com.daviancorp.android.data.*;
@@ -186,6 +188,19 @@ public class DataManager {
 			quest = cursor.getQuest();
 		cursor.close();
 		return quest;
+	}
+	
+	public ArrayList<Quest> queryQuestArrayHub(String hub) {
+		ArrayList<Quest> quests = new ArrayList<Quest>();
+		QuestCursor cursor = mHelper.queryQuestHub(hub);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			quests.add(cursor.getQuest());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return quests;
 	}
 	
 	public QuestCursor queryQuestHub(String hub) {

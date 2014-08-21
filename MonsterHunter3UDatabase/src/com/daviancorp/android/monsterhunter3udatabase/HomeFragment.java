@@ -11,7 +11,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
 
@@ -41,7 +40,7 @@ public class HomeFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_home, parent, false);
-		
+
 		mLogo = (ImageView) v.findViewById(R.id.logo);
 		mLogo.setImageResource(R.drawable.mh3);
 
@@ -55,41 +54,58 @@ public class HomeFragment extends Fragment {
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
-					
-				switch(position) {
-					case MONSTERS:
-						Intent monster_intent = new Intent(getActivity(), MonsterListActivity.class);
-						startActivity(monster_intent);
-						break;
-					case WEAPONS:
-						break;
-					case ARMORS:
-						break;
-					case QUESTS:
-						Intent quest_intent = new Intent(getActivity(), QuestListActivity.class);
-						startActivity(quest_intent);
-						break;
-					case ITEMS:
-						Intent item_intent = new Intent(getActivity(), ItemListActivity.class);
-						startActivity(item_intent);
-						break;
-					case COMBINING:
-						Intent combining_intent = new Intent(getActivity(), CombiningListActivity.class);
-						startActivity(combining_intent);
-						break;
-					case DECORATIONS:
-						break;
-					case SKILLS:
-						break;
-					case LOCATIONS:
-						Intent location_intent = new Intent(getActivity(), LocationListActivity.class);
-						startActivity(location_intent);
-						break;
-					case HUNTINGFLEET:
-						break;
+
+				Intent intent;
+
+				switch (position) {
+				case MONSTERS:
+					intent = new Intent(getActivity(),
+							MonsterListActivity.class);
+					startActivity(intent);
+					break;
+				case WEAPONS:
+					break;
+				case ARMORS:
+					intent = new Intent(getActivity(), ArmorListActivity.class);
+					startActivity(intent);
+					break;
+				case QUESTS:
+					intent = new Intent(getActivity(), QuestListActivity.class);
+					startActivity(intent);
+					break;
+				case ITEMS:
+					intent = new Intent(getActivity(), ItemListActivity.class);
+					startActivity(intent);
+					break;
+				case COMBINING:
+					intent = new Intent(getActivity(),
+							CombiningListActivity.class);
+					startActivity(intent);
+					break;
+				case DECORATIONS:
+					intent = new Intent(getActivity(),
+							DecorationListActivity.class);
+					startActivity(intent);
+					break;
+				case SKILLS:
+					intent = new Intent(getActivity(),
+							SkillTreeListActivity.class);
+					startActivity(intent);
+					break;
+				case LOCATIONS:
+					intent = new Intent(getActivity(),
+							LocationListActivity.class);
+					startActivity(intent);
+					break;
+				case HUNTINGFLEET:
+					intent = new Intent(getActivity(),
+							HuntingFleetListActivity.class);
+					startActivity(intent);
+					break;
 				}
-			}	});
-		
+			}
+		});
+
 		return v;
 	}
 

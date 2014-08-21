@@ -7,10 +7,10 @@ public class LocationListActivity extends GenericActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState) ;
+		super.onCreate(savedInstanceState);
 		setTitle(R.string.locations);
 	}
-	
+
 	@Override
 	protected Fragment createFragment() {
 		super.detail = new LocationListFragment();
@@ -18,4 +18,3 @@ public class LocationListActivity extends GenericActivity {
 	}
 
 }
-

@@ -11,34 +11,36 @@ import com.daviancorp.android.database.DataManager;
  *  how to call this loader
  */
 public class ArmorListCursorLoader extends SQLiteCursorLoader {
-	private String type;	// "Both" (All), "Blade", or "Gunner"
-	private String slot;	// "Head", "Body", "Arms", "Waist", "Legs", or null (All)
-	
+	private String type; // "Both" (All), "Blade", or "Gunner"
+	private String slot; // "Head", "Body", "Arms", "Waist", "Legs", or null
+							// (All)
+
 	public ArmorListCursorLoader(Context context, String type, String slot) {
 		super(context);
 		this.type = type;
 		this.slot = slot;
 	}
-	
+
 	@Override
 	protected Cursor loadCursor() {
 		// Query the list of all armor
 		if ((type == null) || (type.equals("Both"))) {
 			if (slot == null) {
+				Log.d("heyo", "both");
 				return DataManager.get(getContext()).queryArmor();
-			}
-			else {
+			} else {
+				Log.d("heyo", "both1");
 				return DataManager.get(getContext()).queryArmorSlot(slot);
 			}
-		}
-		else {
+		} else {
 			if (slot == null) {
+				Log.d("heyo", "both2");
 				return DataManager.get(getContext()).queryArmorType(type);
-			}
-			else {
-				return DataManager.get(getContext()).queryArmorTypeSlot(type, slot);
+			} else {
+				Log.d("heyo", "both3");
+				return DataManager.get(getContext()).queryArmorTypeSlot(type,
+						slot);
 			}
 		}
 	}
 }
-

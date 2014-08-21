@@ -116,6 +116,9 @@ public class Quest {
 		this.hrp = hrp;
 	}
 	
-	
+	@Override
+	public String toString(){
+		return this.name;
+	}
 	
 }
