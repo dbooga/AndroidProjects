@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
@@ -94,15 +95,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		}
 
 		String[] str = text.split(";");
-		
+		String temp = "";
 		try {
 			for (String s : str) {
+				temp = s;
 				if (!s.equals("") && !s.startsWith("-") && !s.startsWith("/")
-						&& !s.startsWith("\n")) {
+						&& !s.startsWith("\n") && !s.startsWith("\r")) {
 					db.execSQL(s);
 				}
 			}
 		} catch (Exception e) {
+			Log.d("helpme", "" + temp);
 			throw e;
 		}
 
