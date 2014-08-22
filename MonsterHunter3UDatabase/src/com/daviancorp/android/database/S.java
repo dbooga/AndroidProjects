@@ -227,6 +227,7 @@ public class S {
 	static final String COLUMN_WEAPONS_ELEMENTAL_SHOTS = "elemental_shots";
 	static final String COLUMN_WEAPONS_TOOL_SHOTS = "tool_shots";
 	static final String COLUMN_WEAPONS_NUM_SLOTS = "num_slots";
+	static final String COLUMN_WEAPONS_SHARPNESS_FILE = "sharpness_file";
 	
 
 }

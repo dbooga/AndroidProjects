@@ -96,6 +96,8 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 
 		String[] str = text.split(";");
 		String temp = "";
+		String before = "";
+		
 		try {
 			for (String s : str) {
 				temp = s;
@@ -103,9 +105,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 						&& !s.startsWith("\n") && !s.startsWith("\r")) {
 					db.execSQL(s);
 				}
+				before = s;
 			}
 		} catch (Exception e) {
-			Log.d("helpme", "" + temp);
+			int t = (int) temp.charAt(0);
+			Log.d("helpme", "Before: " + before);
+			Log.d("helpme", "String: " + temp);
+			Log.d("helpme", "ascii: " + t);
 			throw e;
 		}
 
@@ -848,6 +854,154 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		return new SkillTreeCursor(wrapHelper());
 	}	
+	
+/********************************* WEAPON QUERIES ******************************************/
+	
+	/*
+	 * Get all weapon
+	 */
+	public WeaponCursor queryWeapon() {
+
+		_Columns = null;
+		_Selection = null;
+		_SelectionArgs = null;
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+
+		return new WeaponCursor(wrapJoinHelper(builderWeapon()));
+	}
+	
+	/*
+	 * Get a specific weapon
+	 */
+	public WeaponCursor queryWeapon(long id) {
+
+		_Columns = null;
+		_Selection = "a." + S.COLUMN_WEAPONS_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = "1";
+		
+		return new WeaponCursor(wrapJoinHelper(builderWeapon()));
+	}	
+	
+	/*
+	 * Get a specific weapon based on weapon type
+	 */
+	public WeaponCursor queryWeaponType(String type) {
+
+		_Columns = null;
+		_Selection = "w." + S.COLUMN_WEAPONS_WTYPE + " = ? ";
+		_SelectionArgs = new String[]{type};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new WeaponCursor(wrapJoinHelper(builderWeapon()));
+	}
+	
+//	/*
+//	 * Get a specific armor based on slot
+//	 */
+//	public ArmorCursor queryArmorSlot(String slot) {
+//
+//		_Columns = null;
+//		_Selection = "a." + S.COLUMN_ARMOR_SLOT + " = ?";
+//		_SelectionArgs = new String[]{slot};
+//		_GroupBy = null;
+//		_Having = null;
+//		_OrderBy = null;
+//		_Limit = null;
+//		
+//		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+//	}
+//	
+//	/*
+//	 * Get a specific armor based on hunter type and slot
+//	 */
+//	public ArmorCursor queryArmorTypeSlot(String type, String slot) {
+//
+//		_Columns = null;
+//		_Selection = "(a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = ?" + " OR " +
+//				"a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = 'Both') " + " AND " + 
+//				"a." + S.COLUMN_ARMOR_SLOT + " = ?";
+//		_SelectionArgs = new String[]{type, slot};
+//		_GroupBy = null;
+//		_Having = null;
+//		_OrderBy = null;
+//		_Limit = null;
+//		
+//		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+//	}
+
+	/*
+	 * Helper method to query for weapon
+	 */
+	private SQLiteQueryBuilder builderWeapon() {
+//		SELECT w._id AS _id, w.wtype, w.creation_cost, w.upgrade_cost, w.attack, w.max_attack,
+//		w.elemental_attack, w.awakened_elemental_attack, w.defense, w.sharpness, w.affinity,
+//		w.horn_notes, w.shelling_type, w.charge_levels, w.allowed_coatings, w.recoil, w.reload_speed,
+//		w.rapid_fire, w.normal_shots, w.status_shots, w.elemental_shots, w.tool_shots, w.num_slots,
+//		w.sharpness_file, 
+//		i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell, i.description,
+//		i.icon_name, i.armor_dupe_name_fix
+//		FROM weapons AS w LEFT OUTER JOIN	items AS i ON w._id = i._id;
+
+		String w = "w";
+		String i = "i";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", w + "." + S.COLUMN_WEAPONS_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_WEAPONS_WTYPE, w + "." + S.COLUMN_WEAPONS_WTYPE);
+		projectionMap.put(S.COLUMN_WEAPONS_CREATION_COST, w + "." + S.COLUMN_WEAPONS_CREATION_COST);
+		projectionMap.put(S.COLUMN_WEAPONS_UPGRADE_COST, w + "." + S.COLUMN_WEAPONS_UPGRADE_COST);
+		projectionMap.put(S.COLUMN_WEAPONS_ATTACK, w + "." + S.COLUMN_WEAPONS_ATTACK);
+		projectionMap.put(S.COLUMN_WEAPONS_MAX_ATTACK, w + "." + S.COLUMN_WEAPONS_MAX_ATTACK);
+		projectionMap.put(S.COLUMN_WEAPONS_ELEMENTAL_ATTACK, w + "." + S.COLUMN_WEAPONS_ELEMENTAL_ATTACK);
+		projectionMap.put(S.COLUMN_WEAPONS_AWAKENED_ELEMENTAL_ATTACK, w + "." + S.COLUMN_WEAPONS_AWAKENED_ELEMENTAL_ATTACK);
+		projectionMap.put(S.COLUMN_WEAPONS_DEFENSE, w + "." + S.COLUMN_WEAPONS_DEFENSE);
+		projectionMap.put(S.COLUMN_WEAPONS_SHARPNESS, w + "." + S.COLUMN_WEAPONS_SHARPNESS);
+		projectionMap.put(S.COLUMN_WEAPONS_AFFINITY, w + "." + S.COLUMN_WEAPONS_AFFINITY);
+		projectionMap.put(S.COLUMN_WEAPONS_HORN_NOTES, w + "." + S.COLUMN_WEAPONS_HORN_NOTES);
+		projectionMap.put(S.COLUMN_WEAPONS_SHELLING_TYPE, w + "." + S.COLUMN_WEAPONS_SHELLING_TYPE);
+		projectionMap.put(S.COLUMN_WEAPONS_CHARGE_LEVELS, w + "." + S.COLUMN_WEAPONS_CHARGE_LEVELS);
+		projectionMap.put(S.COLUMN_WEAPONS_ALLOWED_COATINGS, w + "." + S.COLUMN_WEAPONS_ALLOWED_COATINGS);
+		projectionMap.put(S.COLUMN_WEAPONS_RECOIL, w + "." + S.COLUMN_WEAPONS_RECOIL);
+		projectionMap.put(S.COLUMN_WEAPONS_RELOAD_SPEED, w + "." + S.COLUMN_WEAPONS_RELOAD_SPEED);
+		projectionMap.put(S.COLUMN_WEAPONS_RAPID_FIRE, w + "." + S.COLUMN_WEAPONS_RAPID_FIRE);
+		projectionMap.put(S.COLUMN_WEAPONS_NORMAL_SHOTS, w + "." + S.COLUMN_WEAPONS_NORMAL_SHOTS);
+		projectionMap.put(S.COLUMN_WEAPONS_STATUS_SHOTS, w + "." + S.COLUMN_WEAPONS_STATUS_SHOTS);
+		projectionMap.put(S.COLUMN_WEAPONS_ELEMENTAL_SHOTS, w + "." + S.COLUMN_WEAPONS_ELEMENTAL_SHOTS);
+		projectionMap.put(S.COLUMN_WEAPONS_TOOL_SHOTS, w + "." + S.COLUMN_WEAPONS_TOOL_SHOTS);
+		projectionMap.put(S.COLUMN_WEAPONS_NUM_SLOTS, w + "." + S.COLUMN_WEAPONS_NUM_SLOTS);
+		projectionMap.put(S.COLUMN_WEAPONS_SHARPNESS_FILE, w + "." + S.COLUMN_WEAPONS_SHARPNESS_FILE);
+
+		projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_TYPE, i + "." + S.COLUMN_ITEMS_TYPE);
+		projectionMap.put(S.COLUMN_ITEMS_RARITY, i + "." + S.COLUMN_ITEMS_RARITY);
+		projectionMap.put(S.COLUMN_ITEMS_CARRY_CAPACITY, i + "." + S.COLUMN_ITEMS_CARRY_CAPACITY);
+		projectionMap.put(S.COLUMN_ITEMS_BUY, i + "." + S.COLUMN_ITEMS_BUY);
+		projectionMap.put(S.COLUMN_ITEMS_SELL, i + "." + S.COLUMN_ITEMS_SELL);
+		projectionMap.put(S.COLUMN_ITEMS_DESCRIPTION, i + "." + S.COLUMN_ITEMS_DESCRIPTION);
+		projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
+		
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_WEAPONS + " AS w" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "w." +
+				S.COLUMN_WEAPONS_ID + " = " + "i." + S.COLUMN_ITEMS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
 	
 
 }

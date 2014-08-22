@@ -229,5 +229,25 @@ public class DataManager {
 	}
 	
 	
+/********************************* WEAPON QUERIES ******************************************/	
 	
+	public WeaponCursor queryWeapon() {
+		return mHelper.queryWeapon();
+	}
+	
+	public Weapon getWeapon(long id) {
+		Weapon weapon = null;
+		WeaponCursor cursor = mHelper.queryWeapon(id);
+		cursor.moveToFirst();
+		
+		if (!cursor.isAfterLast())
+			weapon = cursor.getWeapon();
+		cursor.close();
+		return weapon;
+	}
+	
+	public WeaponCursor queryWeaponType(String type) {
+		return mHelper.queryWeaponType(type);
+	}
+		
 }
