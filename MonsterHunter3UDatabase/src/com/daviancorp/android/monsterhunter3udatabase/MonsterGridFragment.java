@@ -1,16 +1,24 @@
 package com.daviancorp.android.monsterhunter3udatabase;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.Monster;
@@ -93,7 +101,7 @@ public class MonsterGridFragment extends Fragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(android.R.layout.simple_list_item_1,
+			return inflater.inflate(R.layout.monster_grid_image,
 					parent, false);
 		}
 
@@ -101,11 +109,29 @@ public class MonsterGridFragment extends Fragment implements
 		public void bindView(View view, Context context, Cursor cursor) {
 			// Get the monster for the current row
 			Monster monster = mMonsterCursor.getMonster();
+	        AssetManager manager = context.getAssets();
+	        
+
 
 			// Set up the text view
-			TextView monsterNameTextView = (TextView) view;
+			TextView monsterNameTextView = (TextView) view.findViewById(R.id.grid_item_label);
+			ImageView monsterImage = (ImageView) view.findViewById(R.id.grid_item_image);
+			
 			String cellText = monster.getName();
+			String cellImage = "icons_monster/" + monster.getFileLocation();
+			
+			Log.d("helpme", "" + cellImage);
 			monsterNameTextView.setText(cellText);
+			
+	        // Read a Bitmap from Assets
+	        try {
+	            InputStream open = manager.open(cellImage);
+	            Bitmap bitmap = BitmapFactory.decodeStream(open);
+	            // Assign the bitmap to an ImageView in this layout
+	            monsterImage.setImageBitmap(bitmap);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } 
 		}
 	}
 
