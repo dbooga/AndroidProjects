@@ -8,13 +8,14 @@ import android.support.v7.app.ActionBar.Tab;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.daviancorp.android.adapter.ArmorExpandableListPagerAdapter;
 import com.daviancorp.android.adapter.ArmorListPagerAdapter;
 
 public class ArmorListActivity extends GenericTabActivity implements
 		ActionBar.TabListener {
 
 	private ViewPager viewPager;
-	private ArmorListPagerAdapter mAdapter;
+	private ArmorExpandableListPagerAdapter mAdapter;
 	private ActionBar actionBar;
 
 	// Tab titles
@@ -27,7 +28,7 @@ public class ArmorListActivity extends GenericTabActivity implements
 
 		// Initialization
 		viewPager = (ViewPager) findViewById(R.id.pager);
-		mAdapter = new ArmorListPagerAdapter(getSupportFragmentManager());
+		mAdapter = new ArmorExpandableListPagerAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(mAdapter);
 
 		actionBar = getSupportActionBar();

@@ -44,6 +44,19 @@ public class DataManager {
 		return armor;
 	}
 	
+	public ArrayList<Armor> queryArmorArrayType(String type) {
+		ArrayList<Armor> armors = new ArrayList<Armor>();
+		ArmorCursor cursor = mHelper.queryArmorType(type);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			armors.add(cursor.getArmor());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return armors;
+	}
+	
 	public ArmorCursor queryArmorType(String type) {
 		return mHelper.queryArmorType(type);
 	}

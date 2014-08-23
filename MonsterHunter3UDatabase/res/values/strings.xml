@@ -18,5 +18,6 @@
     <string name="decorations">Decorations</string>
     <string name="armor">Armor</string>
     <string name="monster_image">monster_image</string>
+    <string name="weapons">Weapons</string>
 
 </resources>

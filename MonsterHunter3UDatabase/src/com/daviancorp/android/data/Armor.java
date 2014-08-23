@@ -120,6 +120,9 @@ public class Armor extends Item{
 		this.num_slots = num_slots;
 	}
 
-	
+	@Override
+	public String toString(){
+		return this.getName();
+	}
 	
 }
