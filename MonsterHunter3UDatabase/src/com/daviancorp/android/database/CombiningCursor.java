@@ -3,8 +3,8 @@ package com.daviancorp.android.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.daviancorp.android.data.Combining;
-import com.daviancorp.android.data.Item;
+import com.daviancorp.android.object.Combining;
+import com.daviancorp.android.object.Item;
 
 /**
  * A convenience class to wrap a cursor that returns rows from the "combining"

@@ -3,7 +3,7 @@ package com.daviancorp.android.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.daviancorp.android.data.SkillTree;
+import com.daviancorp.android.object.SkillTree;
 
 /**
  * A convenience class to wrap a cursor that returns rows from the "skill_trees"

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 
-import com.daviancorp.android.data.*;
+import com.daviancorp.android.object.*;
 
 public class DataManager {
 	private static final String TAG = "DataManager";
