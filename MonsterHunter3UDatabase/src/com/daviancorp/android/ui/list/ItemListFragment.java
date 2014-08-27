@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.daviancorp.android.database.ItemCursor;
+import com.daviancorp.android.data.database.ItemCursor;
+import com.daviancorp.android.data.object.Item;
 import com.daviancorp.android.loader.ItemListCursorLoader;
-import com.daviancorp.android.object.Item;
 
 public class ItemListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

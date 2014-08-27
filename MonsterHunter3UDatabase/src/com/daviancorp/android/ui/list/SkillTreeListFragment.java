@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.daviancorp.android.database.SkillTreeCursor;
+import com.daviancorp.android.data.database.SkillTreeCursor;
+import com.daviancorp.android.data.object.SkillTree;
 import com.daviancorp.android.loader.SkillTreeListCursorLoader;
-import com.daviancorp.android.object.SkillTree;
 
 public class SkillTreeListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

@@ -12,10 +12,10 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import com.daviancorp.android.database.DataManager;
+import com.daviancorp.android.data.database.DataManager;
+import com.daviancorp.android.data.object.Armor;
+import com.daviancorp.android.data.object.Quest;
 import com.daviancorp.android.monsterhunter3udatabase.R;
-import com.daviancorp.android.object.Armor;
-import com.daviancorp.android.object.Quest;
 
 /**
  * Pieced together from: Android samples:

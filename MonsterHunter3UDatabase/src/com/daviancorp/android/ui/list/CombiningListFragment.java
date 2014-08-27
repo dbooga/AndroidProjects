@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.daviancorp.android.database.CombiningCursor;
+import com.daviancorp.android.data.database.CombiningCursor;
+import com.daviancorp.android.data.object.Combining;
 import com.daviancorp.android.loader.CombiningListCursorLoader;
-import com.daviancorp.android.object.Combining;
 
 public class CombiningListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

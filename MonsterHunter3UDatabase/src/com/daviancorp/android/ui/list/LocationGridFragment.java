@@ -21,10 +21,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daviancorp.android.database.LocationCursor;
+import com.daviancorp.android.data.database.LocationCursor;
+import com.daviancorp.android.data.object.Location;
 import com.daviancorp.android.loader.LocationListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
-import com.daviancorp.android.object.Location;
 
 public class LocationGridFragment extends Fragment implements
 		LoaderCallbacks<Cursor> {

@@ -3,7 +3,7 @@ package com.daviancorp.android.loader;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.daviancorp.android.database.DataManager;
+import com.daviancorp.android.data.database.DataManager;
 
 public class CombiningListCursorLoader extends SQLiteCursorLoader {
 

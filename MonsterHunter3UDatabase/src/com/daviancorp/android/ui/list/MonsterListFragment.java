@@ -15,9 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.daviancorp.android.database.MonsterCursor;
+import com.daviancorp.android.data.database.MonsterCursor;
+import com.daviancorp.android.data.object.Monster;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
-import com.daviancorp.android.object.Monster;
 import com.daviancorp.android.ui.detail.MonsterDetailActivity;
 
 public class MonsterListFragment extends ListFragment implements

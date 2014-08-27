@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.daviancorp.android.database.DataManager;
+import com.daviancorp.android.data.database.DataManager;
 
 /*
  *  Refer to MonsterListPagerAdapter and MonsterListFragment on 

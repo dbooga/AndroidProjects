@@ -17,9 +17,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.object.Monster;
 import com.daviancorp.android.loader.MonsterLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
-import com.daviancorp.android.object.Monster;
 
 public class MonsterDetailFragment extends Fragment {
 	private static final String ARG_MONSTER_ID = "MONSTER_ID";

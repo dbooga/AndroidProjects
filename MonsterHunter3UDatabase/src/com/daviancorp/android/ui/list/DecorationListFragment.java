@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.daviancorp.android.database.DecorationCursor;
+import com.daviancorp.android.data.database.DecorationCursor;
+import com.daviancorp.android.data.object.Decoration;
 import com.daviancorp.android.loader.DecorationListCursorLoader;
-import com.daviancorp.android.object.Decoration;
 
 public class DecorationListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

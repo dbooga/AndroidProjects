@@ -21,10 +21,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daviancorp.android.database.MonsterCursor;
+import com.daviancorp.android.data.database.MonsterCursor;
+import com.daviancorp.android.data.object.Monster;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
-import com.daviancorp.android.object.Monster;
 
 public class MonsterGridFragment extends Fragment implements
 		LoaderCallbacks<Cursor> {

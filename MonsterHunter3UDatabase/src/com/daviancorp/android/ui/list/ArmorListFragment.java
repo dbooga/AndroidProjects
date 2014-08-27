@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.daviancorp.android.database.ArmorCursor;
+import com.daviancorp.android.data.database.ArmorCursor;
+import com.daviancorp.android.data.object.Armor;
 import com.daviancorp.android.loader.ArmorListCursorLoader;
-import com.daviancorp.android.object.Armor;
 
 public class ArmorListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.daviancorp.android.database.HuntingFleetCursor;
+import com.daviancorp.android.data.database.HuntingFleetCursor;
+import com.daviancorp.android.data.object.HuntingFleet;
 import com.daviancorp.android.loader.HuntingFleetListCursorLoader;
-import com.daviancorp.android.object.HuntingFleet;
 
 public class HuntingFleetListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
