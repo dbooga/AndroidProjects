@@ -988,7 +988,7 @@ containing a value of this type.
         public static final int sword=0x7f020059;
     }
     public static final class id {
-        public static final int about=0x7f06004b;
+        public static final int about=0x7f06004d;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1006,6 +1006,8 @@ containing a value of this type.
         public static final int checkbox=0x7f06002d;
         public static final int collapseActionView=0x7f06000d;
         public static final int default_activity_button=0x7f060028;
+        public static final int detail_monster_image=0x7f060045;
+        public static final int detail_monster_label=0x7f060046;
         public static final int dialog=0x7f06000e;
         public static final int disableHome=0x7f060008;
         public static final int drawer_layout=0x7f06003c;
@@ -1019,24 +1021,24 @@ containing a value of this type.
         public static final int expanded_menu=0x7f06002c;
         public static final int fragment_container=0x7f06003d;
         public static final int grid_home=0x7f060043;
-        public static final int grid_item_image=0x7f060046;
-        public static final int grid_item_label=0x7f060047;
+        public static final int grid_item_image=0x7f060049;
+        public static final int grid_item_label=0x7f06004a;
         public static final int grid_locations=0x7f060044;
-        public static final int grid_monsters=0x7f060045;
+        public static final int grid_monsters=0x7f060048;
         public static final int home=0x7f060014;
         public static final int homeAsUp=0x7f060005;
         public static final int icon=0x7f06002a;
         public static final int ifRoom=0x7f06000a;
         public static final int image=0x7f060027;
-        public static final int label=0x7f060048;
+        public static final int label=0x7f060047;
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060029;
-        public static final int location_gridview=0x7f06004a;
-        public static final int location_listview=0x7f060049;
+        public static final int location_gridview=0x7f06004c;
+        public static final int location_listview=0x7f06004b;
         public static final int logo=0x7f060042;
         public static final int middle=0x7f060012;
-        public static final int monster_gridview=0x7f06004d;
-        public static final int monster_listview=0x7f06004c;
+        public static final int monster_gridview=0x7f06004f;
+        public static final int monster_listview=0x7f06004e;
         public static final int never=0x7f060009;
         public static final int none=0x7f060010;
         public static final int normal=0x7f060000;
@@ -1122,11 +1124,12 @@ containing a value of this type.
         public static final int fragment_armor_expandablelist=0x7f03001a;
         public static final int fragment_home=0x7f03001b;
         public static final int fragment_location_grid=0x7f03001c;
-        public static final int fragment_monster_grid=0x7f03001d;
-        public static final int fragment_quest_expandablelist=0x7f03001e;
-        public static final int location_grid_image=0x7f03001f;
-        public static final int monster_grid_image=0x7f030020;
-        public static final int support_simple_spinner_dropdown_item=0x7f030021;
+        public static final int fragment_monster_detail=0x7f03001d;
+        public static final int fragment_monster_grid=0x7f03001e;
+        public static final int fragment_quest_expandablelist=0x7f03001f;
+        public static final int location_grid_image=0x7f030020;
+        public static final int monster_grid_image=0x7f030021;
+        public static final int support_simple_spinner_dropdown_item=0x7f030022;
     }
     public static final class menu {
         public static final int locationlist=0x7f0d0000;

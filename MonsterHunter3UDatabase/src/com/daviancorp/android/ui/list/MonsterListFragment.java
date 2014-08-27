@@ -1,6 +1,7 @@
 package com.daviancorp.android.ui.list;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -9,12 +10,15 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.database.MonsterCursor;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
 import com.daviancorp.android.object.Monster;
+import com.daviancorp.android.ui.detail.MonsterDetailActivity;
 
 public class MonsterListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -62,6 +66,14 @@ public class MonsterListFragment extends ListFragment implements
 		setListAdapter(null);
 	}
 
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		// The id argument will be the Monster ID; CursorAdapter gives us this for free
+		Intent i = new Intent(getActivity(), MonsterDetailActivity.class);
+		i.putExtra(MonsterDetailActivity.EXTRA_MONSTER_ID, id);
+		startActivity(i);
+	}
+	
 	private static class MonsterListCursorAdapter extends CursorAdapter {
 
 		private MonsterCursor mMonsterCursor;
@@ -89,6 +101,14 @@ public class MonsterListFragment extends ListFragment implements
 			TextView monsterNameTextView = (TextView) view;
 			String cellText = monster.getName();
 			monsterNameTextView.setText(cellText);
+//			
+//			monsterNameTextView.setOnClickListener(new OnClickListener() {
+//				
+//				@Override
+//				public void onClick(View v) {
+//					
+//				}
+//			});
 		}
 	}
 
