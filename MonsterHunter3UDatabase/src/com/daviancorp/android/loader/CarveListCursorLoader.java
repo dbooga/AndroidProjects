@@ -21,15 +21,13 @@ public class CarveListCursorLoader extends SQLiteCursorLoader {
 	@Override
 	protected Cursor loadCursor() {
 		if (from.equals("item")) {
-			Log.d("heyo", "TestCursorLoader: from item");
-			return DataManager.get(getContext()).queryCarveFromItem(id);
+			return DataManager.get(getContext()).queryCarveItem(id);
 		}
 		else if(from.equals("monster")) {
-			Log.d("heyo", "TestCursorLoader: from monster");
-			return DataManager.get(getContext()).queryCarveFromMonsterRank(id, rank);
+			return DataManager.get(getContext()).queryCarveMonsterRank(id, rank);
 		}
 		else {
-			Log.d("heyo", "TestCursorLoader: bad arg!!! + (" + from + ")");
+			Log.d("heyo", "CarveCursorLoader: bad arg!!! + (" + from + ")");
 			return null;
 		}
 	}

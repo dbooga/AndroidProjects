@@ -43,7 +43,7 @@ public class MogaWoodsRewardCursor extends CursorWrapper {
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID));
-		String itemName = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
+		String itemName = getString(getColumnIndex("i" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 //			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
 //			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
@@ -71,7 +71,7 @@ public class MogaWoodsRewardCursor extends CursorWrapper {
 		Monster monster = new Monster();
 
 		long monsterId = getLong(getColumnIndex(S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID));
-		String monsterName = getString(getColumnIndex(S.COLUMN_MONSTERS_NAME));
+		String monsterName = getString(getColumnIndex("m" + S.COLUMN_MONSTERS_NAME));
 //			String monsterClass = getString(getColumnIndex(S.COLUMN_MONSTERS_CLASS));
 //			String trait = getString(getColumnIndex(S.COLUMN_MONSTERS_TRAIT));
 //			String file_location = getString(getColumnIndex(S.COLUMN_MONSTERS_FILE_LOCATION)); 

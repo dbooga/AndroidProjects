@@ -37,7 +37,7 @@ public class ItemToSkillTreeCursor extends CursorWrapper {
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID));
-		String itemName = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
+		String itemName = getString(getColumnIndex("i" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 //			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
 //			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
@@ -65,7 +65,7 @@ public class ItemToSkillTreeCursor extends CursorWrapper {
 		SkillTree skillTree = new SkillTree();
 
 		long skillTreeId = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID));
-		String skillTreeName = getString(getColumnIndex(S.COLUMN_SKILL_TREES_NAME));
+		String skillTreeName = getString(getColumnIndex("s" + S.COLUMN_SKILL_TREES_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_SKILL_TREES_JPN_NAME));
 		
 		skillTree.setId(skillTreeId);

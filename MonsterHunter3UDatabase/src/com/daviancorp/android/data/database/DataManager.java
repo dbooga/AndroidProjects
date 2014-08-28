@@ -69,17 +69,56 @@ public class DataManager {
 		return mHelper.queryArmorTypeSlot(type, slot);
 	}
 	
-/********************************* COMBINING QUERIES ******************************************/
-	public CarveCursor queryCarveFromItem(long id) {
-		return mHelper.queryCarveFromItem(id);
+/********************************* CARVE QUERIES ******************************************/
+	public CarveCursor queryCarveItem(long id) {
+		return mHelper.queryCarveItem(id);
 	}
 
-	public CarveCursor queryCarveFromMonster(long id) {
-		return mHelper.queryCarveFromMonster(id);
+	public CarveCursor queryCarveMonster(long id) {
+		return mHelper.queryCarveMonster(id);
 	}
 	
-	public CarveCursor queryCarveFromMonsterRank(long id, String rank) {
-		return mHelper.queryCarveFromMonsterRank(id, rank);
+	public CarveCursor queryCarveMonsterRank(long id, String rank) {
+		return mHelper.queryCarveMonsterRank(id, rank);
+	}
+	
+	public ArrayList<Carve> queryCarveArrayItem(long id) {
+		ArrayList<Carve> carves = new ArrayList<Carve>();
+		CarveCursor cursor = mHelper.queryCarveItem(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			carves.add(cursor.getCarve());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return carves;
+	}
+	
+	public ArrayList<Carve> queryCarveArrayMonster(long id) {
+		ArrayList<Carve> carves = new ArrayList<Carve>();
+		CarveCursor cursor = mHelper.queryCarveMonster(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			carves.add(cursor.getCarve());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return carves;
+	}
+	
+	public ArrayList<Carve> queryCarveArrayMonsterRank(long id, String rank) {
+		ArrayList<Carve> carves = new ArrayList<Carve>();
+		CarveCursor cursor = mHelper.queryCarveMonsterRank(id, rank);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			carves.add(cursor.getCarve());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return carves;
 	}
 	
 /********************************* COMBINING QUERIES ******************************************/
@@ -96,6 +135,42 @@ public class DataManager {
 			combining = cursor.getCombining();
 		cursor.close();
 		return combining;
+	}
+	
+/********************************* COMPONENT QUERIES ******************************************/
+	public ComponentCursor queryComponentCreated(long id) {
+		return mHelper.queryComponentCreated(id);
+	}
+
+	public ComponentCursor queryComponentComponent(long id) {
+		return mHelper.queryComponentComponent(id);
+	}
+
+	
+	public ArrayList<Component> queryComponentArrayCreated(long id) {
+		ArrayList<Component> components = new ArrayList<Component>();
+		ComponentCursor cursor = mHelper.queryComponentCreated(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			components.add(cursor.getComponent());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return components;
+	}
+	
+	public ArrayList<Component> queryComponentArrayComponent(long id) {
+		ArrayList<Component> components = new ArrayList<Component>();
+		ComponentCursor cursor = mHelper.queryComponentComponent(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			components.add(cursor.getComponent());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return components;
 	}
 	
 /********************************* DECORATION QUERIES ******************************************/
@@ -139,6 +214,110 @@ public class DataManager {
 		return mHelper.queryHuntingFleetLocation(location);
 	}
 	
+/********************************* HUNTING REWARD QUERIES ******************************************/
+	public HuntingRewardCursor queryHuntingRewardItem(long id) {
+		return mHelper.queryHuntingRewardItem(id);
+	}
+
+	public HuntingRewardCursor queryHuntingRewardMonster(long id) {
+		return mHelper.queryHuntingRewardMonster(id);
+	}
+	
+	public HuntingRewardCursor queryHuntingRewardMonsterRank(long id, String rank) {
+		return mHelper.queryHuntingRewardMonsterRank(id, rank);
+	}
+	
+	public ArrayList<HuntingReward> queryHuntingRewardArrayItem(long id) {
+		ArrayList<HuntingReward> rewards = new ArrayList<HuntingReward>();
+		HuntingRewardCursor cursor = mHelper.queryHuntingRewardItem(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			rewards.add(cursor.getHuntingReward());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return rewards;
+	}
+	
+	public ArrayList<HuntingReward> queryHuntingRewardArrayMonster(long id) {
+		ArrayList<HuntingReward> rewards = new ArrayList<HuntingReward>();
+		HuntingRewardCursor cursor = mHelper.queryHuntingRewardMonster(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			rewards.add(cursor.getHuntingReward());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return rewards;
+	}
+	
+	public ArrayList<HuntingReward> queryHuntingRewardArrayMonsterRank(long id, String rank) {
+		ArrayList<HuntingReward> rewards = new ArrayList<HuntingReward>();
+		HuntingRewardCursor cursor = mHelper.queryHuntingRewardMonsterRank(id, rank);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			rewards.add(cursor.getHuntingReward());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return rewards;
+	}
+	
+/********************************* GATHERING QUERIES ******************************************/
+	public GatheringCursor queryGatheringItem(long id) {
+		return mHelper.queryGatheringItem(id);
+	}
+
+	public GatheringCursor queryGatheringLocation(long id) {
+		return mHelper.queryGatheringLocation(id);
+	}
+	
+	public GatheringCursor queryGatheringLocationRank(long id, String rank) {
+		return mHelper.queryGatheringLocationRank(id, rank);
+	}
+	
+	public ArrayList<Gathering> queryGatheringArrayItem(long id) {
+		ArrayList<Gathering> gatherings = new ArrayList<Gathering>();
+		GatheringCursor cursor = mHelper.queryGatheringItem(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			gatherings.add(cursor.getGathering());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return gatherings;
+	}
+	
+	public ArrayList<Gathering> queryGatheringArrayLocation(long id) {
+		ArrayList<Gathering> gatherings = new ArrayList<Gathering>();
+		GatheringCursor cursor = mHelper.queryGatheringLocation(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			gatherings.add(cursor.getGathering());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return gatherings;
+	}
+	
+	public ArrayList<Gathering> queryGatheringArrayLocationRank(long id, String rank) {
+		ArrayList<Gathering> gatherings = new ArrayList<Gathering>();
+		GatheringCursor cursor = mHelper.queryGatheringLocationRank(id, rank);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			gatherings.add(cursor.getGathering());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return gatherings;
+	}
+	
 /********************************* ITEM QUERIES ******************************************/
 	public ItemCursor queryItems() {
 		return mHelper.queryItems();
@@ -155,6 +334,41 @@ public class DataManager {
 		return item;
 	}
 	
+/********************************* ITEM TO SKILL TREE QUERIES ******************************************/
+	public ItemToSkillTreeCursor queryItemToSkillTreeItem(long id) {
+		return mHelper.queryItemToSkillTreeItem(id);
+	}
+
+	public ItemToSkillTreeCursor queryItemToSkillTreeSkillTree(long id) {
+		return mHelper.queryItemToSkillTreeSkillTree(id);
+	}
+	
+	public ArrayList<ItemToSkillTree> queryItemToSkillTreeArrayItem(long id) {
+		ArrayList<ItemToSkillTree> itst = new ArrayList<ItemToSkillTree>();
+		ItemToSkillTreeCursor cursor = mHelper.queryItemToSkillTreeItem(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			itst.add(cursor.getItemToSkillTree());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return itst;
+	}
+	
+	public ArrayList<ItemToSkillTree> queryItemToSkillTreeArraySkillTree(long id) {
+		ArrayList<ItemToSkillTree> itst = new ArrayList<ItemToSkillTree>();
+		ItemToSkillTreeCursor cursor = mHelper.queryItemToSkillTreeSkillTree(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			itst.add(cursor.getItemToSkillTree());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return itst;
+	}
+		
 /********************************* LOCATION QUERIES ******************************************/
 	
 	public LocationCursor queryLocations() {
@@ -170,6 +384,58 @@ public class DataManager {
 			location = cursor.getLocation();
 		cursor.close();
 		return location;
+	}
+	
+/********************************* MOGA WOODS REWARD QUERIES ******************************************/
+	public MogaWoodsRewardCursor queryMogaWoodsRewardItem(long id) {
+		return mHelper.queryMogaWoodsRewardItem(id);
+	}
+
+	public MogaWoodsRewardCursor queryMogaWoodsRewardMonster(long id) {
+		return mHelper.queryMogaWoodsRewardMonster(id);
+	}
+	
+	public MogaWoodsRewardCursor queryMogaWoodsRewardMonsterTime(long id, String time) {
+		return mHelper.queryMogaWoodsRewardMonsterTime(id, time);
+	}
+	
+	public ArrayList<MogaWoodsReward> queryMogaWoodsRewardArrayItem(long id) {
+		ArrayList<MogaWoodsReward> rewards = new ArrayList<MogaWoodsReward>();
+		MogaWoodsRewardCursor cursor = mHelper.queryMogaWoodsRewardItem(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			rewards.add(cursor.getMogaWoodsReward());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return rewards;
+	}
+	
+	public ArrayList<MogaWoodsReward> queryMogaWoodsRewardArrayMonster(long id) {
+		ArrayList<MogaWoodsReward> rewards = new ArrayList<MogaWoodsReward>();
+		MogaWoodsRewardCursor cursor = mHelper.queryMogaWoodsRewardMonster(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			rewards.add(cursor.getMogaWoodsReward());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return rewards;
+	}
+	
+	public ArrayList<MogaWoodsReward> queryHuntingRewardArrayMonsterTime(long id, String time) {
+		ArrayList<MogaWoodsReward> rewards = new ArrayList<MogaWoodsReward>();
+		MogaWoodsRewardCursor cursor = mHelper.queryMogaWoodsRewardMonsterTime(id, time);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			rewards.add(cursor.getMogaWoodsReward());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return rewards;
 	}
 	
 /********************************* MONSTER QUERIES ******************************************/
@@ -195,6 +461,71 @@ public class DataManager {
 			monster = cursor.getMonster();
 		cursor.close();
 		return monster;
+	}
+	
+	public ArrayList<Monster> getMonsterTraitArray(long id) {
+		ArrayList<Monster> monsters = new ArrayList<Monster>();
+		MonsterCursor cursor = mHelper.queryMonsterTrait(id);
+		cursor.moveToFirst();
+		
+		if (!cursor.isAfterLast())
+			monsters.add(cursor.getMonster());
+		cursor.close();
+		return monsters;
+	}
+	
+/********************************* MONSTER DAMAGE QUERIES ******************************************/	
+	
+	public MonsterDamageCursor queryMonsterDamage(long id) {
+		return mHelper.queryMonsterDamage(id);
+	}
+	
+	public ArrayList<MonsterDamage> queryMonsterDamageArray(long id) {
+		ArrayList<MonsterDamage> damages = new ArrayList<MonsterDamage>();
+		MonsterDamageCursor cursor = mHelper.queryMonsterDamage(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			damages.add(cursor.getMonsterDamage());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return damages;
+	}	
+	
+/********************************* MONSTER TO QUEST QUERIES ******************************************/
+	public MonsterToQuestCursor queryMonsterToQuestMonster(long id) {
+		return mHelper.queryMonsterToQuestMonster(id);
+	}
+
+	public MonsterToQuestCursor queryMonsterToQuestQuest(long id) {
+		return mHelper.queryMonsterToQuestQuest(id);
+	}
+	
+	public ArrayList<MonsterToQuest> queryMonsterToQuestArrayMonster(long id) {
+		ArrayList<MonsterToQuest> mtq = new ArrayList<MonsterToQuest>();
+		MonsterToQuestCursor cursor = mHelper.queryMonsterToQuestMonster(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			mtq.add(cursor.getMonsterToQuest());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return mtq;
+	}
+	
+	public ArrayList<MonsterToQuest> queryMonsterToQuestArrayQuest(long id) {
+		ArrayList<MonsterToQuest> mtq = new ArrayList<MonsterToQuest>();
+		MonsterToQuestCursor cursor = mHelper.queryMonsterToQuestQuest(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			mtq.add(cursor.getMonsterToQuest());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return mtq;
 	}
 	
 /********************************* QUEST QUERIES ******************************************/	
@@ -235,6 +566,60 @@ public class DataManager {
 		return mHelper.queryQuestHubStar(hub, stars);
 	}
 	
+/********************************* QUEST REWARD QUERIES ******************************************/
+	public QuestRewardCursor queryQuestRewardItem(long id) {
+		return mHelper.queryQuestRewardItem(id);
+	}
+
+	public QuestRewardCursor queryQuestRewardQuest(long id) {
+		return mHelper.queryQuestRewardQuest(id);
+	}
+	
+	public ArrayList<QuestReward> queryQuestRewardArrayItem(long id) {
+		ArrayList<QuestReward> rewards = new ArrayList<QuestReward>();
+		QuestRewardCursor cursor = mHelper.queryQuestRewardItem(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			rewards.add(cursor.getQuestReward());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return rewards;
+	}
+	
+	public ArrayList<QuestReward> queryQuestRewardArrayQuest(long id) {
+		ArrayList<QuestReward> rewards = new ArrayList<QuestReward>();
+		QuestRewardCursor cursor = mHelper.queryQuestRewardQuest(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			rewards.add(cursor.getQuestReward());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return rewards;
+	}
+	
+/********************************* SKILL QUERIES ******************************************/	
+	
+	public SkillCursor querySkill(long id) {
+		return mHelper.querySkill(id);
+	}
+	
+	public ArrayList<Skill> querySkillArray(long id) {
+		ArrayList<Skill> skills = new ArrayList<Skill>();
+		SkillCursor cursor = mHelper.querySkill(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			skills.add(cursor.getSkill());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return skills;
+	}
+		
 /********************************* SKILL TREE QUERIES ******************************************/	
 	
 	public SkillTreeCursor querySkillTrees() {

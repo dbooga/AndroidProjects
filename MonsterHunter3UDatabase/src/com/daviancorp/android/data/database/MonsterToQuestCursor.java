@@ -37,7 +37,7 @@ public class MonsterToQuestCursor extends CursorWrapper {
 		Quest quest = new Quest();
 
 		long questId = getLong(getColumnIndex(S.COLUMN_MONSTER_TO_QUEST_QUEST_ID));
-		String questName = getString(getColumnIndex(S.COLUMN_QUESTS_NAME));
+		String questName = getString(getColumnIndex("q" + S.COLUMN_QUESTS_NAME));
 //			String goal = getString(getColumnIndex(S.COLUMN_QUESTS_GOAL));
 		String hub = getString(getColumnIndex(S.COLUMN_QUESTS_HUB));
 //			String type = getString(getColumnIndex(S.COLUMN_QUESTS_TYPE));
@@ -63,7 +63,7 @@ public class MonsterToQuestCursor extends CursorWrapper {
 		Monster monster = new Monster();
 
 		long monsterId = getLong(getColumnIndex(S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID));
-		String monsterName = getString(getColumnIndex(S.COLUMN_MONSTERS_NAME));
+		String monsterName = getString(getColumnIndex("m" + S.COLUMN_MONSTERS_NAME));
 //			String monsterClass = getString(getColumnIndex(S.COLUMN_MONSTERS_CLASS));
 //			String trait = getString(getColumnIndex(S.COLUMN_MONSTERS_TRAIT));
 //			String file_location = getString(getColumnIndex(S.COLUMN_MONSTERS_FILE_LOCATION)); 

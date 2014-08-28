@@ -41,7 +41,7 @@ public class QuestRewardCursor extends CursorWrapper {
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_QUEST_REWARDS_ITEM_ID));
-		String itemName = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
+		String itemName = getString(getColumnIndex("i" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 //			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
 //			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));

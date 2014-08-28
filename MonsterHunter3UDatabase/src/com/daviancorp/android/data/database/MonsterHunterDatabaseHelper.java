@@ -268,9 +268,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Get all carves based on item
 	 */
-	public CarveCursor queryCarveFromItem(long id) {
+	public CarveCursor queryCarveItem(long id) {
 		
 		_Columns = null;
+		_Selection = "c." + S.COLUMN_CARVES_ITEM_ID + " = ? ";
 		_SelectionArgs = new String[]{"" + id};
 		_GroupBy = null;
 		_Having = null;
@@ -283,7 +284,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Get all carves based on what the query is for
 	 */
-	public CarveCursor queryCarveFromMonster(long id) {
+	public CarveCursor queryCarveMonster(long id) {
 		
 		_Columns = null;
 		_Selection = "c." + S.COLUMN_CARVES_MONSTER_ID + " = ? ";
@@ -299,7 +300,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Get all carves based on what the query is for
 	 */
-	public CarveCursor queryCarveFromMonsterRank(long id, String rank) {
+	public CarveCursor queryCarveMonsterRank(long id, String rank) {
 		
 		_Columns = null;
 		_Selection = "c." + S.COLUMN_CARVES_MONSTER_ID + " = ? " + "AND " + 
@@ -444,6 +445,76 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 	}
 	
+/********************************* COMPONENT QUERIES ******************************************/
+	
+	/*
+	 * Get all components for a created item
+	 */
+	public ComponentCursor queryComponentCreated(long id) {
+		
+		_Columns = null;
+		_Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ComponentCursor(wrapJoinHelper(builderComponent()));
+	}
+	
+	/*
+	 * Get all components for a component item
+	 */
+	public ComponentCursor queryComponentComponent(long id) {
+		
+		_Columns = null;
+		_Selection = "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ComponentCursor(wrapJoinHelper(builderComponent()));
+	}
+
+	/*
+	 * Helper method to query for component
+	 */
+	private SQLiteQueryBuilder builderComponent() {
+//		SELECT c._id AS _id, c.created_item_id, c.component_item_id,
+//		c.quantity, c.type, cr.name AS crname, co.name AS coname
+//		FROM components AS c
+//		LEFT OUTER JOIN items AS cr ON c.created_item_id = cr._id
+//		LEFT OUTER JOIN items AS co ON c.component_item_id = co._id;
+
+		String c = "c";
+		String cr = "cr";
+		String co = "co";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", c + "." + S.COLUMN_COMPONENTS_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_COMPONENTS_CREATED_ITEM_ID, c + "." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID);
+		projectionMap.put(S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID, c + "." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID);
+		projectionMap.put(S.COLUMN_COMPONENTS_QUANTITY, c + "." + S.COLUMN_COMPONENTS_QUANTITY);
+		projectionMap.put(S.COLUMN_COMPONENTS_TYPE, c + "." + S.COLUMN_COMPONENTS_TYPE);
+
+		projectionMap.put(cr + S.COLUMN_ITEMS_NAME, cr + "." + S.COLUMN_ITEMS_NAME + " AS " + cr + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(co + S.COLUMN_ITEMS_NAME, co + "." + S.COLUMN_ITEMS_NAME + " AS " + co + S.COLUMN_ITEMS_NAME);
+
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_COMPONENTS + " AS c" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS cr" + " ON " + "c." +
+				S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = " + "cr." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_ITEMS +
+				" AS co " + " ON " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " = " + "co." + S.COLUMN_ITEMS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+
 /********************************* DECORATION QUERIES ******************************************/
 	
 	/*
@@ -524,6 +595,101 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		        "its2." + S.COLUMN_ITEM_TO_SKILL_TREE_POINT_VALUE + " > 0 " + " LEFT OUTER JOIN " + S.TABLE_SKILL_TREES + " AS s2" +
 		        " ON " + "its2." + S.COLUMN_SKILL_TREES_ID + " = " + "s2." + S.COLUMN_SKILL_TREES_ID );
 		
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
+/********************************* GATHERING QUERIES ******************************************/
+	
+	/*
+	 * Get all gathering locations based on item
+	 */
+	public GatheringCursor queryGatheringItem(long id) {
+		
+		_Columns = null;
+		_Selection = "g." + S.COLUMN_GATHERING_ITEM_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new GatheringCursor(wrapJoinHelper(builderGathering()));
+	}
+	
+	/*
+	 * Get all gathering items based on location
+	 */
+	public GatheringCursor queryGatheringLocation(long id) {
+		
+		_Columns = null;
+		_Selection = "g." + S.COLUMN_GATHERING_LOCATION_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new GatheringCursor(wrapJoinHelper(builderGathering()));
+	}
+	
+	/*
+	 * Get all gathering items based on location and rank
+	 */
+	public GatheringCursor queryGatheringLocationRank(long id, String rank) {
+		
+		_Columns = null;
+		_Selection = "g." + S.COLUMN_GATHERING_LOCATION_ID + " = ? " + "AND " + 
+				"g." + S.COLUMN_GATHERING_RANK + " = ? ";
+		_SelectionArgs = new String[]{"" + id, rank};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new GatheringCursor(wrapJoinHelper(builderGathering()));
+	}
+	
+	/*
+	 * Helper method to query for Gathering
+	 */
+	private SQLiteQueryBuilder builderGathering() {
+//		SELECT g._id AS _id, g.item_id, g.location_id, g.area,
+//		g.site, g.site_set, g.site_set_percentage,
+//		g.site_set_gathers_min, g.site_set_gathers_max, g.rank,
+//		g.percentage, i.name AS iname, l.name AS lname
+//		FROM gathering AS g
+//		LEFT OUTER JOIN items AS i ON g.item_id = i._id
+//		LEFT OUTER JOIN locations AS l on g.location_id = l._id;
+
+		String g = "g";
+		String i = "i";
+		String l = "l";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", g + "." + S.COLUMN_GATHERING_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_GATHERING_ITEM_ID, g + "." + S.COLUMN_GATHERING_ITEM_ID);
+		projectionMap.put(S.COLUMN_GATHERING_LOCATION_ID, g + "." + S.COLUMN_GATHERING_LOCATION_ID);
+		projectionMap.put(S.COLUMN_GATHERING_AREA, g + "." + S.COLUMN_GATHERING_AREA);
+		projectionMap.put(S.COLUMN_GATHERING_SITE, g + "." + S.COLUMN_GATHERING_SITE);
+		projectionMap.put(S.COLUMN_GATHERING_SITE_SET, g + "." + S.COLUMN_GATHERING_SITE_SET);
+		projectionMap.put(S.COLUMN_GATHERING_SITE_SET_PERCENTAGE, g + "." + S.COLUMN_GATHERING_SITE_SET_PERCENTAGE);
+		projectionMap.put(S.COLUMN_GATHERING_SITE_SET_GATHERS_MIN, g + "." + S.COLUMN_GATHERING_SITE_SET_GATHERS_MIN);
+		projectionMap.put(S.COLUMN_GATHERING_SITE_SET_GATHERS_MAX, g + "." + S.COLUMN_GATHERING_SITE_SET_GATHERS_MAX);
+		projectionMap.put(S.COLUMN_GATHERING_RANK, g + "." + S.COLUMN_GATHERING_RANK);
+		projectionMap.put(S.COLUMN_GATHERING_PERCENTAGE, g + "." + S.COLUMN_GATHERING_PERCENTAGE);
+		
+		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(l + S.COLUMN_LOCATIONS_NAME, l + "." + S.COLUMN_LOCATIONS_NAME + " AS " + l + S.COLUMN_LOCATIONS_NAME);
+
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_GATHERING + " AS g" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "g." +
+				S.COLUMN_GATHERING_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_LOCATIONS +
+				" AS l " + " ON " + "g." + S.COLUMN_GATHERING_LOCATION_ID + " = " + "l." + S.COLUMN_LOCATIONS_ID);
+
 		_QB.setProjectionMap(projectionMap);
 		return _QB;
 	}
@@ -638,6 +804,96 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return _QB;
 	}
 	
+/********************************* HUNTING REWARD QUERIES ******************************************/
+	
+	/*
+	 * Get all hunting reward monsters based on item
+	 */
+	public HuntingRewardCursor queryHuntingRewardItem(long id) {
+		
+		_Columns = null;
+		_Selection = "h." + S.COLUMN_HUNTING_REWARDS_ITEM_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new HuntingRewardCursor(wrapJoinHelper(builderHuntingReward()));
+	}
+	
+	/*
+	 * Get all hunting reward items based on monster
+	 */
+	public HuntingRewardCursor queryHuntingRewardMonster(long id) {
+		
+		_Columns = null;
+		_Selection = "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new HuntingRewardCursor(wrapJoinHelper(builderHuntingReward()));
+	}
+	
+	/*
+	 * Get all hunting reward items based on monster and rank
+	 */
+	public HuntingRewardCursor queryHuntingRewardMonsterRank(long id, String rank) {
+		
+		_Columns = null;
+		_Selection = "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " = ? " + "AND " + 
+				"h." + S.COLUMN_HUNTING_REWARDS_RANK + " = ? ";
+		_SelectionArgs = new String[]{"" + id, rank};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new HuntingRewardCursor(wrapJoinHelper(builderHuntingReward()));
+	}
+	
+	/*
+	 * Helper method to query for HuntingReward
+	 */
+	private SQLiteQueryBuilder builderHuntingReward() {
+//		SELECT h._id AS _id, h.item_id, h.monster_id,
+//		h.condition, h.rank, h.stack_size, h.percentage,
+//		i.name AS iname, m.name AS mname
+//		FROM hunting_rewards AS h
+//		LEFT OUTER JOIN items AS i ON h.item_id = i._id
+//		LEFT OUTER JOIN monsters AS m ON h.monster_id = m._id;
+
+		String h = "h";
+		String i = "i";
+		String m = "m";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", h + "." + S.COLUMN_HUNTING_REWARDS_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_HUNTING_REWARDS_ITEM_ID, h + "." + S.COLUMN_HUNTING_REWARDS_ITEM_ID);
+		projectionMap.put(S.COLUMN_HUNTING_REWARDS_MONSTER_ID, h + "." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID);
+		projectionMap.put(S.COLUMN_HUNTING_REWARDS_CONDITION, h + "." + S.COLUMN_HUNTING_REWARDS_CONDITION);
+		projectionMap.put(S.COLUMN_HUNTING_REWARDS_RANK, h + "." + S.COLUMN_HUNTING_REWARDS_RANK);
+		projectionMap.put(S.COLUMN_HUNTING_REWARDS_STACK_SIZE, h + "." + S.COLUMN_HUNTING_REWARDS_STACK_SIZE);
+		projectionMap.put(S.COLUMN_HUNTING_REWARDS_PERCENTAGE, h + "." + S.COLUMN_HUNTING_REWARDS_PERCENTAGE);
+		
+		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
+
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_HUNTING_REWARDS + " AS h" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "h." +
+				S.COLUMN_HUNTING_REWARDS_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_MONSTERS +
+				" AS m " + " ON " + "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
 /********************************* ITEM QUERIES ******************************************/
 	
 	/*
@@ -678,7 +934,74 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return new ItemCursor(wrapHelper());
 	}	
 	
+/********************************* ITEM TO SKILL TREE QUERIES ******************************************/
 	
+	/*
+	 * Get all skills based on item
+	 */
+	public ItemToSkillTreeCursor queryItemToSkillTreeItem(long id) {
+		
+		_Columns = null;
+		_Selection = "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ItemToSkillTreeCursor(wrapJoinHelper(builderItemToSkillTree()));
+	}
+	
+	/*
+	 * Get all items based on skill tree
+	 */
+	public ItemToSkillTreeCursor queryItemToSkillTreeSkillTree(long id) {
+		
+		_Columns = null;
+		_Selection = "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ItemToSkillTreeCursor(wrapJoinHelper(builderItemToSkillTree()));
+	}
+	
+	/*
+	 * Helper method to query for ItemToSkillTree
+	 */
+	private SQLiteQueryBuilder builderItemToSkillTree() {
+//		SELECT itst._id AS _id, itst.item_id, itst.skill_tree_id,
+//		itst.point_value, i.name AS iname, s.name AS sname
+//		FROM item_to_skill_tree AS itst
+//		LEFT OUTER JOIN items AS i ON itst.item_id = i._id
+//		LEFT OUTER JOIN skill_trees AS s ON itst.skill_tree_id = s._id;
+
+		String itst = "itst";
+		String i = "i";
+		String s = "s";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", itst + "." + S.COLUMN_ITEM_TO_SKILL_TREE_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID, itst + "." + S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID);
+		projectionMap.put(S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID, itst + "." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID);
+		projectionMap.put(S.COLUMN_ITEM_TO_SKILL_TREE_POINT_VALUE, itst + "." + S.COLUMN_ITEM_TO_SKILL_TREE_POINT_VALUE);
+		
+		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(s + S.COLUMN_SKILL_TREES_NAME, s + "." + S.COLUMN_SKILL_TREES_NAME + " AS " + s + S.COLUMN_SKILL_TREES_NAME);
+
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_ITEM_TO_SKILL_TREE + " AS itst" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "itst." +
+				S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_SKILL_TREES +
+				" AS s " + " ON " + "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = " + "s." + S.COLUMN_SKILL_TREES_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
 
 /********************************* LOCATION QUERIES ******************************************/
 	
@@ -720,6 +1043,97 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return new LocationCursor(wrapHelper());
 	}
 	
+/********************************* MOGA WOODS REWARD QUERIES ******************************************/
+	
+	/*
+	 * Get all moga woods reward monsters based on item
+	 */
+	public MogaWoodsRewardCursor queryMogaWoodsRewardItem(long id) {
+		
+		_Columns = null;
+		_Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward()));
+	}
+	
+	/*
+	 * Get all moga woods reward items based on monster
+	 */
+	public MogaWoodsRewardCursor queryMogaWoodsRewardMonster(long id) {
+		
+		_Columns = null;
+		_Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward()));
+	}
+	
+	/*
+	 * Get all moga woods reward items based on monster and time
+	 */
+	public MogaWoodsRewardCursor queryMogaWoodsRewardMonsterTime(long id, String time) {
+		
+		_Columns = null;
+		_Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = ? " + "AND " + 
+				"mwr." + S.COLUMN_MOGA_WOODS_REWARDS_TIME + " = ? ";
+		_SelectionArgs = new String[]{"" + id, time};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward()));
+	}
+	
+	/*
+	 * Helper method to query for MogaWoods
+	 */
+	private SQLiteQueryBuilder builderMogaWoodsReward() {
+//		SELECT mwr._id AS _id, mwr.monster_id, mwr.item_id,
+//		mwr.time, mwr.commodity_stars, mwr.kill_percentage,
+//		mwr.capture_percentage, 
+//		i.name AS iname, m.name AS mname 
+//		FROM moga_woods_rewards AS mwr
+//		LEFT OUTER JOIN monsters AS m ON mwr.monster_id = m._id 
+//		LEFT OUTER JOIN items AS i ON mwr.item_id = i._id;
+
+		String mwr = "mwr";
+		String i = "i";
+		String m = "m";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID);
+		projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID);
+		projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_TIME, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_TIME);
+		projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_COMMODITY_STARS, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_COMMODITY_STARS);
+		projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_KILL_PERCENTAGE, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_KILL_PERCENTAGE);
+		projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_CAPTURE_PERCENTAGE, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_CAPTURE_PERCENTAGE);
+		
+		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
+
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_MOGA_WOODS_REWARDS + " AS mwr" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "mwr." +
+				S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_MONSTERS +
+				" AS m " + " ON " + "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
 /********************************* MONSTER QUERIES ******************************************/
 	
 	/*
@@ -731,7 +1145,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_Distinct = true;
 		_Table = S.TABLE_MONSTERS;
 		_Columns = null;
-		_Selection = null;
+		_Selection = S.COLUMN_MONSTERS_TRAIT + " = '' ";
 		_SelectionArgs = null;
 		_GroupBy = S.COLUMN_MONSTERS_NAME;
 		_Having = null;
@@ -750,7 +1164,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_Distinct = true;
 		_Table = S.TABLE_MONSTERS;
 		_Columns = null;
-		_Selection = S.COLUMN_MONSTERS_CLASS + " = ?";
+		_Selection = S.COLUMN_MONSTERS_CLASS + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " = '' ";
 		_SelectionArgs = new String[] {"Minion"};
 		_GroupBy = S.COLUMN_MONSTERS_NAME;
 		_Having = null;
@@ -769,7 +1183,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_Distinct = true;
 		_Table = S.TABLE_MONSTERS;
 		_Columns = null;
-		_Selection = S.COLUMN_MONSTERS_CLASS + " = ?";
+		_Selection = S.COLUMN_MONSTERS_CLASS + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " = '' ";
 		_SelectionArgs = new String[] {"Boss"};
 		_GroupBy = S.COLUMN_MONSTERS_NAME;
 		_Having = null;
@@ -798,6 +1212,119 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return new MonsterCursor(wrapHelper());
 	}
 	
+	/*
+	 * Get all traits from same monsters
+	 */
+	public MonsterCursor queryMonsterTrait(long id) {
+		// "SELECT * FROM monsters WHERE _id = ? AND trait != ''"
+		
+		_Distinct = true;
+		_Table = S.TABLE_MONSTERS;
+		_Columns = null;
+		_Selection = S.COLUMN_MONSTERS_ID + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " != '' ";
+		_SelectionArgs = new String[] {"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new MonsterCursor(wrapHelper());
+	}
+	
+/********************************* MONSTER DAMAGE QUERIES ******************************************/
+	
+	/*
+	 * Get all monster damage for a monster
+	 */
+	public MonsterDamageCursor queryMonsterDamage(long id) {
+		// "SELECT * FROM monster_damage WHERE monster_id = id"
+		
+		_Distinct = false;
+		_Table = S.TABLE_MONSTER_DAMAGE;
+		_Columns = null;
+		_Selection = S.COLUMN_MONSTER_DAMAGE_MONSTER_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new MonsterDamageCursor(wrapHelper());
+	}	
+	
+/********************************* MONSTER TO QUEST QUERIES ******************************************/
+	
+	/*
+	 * Get all quests based on monster
+	 */
+	public MonsterToQuestCursor queryMonsterToQuestMonster(long id) {
+		
+		_Columns = null;
+		_Selection = "mtq." + S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest()));
+	}
+	
+	/*
+	 * Get all monsters based on quest
+	 */
+	public MonsterToQuestCursor queryMonsterToQuestQuest(long id) {
+		
+		_Columns = null;
+		_Selection = "mtq." + S.COLUMN_MONSTER_TO_QUEST_QUEST_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest()));
+	}
+	
+	/*
+	 * Helper method to query for MonsterToQuest
+	 */
+	private SQLiteQueryBuilder builderMonsterToQuest() {
+//		SELECT mtq._id AS _id, mtq.monster_id, mtq.quest_id,
+//		mtq.unstable, m.name AS mname, q.name AS qname,
+//		q.hub, q.stars
+//		FROM monster_to_quest AS mtq
+//		LEFT OUTER JOIN monsters AS m ON mtq.monster_id = m._id
+//		LEFT OUTER JOIN quests AS q ON mtq.quest_id = q._id;
+
+		String mtq = "mtq";
+		String m = "m";
+		String q = "q";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", mtq + "." + S.COLUMN_MONSTER_TO_QUEST_ID + " AS " + "_id");
+		
+		projectionMap.put(S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID, mtq + "." + S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID);
+		projectionMap.put(S.COLUMN_MONSTER_TO_QUEST_QUEST_ID, mtq + "." + S.COLUMN_MONSTER_TO_QUEST_QUEST_ID);
+		projectionMap.put(S.COLUMN_MONSTER_TO_QUEST_UNSTABLE, mtq + "." + S.COLUMN_MONSTER_TO_QUEST_UNSTABLE);
+		
+		projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
+		projectionMap.put(q + S.COLUMN_QUESTS_NAME, q + "." + S.COLUMN_QUESTS_NAME + " AS " + q + S.COLUMN_QUESTS_NAME);
+		projectionMap.put(S.COLUMN_QUESTS_HUB, q + "." + S.COLUMN_QUESTS_HUB);
+		projectionMap.put(S.COLUMN_QUESTS_STARS, q + "." + S.COLUMN_QUESTS_STARS);
+		
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_MONSTER_TO_QUEST + " AS mtq" + " LEFT OUTER JOIN " + S.TABLE_MONSTERS + " AS m" + " ON " + "mtq." +
+				S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID + " LEFT OUTER JOIN " + S.TABLE_QUESTS +
+				" AS q " + " ON " + "mtq." + S.COLUMN_MONSTER_TO_QUEST_QUEST_ID + " = " + "q." + S.COLUMN_QUESTS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+		
 /********************************* QUEST QUERIES ******************************************/
 	
 	/*
@@ -902,6 +1429,101 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_QB.setProjectionMap(projectionMap);
 		return _QB;
 	}
+	
+/********************************* QUEST REWARD QUERIES ******************************************/
+	
+	/*
+	 * Get all quest reward quests based on item
+	 */
+	public QuestRewardCursor queryQuestRewardItem(long id) {
+		
+		_Columns = null;
+		_Selection = "qr." + S.COLUMN_QUEST_REWARDS_ITEM_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new QuestRewardCursor(wrapJoinHelper(builderQuestReward()));
+	}
+	
+	/*
+	 * Get all quest reward items based on quest
+	 */
+	public QuestRewardCursor queryQuestRewardQuest(long id) {
+		
+		_Columns = null;
+		_Selection = "qr." + S.COLUMN_QUEST_REWARDS_QUEST_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new QuestRewardCursor(wrapJoinHelper(builderQuestReward()));
+	}
+	
+	/*
+	 * Helper method to query for QuestReward
+	 */
+	private SQLiteQueryBuilder builderQuestReward() {
+//		SELECT qr._id AS _id, qr.quest_id, qr.item_id, 
+//		qr.reward_slot, qr.percentage, qr.stack_size,
+//		q.name AS qname, q.hub, q.stars, i.name AS iname
+//		FROM quest_rewards AS qr
+//		LEFT OUTER JOIN quests AS q ON qr.quest_id = q._id
+//		LEFT OUTER JOIN items AS i ON qr.item_id = i._id;
+
+		String qr = "qr";
+		String i = "i";
+		String q = "q";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", qr + "." + S.COLUMN_QUEST_REWARDS_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_QUEST_REWARDS_ITEM_ID, qr + "." + S.COLUMN_QUEST_REWARDS_ITEM_ID);
+		projectionMap.put(S.COLUMN_QUEST_REWARDS_QUEST_ID, qr + "." + S.COLUMN_QUEST_REWARDS_QUEST_ID);
+		projectionMap.put(S.COLUMN_QUEST_REWARDS_REWARD_SLOT, qr + "." + S.COLUMN_QUEST_REWARDS_REWARD_SLOT);
+		projectionMap.put(S.COLUMN_QUEST_REWARDS_PERCENTAGE, qr + "." + S.COLUMN_QUEST_REWARDS_PERCENTAGE);
+		projectionMap.put(S.COLUMN_QUEST_REWARDS_STACK_SIZE, qr + "." + S.COLUMN_QUEST_REWARDS_STACK_SIZE);
+		
+		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(q + S.COLUMN_QUESTS_NAME, q + "." + S.COLUMN_QUESTS_NAME + " AS " + q + S.COLUMN_QUESTS_NAME);
+		projectionMap.put(S.COLUMN_QUESTS_HUB, q + "." + S.COLUMN_QUESTS_HUB);
+		projectionMap.put(S.COLUMN_QUESTS_STARS, q + "." + S.COLUMN_QUESTS_STARS);
+
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_QUEST_REWARDS + " AS qr" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "qr." +
+				S.COLUMN_QUEST_REWARDS_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_QUESTS +
+				" AS q " + " ON " + "qr." + S.COLUMN_QUEST_REWARDS_QUEST_ID + " = " + "q." + S.COLUMN_QUESTS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
+/********************************* SKILL QUERIES ******************************************/
+	
+	/*
+	 * Get all skills for a skill tree
+	 */
+	public SkillCursor querySkill(long id) {
+		// "SELECT * FROM skills WHERE skill_tree_id = id"
+		
+		_Distinct = false;
+		_Table = S.TABLE_SKILLS;
+		_Columns = null;
+		_Selection = S.COLUMN_SKILLS_SKILL_TREE_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new SkillCursor(wrapHelper());
+	}	
 	
 /********************************* SKILL TREE QUERIES ******************************************/	
 
