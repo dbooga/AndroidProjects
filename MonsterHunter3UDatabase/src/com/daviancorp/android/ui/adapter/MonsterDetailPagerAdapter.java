@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.daviancorp.android.ui.detail.MonsterDetailFragment;
+import com.daviancorp.android.ui.detail.MonsterCarveFragment;
 
 public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 	
@@ -22,9 +23,11 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			return MonsterDetailFragment.newInstance(monsterId);
 		case 1:
-			return MonsterDetailFragment.newInstance(3);
+			return MonsterCarveFragment.newInstance(monsterId, "LR");
 		case 2:
-			return MonsterDetailFragment.newInstance(70);
+			return MonsterCarveFragment.newInstance(monsterId, "HR");
+		case 3:
+			return MonsterCarveFragment.newInstance(monsterId, "G");
 		default:
 			return null;
 		}
@@ -33,7 +36,7 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 3;
+		return 4;
 	}
 
 }

@@ -68,7 +68,20 @@ public class DataManager {
 	public ArmorCursor queryArmorTypeSlot(String type, String slot) {
 		return mHelper.queryArmorTypeSlot(type, slot);
 	}
-		
+	
+/********************************* COMBINING QUERIES ******************************************/
+	public CarveCursor queryCarveFromItem(long id) {
+		return mHelper.queryCarveFromItem(id);
+	}
+
+	public CarveCursor queryCarveFromMonster(long id) {
+		return mHelper.queryCarveFromMonster(id);
+	}
+	
+	public CarveCursor queryCarveFromMonsterRank(long id, String rank) {
+		return mHelper.queryCarveFromMonsterRank(id, rank);
+	}
+	
 /********************************* COMBINING QUERIES ******************************************/
 	public CombiningCursor queryCombinings() {
 		return mHelper.queryCombinings();
@@ -84,8 +97,6 @@ public class DataManager {
 		cursor.close();
 		return combining;
 	}
-	
-	
 	
 /********************************* DECORATION QUERIES ******************************************/
 	public DecorationCursor queryDecorations() {

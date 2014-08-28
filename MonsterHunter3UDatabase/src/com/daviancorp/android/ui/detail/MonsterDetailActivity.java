@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar.Tab;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.adapter.MonsterDetailPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
@@ -23,14 +24,14 @@ public class MonsterDetailActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "All", "Small", "Large" };
+	private String[] tabs = { "All", "Low-Rank", "High-Rank", "G-Rank" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(R.string.monsters);
 		
 		long id = getIntent().getLongExtra(EXTRA_MONSTER_ID, -1);
+		setTitle(DataManager.get(getApplicationContext()).getMonster(id).getName());
 
 		// Initialization
 		viewPager = (ViewPager) findViewById(R.id.pager);
