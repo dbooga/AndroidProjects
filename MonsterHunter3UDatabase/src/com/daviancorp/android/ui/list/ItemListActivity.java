@@ -1,13 +1,12 @@
 package com.daviancorp.android.ui.list;
 
-import com.daviancorp.android.monsterhunter3udatabase.R;
-import com.daviancorp.android.ui.general.GenericActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+
+import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.general.GenericActivity;
 
 public class ItemListActivity extends GenericActivity {
 
