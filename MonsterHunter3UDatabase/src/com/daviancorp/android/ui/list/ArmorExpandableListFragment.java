@@ -1,7 +1,10 @@
 package com.daviancorp.android.ui.list;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,11 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.object.Armor;
-import com.daviancorp.android.data.object.Quest;
+import com.daviancorp.android.data.object.Item;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
 /**
@@ -29,11 +33,7 @@ public class ArmorExpandableListFragment extends Fragment {
 	private String mType;
 	private static final String ARG_TYPE = "ARMOR_TYPE";
 	private ArrayList<Armor> armors;
-	// private String[] village = { "1 Star", "2 Star", "3 Star", "4 Star",
-	// "5 Star", "6 Star", "7 Star", "8 Star", "9 Star" };
-	//
-	// private String[] port_dlc = { "1 Star", "2 Star", "3 Star", "4 Star",
-	// "5 Star", "6 Star", "7 Star", "8 Star"};
+
 	private String[] slots = { "Head", "Body", "Arms", "Waist", "Legs" };
 
 	private ArrayList<ArrayList<Armor>> children;
@@ -106,29 +106,16 @@ public class ArmorExpandableListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View v = inflater.inflate(R.layout.fragment_quest_expandablelist, null);
+		View v = inflater.inflate(R.layout.fragment_armor_expandablelist, null);
 		ExpandableListView elv = (ExpandableListView) v
 				.findViewById(R.id.expandableListView);
-//		if (mType.equals("Village")) {
-//			elv.setAdapter(new QuestListAdapter(village));
-//		} else {
-//			elv.setAdapter(new QuestListAdapter(port_dlc));
-//		}
+
 		elv.setAdapter(new ArmorListAdapter(slots));
 		return v;
 	}
 
 	public class ArmorListAdapter extends BaseExpandableListAdapter {
 
-		// private String[] groups1 = { "11111", "22222", "33333", "444444" ,
-		// "555555" , "666666", "77777", "88888" , "99999" };
-
-		// private String[][] children1 = {
-		// { "Arnold", "Barry", "Chuck", "David" },
-		// { "Ace", "Bandit", "Cha-Cha", "Deuce" },
-		// { "Fluffy", "Snuggles" },
-		// { "Goldy", "Bubbles" }
-		// };
 		private String[] armors;
 
 		public ArmorListAdapter(String[] armors) {
@@ -182,12 +169,49 @@ public class ArmorExpandableListFragment extends Fragment {
 		}
 
 		@Override
-		public View getChildView(int i, int i1, boolean b, View view,
-				ViewGroup viewGroup) {
-			TextView textView = new TextView(
-					ArmorExpandableListFragment.this.getActivity());
-			textView.setText(getChild(i, i1).toString());
-			return textView;
+		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
+				ViewGroup parent) {
+			
+			View v = convertView;
+			Context context = parent.getContext();
+			LayoutInflater inflater = (LayoutInflater)context.getSystemService
+	                  (Context.LAYOUT_INFLATER_SERVICE);
+	        v = inflater.inflate(android.R.layout.activity_list_item, parent, false);
+			
+	        
+	        
+	        TextView armorTextView = (TextView) v.findViewById(android.R.id.text1);
+	        ImageView armorImageView = (ImageView) v.findViewById(android.R.id.icon);
+  
+	        armorTextView.setText(getChild(groupPosition, childPosition).toString());
+	        
+//	        int rarity = ((Armor) getChild(groupPosition, childPosition)).getRarity();
+	        String slot = ((Armor) getChild(groupPosition, childPosition)).getSlot();
+	        
+//	        String Fileloc = ((Armor) getChild(groupPosition, childPosition)).getFileLocation();
+	        
+			String cellImage = "icons_armor/icons_" + slot + "/" + ((Item) getChild(groupPosition, childPosition)).getFileLocation();
+	
+			Log.d("armor", cellImage);
+//			Log.d("armor", Fileloc);
+			
+	        Drawable armorImage = null;
+	        
+			try {
+				armorImage = Drawable.createFromStream(
+						context.getAssets().open(cellImage), null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	        armorImageView.setImageDrawable(armorImage);
+	        
+	        return v;
+//			TextView textView = new TextView(
+//					ArmorExpandableListFragment.this.getActivity());
+//			textView.setText(getChild(i, i1).toString());
+//			return textView;
 		}
 
 		@Override
