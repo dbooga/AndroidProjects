@@ -63,6 +63,7 @@ public abstract class GenericActivity extends SingleFragmentActivity {
 
 		setTitle(R.string.app_name);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeAsUpIndicator(R.drawable.drawer);
 		getActionBar().setHomeButtonEnabled(true);
 
 		setContentView(R.layout.activity_main);

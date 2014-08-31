@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.daviancorp.android.ui.detail.ItemCarveFragment;
 import com.daviancorp.android.ui.detail.ItemDetailFragment;
 
 public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
@@ -24,7 +25,7 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 		case 1:
 			return ItemDetailFragment.newInstance(itemId);
 		case 2:
-			return ItemDetailFragment.newInstance(itemId);
+			return ItemCarveFragment.newInstance(itemId);
 		case 3:
 			return ItemDetailFragment.newInstance(itemId);
 		default:

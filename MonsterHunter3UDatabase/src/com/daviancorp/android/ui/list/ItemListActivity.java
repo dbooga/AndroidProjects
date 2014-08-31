@@ -29,18 +29,18 @@ public class ItemListActivity extends GenericActivity {
 		FragmentTransaction transaction;
 
 		switch (item.getItemId()) {
-		case R.id.about:
-			
-			newFragment = QuestExpandableListFragment.newInstance("DLC");
-			transaction = getSupportFragmentManager().beginTransaction();
-
-			transaction.replace(R.id.fragment_container, newFragment);
-			// transaction.addToBackStack(null);
-
-			// Commit the transaction
-			transaction.commit();
-
-			return true;
+//		case R.id.about:
+//			
+//			newFragment = QuestExpandableListFragment.newInstance("DLC");
+//			transaction = getSupportFragmentManager().beginTransaction();
+//
+//			transaction.replace(R.id.fragment_container, newFragment);
+//			// transaction.addToBackStack(null);
+//
+//			// Commit the transaction
+//			transaction.commit();
+//
+//			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

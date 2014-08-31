@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -17,14 +18,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.daviancorp.android.data.database.MonsterCursor;
 import com.daviancorp.android.data.object.Monster;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.detail.MonsterDetailActivity;
 
 public class MonsterGridFragment extends Fragment implements
 		LoaderCallbacks<Cursor> {
@@ -57,6 +62,17 @@ public class MonsterGridFragment extends Fragment implements
 
 		mGridView = (GridView) v.findViewById(R.id.grid_monsters);
 		mGridView.setAdapter(mAdapter);
+		
+		mGridView.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				
+				Intent i = new Intent(getActivity(), MonsterDetailActivity.class);
+				i.putExtra(MonsterDetailActivity.EXTRA_MONSTER_ID, id);
+				startActivity(i);
+				
+			}
+		});
 
 		return v;
 	}
@@ -87,6 +103,7 @@ public class MonsterGridFragment extends Fragment implements
 		// Stop using the cursor (via the adapter)
 		mGridView.setAdapter(null);
 	}
+	
 
 	private static class MonsterGridCursorAdapter extends CursorAdapter {
 

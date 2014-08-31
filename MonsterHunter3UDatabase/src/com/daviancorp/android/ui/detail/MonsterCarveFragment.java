@@ -1,6 +1,8 @@
 package com.daviancorp.android.ui.detail;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -10,6 +12,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.CarveCursor;
@@ -38,6 +41,7 @@ public class MonsterCarveFragment extends ListFragment implements
 		getLoaderManager().initLoader(0, getArguments(), this);
 	}
 
+	@SuppressLint("NewApi")
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
@@ -60,6 +64,15 @@ public class MonsterCarveFragment extends ListFragment implements
 	public void onLoaderReset(Loader<Cursor> loader) {
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
+	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		// The id argument will be the Monster ID; CursorAdapter gives us this
+		// for free
+		Intent i = new Intent(getActivity(), ItemDetailActivity.class);
+		i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, id);
+		startActivity(i);
 	}
 
 	private static class MonsterCarveListCursorAdapter extends CursorAdapter {

@@ -64,6 +64,7 @@ public abstract class GenericTabActivity extends ActionBarActivity {
 
 		setTitle(R.string.app_name);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeAsUpIndicator(R.drawable.drawer);
 		getActionBar().setHomeButtonEnabled(true);
 
 		setContentView(R.layout.activity_tab_list);

@@ -1,8 +1,11 @@
 package com.daviancorp.android.ui.list;
 
+import java.io.IOException;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -11,6 +14,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -50,10 +54,11 @@ public class ItemListFragment extends ListFragment implements
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
 	}
-	
+
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this for free
+		// The id argument will be the Monster ID; CursorAdapter gives us this
+		// for free
 		Intent i = new Intent(getActivity(), ItemDetailActivity.class);
 		i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, id);
 		startActivity(i);
@@ -73,7 +78,8 @@ public class ItemListFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(android.R.layout.simple_list_item_1,
+
+			return inflater.inflate(android.R.layout.activity_list_item,
 					parent, false);
 		}
 
@@ -83,9 +89,28 @@ public class ItemListFragment extends ListFragment implements
 			Item item = mItemCursor.getItem();
 
 			// Set up the text view
-			TextView itemNameTextView = (TextView) view;
+			TextView itemNameTextView = (TextView) view
+					.findViewById(android.R.id.text1);
+			ImageView itemImageView = (ImageView) view
+					.findViewById(android.R.id.icon);
+
 			String cellText = item.getName();
+			String cellImage = "icons_items/" + item.getFileLocation();
+
 			itemNameTextView.setText(cellText);
+
+			Drawable itemImage = null;
+
+			try {
+				itemImage = Drawable.createFromStream(
+						context.getAssets().open(cellImage), null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			itemImageView.setImageDrawable(itemImage);
+
 		}
 	}
 
