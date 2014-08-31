@@ -38,15 +38,14 @@ public class WeaponCursor extends CursorWrapper {
 		int affinity = getInt(getColumnIndex(S.COLUMN_WEAPONS_AFFINITY));
 		String horn_notes = getString(getColumnIndex(S.COLUMN_WEAPONS_HORN_NOTES));
 		String shelling_type = getString(getColumnIndex(S.COLUMN_WEAPONS_SHELLING_TYPE));
-		String charge_levels = getString(getColumnIndex(S.COLUMN_WEAPONS_CHARGE_LEVELS));
-		String allowed_coatings = getString(getColumnIndex(S.COLUMN_WEAPONS_ALLOWED_COATINGS));
+		String phial = getString(getColumnIndex(S.COLUMN_WEAPONS_PHIAL));
+		String charges = getString(getColumnIndex(S.COLUMN_WEAPONS_CHARGES));
+		String coatings = getString(getColumnIndex(S.COLUMN_WEAPONS_COATINGS));
 		String recoil = getString(getColumnIndex(S.COLUMN_WEAPONS_RECOIL));
 		String reload_speed = getString(getColumnIndex(S.COLUMN_WEAPONS_RELOAD_SPEED));
 		String rapid_fire = getString(getColumnIndex(S.COLUMN_WEAPONS_RAPID_FIRE));
-		String normal_shots = getString(getColumnIndex(S.COLUMN_WEAPONS_NORMAL_SHOTS));
-		String status_shots = getString(getColumnIndex(S.COLUMN_WEAPONS_STATUS_SHOTS));
-		String elemental_shots = getString(getColumnIndex(S.COLUMN_WEAPONS_ELEMENTAL_SHOTS));
-		String tool_shots = getString(getColumnIndex(S.COLUMN_WEAPONS_TOOL_SHOTS));
+		String deviation = getString(getColumnIndex(S.COLUMN_WEAPONS_DEVIATION));
+		String ammo = getString(getColumnIndex(S.COLUMN_WEAPONS_AMMO));
 		int num_slots = getInt(getColumnIndex(S.COLUMN_WEAPONS_NUM_SLOTS));
 		String sharpness_file = getString(getColumnIndex(S.COLUMN_WEAPONS_SHARPNESS_FILE));
 
@@ -62,15 +61,14 @@ public class WeaponCursor extends CursorWrapper {
 		weapon.setAffinity(affinity);
 		weapon.setHornNotes(horn_notes);
 		weapon.setShellingType(shelling_type);
-		weapon.setChargeLevels(charge_levels);
-		weapon.setAllowedCoatings(allowed_coatings);
+		weapon.setPhial(phial);
+		weapon.setCharges(charges);
+		weapon.setCoatings(coatings);
 		weapon.setRecoil(recoil);
 		weapon.setReloadSpeed(reload_speed);
 		weapon.setRapidFire(rapid_fire);
-		weapon.setNormalShots(normal_shots);
-		weapon.setStatusShots(status_shots);
-		weapon.setElementalShots(elemental_shots);
-		weapon.setToolShots(tool_shots);
+		weapon.setDeviation(deviation);
+		weapon.setAmmo(ammo);
 		weapon.setNumSlots(num_slots);
 		weapon.setSharpnessFile(sharpness_file);
 

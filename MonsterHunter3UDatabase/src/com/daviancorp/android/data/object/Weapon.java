@@ -18,15 +18,14 @@ public class Weapon extends Item{
 	private int affinity;
 	private String horn_notes;
 	private String shelling_type;
-	private String charge_levels;
-	private String allowed_coatings;
+	private String phial;
+	private String charges;
+	private String coatings;
 	private String recoil;
 	private String reload_speed;
 	private String rapid_fire;
-	private String normal_shots;
-	private String status_shots;
-	private String elemental_shots;
-	private String tool_shots;
+	private String deviation;
+	private String ammo;
 	private int num_slots;
 	private String sharpness_file;
 	
@@ -45,15 +44,14 @@ public class Weapon extends Item{
 		this.affinity = -1;
 		this.horn_notes = "";
 		this.shelling_type = "";
-		this.charge_levels = "";
-		this.allowed_coatings = "";
+		this.phial = "";
+		this.charges = "";
+		this.coatings = "";
 		this.recoil = "";
 		this.reload_speed = "";
 		this.rapid_fire = "";
-		this.normal_shots = "";
-		this.status_shots = "";
-		this.elemental_shots = "";
-		this.tool_shots = "";
+		this.deviation = "";
+		this.ammo = "";
 		this.num_slots = -1;
 		this.sharpness_file = "";
 	}
@@ -153,21 +151,29 @@ public class Weapon extends Item{
 	public void setShellingType(String shelling_type) {
 		this.shelling_type = shelling_type;
 	}
-
-	public String getChargeLevels() {
-		return charge_levels;
+	
+	public String getPhial() {
+		return phial;
+	}
+	
+	public void setPhial(String phial) {
+		this.phial = phial;
 	}
 
-	public void setChargeLevels(String charge_levels) {
-		this.charge_levels = charge_levels;
+	public String getCharges() {
+		return charges;
 	}
 
-	public String getAllowedCoatings() {
-		return allowed_coatings;
+	public void setCharges(String charges) {
+		this.charges = charges;
 	}
 
-	public void setAllowedCoatings(String allowed_coatings) {
-		this.allowed_coatings = allowed_coatings;
+	public String getCoatings() {
+		return coatings;
+	}
+
+	public void setCoatings(String coatings) {
+		this.coatings = coatings;
 	}
 
 	public String getRecoil() {
@@ -194,36 +200,20 @@ public class Weapon extends Item{
 		this.rapid_fire = rapid_fire;
 	}
 
-	public String getNormalShots() {
-		return normal_shots;
+	public String getDeviation() {
+		return deviation;
 	}
 
-	public void setNormalShots(String normal_shots) {
-		this.normal_shots = normal_shots;
+	public void setDeviation(String deviation) {
+		this.deviation = deviation;
 	}
 
-	public String getStatusShots() {
-		return status_shots;
+	public String getAmmo() {
+		return ammo;
 	}
 
-	public void setStatusShots(String status_shots) {
-		this.status_shots = status_shots;
-	}
-
-	public String getElementalShots() {
-		return elemental_shots;
-	}
-
-	public void setElementalShots(String elemental_shots) {
-		this.elemental_shots = elemental_shots;
-	}
-
-	public String getToolShots() {
-		return tool_shots;
-	}
-
-	public void setToolShots(String tool_shots) {
-		this.tool_shots = tool_shots;
+	public void setAmmo(String ammo) {
+		this.ammo = ammo;
 	}
 
 	public int getNumSlots() {

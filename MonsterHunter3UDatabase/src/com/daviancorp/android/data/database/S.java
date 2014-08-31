@@ -232,15 +232,14 @@ public class S {
 	static final String COLUMN_WEAPONS_AFFINITY = "affinity";
 	static final String COLUMN_WEAPONS_HORN_NOTES = "horn_notes";
 	static final String COLUMN_WEAPONS_SHELLING_TYPE = "shelling_type";
-	static final String COLUMN_WEAPONS_CHARGE_LEVELS = "charge_levels";
-	static final String COLUMN_WEAPONS_ALLOWED_COATINGS = "allowed_coatings";
+	static final String COLUMN_WEAPONS_PHIAL = "phial";
+	static final String COLUMN_WEAPONS_CHARGES = "charges";
+	static final String COLUMN_WEAPONS_COATINGS = "coatings";
 	static final String COLUMN_WEAPONS_RECOIL = "recoil";
 	static final String COLUMN_WEAPONS_RELOAD_SPEED = "reload_speed";
 	static final String COLUMN_WEAPONS_RAPID_FIRE = "rapid_fire";
-	static final String COLUMN_WEAPONS_NORMAL_SHOTS = "normal_shots";
-	static final String COLUMN_WEAPONS_STATUS_SHOTS = "status_shots";
-	static final String COLUMN_WEAPONS_ELEMENTAL_SHOTS = "elemental_shots";
-	static final String COLUMN_WEAPONS_TOOL_SHOTS = "tool_shots";
+	static final String COLUMN_WEAPONS_DEVIATION = "deviation";
+	static final String COLUMN_WEAPONS_AMMO = "ammo";
 	static final String COLUMN_WEAPONS_NUM_SLOTS = "num_slots";
 	static final String COLUMN_WEAPONS_SHARPNESS_FILE = "sharpness_file";
 	
