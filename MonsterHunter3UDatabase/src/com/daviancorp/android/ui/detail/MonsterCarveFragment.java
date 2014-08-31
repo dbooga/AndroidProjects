@@ -71,7 +71,7 @@ public class MonsterCarveFragment extends ListFragment implements
 		// The id argument will be the Monster ID; CursorAdapter gives us this
 		// for free
 		Intent i = new Intent(getActivity(), ItemDetailActivity.class);
-		i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, id);
+		i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, (long) v.getTag());
 		startActivity(i);
 	}
 
@@ -102,6 +102,8 @@ public class MonsterCarveFragment extends ListFragment implements
 			TextView itemNameTextView = (TextView) view;
 			String cellText = carve.getItem().getName() + "\t\t\t\t" + carve.getLocation();
 			itemNameTextView.setText(cellText);
+			
+			itemNameTextView.setTag(carve.getItem().getId());
 		}
 	}
 
