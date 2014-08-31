@@ -190,9 +190,10 @@ public class ArmorExpandableListFragment extends Fragment {
 	        
 //	        String Fileloc = ((Armor) getChild(groupPosition, childPosition)).getFileLocation();
 	        
-			String cellImage = "icons_armor/icons_" + slot + "/" + ((Item) getChild(groupPosition, childPosition)).getFileLocation();
+			String cellImage = "icons_armor/icons_" + slot.toLowerCase() + "/" + slot.toLowerCase() + 
+					((Item) getChild(groupPosition, childPosition)).getRarity() + ".png";
 	
-			Log.d("armor", cellImage);
+//			Log.d("armor", cellImage);
 //			Log.d("armor", Fileloc);
 			
 	        Drawable armorImage = null;
