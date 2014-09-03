@@ -62,13 +62,13 @@ public class ArmorExpandableListFragment extends Fragment {
 	private void populateList() {
 		children = new ArrayList<ArrayList<Armor>>();
 		armors = DataManager.get(getActivity()).queryArmorArrayType(mType);
-		
+
 		ArrayList<Armor> g1 = new ArrayList<Armor>();
 		ArrayList<Armor> g2 = new ArrayList<Armor>();
 		ArrayList<Armor> g3 = new ArrayList<Armor>();
 		ArrayList<Armor> g4 = new ArrayList<Armor>();
 		ArrayList<Armor> g5 = new ArrayList<Armor>();
-		
+
 		for (int i = 0; i < armors.size(); i++) {
 			Log.d("armor", "Type = " + armors.get(i).getSlot() + " "
 					+ armors.get(i).getName());
@@ -105,6 +105,7 @@ public class ArmorExpandableListFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
 
 		View v = inflater.inflate(R.layout.fragment_armor_expandablelist, null);
 		ExpandableListView elv = (ExpandableListView) v
@@ -169,50 +170,47 @@ public class ArmorExpandableListFragment extends Fragment {
 		}
 
 		@Override
-		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
-				ViewGroup parent) {
-			
+		public View getChildView(int groupPosition, int childPosition,
+				boolean isLastChild, View convertView, ViewGroup parent) {
+
 			View v = convertView;
 			Context context = parent.getContext();
-			LayoutInflater inflater = (LayoutInflater)context.getSystemService
-	                  (Context.LAYOUT_INFLATER_SERVICE);
-	        v = inflater.inflate(android.R.layout.activity_list_item, parent, false);
-			
-	        
-	        
-	        TextView armorTextView = (TextView) v.findViewById(android.R.id.text1);
-	        ImageView armorImageView = (ImageView) v.findViewById(android.R.id.icon);
-  
-	        armorTextView.setText(getChild(groupPosition, childPosition).toString());
-	        
-//	        int rarity = ((Armor) getChild(groupPosition, childPosition)).getRarity();
-	        String slot = ((Armor) getChild(groupPosition, childPosition)).getSlot();
-	        
-//	        String Fileloc = ((Armor) getChild(groupPosition, childPosition)).getFileLocation();
-	        
-			String cellImage = "icons_armor/icons_" + slot.toLowerCase() + "/" + slot.toLowerCase() + 
-					((Item) getChild(groupPosition, childPosition)).getRarity() + ".png";
-	
-//			Log.d("armor", cellImage);
-//			Log.d("armor", Fileloc);
-			
-	        Drawable armorImage = null;
-	        
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			v = inflater.inflate(android.R.layout.activity_list_item, parent,
+					false);
+
+			TextView armorTextView = (TextView) v
+					.findViewById(android.R.id.text1);
+			ImageView armorImageView = (ImageView) v
+					.findViewById(android.R.id.icon);
+
+			armorTextView.setText(getChild(groupPosition, childPosition)
+					.toString());
+
+			String slot = ((Armor) getChild(groupPosition, childPosition))
+					.getSlot();
+
+			String cellImage = "icons_armor/icons_"
+					+ slot.toLowerCase()
+					+ "/"
+					+ slot.toLowerCase()
+					+ ((Item) getChild(groupPosition, childPosition))
+							.getRarity() + ".png";
+
+			Drawable armorImage = null;
+
 			try {
-				armorImage = Drawable.createFromStream(
-						context.getAssets().open(cellImage), null);
+				armorImage = Drawable.createFromStream(context.getAssets()
+						.open(cellImage), null);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-	        armorImageView.setImageDrawable(armorImage);
-	        
-	        return v;
-//			TextView textView = new TextView(
-//					ArmorExpandableListFragment.this.getActivity());
-//			textView.setText(getChild(i, i1).toString());
-//			return textView;
+
+			armorImageView.setImageDrawable(armorImage);
+
+			return v;
 		}
 
 		@Override
