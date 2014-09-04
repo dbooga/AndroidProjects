@@ -33,7 +33,6 @@ public class ItemCarveFragment extends ListFragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		// Initialize the loader to load the list of runs
 		getLoaderManager().initLoader(0, getArguments(), this);
 	}

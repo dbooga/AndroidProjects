@@ -39,9 +39,7 @@ public class CombiningListFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
-		View v = inflater.inflate(R.layout.fragment_list_combining, null);
-		
+		View v = inflater.inflate(R.layout.fragment_combining_list, null);
 		return v;
 	}
 
@@ -83,7 +81,7 @@ public class CombiningListFragment extends ListFragment implements
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 			return inflater
-					.inflate(R.layout.fragment_combining, parent, false);
+					.inflate(R.layout.fragment_combining_listitem, parent, false);
 		}
 
 		@Override
@@ -100,6 +98,18 @@ public class CombiningListFragment extends ListFragment implements
 			String cellImage1 = "icons_items/" + item.getItem1().getFileLocation();
 			String cellImage2 = "icons_items/" + item.getItem2().getFileLocation();
 			String cellImage3 = "icons_items/" + item.getCreatedItem().getFileLocation();
+			
+			int percent = item.getPercentage();
+			int min = item.getAmountMadeMin();
+			int max = item.getAmountMadeMax();
+			
+			String temp = "" + min;
+			
+			if (min != max){
+				temp = temp + "-" + max;
+			}
+			
+			String percentage = "" + percent + "% " + temp; 
 
 			TextView itemtv1 = (TextView) v.findViewById(R.id.item_text1);
 			TextView itemtv2 = (TextView) v.findViewById(R.id.item_text2);
@@ -112,6 +122,8 @@ public class CombiningListFragment extends ListFragment implements
 			LinearLayout itemlayout1 = (LinearLayout) v.findViewById(R.id.item1);
 			LinearLayout itemlayout2 = (LinearLayout) v.findViewById(R.id.item2);
 			LinearLayout itemlayout3 = (LinearLayout) v.findViewById(R.id.item3);
+			
+			TextView percenttv = (TextView) v.findViewById(R.id.percentage);
 
 			Drawable i1 = null;
 			Drawable i2 = null;
@@ -131,6 +143,8 @@ public class CombiningListFragment extends ListFragment implements
 			itemiv1.setImageDrawable(i1);
 			itemiv2.setImageDrawable(i2);
 			itemiv3.setImageDrawable(i3);
+			
+			percenttv.setText(percentage);
 			
 			itemtv1.setText(item1);
 			itemtv2.setText(item2);

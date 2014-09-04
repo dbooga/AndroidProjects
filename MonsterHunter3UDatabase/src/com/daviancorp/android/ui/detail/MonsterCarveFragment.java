@@ -9,6 +9,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,13 @@ import android.widget.TextView;
 import com.daviancorp.android.data.database.CarveCursor;
 import com.daviancorp.android.data.object.Carve;
 import com.daviancorp.android.loader.CarveListCursorLoader;
+import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class MonsterCarveFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 	private static final String ARG_MONSTER_ID = "MONSTER_ID";
 	private static final String ARG_RANK = "RANK";
-	
+
 	public static MonsterCarveFragment newInstance(long monsterId, String rank) {
 		Bundle args = new Bundle();
 		args.putLong(ARG_MONSTER_ID, monsterId);
@@ -41,19 +43,28 @@ public class MonsterCarveFragment extends ListFragment implements
 		getLoaderManager().initLoader(0, getArguments(), this);
 	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.fragment_monster_carve_list, null);
+		return v;
+	}
+
 	@SuppressLint("NewApi")
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
 		long monsterId = args.getLong(ARG_MONSTER_ID, -1);
 		String rank = args.getString(ARG_RANK, null);
-		
-		return new CarveListCursorLoader(getActivity(), "monster", monsterId, rank);
+
+		return new CarveListCursorLoader(getActivity(), "monster", monsterId,
+				rank);
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Create an adapter to point at this cursor
+
 		MonsterCarveListCursorAdapter adapter = new MonsterCarveListCursorAdapter(
 				getActivity(), (CarveCursor) cursor);
 		setListAdapter(adapter);
@@ -65,7 +76,7 @@ public class MonsterCarveFragment extends ListFragment implements
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
 	}
-	
+
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// The id argument will be the Monster ID; CursorAdapter gives us this
@@ -89,7 +100,7 @@ public class MonsterCarveFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(android.R.layout.simple_list_item_1,
+			return inflater.inflate(R.layout.fragment_monster_carve_listitem,
 					parent, false);
 		}
 
@@ -99,11 +110,25 @@ public class MonsterCarveFragment extends ListFragment implements
 			Carve carve = mCarveCursor.getCarve();
 
 			// Set up the text view
-			TextView itemNameTextView = (TextView) view;
-			String cellText = carve.getItem().getName() + "\t\t\t\t" + carve.getLocation();
-			itemNameTextView.setText(cellText);
-			
-			itemNameTextView.setTag(carve.getItem().getId());
+			TextView itemTextView = (TextView) view.findViewById(R.id.item);
+			TextView carveTextView = (TextView) view.findViewById(R.id.carve);
+			TextView amountTextView = (TextView) view.findViewById(R.id.amount);
+			TextView percentageTextView = (TextView) view
+					.findViewById(R.id.percentage);
+
+			String cellItemText = carve.getItem().getName();
+			String cellCarveText = carve.getLocation();
+			int cellAmountText = carve.getNumCarves();
+			int cellPercentageText = carve.getPercentage();
+
+			itemTextView.setText(cellItemText);
+			carveTextView.setText(cellCarveText);
+			amountTextView.setText("" + cellAmountText);
+
+			String percent = "" + cellPercentageText + "%";
+			percentageTextView.setText(percent);
+
+			itemTextView.setTag(carve.getItem().getId());
 		}
 	}
 

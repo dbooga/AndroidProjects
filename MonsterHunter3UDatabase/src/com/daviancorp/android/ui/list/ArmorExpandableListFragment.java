@@ -177,49 +177,48 @@ public class ArmorExpandableListFragment extends Fragment {
 		public View getChildView(int groupPosition, int childPosition,
 				boolean isLastChild, View convertView, ViewGroup parent) {
 
-//			View v = convertView;
-//			Context context = parent.getContext();
-//			LayoutInflater inflater = (LayoutInflater) context
-//					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//			v = inflater.inflate(android.R.layout.activity_list_item, parent,
-//					false);
+			View v = convertView;
+			Context context = parent.getContext();
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			v = inflater.inflate(android.R.layout.activity_list_item, parent,
+					false);
 
-//			TextView armorTextView = (TextView) v
-//					.findViewById(android.R.id.text1);
-//			ImageView armorImageView = (ImageView) v
-//					.findViewById(android.R.id.icon);
+			TextView armorTextView = (TextView) v
+					.findViewById(android.R.id.text1);
+			ImageView armorImageView = (ImageView) v
+					.findViewById(android.R.id.icon);
 
-//			armorTextView.setText(getChild(groupPosition, childPosition)
-//					.toString());
+			armorTextView.setText(getChild(groupPosition, childPosition)
+					.toString());
 
-//			String slot = ((Armor) getChild(groupPosition, childPosition))
-//					.getSlot();
-//
-//			String cellImage = "icons_armor/icons_"
-//					+ slot.toLowerCase()
-//					+ "/"
-//					+ slot.toLowerCase()
-//					+ ((Item) getChild(groupPosition, childPosition))
-//							.getRarity() + ".png";
-//
-//			Drawable armorImage = null;
-//
-//			try {
-//				armorImage = Drawable.createFromStream(context.getAssets()
-//						.open(cellImage), null);
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//			armorImageView.setImageDrawable(armorImage);
+			String slot = ((Armor) getChild(groupPosition, childPosition))
+					.getSlot();
+
+			String cellImage = "icons_armor/icons_"
+					+ slot.toLowerCase()
+					+ "/"
+					+ slot.toLowerCase()
+					+ ((Item) getChild(groupPosition, childPosition))
+							.getRarity() + ".png";
+
+			Drawable armorImage = null;
+
+			try {
+				armorImage = Drawable.createFromStream(context.getAssets()
+						.open(cellImage), null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			armorImageView.setImageDrawable(armorImage);
 			
-//			return v;
+			return v;
 			
-			TextView textView = new TextView(
-					ArmorExpandableListFragment.this.getActivity());
-			textView.setText(getChild(groupPosition, childPosition).toString());
-			return textView;
+//			TextView textView = new TextView(
+//					ArmorExpandableListFragment.this.getActivity());
+//			textView.setText(getChild(groupPosition, childPosition).toString());
+//			return textView;
 
 
 		}
