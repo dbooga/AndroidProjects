@@ -3,11 +3,10 @@ package com.daviancorp.android.ui.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 import com.daviancorp.android.ui.detail.MonsterCarveFragment;
 import com.daviancorp.android.ui.detail.MonsterDetailFragment;
-import com.daviancorp.android.ui.detail.TestFragment;
+import com.daviancorp.android.ui.detail.MonsterQuestFragment;
 
 public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 	
@@ -31,7 +30,7 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 		case 3:
 			return MonsterCarveFragment.newInstance(monsterId, "G");
 		case 4:
-			return TestFragment.newInstance(12);
+			return MonsterQuestFragment.newInstance(monsterId);
 		default:
 			return null;
 		}
