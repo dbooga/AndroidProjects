@@ -1,9 +1,12 @@
 package com.daviancorp.android.ui.detail;
 
+import java.io.IOException;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -13,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -110,6 +115,11 @@ public class MonsterCarveFragment extends ListFragment implements
 			Carve carve = mCarveCursor.getCarve();
 
 			// Set up the text view
+			LinearLayout itemLayout = (LinearLayout) view
+					.findViewById(R.id.listitem);
+			ImageView itemImageView = (ImageView) view
+					.findViewById(R.id.item_image);
+
 			TextView itemTextView = (TextView) view.findViewById(R.id.item);
 			TextView carveTextView = (TextView) view.findViewById(R.id.carve);
 			TextView amountTextView = (TextView) view.findViewById(R.id.amount);
@@ -128,7 +138,19 @@ public class MonsterCarveFragment extends ListFragment implements
 			String percent = "" + cellPercentageText + "%";
 			percentageTextView.setText(percent);
 
-			itemTextView.setTag(carve.getItem().getId());
+			Drawable i = null;
+			String cellImage = "icons_items/" + carve.getItem().getFileLocation();
+			Log.d("heyo" , cellImage);
+			try {
+				i = Drawable.createFromStream(
+						context.getAssets().open(cellImage), null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			itemImageView.setImageDrawable(i);
+
+			itemLayout.setTag(carve.getItem().getId());
 		}
 	}
 

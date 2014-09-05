@@ -2,6 +2,7 @@ package com.daviancorp.android.ui.list;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -9,12 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.object.Quest;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.detail.ItemDetailActivity;
+import com.daviancorp.android.ui.detail.MonsterDetailActivity;
+import com.daviancorp.android.ui.detail.QuestDetailActivity;
 
 /**
  * Pieced together from: Android samples:
@@ -30,9 +37,9 @@ public class QuestExpandableListFragment extends Fragment {
 	private ArrayList<Quest> quests;
 	private String[] village = { "1 Star", "2 Star", "3 Star", "4 Star",
 			"5 Star", "6 Star", "7 Star", "8 Star", "9 Star" };
-	
+
 	private String[] port_dlc = { "1 Star", "2 Star", "3 Star", "4 Star",
-			"5 Star", "6 Star", "7 Star", "8 Star"};
+			"5 Star", "6 Star", "7 Star", "8 Star" };
 
 	private ArrayList<ArrayList<Quest>> children;
 
@@ -125,13 +132,29 @@ public class QuestExpandableListFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_quest_expandablelist, null);
 		ExpandableListView elv = (ExpandableListView) v
 				.findViewById(R.id.expandableListView);
-		if(mHub.equals("Village")){
+		if (mHub.equals("Village")) {
 			elv.setAdapter(new QuestListAdapter(village));
-		}
-		else{
+		} else {
 			elv.setAdapter(new QuestListAdapter(port_dlc));
 		}
+
+		elv.setOnChildClickListener(new OnChildClickListener() {
+
+			@Override
+			public boolean onChildClick(ExpandableListView arg0, View arg1,
+					int arg2, int arg3, long id) {
+				
+				
+				Intent i = new Intent(getActivity(), QuestDetailActivity.class);
+				i.putExtra(QuestDetailActivity.EXTRA_QUEST_ID, (long) arg1.getTag());
+				startActivity(i);
+
+				return false;
+			}
+		});
+
 		return v;
+
 	}
 
 	public class QuestListAdapter extends BaseExpandableListAdapter {
@@ -146,11 +169,11 @@ public class QuestExpandableListFragment extends Fragment {
 		// { "Goldy", "Bubbles" }
 		// };
 		private String[] quests;
-		
-		public QuestListAdapter(String[] quests){
+
+		public QuestListAdapter(String[] quests) {
 			super();
 			this.quests = quests;
-			
+
 		}
 
 		@Override
@@ -203,6 +226,8 @@ public class QuestExpandableListFragment extends Fragment {
 			TextView textView = new TextView(
 					QuestExpandableListFragment.this.getActivity());
 			textView.setText(getChild(i, i1).toString());
+			
+			textView.setTag(((Quest) getChild(i,i1)).getId());
 			return textView;
 		}
 

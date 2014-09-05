@@ -12,34 +12,34 @@
 
         <TextView
             android:id="@+id/header1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".33"
+            android:layout_weight=".5"
             android:gravity="center"
             android:text="Item" />
 
         <TextView
             android:id="@+id/header2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".33"
+            android:layout_weight=".3"
             android:gravity="center"
             android:text="Carve" />
 
         <TextView
             android:id="@+id/header3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".33"
+            android:layout_weight=".05"
             android:gravity="center"
             android:text="#" />
 
         <TextView
             android:id="@+id/header4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingRight="5dp"
+            android:layout_weight=".15"
             android:text="%" />
     </LinearLayout>
 

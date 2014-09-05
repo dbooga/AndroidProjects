@@ -11,12 +11,14 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.CarveCursor;
 import com.daviancorp.android.data.object.Carve;
 import com.daviancorp.android.loader.CarveListCursorLoader;
+import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class ItemCarveFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -35,6 +37,13 @@ public class ItemCarveFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 		// Initialize the loader to load the list of runs
 		getLoaderManager().initLoader(0, getArguments(), this);
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.fragment_item_carve_list, null);
+		return v;
 	}
 
 	@Override
@@ -83,7 +92,7 @@ public class ItemCarveFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(android.R.layout.simple_list_item_1,
+			return inflater.inflate(R.layout.fragment_item_carve_listitem,
 					parent, false);
 		}
 
@@ -93,11 +102,40 @@ public class ItemCarveFragment extends ListFragment implements
 			Carve carve = mCarveCursor.getCarve();
 
 			// Set up the text view
-			TextView itemNameTextView = (TextView) view;
-			String cellText = carve.getMonster().getName() + "\t\t\t\t" + carve.getLocation();
-			itemNameTextView.setText(cellText);
+			LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.listitem);
 			
-			itemNameTextView.setTag(carve.getMonster().getId());
+			TextView rankTextView = (TextView) view.findViewById(R.id.rank);
+			TextView monsterTextView = (TextView) view.findViewById(R.id.monster);
+			TextView carveTextView = (TextView) view.findViewById(R.id.carve);
+			TextView amountTextView = (TextView) view.findViewById(R.id.amount);
+			TextView percentageTextView = (TextView) view
+					.findViewById(R.id.percentage);
+
+			String cellRankText = carve.getRank();
+			String cellMonsterText = carve.getMonster().getName();
+			String cellCarveText = carve.getLocation();
+			int cellAmountText = carve.getNumCarves();
+			int cellPercentageText = carve.getPercentage();
+
+			rankTextView.setText(cellRankText);
+			monsterTextView.setText(cellMonsterText);
+			carveTextView.setText(cellCarveText);
+			amountTextView.setText("" + cellAmountText);
+
+			String percent = "" + cellPercentageText + "%";
+			percentageTextView.setText(percent);
+
+			itemLayout.setTag(carve.getMonster().getId());
+			
+			
+			
+//			TextView itemNameTextView = (TextView) view;
+//			String cellText = carve.getMonster().getName() + "\t\t\t\t" + carve.getLocation();
+//			itemNameTextView.setText(cellText);
+//			
+//			itemNameTextView.setTag(carve.getMonster().getId());
+			
+			
 		}
 	}
 
