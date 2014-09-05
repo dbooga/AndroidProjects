@@ -119,7 +119,7 @@ public class MonsterGridFragment extends Fragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.monster_grid_image,
+			return inflater.inflate(R.layout.fragment_monster_griditem,
 					parent, false);
 		}
 

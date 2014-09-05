@@ -6,7 +6,7 @@ import com.daviancorp.android.ui.list.CombiningListActivity;
 import com.daviancorp.android.ui.list.DecorationListActivity;
 import com.daviancorp.android.ui.list.HuntingFleetListActivity;
 import com.daviancorp.android.ui.list.ItemListActivity;
-import com.daviancorp.android.ui.list.LocationListActivity;
+import com.daviancorp.android.ui.list.LocationGridActivity;
 import com.daviancorp.android.ui.list.MonsterListActivity;
 import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
 					break;
 				case LOCATIONS:
 					intent = new Intent(getActivity(),
-							LocationListActivity.class);
+							LocationGridActivity.class);
 					startActivity(intent);
 					break;
 				case HUNTINGFLEET:

@@ -72,8 +72,8 @@ public class QuestDetailFragment extends Fragment {
 		String cellLevels = mQuest.getHub() + " " + mQuest.getStars();
 		String cellGoal = mQuest.getGoal();
 		String cellHrp = "" + mQuest.getHrp();
-		String cellReward = "" + mQuest.getReward();
-		String cellFee = "" + mQuest.getReward();
+		String cellReward = "" + mQuest.getReward() + "z";
+		String cellFee = "" + mQuest.getFee() + "z";
 		
 		questtv1.setText(cellLevels);
 		questtv2.setText(cellGoal);

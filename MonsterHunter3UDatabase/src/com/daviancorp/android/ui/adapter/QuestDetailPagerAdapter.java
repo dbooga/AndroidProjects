@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.daviancorp.android.ui.detail.QuestDetailFragment;
+import com.daviancorp.android.ui.detail.QuestMonsterFragment;
+import com.daviancorp.android.ui.detail.QuestRewardFragment;
 
 public class QuestDetailPagerAdapter extends FragmentPagerAdapter {
 	
@@ -22,9 +24,9 @@ public class QuestDetailPagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			return QuestDetailFragment.newInstance(questId);
 		case 1:
-			return QuestDetailFragment.newInstance(questId);
+			return QuestMonsterFragment.newInstance(questId);
 		case 2:
-			return QuestDetailFragment.newInstance(questId);
+			return QuestRewardFragment.newInstance(questId);
 		default:
 			return null;
 		}

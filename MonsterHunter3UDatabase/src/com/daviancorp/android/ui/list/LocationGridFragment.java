@@ -32,15 +32,7 @@ public class LocationGridFragment extends Fragment implements
 
 	private GridView mGridView;
 	private LocationGridCursorAdapter mAdapter;
-
-	// public static LocationGridFragment newInstance(String tab) {
-	// Bundle args = new Bundle();
-	// args.putString(ARG_TAB, tab);
-	// LocationGridFragment f = new LocationGridFragment();
-	// f.setArguments(args);
-	// return f;
-	// }
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -99,7 +91,7 @@ public class LocationGridFragment extends Fragment implements
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			return inflater
-					.inflate(R.layout.location_grid_image, parent, false);
+					.inflate(R.layout.fragment_location_griditem, parent, false);
 		}
 
 		@Override
