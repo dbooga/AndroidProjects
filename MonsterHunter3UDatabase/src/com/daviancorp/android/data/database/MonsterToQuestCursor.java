@@ -66,13 +66,13 @@ public class MonsterToQuestCursor extends CursorWrapper {
 		String monsterName = getString(getColumnIndex("m" + S.COLUMN_MONSTERS_NAME));
 //			String monsterClass = getString(getColumnIndex(S.COLUMN_MONSTERS_CLASS));
 //			String trait = getString(getColumnIndex(S.COLUMN_MONSTERS_TRAIT));
-//			String file_location = getString(getColumnIndex(S.COLUMN_MONSTERS_FILE_LOCATION)); 
+		String file_location = getString(getColumnIndex(S.COLUMN_MONSTERS_FILE_LOCATION)); 
 		
 		monster.setId(monsterId);
 		monster.setName(monsterName);
 //			monster.setMonsterClass(monsterClass);
 //			monster.setTrait(trait);
-//			monster.setFileLocation(file_location); 
+		monster.setFileLocation(file_location); 
 		
 		monster_to_quest.setMonster(monster);
 		

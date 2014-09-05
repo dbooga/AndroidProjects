@@ -51,7 +51,7 @@ public class MogaWoodsRewardCursor extends CursorWrapper {
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
 //			String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-//			String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
+			String fileLocation1 = getString(getColumnIndex("i" + S.COLUMN_ITEMS_ICON_NAME));
 //			String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
 
 		item.setId(itemId);
@@ -63,7 +63,7 @@ public class MogaWoodsRewardCursor extends CursorWrapper {
 //			item.setBuy(buy);
 //			item.setSell(sell);
 //			item.setDescription(description);
-//			item.setFileLocation(fileLocation);
+			item.setFileLocation(fileLocation1);
 //			item.setArmorDupeNameFix(armor_dupe_name_fix);
 		
 		mogaWoodsReward.setItem(item);
@@ -74,13 +74,13 @@ public class MogaWoodsRewardCursor extends CursorWrapper {
 		String monsterName = getString(getColumnIndex("m" + S.COLUMN_MONSTERS_NAME));
 //			String monsterClass = getString(getColumnIndex(S.COLUMN_MONSTERS_CLASS));
 //			String trait = getString(getColumnIndex(S.COLUMN_MONSTERS_TRAIT));
-//			String file_location = getString(getColumnIndex(S.COLUMN_MONSTERS_FILE_LOCATION)); 
+			String file_location2 = getString(getColumnIndex("m" + S.COLUMN_MONSTERS_FILE_LOCATION)); 
 		
 		monster.setId(monsterId);
 		monster.setName(monsterName);
 //			monster.setMonsterClass(monsterClass);
 //			monster.setTrait(trait);
-//			monster.setFileLocation(file_location); 
+		monster.setFileLocation(file_location2); 
 		
 		mogaWoodsReward.setMonster(monster);
 		

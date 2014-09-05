@@ -46,7 +46,7 @@ public class ComponentCursor extends CursorWrapper {
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
 //			String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-//			String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
+			String fileLocation1 = getString(getColumnIndex("cr" + S.COLUMN_ITEMS_ICON_NAME));
 //			String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
 
 		created.setId(itemId1);
@@ -58,7 +58,7 @@ public class ComponentCursor extends CursorWrapper {
 //			created.setBuy(buy);
 //			created.setSell(sell);
 //			created.setDescription(description);
-//			created.setFileLocation(fileLocation);
+			created.setFileLocation(fileLocation1);
 //			created.setArmorDupeNameFix(armor_dupe_name_fix);
 		
 		component.setCreated(created);
@@ -74,7 +74,7 @@ public class ComponentCursor extends CursorWrapper {
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
 //			String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-//			String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
+			String fileLocation2 = getString(getColumnIndex("co" + S.COLUMN_ITEMS_ICON_NAME));
 //			String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
 
 		comp.setId(itemId2);
@@ -86,7 +86,7 @@ public class ComponentCursor extends CursorWrapper {
 //			comp.setBuy(buy);
 //			comp.setSell(sell);
 //			comp.setDescription(description);
-//			comp.setFileLocation(fileLocation);
+			comp.setFileLocation(fileLocation2);
 //			comp.setArmorDupeNameFix(armor_dupe_name_fix);
 		
 		component.setComponent(comp);

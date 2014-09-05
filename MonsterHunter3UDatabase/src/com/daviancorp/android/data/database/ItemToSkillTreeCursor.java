@@ -45,7 +45,7 @@ public class ItemToSkillTreeCursor extends CursorWrapper {
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
 //			String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-//			String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
+			String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
 //			String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
 
 		item.setId(itemId);
@@ -57,7 +57,7 @@ public class ItemToSkillTreeCursor extends CursorWrapper {
 //			item.setBuy(buy);
 //			item.setSell(sell);
 //			item.setDescription(description);
-//			item.setFileLocation(fileLocation);
+			item.setFileLocation(fileLocation);
 //			item.setArmorDupeNameFix(armor_dupe_name_fix);
 		
 		itemToSkillTree.setItem(item);
