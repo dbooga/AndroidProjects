@@ -1,20 +1,26 @@
 package com.daviancorp.android.ui.list;
 
+import java.io.IOException;
+
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.DecorationCursor;
 import com.daviancorp.android.data.object.Decoration;
 import com.daviancorp.android.loader.DecorationListCursorLoader;
+import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class DecorationListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -63,7 +69,7 @@ public class DecorationListFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(android.R.layout.simple_list_item_1,
+			return inflater.inflate(R.layout.fragment_decoration_listitem,
 					parent, false);
 		}
 
@@ -73,9 +79,35 @@ public class DecorationListFragment extends ListFragment implements
 			Decoration decoration = mDecorationCursor.getDecoration();
 
 			// Set up the text view
-			TextView decorationNameTextView = (TextView) view;
-			String cellText = decoration.getName();
-			decorationNameTextView.setText(cellText);
+			ImageView itemImageView = (ImageView) view.findViewById(R.id.item_image);
+			TextView decorationNameTextView = (TextView) view.findViewById(R.id.item);
+			TextView skill1TextView = (TextView) view.findViewById(R.id.skill1);
+			TextView skill1amtTextView = (TextView) view.findViewById(R.id.skill1_amt);
+			TextView skill2TextView = (TextView) view.findViewById(R.id.skill2);
+			TextView skill2amtTextView = (TextView) view.findViewById(R.id.skill2_amt);
+			
+			String decorationNameText = decoration.getName();
+			String skill1Text = decoration.getSkill1Name();
+			String skill1amtText = "" + decoration.getSkill1Point();
+			String skill2Text = decoration.getSkill2Name();
+			String skill2amtText = "" + decoration.getSkill2Point();
+
+			Drawable i = null;
+			String cellImage = "icons_items/" + decoration.getFileLocation();
+			try {
+				i = Drawable.createFromStream(
+						context.getAssets().open(cellImage), null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			itemImageView.setImageDrawable(i);
+			
+			decorationNameTextView.setText(decorationNameText);
+			skill1TextView.setText(skill1Text);
+			skill1amtTextView.setText(skill1amtText);
+			skill2TextView.setText(skill2Text);
+			skill2amtTextView.setText(skill2amtText);
 		}
 	}
 

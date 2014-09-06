@@ -592,11 +592,11 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		        S.COLUMN_DECORATIONS_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_ITEM_TO_SKILL_TREE +
 		        " AS its1 " + " ON " + "i." + S.COLUMN_ITEMS_ID + " = " + "its1." + S.COLUMN_ITEM_TO_SKILL_TREE_ID + " AND " + 
 		        "its1." + S.COLUMN_ITEM_TO_SKILL_TREE_POINT_VALUE + " > 0 " + " LEFT OUTER JOIN " + S.TABLE_SKILL_TREES + " AS s1" +
-		        " ON " + "its1." + S.COLUMN_SKILL_TREES_ID + " = " + "s1." + S.COLUMN_SKILL_TREES_ID + 
+		        " ON " + "its1." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = " + "s1." + S.COLUMN_SKILL_TREES_ID + 
 		        " LEFT OUTER JOIN " + S.TABLE_ITEM_TO_SKILL_TREE +
 		        " AS its2 " + " ON " + "i." + S.COLUMN_ITEMS_ID + " = " + "its2." + S.COLUMN_ITEM_TO_SKILL_TREE_ID + " AND " + 
 		        "its2." + S.COLUMN_ITEM_TO_SKILL_TREE_POINT_VALUE + " > 0 " + " LEFT OUTER JOIN " + S.TABLE_SKILL_TREES + " AS s2" +
-		        " ON " + "its2." + S.COLUMN_SKILL_TREES_ID + " = " + "s2." + S.COLUMN_SKILL_TREES_ID );
+		        " ON " + "its2." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = " + "s2." + S.COLUMN_SKILL_TREES_ID );
 		
 		_QB.setProjectionMap(projectionMap);
 		return _QB;
