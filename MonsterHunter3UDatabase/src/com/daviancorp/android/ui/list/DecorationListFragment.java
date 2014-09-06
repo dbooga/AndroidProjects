@@ -90,7 +90,10 @@ public class DecorationListFragment extends ListFragment implements
 			String skill1Text = decoration.getSkill1Name();
 			String skill1amtText = "" + decoration.getSkill1Point();
 			String skill2Text = decoration.getSkill2Name();
-			String skill2amtText = "" + decoration.getSkill2Point();
+			String skill2amtText = "";
+			if (decoration.getSkill2Point() != 0) {
+				skill2amtText = skill2amtText + decoration.getSkill2Point();
+			}
 
 			Drawable i = null;
 			String cellImage = "icons_items/" + decoration.getFileLocation();

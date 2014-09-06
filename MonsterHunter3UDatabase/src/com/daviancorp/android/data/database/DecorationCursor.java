@@ -2,6 +2,7 @@ package com.daviancorp.android.data.database;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
+import android.util.Log;
 
 import com.daviancorp.android.data.object.Decoration;
 
@@ -66,9 +67,9 @@ public class DecorationCursor extends CursorWrapper {
 		decoration.setSkill1Name(skill_1_name);
 		decoration.setSkill1Point(skill_1_point);
 		
-		decoration.setSkill1Id(skill_2_id);
+		decoration.setSkill2Id(skill_2_id);
 		decoration.setSkill2Name(skill_2_name);
-		decoration.setSkill1Point(skill_2_point);
+		decoration.setSkill2Point(skill_2_point);
 
 		return decoration;
 	}
