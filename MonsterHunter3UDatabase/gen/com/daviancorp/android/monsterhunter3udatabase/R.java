@@ -983,10 +983,23 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020054;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020056;
-        public static final int drawer=0x7f020057;
-        public static final int ic_launcher=0x7f020058;
-        public static final int mh3=0x7f020059;
-        public static final int sword=0x7f02005a;
+        public static final int bow1=0x7f020057;
+        public static final int drawer=0x7f020058;
+        public static final int dual_blades1=0x7f020059;
+        public static final int great_sword1=0x7f02005a;
+        public static final int grid=0x7f02005b;
+        public static final int gunlance1=0x7f02005c;
+        public static final int hammer1=0x7f02005d;
+        public static final int heavy_bowgun1=0x7f02005e;
+        public static final int hunting_horn1=0x7f02005f;
+        public static final int ic_launcher=0x7f020060;
+        public static final int lance1=0x7f020061;
+        public static final int light_bowgun1=0x7f020062;
+        public static final int list=0x7f020063;
+        public static final int long_sword1=0x7f020064;
+        public static final int mh3=0x7f020065;
+        public static final int switch_axe1=0x7f020066;
+        public static final int sword_and_shield1=0x7f020067;
     }
     public static final class id {
         public static final int about=0x7f06006e;
@@ -1182,7 +1195,8 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
-        public static final int monsterlist=0x7f0d0001;
+        public static final int menu_monster_grid=0x7f0d0001;
+        public static final int menu_monster_list=0x7f0d0002;
     }
     public static final class raw {
         public static final int mh3u=0x7f050000;

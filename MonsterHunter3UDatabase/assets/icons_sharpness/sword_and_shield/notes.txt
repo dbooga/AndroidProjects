@@ -1,7 +1,0 @@
-
-
-hunters_knife:
-	Ironsns-sharp49 x 3:
-		Oppressor's bounty
-		brimstren drakescale
-		stygian luxuria
