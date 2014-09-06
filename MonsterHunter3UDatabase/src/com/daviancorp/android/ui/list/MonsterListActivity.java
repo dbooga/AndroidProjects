@@ -72,38 +72,31 @@ public class MonsterListActivity extends GenericTabActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.monsterlist, menu);
+		inflater.inflate(R.menu.menu_monster_list, menu);
+		super.onCreateOptionsMenu(menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		Fragment newFragment;
-		FragmentTransaction transaction;
+
 
 		switch (item.getItemId()) {
-		case R.id.monster_listview:
-			// FragmentManager fm = getSupportFragmentManager();
-			// AboutDialogFragment dialog = new AboutDialogFragment();
-			// dialog.show(fm, DIALOG_ABOUT);
-
-			// Create new fragment and transaction
-			newFragment = new HomeFragment();
-			transaction = getSupportFragmentManager().beginTransaction();
-
-			// Replace whatever is in the fragment_container view with this
-			// fragment,
-			// and add the transaction to the back stack
-			transaction.replace(R.id.fragment_container, newFragment);
-			// transaction.addToBackStack(null);
-
-			// Commit the transaction
-			transaction.commit();
-
-			return true;
+//		case R.id.monster_listview:
+//			
+//			Fragment newFragment;
+//			FragmentTransaction transaction;
+//
+//			newFragment = new HomeFragment();
+//			transaction = getSupportFragmentManager().beginTransaction();
+//
+//			transaction.replace(R.id.fragment_container, newFragment);
+//
+//			transaction.commit();
+//
+//			return true;
 		case R.id.monster_gridview:
 			toggle = 1;
 			Intent intent = new Intent(this, MonsterGridActivity.class);
