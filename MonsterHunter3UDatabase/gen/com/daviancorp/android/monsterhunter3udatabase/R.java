@@ -1002,7 +1002,7 @@ containing a value of this type.
         public static final int sword_and_shield1=0x7f020067;
     }
     public static final class id {
-        public static final int about=0x7f060072;
+        public static final int about=0x7f060079;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1015,13 +1015,16 @@ containing a value of this type.
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
         public static final int activity_chooser_view_content=0x7f060025;
+        public static final int affinity=0x7f060076;
         public static final int always=0x7f06000b;
         public static final int amount=0x7f060061;
+        public static final int attack=0x7f060073;
         public static final int beginning=0x7f060011;
         public static final int carve=0x7f060060;
         public static final int checkbox=0x7f06002d;
         public static final int collapseActionView=0x7f06000d;
         public static final int default_activity_button=0x7f060028;
+        public static final int defense=0x7f060077;
         public static final int detail_item_image=0x7f06005a;
         public static final int detail_item_label=0x7f06005b;
         public static final int detail_monster_image=0x7f060069;
@@ -1033,6 +1036,7 @@ containing a value of this type.
         public static final int drawer_text_item=0x7f060040;
         public static final int dropdown=0x7f06000f;
         public static final int edit_query=0x7f060030;
+        public static final int element=0x7f060074;
         public static final int end=0x7f060013;
         public static final int expand_activities_button=0x7f060026;
         public static final int expandableListView=0x7f060041;
@@ -1077,8 +1081,9 @@ containing a value of this type.
         public static final int logo=0x7f060058;
         public static final int middle=0x7f060012;
         public static final int monster=0x7f06005f;
-        public static final int monster_gridview=0x7f060074;
-        public static final int monster_listview=0x7f060073;
+        public static final int monster_gridview=0x7f06007b;
+        public static final int monster_listview=0x7f06007a;
+        public static final int name=0x7f060072;
         public static final int never=0x7f060009;
         public static final int none=0x7f060010;
         public static final int normal=0x7f060000;
@@ -1102,6 +1107,7 @@ containing a value of this type.
         public static final int search_plate=0x7f060036;
         public static final int search_src_text=0x7f060037;
         public static final int search_voice_btn=0x7f06003b;
+        public static final int sharpness=0x7f060078;
         public static final int shortcut=0x7f06002e;
         public static final int showCustom=0x7f060007;
         public static final int showHome=0x7f060004;
@@ -1111,6 +1117,7 @@ containing a value of this type.
         public static final int skill2=0x7f060056;
         public static final int skill2_amt=0x7f060057;
         public static final int slot=0x7f060064;
+        public static final int special=0x7f060075;
         public static final int split_action_bar=0x7f06001e;
         public static final int submit_area=0x7f060039;
         public static final int tabMode=0x7f060002;
@@ -1196,7 +1203,8 @@ containing a value of this type.
         public static final int fragment_quest_monstertoquest=0x7f03002f;
         public static final int fragment_quest_reward_list=0x7f030030;
         public static final int fragment_quest_reward_listitem=0x7f030031;
-        public static final int support_simple_spinner_dropdown_item=0x7f030032;
+        public static final int fragment_weapon_listitem=0x7f030032;
+        public static final int support_simple_spinner_dropdown_item=0x7f030033;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;

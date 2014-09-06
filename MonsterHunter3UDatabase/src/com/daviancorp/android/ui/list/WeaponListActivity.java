@@ -1,8 +1,5 @@
 package com.daviancorp.android.ui.list;
 
-import java.io.IOException;
-
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;

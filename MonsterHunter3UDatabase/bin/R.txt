@@ -245,7 +245,7 @@ int drawable long_sword1 0x7f020064
 int drawable mh3 0x7f020065
 int drawable switch_axe1 0x7f020066
 int drawable sword_and_shield1 0x7f020067
-int id about 0x7f060072
+int id about 0x7f060079
 int id action_bar 0x7f06001c
 int id action_bar_activity_content 0x7f060015
 int id action_bar_container 0x7f06001b
@@ -258,13 +258,16 @@ int id action_menu_divider 0x7f060016
 int id action_menu_presenter 0x7f060017
 int id action_mode_close_button 0x7f060024
 int id activity_chooser_view_content 0x7f060025
+int id affinity 0x7f060076
 int id always 0x7f06000b
 int id amount 0x7f060061
+int id attack 0x7f060073
 int id beginning 0x7f060011
 int id carve 0x7f060060
 int id checkbox 0x7f06002d
 int id collapseActionView 0x7f06000d
 int id default_activity_button 0x7f060028
+int id defense 0x7f060077
 int id detail_item_image 0x7f06005a
 int id detail_item_label 0x7f06005b
 int id detail_monster_image 0x7f060069
@@ -276,6 +279,7 @@ int id drawer_list 0x7f06003e
 int id drawer_text_item 0x7f060040
 int id dropdown 0x7f06000f
 int id edit_query 0x7f060030
+int id element 0x7f060074
 int id end 0x7f060013
 int id expand_activities_button 0x7f060026
 int id expandableListView 0x7f060041
@@ -320,8 +324,9 @@ int id listitem 0x7f060051
 int id logo 0x7f060058
 int id middle 0x7f060012
 int id monster 0x7f06005f
-int id monster_gridview 0x7f060074
-int id monster_listview 0x7f060073
+int id monster_gridview 0x7f06007b
+int id monster_listview 0x7f06007a
+int id name 0x7f060072
 int id never 0x7f060009
 int id none 0x7f060010
 int id normal 0x7f060000
@@ -345,6 +350,7 @@ int id search_mag_icon 0x7f060035
 int id search_plate 0x7f060036
 int id search_src_text 0x7f060037
 int id search_voice_btn 0x7f06003b
+int id sharpness 0x7f060078
 int id shortcut 0x7f06002e
 int id showCustom 0x7f060007
 int id showHome 0x7f060004
@@ -354,6 +360,7 @@ int id skill1_amt 0x7f060055
 int id skill2 0x7f060056
 int id skill2_amt 0x7f060057
 int id slot 0x7f060064
+int id special 0x7f060075
 int id split_action_bar 0x7f06001e
 int id submit_area 0x7f060039
 int id tabMode 0x7f060002
@@ -413,7 +420,8 @@ int layout fragment_quest_expandablelist 0x7f03002e
 int layout fragment_quest_monstertoquest 0x7f03002f
 int layout fragment_quest_reward_list 0x7f030030
 int layout fragment_quest_reward_listitem 0x7f030031
-int layout support_simple_spinner_dropdown_item 0x7f030032
+int layout fragment_weapon_listitem 0x7f030032
+int layout support_simple_spinner_dropdown_item 0x7f030033
 int menu main 0x7f0d0000
 int menu menu_monster_grid 0x7f0d0001
 int menu menu_monster_list 0x7f0d0002

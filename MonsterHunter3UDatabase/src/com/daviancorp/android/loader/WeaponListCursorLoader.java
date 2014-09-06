@@ -2,7 +2,6 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.daviancorp.android.data.database.DataManager;
 
@@ -25,10 +24,8 @@ public class WeaponListCursorLoader extends SQLiteCursorLoader {
 	protected Cursor loadCursor() {
 		// Query the list of weapons
 		if (type == null) {
-			Log.d("helpme", "type is null");
 			return DataManager.get(getContext()).queryWeapon();
 		} else {
-			Log.d("helpme", "type = " + type);
 			return DataManager.get(getContext()).queryWeaponType(type);
 		}
 	}
