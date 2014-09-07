@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_weight=".14"
-            android:text="Slot" />
+            android:text=" Slot" />
         
         <TextView
             android:id="@+id/header5"

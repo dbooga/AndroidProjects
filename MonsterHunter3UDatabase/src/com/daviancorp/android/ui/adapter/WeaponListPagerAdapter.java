@@ -4,7 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.daviancorp.android.ui.list.WeaponListFragment;
+import com.daviancorp.android.ui.list.WeaponBladeListFragment;
+import com.daviancorp.android.ui.list.WeaponBowListFragment;
 
 public class WeaponListPagerAdapter extends FragmentPagerAdapter {
 
@@ -22,29 +23,29 @@ public class WeaponListPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
-			return WeaponListFragment.newInstance("Great Sword");
+			return WeaponBladeListFragment.newInstance("Great Sword");
 		case 1:
-			return WeaponListFragment.newInstance("Long Sword");
+			return WeaponBladeListFragment.newInstance("Long Sword");
 		case 2:
-			return WeaponListFragment.newInstance("Sword and Shield");
+			return WeaponBladeListFragment.newInstance("Sword and Shield");
 		case 3:
-			return WeaponListFragment.newInstance("Dual Blades");
+			return WeaponBladeListFragment.newInstance("Dual Blades");
 		case 4:
-			return WeaponListFragment.newInstance("Hammer");
+			return WeaponBladeListFragment.newInstance("Hammer");
 		case 5:
-			return WeaponListFragment.newInstance("Hunting Horn");
+			return WeaponBladeListFragment.newInstance("Hunting Horn");
 		case 6:
-			return WeaponListFragment.newInstance("Lance");
+			return WeaponBladeListFragment.newInstance("Lance");
 		case 7:
-			return WeaponListFragment.newInstance("Gunlance");
+			return WeaponBladeListFragment.newInstance("Gunlance");
 		case 8:
-			return WeaponListFragment.newInstance("Switch Axe");
+			return WeaponBladeListFragment.newInstance("Switch Axe");
 		case 9:
-			return WeaponListFragment.newInstance("Light Bowgun");
+			return WeaponBladeListFragment.newInstance("Light Bowgun");
 		case 10:
-			return WeaponListFragment.newInstance("Heavy Bowgun");
+			return WeaponBladeListFragment.newInstance("Heavy Bowgun");
 		case 11:
-			return WeaponListFragment.newInstance("Bow");
+			return WeaponBowListFragment.newInstance("Bow");
 		default:
 			return null;
 		}

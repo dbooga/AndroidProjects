@@ -26,14 +26,14 @@ import com.daviancorp.android.data.object.Weapon;
 import com.daviancorp.android.loader.WeaponListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
-public class WeaponListFragment extends ListFragment implements
+public class WeaponBladeListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 	private static final String ARG_TYPE = "WEAPON_TYPE";
 
-	public static WeaponListFragment newInstance(String type) {
+	public static WeaponBladeListFragment newInstance(String type) {
 		Bundle args = new Bundle();
 		args.putString(ARG_TYPE, type);
-		WeaponListFragment f = new WeaponListFragment();
+		WeaponBladeListFragment f = new WeaponBladeListFragment();
 		f.setArguments(args);
 		return f;
 	}
@@ -49,7 +49,7 @@ public class WeaponListFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_weapon_list, null);
+		View v = inflater.inflate(R.layout.fragment_weapon_blade_list, null);
 		return v;
 	}
 
@@ -93,7 +93,7 @@ public class WeaponListFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_weapon_listitem, parent,
+			return inflater.inflate(R.layout.fragment_weapon_blade_listitem, parent,
 					false);
 		}
 
@@ -156,7 +156,7 @@ public class WeaponListFragment extends ListFragment implements
 					android.view.Display display = ((android.view.WindowManager)context
 							.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 					// x position: 185
-					specialtv.setPadding((int) (display.getWidth()*0.17), 0, 0, 0);
+					specialtv.setPadding((int) (display.getWidth()*0.16), 0, 0, 0);
 				}
 			
 				dEle = scaleDrawable(dEle, 35, 35);

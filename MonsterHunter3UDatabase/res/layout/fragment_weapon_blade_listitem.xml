@@ -110,21 +110,21 @@
                 android:id="@+id/slot"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:gravity="center"
                 android:layout_weight=".333" />
 
             <TextView
                 android:id="@+id/affinity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:gravity="center"
                 android:layout_weight=".333" />
 
             <TextView
                 android:id="@+id/defense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:gravity="center"
                 android:layout_weight=".333" />
         </LinearLayout>
 
