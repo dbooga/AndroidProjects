@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.daviancorp.android.ui.list.WeaponBladeListFragment;
 import com.daviancorp.android.ui.list.WeaponBowListFragment;
+import com.daviancorp.android.ui.list.WeaponBowgunListFragment;
 
 public class WeaponListPagerAdapter extends FragmentPagerAdapter {
 
@@ -41,9 +42,9 @@ public class WeaponListPagerAdapter extends FragmentPagerAdapter {
 		case 8:
 			return WeaponBladeListFragment.newInstance("Switch Axe");
 		case 9:
-			return WeaponBladeListFragment.newInstance("Light Bowgun");
+			return WeaponBowgunListFragment.newInstance("Light Bowgun");
 		case 10:
-			return WeaponBladeListFragment.newInstance("Heavy Bowgun");
+			return WeaponBowgunListFragment.newInstance("Heavy Bowgun");
 		case 11:
 			return WeaponBowListFragment.newInstance("Bow");
 		default:
