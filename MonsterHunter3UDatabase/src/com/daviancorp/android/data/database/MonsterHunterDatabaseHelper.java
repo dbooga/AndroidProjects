@@ -1601,7 +1601,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public WeaponCursor queryWeapon(long id) {
 
 		_Columns = null;
-		_Selection = "a." + S.COLUMN_WEAPONS_ID + " = ?";
+		_Selection = "w." + S.COLUMN_WEAPONS_ID + " = ?";
 		_SelectionArgs = new String[]{ String.valueOf(id) };
 		_GroupBy = null;
 		_Having = null;
@@ -1690,5 +1690,93 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return _QB;
 	}
 	
+/********************************* WEAPON TREE QUERIES ******************************************/
+	
+	/*
+	 * Get the parent weapon
+	 */
+	public WeaponTreeCursor queryWeaponTreeParent(long id) {
 
+		_Columns = null;
+		_Selection = "i1." + S.COLUMN_ITEMS_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new WeaponTreeCursor(wrapJoinHelper(builderWeaponTreeParent()));
+	}
+
+	/*
+	 * Helper method to query for weapon tree parent
+	 */
+	private SQLiteQueryBuilder builderWeaponTreeParent() {
+//		SELECT i2._id, i2.name
+//		FROM items AS i1
+//		LEFT OUTER JOIN components AS c ON i1._id = c.created_item_id 
+//		JOIN weapons AS w2 ON w2._id = c.component_item_id 
+//		LEFT OUTER JOIN items AS i2 ON i2._id = w2._id
+//
+//		WHERE i1._id = 'id';
+
+		String i1 = "i1";
+		String i2 = "i2";
+		String w2 = "w2";
+		String c = "c";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", i2 + "." + S.COLUMN_ITEMS_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_ITEMS_NAME, i2 + "." + S.COLUMN_ITEMS_NAME);
+		
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_ITEMS + " AS i1" + " LEFT OUTER JOIN " + S.TABLE_COMPONENTS + " AS c" + 
+				" ON " + "i1." + S.COLUMN_ITEMS_ID + " = " + "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID +
+				" JOIN " + S.TABLE_WEAPONS + " AS w2" + " ON " + "w2." + S.COLUMN_WEAPONS_ID + " = " + 
+				"c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " LEFT OUTER JOIN " + S.TABLE_ITEMS + 
+				" AS i2" + " ON " + "i2." + S.COLUMN_ITEMS_ID + " = " + "w2." + S.COLUMN_WEAPONS_ID
+				);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
+	/*
+	 * Helper method to query for weapon tree child
+	 */
+	private SQLiteQueryBuilder builderWeaponTreeChild() {
+//		SELECT i2._id, i2.name
+//		FROM items AS i1
+//		LEFT OUTER JOIN components AS c ON i1._id = c.component_item_id 
+//		JOIN weapons AS w2 ON w2._id = c.created_item_id 
+//		LEFT OUTER JOIN items AS i2 ON i2._id = w2._id
+//
+//		WHERE i1._id = '_id';
+
+		String i1 = "i1";
+		String i2 = "i2";
+		String w2 = "w2";
+		String c = "c";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", i2 + "." + S.COLUMN_ITEMS_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_ITEMS_NAME, i2 + "." + S.COLUMN_ITEMS_NAME);
+		
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_ITEMS + " AS i1" + " LEFT OUTER JOIN " + S.TABLE_COMPONENTS + " AS c" + 
+				" ON " + "i1." + S.COLUMN_ITEMS_ID + " = " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID +
+				" JOIN " + S.TABLE_WEAPONS + " AS w2" + " ON " + "w2." + S.COLUMN_WEAPONS_ID + " = " + 
+				"c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " LEFT OUTER JOIN " + S.TABLE_ITEMS + 
+				" AS i2" + " ON " + "i2." + S.COLUMN_ITEMS_ID + " = " + "w2." + S.COLUMN_WEAPONS_ID
+				);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
 }

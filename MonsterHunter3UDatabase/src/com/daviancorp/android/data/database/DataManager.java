@@ -3,8 +3,29 @@ package com.daviancorp.android.data.database;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.MergeCursor;
 
-import com.daviancorp.android.data.object.*;
+import com.daviancorp.android.data.object.Armor;
+import com.daviancorp.android.data.object.Carve;
+import com.daviancorp.android.data.object.Combining;
+import com.daviancorp.android.data.object.Component;
+import com.daviancorp.android.data.object.Decoration;
+import com.daviancorp.android.data.object.Gathering;
+import com.daviancorp.android.data.object.HuntingFleet;
+import com.daviancorp.android.data.object.HuntingReward;
+import com.daviancorp.android.data.object.Item;
+import com.daviancorp.android.data.object.ItemToSkillTree;
+import com.daviancorp.android.data.object.Location;
+import com.daviancorp.android.data.object.MogaWoodsReward;
+import com.daviancorp.android.data.object.Monster;
+import com.daviancorp.android.data.object.MonsterDamage;
+import com.daviancorp.android.data.object.MonsterToQuest;
+import com.daviancorp.android.data.object.Quest;
+import com.daviancorp.android.data.object.QuestReward;
+import com.daviancorp.android.data.object.Skill;
+import com.daviancorp.android.data.object.SkillTree;
+import com.daviancorp.android.data.object.Weapon;
 
 public class DataManager {
 	private static final String TAG = "DataManager";
@@ -659,4 +680,31 @@ public class DataManager {
 		return mHelper.queryWeaponType(type);
 	}
 		
+	public WeaponTreeCursor queryWeaponTree(long id) {
+//		Weapon weapon = null;
+//		WeaponTreeCursor cursor2 = null;
+		WeaponTreeCursor cursor = mHelper.queryWeaponTreeParent(id);
+		cursor.moveToFirst();
+		
+//		if(!cursor.isAfterLast()) {
+//			Cursor[] cursors = new Cursor[2];
+//			cursor2 = mHelper.queryWeaponTreeParent(cursor.getWeapon().getId());
+//		
+//			cursors[0] = cursor;
+//			cursors[1] = cursor2;
+//			
+//			MergeCursor mergeCursor = new MergeCursor(cursors);
+//			
+//			return (WeaponTreeCursor) (Cursor) mergeCursor;
+//		}
+		
+		return cursor;
+		
+//		cursor.moveToFirst();
+//		
+//		if (!cursor.isAfterLast())
+//			weapon = cursor.getWeapon();
+//		cursor.close();
+//		return weapon;
+	}
 }

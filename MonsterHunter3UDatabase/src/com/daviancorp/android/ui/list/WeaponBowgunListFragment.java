@@ -3,6 +3,7 @@ package com.daviancorp.android.ui.list;
 import java.io.IOException;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -17,12 +18,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.data.object.Weapon;
 import com.daviancorp.android.loader.WeaponListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.detail.WeaponDetailActivity;
 
 public class WeaponBowgunListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -76,6 +79,15 @@ public class WeaponBowgunListFragment extends ListFragment implements
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
 	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		// The id argument will be the Monster ID; CursorAdapter gives us this
+		// for free
+		Intent i = new Intent(getActivity(), WeaponDetailActivity.class);
+		i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, id);
+		startActivity(i);
+	}
 
 	private static class WeaponListCursorAdapter extends CursorAdapter {
 
@@ -99,7 +111,7 @@ public class WeaponBowgunListFragment extends ListFragment implements
 		public void bindView(View view, Context context, Cursor cursor) {
 			// Get the monster for the current row
 			Weapon weapon = mWeaponCursor.getWeapon();
-
+			
 			// Set up the text view
 			TextView nametv = (TextView) view.findViewById(R.id.name);
 			TextView attacktv = (TextView) view.findViewById(R.id.attack);
