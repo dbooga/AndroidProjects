@@ -3,8 +3,7 @@ package com.daviancorp.android.data.database;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.database.MergeCursor;
+import android.util.Log;
 
 import com.daviancorp.android.data.object.Armor;
 import com.daviancorp.android.data.object.Carve;
@@ -680,31 +679,46 @@ public class DataManager {
 		return mHelper.queryWeaponType(type);
 	}
 		
-	public WeaponTreeCursor queryWeaponTree(long id) {
-//		Weapon weapon = null;
-//		WeaponTreeCursor cursor2 = null;
-		WeaponTreeCursor cursor = mHelper.queryWeaponTreeParent(id);
+	public WeaponCursor queryWeaponTree(long id) {
+		ArrayList<Long> ids = new ArrayList<Long>();
+		ids.add(id);
+		
+		long currentId = id;
+		WeaponTreeCursor cursor = null;
+		
+		// Get ancestors
+		do {
+			cursor = mHelper.queryWeaponTreeParent(currentId);
+			cursor.moveToFirst();
+			
+			if(cursor.isAfterLast())
+				break;
+			
+			currentId = cursor.getWeapon().getId();
+			ids.add(0, currentId);
+
+		}
+		while (true);
+		
+		// Get children
+		currentId = id;
+		
+		cursor = mHelper.queryWeaponTreeChild(currentId);
 		cursor.moveToFirst();
 		
-//		if(!cursor.isAfterLast()) {
-//			Cursor[] cursors = new Cursor[2];
-//			cursor2 = mHelper.queryWeaponTreeParent(cursor.getWeapon().getId());
-//		
-//			cursors[0] = cursor;
-//			cursors[1] = cursor2;
-//			
-//			MergeCursor mergeCursor = new MergeCursor(cursors);
-//			
-//			return (WeaponTreeCursor) (Cursor) mergeCursor;
-//		}
+		if(!cursor.isAfterLast()) {
+			for (int i = 0; i < cursor.getCount(); i++) {
+				ids.add(cursor.getWeapon().getId());
+				cursor.moveToNext();
+			}
+		}
+
+		long[] idArray = new long[ids.size()];
+		for (int i = 0; i < idArray.length; i++) {
+			idArray[i] = ids.get(i);
+		}
+
+		return mHelper.queryWeapons(idArray);
 		
-		return cursor;
-		
-//		cursor.moveToFirst();
-//		
-//		if (!cursor.isAfterLast())
-//			weapon = cursor.getWeapon();
-//		cursor.close();
-//		return weapon;
 	}
 }

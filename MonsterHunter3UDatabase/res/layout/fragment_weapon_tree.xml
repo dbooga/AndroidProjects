@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:gravity="center" />
 
-    <TextView
+    <ImageView
         android:id="@+id/arrow"
+        android:contentDescription=""
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="" />
+        android:layout_height="20dp"
+        android:gravity="center" />
 </LinearLayout>

@@ -11,12 +11,12 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.WeaponCursor;
-import com.daviancorp.android.data.database.WeaponTreeCursor;
 import com.daviancorp.android.data.object.Weapon;
 import com.daviancorp.android.loader.WeaponTreeListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
@@ -24,6 +24,7 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 public class WeaponTreeFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 	private static final String ARG_WEAPON_ID = "WEAPON_ID";
+	private long mWeaponId;
 	
 	public static WeaponTreeFragment newInstance(long weaponId) {
 		Bundle args = new Bundle();
@@ -43,16 +44,16 @@ public class WeaponTreeFragment extends ListFragment implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
-		long weaponId = args.getLong(ARG_WEAPON_ID, -1);
+		mWeaponId = args.getLong(ARG_WEAPON_ID, -1);
 		
-		return new WeaponTreeListCursorLoader(getActivity(), weaponId);
+		return new WeaponTreeListCursorLoader(getActivity(), mWeaponId);
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Create an adapter to point at this cursor
 		WeaponTreeListCursorAdapter adapter = new WeaponTreeListCursorAdapter(
-				getActivity(), (WeaponTreeCursor) cursor);
+				getActivity(), (WeaponCursor) cursor, mWeaponId);
 		setListAdapter(adapter);
 
 	}
@@ -74,11 +75,13 @@ public class WeaponTreeFragment extends ListFragment implements
 
 	private static class WeaponTreeListCursorAdapter extends CursorAdapter {
 
-		private WeaponTreeCursor mWeaponCursor;
+		private WeaponCursor mWeaponCursor;
+		private long weaponId;
 
-		public WeaponTreeListCursorAdapter(Context context, WeaponTreeCursor cursor) {
+		public WeaponTreeListCursorAdapter(Context context, WeaponCursor cursor, long id) {
 			super(context, cursor, 0);
 			mWeaponCursor = cursor;
+			weaponId = id;
 		}
 
 		@Override
@@ -102,6 +105,12 @@ public class WeaponTreeFragment extends ListFragment implements
 			TextView weaponView = (TextView) view.findViewById(R.id.name);
 			String cellWeaponText = weapon.getName();
 			weaponView.setText(cellWeaponText);
+			
+			if (weapon.getId() <= weaponId) {
+				ImageView arrowView = (ImageView) view.findViewById(R.id.arrow);
+				arrowView.setImageResource(R.drawable.arrow_down_float);
+				
+			}
 		}
 	}
 

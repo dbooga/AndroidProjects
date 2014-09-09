@@ -122,6 +122,21 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 
 	}
 	
+	private String makePlaceholders(int len) {
+	    if (len < 1) {
+	        // It will lead to an invalid query anyway ..
+	        throw new RuntimeException("No placeholders");
+	    } else {
+	        StringBuilder sb = new StringBuilder(len * 2 - 1);
+	        sb.append("?");
+	        for (int i = 1; i < len; i++) {
+	            sb.append(",?");
+	        }
+	        return sb.toString();
+	    }
+	}
+	
+	
 	private Cursor wrapHelper() {
 		return getReadableDatabase().query(_Distinct, _Table, _Columns, _Selection, _SelectionArgs,_GroupBy,_Having, _OrderBy, _Limit);
 	}
@@ -1612,6 +1627,27 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}	
 	
 	/*
+	 * Get multiple specific weapon
+	 */
+	public WeaponCursor queryWeapons(long[] ids) {
+		
+		String[] string_list = new String[ids.length];
+		for(int i = 0; i < ids.length; i++){
+		    string_list[i] = String.valueOf(ids[i]);
+		}
+		
+		_Columns = null;
+		_Selection = "w." + S.COLUMN_WEAPONS_ID + " IN (" + makePlaceholders(ids.length) + ")";
+		_SelectionArgs = string_list;
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new WeaponCursor(wrapJoinHelper(builderWeapon()));
+	}
+	
+	/*
 	 * Get a specific weapon based on weapon type
 	 */
 	public WeaponCursor queryWeaponType(String type) {
@@ -1707,7 +1743,23 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		return new WeaponTreeCursor(wrapJoinHelper(builderWeaponTreeParent()));
 	}
+	
+	/*
+	 * Get the child weapon
+	 */
+	public WeaponTreeCursor queryWeaponTreeChild(long id) {
 
+		_Columns = null;
+		_Selection = "i1." + S.COLUMN_ITEMS_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new WeaponTreeCursor(wrapJoinHelper(builderWeaponTreeChild()));
+	}
+	
 	/*
 	 * Helper method to query for weapon tree parent
 	 */
