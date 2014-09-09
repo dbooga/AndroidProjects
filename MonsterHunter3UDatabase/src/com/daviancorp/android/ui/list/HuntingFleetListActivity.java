@@ -20,7 +20,7 @@ public class HuntingFleetListActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "All", "Fishing", "Treasure", "Hunting" };
+	private String[] tabs = {"Fishing", "Treasure", "Hunting" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

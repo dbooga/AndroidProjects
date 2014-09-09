@@ -79,6 +79,10 @@
             android:name="com.daviancorp.android.ui.detail.QuestDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+                <activity
+            android:name="com.daviancorp.android.ui.detail.SkillTreeDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

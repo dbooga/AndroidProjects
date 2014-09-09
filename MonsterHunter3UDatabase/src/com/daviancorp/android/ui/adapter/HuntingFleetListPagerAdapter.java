@@ -17,12 +17,10 @@ public class HuntingFleetListPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
-			return HuntingFleetListFragment.newInstance(null, null);
-		case 1:
 			return HuntingFleetListFragment.newInstance("Fishing", null);
-		case 2:
+		case 1:
 			return HuntingFleetListFragment.newInstance("Treasure", null);
-		case 3:
+		case 2:
 			return HuntingFleetListFragment.newInstance("Hunting", null);
 		default:
 			return null;
@@ -32,7 +30,7 @@ public class HuntingFleetListPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 4;
+		return 3;
 	}
 
 }
