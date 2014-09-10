@@ -55,7 +55,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reload" />
+            android:text="Creation Cost:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upgrade Cost:" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reload:" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,11 +81,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ammo:" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -156,6 +161,16 @@
 
         <TextView
             android:id="@+id/detail_weapon_defense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+        <TextView
+            android:id="@+id/detail_weapon_creation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/detail_weapon_upgrade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -792,11 +807,6 @@
                     android:text="" />
             </TableRow>  
         </TableLayout>
-        
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
         
         <TextView
             android:id="@+id/special1"

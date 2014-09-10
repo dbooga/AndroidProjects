@@ -55,6 +55,10 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 				.findViewById(R.id.detail_weapon_affinity);
 		mWeaponDefenseTextView = (TextView) view
 				.findViewById(R.id.detail_weapon_defense);
+		mWeaponCreationTextView = (TextView) view
+				.findViewById(R.id.detail_weapon_creation);
+		mWeaponUpgradeTextView = (TextView) view
+				.findViewById(R.id.detail_weapon_upgrade);
 
 		mWeaponReloadTextView = (TextView) view
 				.findViewById(R.id.detail_weapon_bowgun_reload);

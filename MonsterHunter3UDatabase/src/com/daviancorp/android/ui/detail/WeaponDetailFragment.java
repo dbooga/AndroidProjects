@@ -21,7 +21,8 @@ public class WeaponDetailFragment extends Fragment {
 	protected TextView mWeaponLabelTextView, mWeaponTypeTextView,
 			mWeaponAttackTextView, mWeaponElementTextView,
 			mWeaponRarityTextView, mWeaponSlotTextView,
-			mWeaponAffinityTextView, mWeaponDefenseTextView;
+			mWeaponAffinityTextView, mWeaponDefenseTextView,
+			mWeaponCreationTextView, mWeaponUpgradeTextView;
 
 	public static WeaponDetailFragment newInstance(long weaponId) {
 		Bundle args = new Bundle();
@@ -56,6 +57,9 @@ public class WeaponDetailFragment extends Fragment {
 		mWeaponSlotTextView.setText("" + mWeapon.getNumSlots());
 		mWeaponAffinityTextView.setText("" + mWeapon.getAffinity() + "%");
 		mWeaponDefenseTextView.setText("" + mWeapon.getDefense());
+		
+		mWeaponCreationTextView.setText("" + mWeapon.getCreationCost() + "z");
+		mWeaponUpgradeTextView.setText("" + mWeapon.getUpgradeCost() + "z");
 		
 		/* Element */
 		String element = "";
