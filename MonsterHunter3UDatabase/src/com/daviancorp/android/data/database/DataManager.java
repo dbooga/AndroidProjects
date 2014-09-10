@@ -627,6 +627,10 @@ public class DataManager {
 		return mHelper.querySkill(id);
 	}
 	
+	public SkillCursor querySkillFromTree(long id) {
+		return mHelper.querySkillFromTree(id);
+	}
+	
 	public ArrayList<Skill> querySkillArray(long id) {
 		ArrayList<Skill> skills = new ArrayList<Skill>();
 		SkillCursor cursor = mHelper.querySkill(id);

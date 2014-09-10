@@ -136,7 +136,7 @@ public class QuestRewardFragment extends ListFragment implements
 
 			Drawable i = null;
 			String cellImage = "icons_items/" + questReward.getItem().getFileLocation();
-			Log.d("heyo" , cellImage);
+			
 			try {
 				i = Drawable.createFromStream(
 						context.getAssets().open(cellImage), null);

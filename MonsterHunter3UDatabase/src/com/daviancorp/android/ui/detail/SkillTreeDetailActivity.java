@@ -23,7 +23,7 @@ public class SkillTreeDetailActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "Detail" };
+	private String[] tabs = { "Detail" , "Head" , "Body" , "Arm" , "Waist", "Leg" , "Jewels" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

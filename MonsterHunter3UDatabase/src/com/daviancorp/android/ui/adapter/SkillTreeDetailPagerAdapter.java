@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.daviancorp.android.ui.detail.SkillTreeArmorFragment;
 import com.daviancorp.android.ui.detail.SkillTreeDetailFragment;
 
 public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
@@ -21,6 +22,18 @@ public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
 		switch (index) {
 		case 0:
 			return SkillTreeDetailFragment.newInstance(skillTreeId);
+		case 1:
+			return SkillTreeArmorFragment.newInstance(skillTreeId);
+		case 2:
+			return SkillTreeDetailFragment.newInstance(skillTreeId);
+		case 3:
+			return SkillTreeDetailFragment.newInstance(skillTreeId);
+		case 4:
+			return SkillTreeDetailFragment.newInstance(skillTreeId);
+		case 5:
+			return SkillTreeDetailFragment.newInstance(skillTreeId);
+		case 6:
+			return SkillTreeDetailFragment.newInstance(skillTreeId);
 		default:
 			return null;
 		}
@@ -29,7 +42,7 @@ public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 1;
+		return 7;
 	}
 
 }

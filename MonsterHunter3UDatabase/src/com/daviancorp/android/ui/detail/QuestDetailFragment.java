@@ -39,7 +39,6 @@ public class QuestDetailFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setRetainInstance(true);
 		
 		// Check for a Quest ID as an argument, and find the monster
 		Bundle args = getArguments();

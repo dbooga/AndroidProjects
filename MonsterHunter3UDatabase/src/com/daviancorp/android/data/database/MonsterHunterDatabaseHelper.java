@@ -1542,7 +1542,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_Distinct = false;
 		_Table = S.TABLE_SKILLS;
 		_Columns = null;
-		_Selection = S.COLUMN_SKILLS_SKILL_TREE_ID + " = ?";
+		_Selection = S.COLUMN_SKILLS_ID + " = ?";
 		_SelectionArgs = new String[]{ String.valueOf(id) };
 		_GroupBy = null;
 		_Having = null;
@@ -1551,6 +1551,22 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		return new SkillCursor(wrapHelper());
 	}	
+	
+	public SkillCursor querySkillFromTree(long id) {
+		// "SELECT * FROM skills WHERE skill_tree_id = id"
+		
+		_Distinct = false;
+		_Table = S.TABLE_SKILLS;
+		_Columns = null;
+		_Selection = S.COLUMN_SKILLS_SKILL_TREE_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new SkillCursor(wrapHelper());
+	}
 	
 /********************************* SKILL TREE QUERIES ******************************************/	
 

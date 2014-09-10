@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.daviancorp.android.data.database.SkillTreeCursor;
 import com.daviancorp.android.data.object.SkillTree;
 import com.daviancorp.android.loader.SkillTreeListCursorLoader;
-import com.daviancorp.android.ui.detail.MonsterDetailActivity;
 import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
 
 public class SkillTreeListFragment extends ListFragment implements
@@ -54,7 +53,7 @@ public class SkillTreeListFragment extends ListFragment implements
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this for free
+		// The id argument will be the Skill ID; CursorAdapter gives us this for free
 		Intent i = new Intent(getActivity(), SkillTreeDetailActivity.class);
 		i.putExtra(SkillTreeDetailActivity.EXTRA_SKILLTREE_ID, id);
 		startActivity(i);
@@ -88,6 +87,8 @@ public class SkillTreeListFragment extends ListFragment implements
 			TextView skilltreeNameTextView = (TextView) view;
 			String cellText = skilltree.getName();
 			skilltreeNameTextView.setText(cellText);
+			
+			
 		}
 	}
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.database.SkillCursor;
 import com.daviancorp.android.data.object.Skill;
 import com.daviancorp.android.loader.SkillListCursorLoader;
+import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class SkillTreeDetailFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -34,8 +35,16 @@ public class SkillTreeDetailFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, null, this);
+		getLoaderManager().initLoader(0, getArguments(), this);
 	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.fragment_skill_detail_list, null);
+		return v;
+	}
+
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -44,7 +53,6 @@ public class SkillTreeDetailFragment extends ListFragment implements
 		if (args != null) {
 			mSkill = args.getLong(ARG_SKILL);
 		}
-
 		return new SkillListCursorLoader(getActivity(), mSkill);
 	}
 
@@ -77,7 +85,7 @@ public class SkillTreeDetailFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(android.R.layout.simple_list_item_1,
+			return inflater.inflate(R.layout.fragment_skill_detail_listitem,
 					parent, false);
 		}
 
@@ -87,9 +95,22 @@ public class SkillTreeDetailFragment extends ListFragment implements
 			Skill skill = mSkillCursor.getSkill();
 
 			// Set up the text view
-			TextView skillNameTextView = (TextView) view;
-			String cellText = skill.getName();
-			skillNameTextView.setText(cellText);
+			TextView skillNameTextView = (TextView) view.findViewById(R.id.skill);
+			TextView skillPtTextView = (TextView) view.findViewById(R.id.pts);
+			TextView skillDescTextView = (TextView) view.findViewById(R.id.description);
+			
+			String nameText = skill.getName();
+			String ptText = "" + skill.getRequiredPoints();
+			String descText = skill.getDescription();
+			
+			skillNameTextView.setText(nameText);
+			skillPtTextView.setText(ptText);
+			skillDescTextView.setText(descText);
+		}
+		
+		@Override
+		public boolean isEnabled(int position) {
+			return false;
 		}
 	}
 
