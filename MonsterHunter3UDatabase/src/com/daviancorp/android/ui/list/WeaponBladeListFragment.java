@@ -129,7 +129,8 @@ public class WeaponBladeListFragment extends ListFragment implements
 			specialtv.setCompoundDrawables(null, null, null, null);
 			specialtv.setText(null);
 			
-			String name = weapon.getName();
+			String name = "";
+			name = name + weapon.getName();
 			String attack = "" + weapon.getAttack();
 			
 			// Set the element to view

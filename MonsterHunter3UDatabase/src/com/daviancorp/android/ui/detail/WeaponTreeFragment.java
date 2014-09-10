@@ -3,6 +3,7 @@ package com.daviancorp.android.ui.detail;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -20,6 +21,7 @@ import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.data.object.Weapon;
 import com.daviancorp.android.loader.WeaponTreeListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.monsterhunter3udatabase.R.color;
 
 public class WeaponTreeFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -106,10 +108,12 @@ public class WeaponTreeFragment extends ListFragment implements
 			String cellWeaponText = weapon.getName();
 			weaponView.setText(cellWeaponText);
 			
-			if (weapon.getId() <= weaponId) {
+			if ((weapon.getId() <= weaponId) && (weapon.getWFinal() == 0)) {
 				ImageView arrowView = (ImageView) view.findViewById(R.id.arrow);
 				arrowView.setImageResource(R.drawable.arrow_down_float);
-				
+			}
+			if (weapon.getId() == weaponId) {
+				weaponView.setTextColor(Color.RED);
 			}
 		}
 	}

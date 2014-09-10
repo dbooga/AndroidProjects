@@ -359,8 +359,8 @@ public class DataManager {
 		return mHelper.queryItemToSkillTreeItem(id);
 	}
 
-	public ItemToSkillTreeCursor queryItemToSkillTreeSkillTree(long id) {
-		return mHelper.queryItemToSkillTreeSkillTree(id);
+	public ItemToSkillTreeCursor queryItemToSkillTreeSkillTree(long id, String type) {
+		return mHelper.queryItemToSkillTreeSkillTree(id, type);
 	}
 	
 	public ArrayList<ItemToSkillTree> queryItemToSkillTreeArrayItem(long id) {
@@ -376,9 +376,9 @@ public class DataManager {
 		return itst;
 	}
 	
-	public ArrayList<ItemToSkillTree> queryItemToSkillTreeArraySkillTree(long id) {
+	public ArrayList<ItemToSkillTree> queryItemToSkillTreeArraySkillTree(long id, String type) {
 		ArrayList<ItemToSkillTree> itst = new ArrayList<ItemToSkillTree>();
-		ItemToSkillTreeCursor cursor = mHelper.queryItemToSkillTreeSkillTree(id);
+		ItemToSkillTreeCursor cursor = mHelper.queryItemToSkillTreeSkillTree(id, type);
 		cursor.moveToFirst();
 		
 		while(!cursor.isAfterLast()) {

@@ -26,10 +26,14 @@ public class SkillTreeArmorFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
 	private static final String ARG_SKILL = "SKILLTREE_SKILL";
+	private static final String ARG_TYPE = "SKILLTREE_TYPE";
+	
+	private String skill_type;
 
-	public static SkillTreeArmorFragment newInstance(Long skill) {
+	public static SkillTreeArmorFragment newInstance(long skill, String type) {
 		Bundle args = new Bundle();
 		args.putLong(ARG_SKILL, skill);
+		args.putString(ARG_TYPE, type);
 		SkillTreeArmorFragment f = new SkillTreeArmorFragment();
 		f.setArguments(args);
 		return f;
@@ -54,18 +58,20 @@ public class SkillTreeArmorFragment extends ListFragment implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
-		Long mSkill = null;
+		long mSkill = -1;
+		skill_type = null;
 		if (args != null) {
 			mSkill = args.getLong(ARG_SKILL);
+			skill_type = args.getString(ARG_TYPE);
 		}
-		return new ItemToSkillTreeListCursorLoader(getActivity(), "skillTree", mSkill);
+		return new ItemToSkillTreeListCursorLoader(getActivity(), "skillTree", mSkill, skill_type);
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Create an adapter to point at this cursor
 		ItemToSkillTreeListCursorAdapter adapter = new ItemToSkillTreeListCursorAdapter(
-				getActivity(), (ItemToSkillTreeCursor) cursor);
+				getActivity(), (ItemToSkillTreeCursor) cursor, skill_type);
 		setListAdapter(adapter);
 
 	}
@@ -79,10 +85,12 @@ public class SkillTreeArmorFragment extends ListFragment implements
 	private static class ItemToSkillTreeListCursorAdapter extends CursorAdapter {
 
 		private ItemToSkillTreeCursor mItemToSkillTreeCursor;
+		private String mType;
 
-		public ItemToSkillTreeListCursorAdapter(Context context, ItemToSkillTreeCursor cursor) {
+		public ItemToSkillTreeListCursorAdapter(Context context, ItemToSkillTreeCursor cursor, String type) {
 			super(context, cursor, 0);
 			mItemToSkillTreeCursor = cursor;
+			mType = type;
 		}
 
 		@Override
@@ -111,8 +119,23 @@ public class SkillTreeArmorFragment extends ListFragment implements
 			skillAmtTextView.setText(amtText);
 			
 			Drawable i = null;
-			String cellImage = "icons_items/" + skill.getItem().getFileLocation();
-			Log.d("heyo" , cellImage);
+			
+			String part = "";
+			if (mType.equals("Head")) {
+				part = "head";
+			} else if (mType.equals("Body")) {
+				part = "body";
+			} else if (mType.equals("Arms")) {
+				part = "arms";
+			} else if (mType.equals("Waist")) {
+				part = "waist";
+			} else if (mType.equals("Legs")) {
+				part = "legs";
+			}
+			
+			String cellImage = "icons_armor/icons_" + part + "/" + part + 
+						skill.getItem().getRarity() + ".png";
+			Log.d("helpme" , cellImage);
 			try {
 				i = Drawable.createFromStream(
 						context.getAssets().open(cellImage), null);

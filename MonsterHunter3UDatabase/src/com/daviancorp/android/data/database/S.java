@@ -242,6 +242,7 @@ public class S {
 	static final String COLUMN_WEAPONS_AMMO = "ammo";
 	static final String COLUMN_WEAPONS_NUM_SLOTS = "num_slots";
 	static final String COLUMN_WEAPONS_SHARPNESS_FILE = "sharpness_file";
+	static final String COLUMN_WEAPONS_FINAL = "final";
 	
 
 }

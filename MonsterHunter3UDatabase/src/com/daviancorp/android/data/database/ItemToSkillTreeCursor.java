@@ -39,8 +39,8 @@ public class ItemToSkillTreeCursor extends CursorWrapper {
 		long itemId = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID));
 		String itemName = getString(getColumnIndex("i" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
-//			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
-//			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
+			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
+			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
 //			int carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
@@ -51,8 +51,8 @@ public class ItemToSkillTreeCursor extends CursorWrapper {
 		item.setId(itemId);
 		item.setName(itemName);
 //			item.setJpnName(jpnName);
-//			item.setType(type);
-//			item.setRarity(rarity);
+			item.setType(type);
+			item.setRarity(rarity);
 //			item.setCarryCapacity(carry_capacity);
 //			item.setBuy(buy);
 //			item.setSell(sell);

@@ -977,11 +977,20 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Get all items based on skill tree
 	 */
-	public ItemToSkillTreeCursor queryItemToSkillTreeSkillTree(long id) {
+	public ItemToSkillTreeCursor queryItemToSkillTreeSkillTree(long id, String type) {
+		
+		String queryType = "";
+		if (type.equals("Decoration")) {
+			queryType = "i." + S.COLUMN_ITEMS_TYPE;
+		}
+		else {
+			queryType = "a." + S.COLUMN_ARMOR_SLOT;
+		}
 		
 		_Columns = null;
-		_Selection = "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
+		_Selection = "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = ? " + " AND " +
+					queryType + " = ? ";
+		_SelectionArgs = new String[]{"" + id, type};
 		_GroupBy = null;
 		_Having = null;
 		_OrderBy = null;
@@ -999,10 +1008,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 //		FROM item_to_skill_tree AS itst
 //		LEFT OUTER JOIN items AS i ON itst.item_id = i._id
 //		LEFT OUTER JOIN skill_trees AS s ON itst.skill_tree_id = s._id;
+//		LEFT OUTER JOIN armor AS a ON i._id = a._id 
+//		LEFT OUTER JOIN decorations AS d ON i._id = d._id;
 
 		String itst = "itst";
 		String i = "i";
 		String s = "s";
+		String a = "a";
+		String d = "d";
 		
 		HashMap<String, String> projectionMap = new HashMap<String, String>();
 		
@@ -1013,6 +1026,8 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
 		projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_TYPE, i + "." + S.COLUMN_ITEMS_TYPE);
+		projectionMap.put(S.COLUMN_ITEMS_RARITY, i + "." + S.COLUMN_ITEMS_RARITY);
 		projectionMap.put(s + S.COLUMN_SKILL_TREES_NAME, s + "." + S.COLUMN_SKILL_TREES_NAME + " AS " + s + S.COLUMN_SKILL_TREES_NAME);
 
 		//Create new querybuilder
@@ -1020,7 +1035,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		_QB.setTables(S.TABLE_ITEM_TO_SKILL_TREE + " AS itst" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "itst." +
 				S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_SKILL_TREES +
-				" AS s " + " ON " + "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = " + "s." + S.COLUMN_SKILL_TREES_ID);
+				" AS s " + " ON " + "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = " + "s." + S.COLUMN_SKILL_TREES_ID + 
+				" LEFT OUTER JOIN " + S.TABLE_ARMOR + " AS a" + " ON " + "i." + S.COLUMN_ITEMS_ID + " = " + "a." + S.COLUMN_ARMOR_ID + 
+				" LEFT OUTER JOIN " + S.TABLE_DECORATIONS + " AS d" + " ON " + "i." + S.COLUMN_ITEMS_ID + " = " + "d." + 
+				S.COLUMN_DECORATIONS_ID);
 
 		_QB.setProjectionMap(projectionMap);
 		return _QB;
@@ -1552,6 +1570,9 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return new SkillCursor(wrapHelper());
 	}	
 	
+	/*
+	 * Get all skills for a skill tree
+	 */
 	public SkillCursor querySkillFromTree(long id) {
 		// "SELECT * FROM skills WHERE skill_tree_id = id"
 		
@@ -1566,7 +1587,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_Limit = null;
 		
 		return new SkillCursor(wrapHelper());
-	}
+	}	
 	
 /********************************* SKILL TREE QUERIES ******************************************/	
 
@@ -1720,6 +1741,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_WEAPONS_AMMO, w + "." + S.COLUMN_WEAPONS_AMMO);
 		projectionMap.put(S.COLUMN_WEAPONS_NUM_SLOTS, w + "." + S.COLUMN_WEAPONS_NUM_SLOTS);
 		projectionMap.put(S.COLUMN_WEAPONS_SHARPNESS_FILE, w + "." + S.COLUMN_WEAPONS_SHARPNESS_FILE);
+		projectionMap.put(S.COLUMN_WEAPONS_FINAL, w + "." + S.COLUMN_WEAPONS_FINAL);
 
 		projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
 		projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);

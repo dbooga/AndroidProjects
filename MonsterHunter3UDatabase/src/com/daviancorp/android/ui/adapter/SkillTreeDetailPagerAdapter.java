@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.daviancorp.android.ui.detail.SkillTreeArmorFragment;
+import com.daviancorp.android.ui.detail.SkillTreeDecorationFragment;
 import com.daviancorp.android.ui.detail.SkillTreeDetailFragment;
 
 public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
@@ -23,17 +24,17 @@ public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			return SkillTreeDetailFragment.newInstance(skillTreeId);
 		case 1:
-			return SkillTreeArmorFragment.newInstance(skillTreeId);
+			return SkillTreeArmorFragment.newInstance(skillTreeId, "Head");
 		case 2:
-			return SkillTreeDetailFragment.newInstance(skillTreeId);
+			return SkillTreeArmorFragment.newInstance(skillTreeId, "Body");
 		case 3:
-			return SkillTreeDetailFragment.newInstance(skillTreeId);
+			return SkillTreeArmorFragment.newInstance(skillTreeId, "Arms");
 		case 4:
-			return SkillTreeDetailFragment.newInstance(skillTreeId);
+			return SkillTreeArmorFragment.newInstance(skillTreeId, "Waist");
 		case 5:
-			return SkillTreeDetailFragment.newInstance(skillTreeId);
+			return SkillTreeArmorFragment.newInstance(skillTreeId, "Legs");
 		case 6:
-			return SkillTreeDetailFragment.newInstance(skillTreeId);
+			return SkillTreeDecorationFragment.newInstance(skillTreeId, "Decoration");
 		default:
 			return null;
 		}

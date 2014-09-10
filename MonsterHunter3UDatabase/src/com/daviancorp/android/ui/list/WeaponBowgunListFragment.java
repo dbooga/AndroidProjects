@@ -120,8 +120,9 @@ public class WeaponBowgunListFragment extends ListFragment implements
 			TextView defensetv = (TextView) view.findViewById(R.id.defense);
 
 			// Need to reset drawables
-
-			String name = weapon.getName();
+			
+			String name = "";
+			name = name + weapon.getName();
 			String attack = "" + weapon.getAttack();
 
 			// Set the slot to view

@@ -28,6 +28,7 @@ public class Weapon extends Item{
 	private String ammo;
 	private int num_slots;
 	private String sharpness_file;
+	private int wfinal;
 	
 	public Weapon() {
 		super();
@@ -54,6 +55,7 @@ public class Weapon extends Item{
 		this.ammo = "";
 		this.num_slots = -1;
 		this.sharpness_file = "";
+		this.wfinal = -1;
 	}
 
 	public String getWtype() {
@@ -230,5 +232,13 @@ public class Weapon extends Item{
 	
 	public void setSharpnessFile(String sharpness_file) {
 		this.sharpness_file = sharpness_file;
+	}
+	
+	public int getWFinal() {
+		return wfinal;
+	}
+	
+	public void setWFinal(int wfinal) {
+		this.wfinal = wfinal;
 	}
 }

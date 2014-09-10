@@ -124,7 +124,8 @@ public class WeaponBowListFragment extends ListFragment implements
 			// Need to reset drawables
 			elementtv.setCompoundDrawables(null, null, null, null);
 
-			String name = weapon.getName();
+			String name = "";
+			name = name + weapon.getName();
 			String attack = "" + weapon.getAttack();
 
 			// Set the element to view
