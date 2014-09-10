@@ -65,7 +65,7 @@ public class ComponentCursor extends CursorWrapper {
 	
 		Item comp = new Item();
 		
-		long itemId2 = getLong(getColumnIndex(S.COLUMN_COMPONENTS_CREATED_ITEM_ID));
+		long itemId2 = getLong(getColumnIndex(S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID));
 		String itemName2 = getString(getColumnIndex("co" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 //			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));

@@ -140,7 +140,6 @@ public class MonsterCarveFragment extends ListFragment implements
 
 			Drawable i = null;
 			String cellImage = "icons_items/" + carve.getItem().getFileLocation();
-			Log.d("heyo" , cellImage);
 			try {
 				i = Drawable.createFromStream(
 						context.getAssets().open(cellImage), null);

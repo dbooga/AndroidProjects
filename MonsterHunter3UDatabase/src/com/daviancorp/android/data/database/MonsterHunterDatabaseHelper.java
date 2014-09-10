@@ -470,7 +470,8 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public ComponentCursor queryComponentCreated(long id) {
 		
 		_Columns = null;
-		_Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? ";
+		_Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? " +
+				" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < 1314";
 		_SelectionArgs = new String[]{"" + id};
 		_GroupBy = null;
 		_Having = null;

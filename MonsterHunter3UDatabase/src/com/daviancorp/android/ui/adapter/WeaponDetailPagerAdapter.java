@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.daviancorp.android.ui.detail.ComponentListFragment;
 import com.daviancorp.android.ui.detail.WeaponBladeDetailFragment;
 import com.daviancorp.android.ui.detail.WeaponBowDetailFragment;
 import com.daviancorp.android.ui.detail.WeaponBowgunDetailFragment;
@@ -35,7 +36,7 @@ public class WeaponDetailPagerAdapter extends FragmentPagerAdapter {
 		case 1:
 			return WeaponTreeFragment.newInstance(weaponId);
 		case 2:
-			return WeaponBladeDetailFragment.newInstance(weaponId);
+			return ComponentListFragment.newInstance(weaponId);
 		default:
 			return null;
 		}
