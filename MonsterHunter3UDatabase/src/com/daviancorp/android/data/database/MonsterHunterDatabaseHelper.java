@@ -520,7 +520,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_COMPONENTS_TYPE, c + "." + S.COLUMN_COMPONENTS_TYPE);
 
 		projectionMap.put(cr + S.COLUMN_ITEMS_NAME, cr + "." + S.COLUMN_ITEMS_NAME + " AS " + cr + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(cr + S.COLUMN_ITEMS_TYPE, cr + "." + S.COLUMN_ITEMS_TYPE + " AS " + cr + S.COLUMN_ITEMS_TYPE);
+		projectionMap.put(cr + S.COLUMN_ITEMS_RARITY, cr + "." + S.COLUMN_ITEMS_RARITY + " AS " + cr + S.COLUMN_ITEMS_RARITY);
 		projectionMap.put(cr + S.COLUMN_ITEMS_ICON_NAME, cr + "." + S.COLUMN_ITEMS_ICON_NAME + " AS " + cr + S.COLUMN_ITEMS_ICON_NAME);
+		
 		projectionMap.put(co + S.COLUMN_ITEMS_NAME, co + "." + S.COLUMN_ITEMS_NAME + " AS " + co + S.COLUMN_ITEMS_NAME);
 		projectionMap.put(co + S.COLUMN_ITEMS_ICON_NAME, co + "." + S.COLUMN_ITEMS_ICON_NAME + " AS " + co + S.COLUMN_ITEMS_ICON_NAME);
 

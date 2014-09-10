@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.daviancorp.android.ui.detail.ItemCarveFragment;
+import com.daviancorp.android.ui.detail.ItemComponentFragment;
 import com.daviancorp.android.ui.detail.ItemDetailFragment;
 import com.daviancorp.android.ui.detail.ItemQuestFragment;
 
@@ -29,6 +30,8 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 			return ItemCarveFragment.newInstance(itemId);
 		case 3:
 			return ItemDetailFragment.newInstance(itemId);
+		case 4:
+			return ItemComponentFragment.newInstance(itemId);
 		default:
 			return null;
 		}
@@ -37,7 +40,7 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 4;
+		return 5;
 	}
 
 }

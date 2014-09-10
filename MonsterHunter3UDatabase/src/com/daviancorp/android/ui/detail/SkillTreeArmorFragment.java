@@ -135,7 +135,7 @@ public class SkillTreeArmorFragment extends ListFragment implements
 			
 			String cellImage = "icons_armor/icons_" + part + "/" + part + 
 						skill.getItem().getRarity() + ".png";
-			Log.d("helpme" , cellImage);
+			
 			try {
 				i = Drawable.createFromStream(
 						context.getAssets().open(cellImage), null);

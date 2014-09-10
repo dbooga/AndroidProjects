@@ -24,7 +24,7 @@ public class ItemDetailActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "Detail", "Quest", "Monster", "Location"};
+	private String[] tabs = { "Detail", "Quest", "Monster", "Location", "Usage"};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

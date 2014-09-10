@@ -40,8 +40,8 @@ public class ComponentCursor extends CursorWrapper {
 		long itemId1 = getLong(getColumnIndex(S.COLUMN_COMPONENTS_CREATED_ITEM_ID));
 		String itemName1 = getString(getColumnIndex("cr" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
-//			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
-//			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
+			String type1 = getString(getColumnIndex("cr" + S.COLUMN_ITEMS_TYPE));
+			int rarity1 = getInt(getColumnIndex("cr" + S.COLUMN_ITEMS_RARITY));
 //			int carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
@@ -52,8 +52,8 @@ public class ComponentCursor extends CursorWrapper {
 		created.setId(itemId1);
 		created.setName(itemName1);
 //			created.setJpnName(jpnName);
-//			created.setType(type);
-//			created.setRarity(rarity);
+			created.setType(type1);
+			created.setRarity(rarity1);
 //			created.setCarryCapacity(carry_capacity);
 //			created.setBuy(buy);
 //			created.setSell(sell);
@@ -69,7 +69,7 @@ public class ComponentCursor extends CursorWrapper {
 		String itemName2 = getString(getColumnIndex("co" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 //			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
-//			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
+//			int rarity2 = getInt(getColumnIndex("co" + S.COLUMN_ITEMS_RARITY));
 //			int carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
@@ -81,7 +81,7 @@ public class ComponentCursor extends CursorWrapper {
 		comp.setName(itemName2);
 //			comp.setJpnName(jpnName);
 //			comp.setType(type);
-//			comp.setRarity(rarity);
+//			comp.setRarity(rarity2);
 //			comp.setCarryCapacity(carry_capacity);
 //			comp.setBuy(buy);
 //			comp.setSell(sell);
