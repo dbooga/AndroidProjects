@@ -3,6 +3,7 @@ package com.daviancorp.android.ui.list;
 import java.io.IOException;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,17 +11,19 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.DecorationCursor;
 import com.daviancorp.android.data.object.Decoration;
 import com.daviancorp.android.loader.DecorationListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 
 public class DecorationListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -53,6 +56,16 @@ public class DecorationListFragment extends ListFragment implements
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
 	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		// The id argument will be the Monster ID; CursorAdapter gives us this
+		// for free
+		Intent i = new Intent(getActivity(), DecorationDetailActivity.class);
+		i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, (long) v.getTag());
+		startActivity(i);
+	}
+	
 
 	private static class DecorationListCursorAdapter extends CursorAdapter {
 
@@ -77,6 +90,8 @@ public class DecorationListFragment extends ListFragment implements
 		public void bindView(View view, Context context, Cursor cursor) {
 			// Get the decoration for the current row
 			Decoration decoration = mDecorationCursor.getDecoration();
+			
+			LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.listitem);
 
 			// Set up the text view
 			ImageView itemImageView = (ImageView) view.findViewById(R.id.item_image);
@@ -111,6 +126,8 @@ public class DecorationListFragment extends ListFragment implements
 			skill1amtTextView.setText(skill1amtText);
 			skill2TextView.setText(skill2Text);
 			skill2amtTextView.setText(skill2amtText);
+			
+			itemLayout.setTag(decoration.getId());
 		}
 	}
 

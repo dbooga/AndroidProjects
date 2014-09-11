@@ -8,9 +8,9 @@ import com.daviancorp.android.data.object.Item;
 public class ItemLoader extends DataLoader<Item> {
 	private long mItemId;
 	
-	public ItemLoader(Context context, long monsterId) {
+	public ItemLoader(Context context, long itemId) {
 		super(context);
-		mItemId = monsterId;
+		mItemId = itemId;
 	}
 	
 	@Override

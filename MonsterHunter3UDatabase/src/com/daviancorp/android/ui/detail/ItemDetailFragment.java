@@ -59,10 +59,10 @@ public class ItemDetailFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_monster_detail, container, false);
+		View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
 		
-		mItemLabelTextView = (TextView) view.findViewById(R.id.detail_monster_label);
-		mItemIconImageView = (ImageView) view.findViewById(R.id.detail_monster_image);
+		mItemLabelTextView = (TextView) view.findViewById(R.id.detail_item_label);
+		mItemIconImageView = (ImageView) view.findViewById(R.id.detail_item_image);
 	
 		return view;
 	}

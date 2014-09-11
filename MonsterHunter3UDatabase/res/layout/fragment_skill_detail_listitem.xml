@@ -23,6 +23,8 @@
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".6"/>
+        android:layout_weight=".6"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"/>
 
 </LinearLayout>
