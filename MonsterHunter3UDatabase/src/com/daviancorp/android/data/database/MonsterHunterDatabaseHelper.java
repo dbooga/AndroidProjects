@@ -1305,11 +1305,12 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 * Get all quests based on monster
 	 */
 	public MonsterToQuestCursor queryMonsterToQuestMonster(long id) {
-		
+
+		_Distinct = true;
 		_Columns = null;
 		_Selection = "mtq." + S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID + " = ? ";
 		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
+		_GroupBy = "q." + S.COLUMN_QUESTS_NAME;
 		_Having = null;
 		_OrderBy = null;
 		_Limit = null;
@@ -1321,7 +1322,8 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 * Get all monsters based on quest
 	 */
 	public MonsterToQuestCursor queryMonsterToQuestQuest(long id) {
-		
+
+		_Distinct = false;
 		_Columns = null;
 		_Selection = "mtq." + S.COLUMN_MONSTER_TO_QUEST_QUEST_ID + " = ? ";
 		_SelectionArgs = new String[]{"" + id};
@@ -1369,6 +1371,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 				S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID + " LEFT OUTER JOIN " + S.TABLE_QUESTS +
 				" AS q " + " ON " + "mtq." + S.COLUMN_MONSTER_TO_QUEST_QUEST_ID + " = " + "q." + S.COLUMN_QUESTS_ID);
 
+		_QB.setDistinct(_Distinct);
 		_QB.setProjectionMap(projectionMap);
 		return _QB;
 	}

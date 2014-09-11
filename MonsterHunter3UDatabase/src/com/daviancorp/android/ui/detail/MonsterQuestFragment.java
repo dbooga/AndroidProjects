@@ -115,13 +115,24 @@ public class MonsterQuestFragment extends ListFragment implements
 					.findViewById(R.id.quest_name);
 			TextView locationTextView = (TextView) view
 					.findViewById(R.id.quest_location);
+			TextView unstableTextView = (TextView) view
+					.findViewById(R.id.quest_unstable);
 
 			String cellQuestText = monsterToQuest.getQuest().getName();
 			String cellLocationText = monsterToQuest.getQuest().getHub() + " "
 					+ monsterToQuest.getQuest().getStars();
-
+			String cellUnstableText = monsterToQuest.getUnstable();
+			
+			if (cellUnstableText.equals("no")) {
+				cellUnstableText = "";
+			}
+			else {
+				cellUnstableText = "Unstable";
+			}
+			
 			questTextView.setText(cellQuestText);
 			locationTextView.setText(cellLocationText);
+			unstableTextView.setText(cellUnstableText);
 
 			itemLayout.setTag(monsterToQuest.getQuest().getId());
 		}

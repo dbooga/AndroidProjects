@@ -16,9 +16,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
-            android:layout_weight=".7" >
+            android:layout_weight=".5" >
         </TextView>
 
+        <TextView
+            android:id="@+id/quest_unstable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
+            android:layout_weight=".2"
+            android:gravity="center"  >
+        </TextView>
+        
         <TextView
             android:id="@+id/quest_location"
             android:layout_width="0dp"

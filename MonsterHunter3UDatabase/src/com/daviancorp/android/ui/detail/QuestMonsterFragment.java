@@ -117,10 +117,21 @@ public class QuestMonsterFragment extends ListFragment implements
 					.findViewById(R.id.detail_monster_image);
 			TextView monsterTextView = (TextView) view
 					.findViewById(R.id.detail_monster_label);
-
+			TextView unstableTextView = (TextView) view
+					.findViewById(R.id.detail_monster_unstable);
+			
 			String cellMonsterText = monsterToQuest.getMonster().getName();
-
+			String cellUnstableText = monsterToQuest.getUnstable();
+			
+			if (cellUnstableText.equals("no")) {
+				cellUnstableText = "";
+			}
+			else {
+				cellUnstableText = "Unstable";
+			}
+			
 			monsterTextView.setText(cellMonsterText);
+			unstableTextView.setText(cellUnstableText);
 
 			Drawable i = null;
 			String cellImage = "icons_monster/"
