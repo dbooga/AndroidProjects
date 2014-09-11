@@ -1,17 +1,5 @@
 package com.daviancorp.android.ui.general;
 
-import com.daviancorp.android.monsterhunter3udatabase.R;
-import com.daviancorp.android.ui.list.ArmorListActivity;
-import com.daviancorp.android.ui.list.CombiningListActivity;
-import com.daviancorp.android.ui.list.DecorationListActivity;
-import com.daviancorp.android.ui.list.HuntingFleetListActivity;
-import com.daviancorp.android.ui.list.ItemListActivity;
-import com.daviancorp.android.ui.list.LocationGridActivity;
-import com.daviancorp.android.ui.list.MonsterListActivity;
-import com.daviancorp.android.ui.list.QuestListActivity;
-import com.daviancorp.android.ui.list.SkillTreeListActivity;
-import com.daviancorp.android.ui.list.WeaponListActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +11,18 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.list.ArmorListActivity;
+import com.daviancorp.android.ui.list.CombiningListActivity;
+import com.daviancorp.android.ui.list.DecorationListActivity;
+import com.daviancorp.android.ui.list.HuntingFleetListActivity;
+import com.daviancorp.android.ui.list.ItemListActivity;
+import com.daviancorp.android.ui.list.LocationGridActivity;
+import com.daviancorp.android.ui.list.MonsterGridActivity;
+import com.daviancorp.android.ui.list.QuestListActivity;
+import com.daviancorp.android.ui.list.SkillTreeListActivity;
+import com.daviancorp.android.ui.list.WeaponGridActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -71,12 +71,11 @@ public class HomeFragment extends Fragment {
 
 				switch (position) {
 				case MONSTERS:
-					intent = new Intent(getActivity(),
-							MonsterListActivity.class);
+					intent = new Intent(getActivity(),MonsterGridActivity.class);
 					startActivity(intent);
 					break;
 				case WEAPONS:
-					intent = new Intent(getActivity(), WeaponListActivity.class);
+					intent = new Intent(getActivity(), WeaponGridActivity.class);
 					startActivity(intent);
 					break;
 				case ARMORS:
