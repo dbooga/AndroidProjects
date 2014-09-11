@@ -31,8 +31,8 @@ public class DecorationDetailFragment extends Fragment {
 	private ImageView mDecorationIconImageView;
 	private TextView rareTextView;
 	private TextView maxTextView;
-	private TextView sellTextView;
 	private TextView buyTextView;
+	private TextView sellTextView;
 
 	public static DecorationDetailFragment newInstance(long decorationId) {
 		Bundle args = new Bundle();
@@ -84,14 +84,21 @@ public class DecorationDetailFragment extends Fragment {
 		String cellImage = "icons_items/" + mDecoration.getFileLocation();
 		String cellRare = "" + mDecoration.getRarity();
 		String cellMax = "" + mDecoration.getCarryCapacity();
-		String cellSell = "" + mDecoration.getSell() + "z";
 		String cellBuy = "" + mDecoration.getBuy() + "z";
+		String cellSell = "" + mDecoration.getSell() + "z";
 
+		if (cellBuy.equals("0z")) {
+			cellBuy = "-";
+		}
+		if (cellSell.equals("0z")) {
+			cellSell = "-";
+		}
+		
 		mDecorationLabelTextView.setText(cellText);
 		rareTextView.setText(cellRare);
 		maxTextView.setText(cellMax);
-		sellTextView.setText(cellSell);
 		buyTextView.setText(cellBuy);
+		sellTextView.setText(cellSell);
 
 		// Read a Bitmap from Assets
 		AssetManager manager = getActivity().getAssets();

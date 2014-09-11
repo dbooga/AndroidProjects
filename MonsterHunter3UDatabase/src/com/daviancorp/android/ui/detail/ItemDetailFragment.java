@@ -30,6 +30,10 @@ public class ItemDetailFragment extends Fragment {
 	
 	private TextView mItemLabelTextView;
 	private ImageView mItemIconImageView;
+	private TextView rareTextView;
+	private TextView maxTextView;
+	private TextView buyTextView;
+	private TextView sellTextView;
 
 	public static ItemDetailFragment newInstance(long itemId) {
 		Bundle args = new Bundle();
@@ -64,13 +68,34 @@ public class ItemDetailFragment extends Fragment {
 		mItemLabelTextView = (TextView) view.findViewById(R.id.detail_item_label);
 		mItemIconImageView = (ImageView) view.findViewById(R.id.detail_item_image);
 	
+		rareTextView = (TextView) view.findViewById(R.id.rare);
+		maxTextView = (TextView) view.findViewById(R.id.max);
+		sellTextView = (TextView) view.findViewById(R.id.sell);
+		buyTextView = (TextView) view.findViewById(R.id.buy);
+
 		return view;
 	}
 	
 	private void updateUI() throws IOException {
 		String cellText = mItem.getName();
 		String cellImage = "icons_items/" + mItem.getFileLocation();
+		String cellRare = "" + mItem.getRarity();
+		String cellMax = "" + mItem.getCarryCapacity();
+		String cellSell = "" + mItem.getSell() + "z";
+		String cellBuy = "" + mItem.getBuy() + "z";
+		
+		if (cellBuy.equals("0z")) {
+			cellBuy = "-";
+		}
+		if (cellSell.equals("0z")) {
+			cellSell = "-";
+		}
+		
 		mItemLabelTextView.setText(cellText);
+		rareTextView.setText(cellRare);
+		maxTextView.setText(cellMax);
+		buyTextView.setText(cellBuy);
+		sellTextView.setText(cellSell);
 		
 		// Read a Bitmap from Assets
         AssetManager manager = getActivity().getAssets();

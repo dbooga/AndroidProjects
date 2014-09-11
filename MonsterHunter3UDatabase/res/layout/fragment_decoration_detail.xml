@@ -39,31 +39,27 @@
             android:paddingLeft="10dp" >
 
             <TextView
-                android:id="@+id/rare_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rare:" >
             </TextView>
 
             <TextView
-                android:id="@+id/max_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Max:" >
             </TextView>
 
             <TextView
-                android:id="@+id/sell_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sell:" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/buy_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Buy:" >
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sell:" >
             </TextView>
         </LinearLayout>
 
@@ -86,13 +82,13 @@
             </TextView>
 
             <TextView
-                android:id="@+id/sell"
+                android:id="@+id/buy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
             </TextView>
 
             <TextView
-                android:id="@+id/buy"
+                android:id="@+id/sell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
             </TextView>
