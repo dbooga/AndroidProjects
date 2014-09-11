@@ -29,10 +29,17 @@ public class ArmorDetailFragment extends Fragment {
 
 	private TextView mArmorLabelTextView;
 	private ImageView mArmorIconImageView;
+	private TextView partTextView;
+	private TextView defenseTextView;
+	private TextView slotTextView;
 	private TextView rareTextView;
-	private TextView maxTextView;
-	private TextView sellTextView;
 	private TextView buyTextView;
+	
+	private TextView fireResTextView;
+	private TextView waterResTextView;
+	private TextView iceResTextView;
+	private TextView thunderResTextView;
+	private TextView dragonResTextView;
 
 	public static ArmorDetailFragment newInstance(long armorId) {
 		Bundle args = new Bundle();
@@ -71,34 +78,52 @@ public class ArmorDetailFragment extends Fragment {
 		mArmorIconImageView = (ImageView) view
 				.findViewById(R.id.detail_armor_image);
 
+		partTextView = (TextView) view.findViewById(R.id.part);
+		defenseTextView = (TextView) view.findViewById(R.id.defense);
+		slotTextView = (TextView) view.findViewById(R.id.slot);
 		rareTextView = (TextView) view.findViewById(R.id.rare);
-		maxTextView = (TextView) view.findViewById(R.id.max);
-		sellTextView = (TextView) view.findViewById(R.id.sell);
 		buyTextView = (TextView) view.findViewById(R.id.buy);
 
+		fireResTextView = (TextView) view.findViewById(R.id.fire_res);
+		waterResTextView = (TextView) view.findViewById(R.id.water_res);
+		iceResTextView = (TextView) view.findViewById(R.id.ice_res);
+		thunderResTextView = (TextView) view.findViewById(R.id.thunder_res);
+		dragonResTextView = (TextView) view.findViewById(R.id.dragon_res);
+		
 		return view;
 	}
 
 	private void updateUI() throws IOException {
 		String cellText = mArmor.getName();
 		String cellImage = "";
+		String cellPart = "" + mArmor.getSlot();
+		String cellDefense = "" + mArmor.getDefense() + " (min) - " + mArmor.getMaxDefense() + " (max)";
+		String cellSlot = "" + mArmor.getNumSlots();
 		String cellRare = "" + mArmor.getRarity();
-		String cellMax = "" + mArmor.getCarryCapacity();
-		String cellSell = "" + mArmor.getSell() + "z";
 		String cellBuy = "" + mArmor.getBuy() + "z";
+		
+		String cellFire = "" + mArmor.getFireRes();
+		String cellWater = "" + mArmor.getWaterRes();
+		String cellIce = "" + mArmor.getIceRes();
+		String cellThunder = "" + mArmor.getThunderRes();
+		String cellDragon = "" + mArmor.getDragonRes();
 
-		if (cellSell.equals("0z")) {
-			cellSell = "-";
-		}
 		if (cellBuy.equals("0z")) {
 			cellBuy = "-";
 		}
 		
 		mArmorLabelTextView.setText(cellText);
+		partTextView.setText(cellPart);
+		defenseTextView.setText(cellDefense);
+		slotTextView.setText(cellSlot);
 		rareTextView.setText(cellRare);
-		maxTextView.setText(cellMax);
-		sellTextView.setText(cellSell);
 		buyTextView.setText(cellBuy);
+		
+		fireResTextView.setText(cellFire);
+		waterResTextView.setText(cellWater);
+		iceResTextView.setText(cellIce);
+		thunderResTextView.setText(cellThunder);
+		dragonResTextView.setText(cellDragon);
 		
 		long createdId = mArmor.getId();
 

@@ -34,68 +34,126 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".2"
+            android:layout_weight=".4"
             android:orientation="vertical"
             android:paddingLeft="10dp" >
 
             <TextView
-                android:id="@+id/rare_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rare:" >
-            </TextView>
+                android:text="Part:" />
 
             <TextView
-                android:id="@+id/max_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Max:" >
-            </TextView>
+                android:text="Defense:" />
 
             <TextView
-                android:id="@+id/sell_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sell:" >
-            </TextView>
+                android:text="Slot:" />
 
             <TextView
-                android:id="@+id/buy_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buy:" >
-            </TextView>
+                android:text="Rare:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fire Res:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Water Res:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ice Res:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thunder Res:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dragon Res:" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".8"
+            android:layout_weight=".6"
             android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/part"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/defense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/slot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/rare"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/max"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/sell"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/buy"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
+                android:layout_height="wrap_content" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/fire_res"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/water_res"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/ice_res"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/thunder_res"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/dragon_res"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
 
