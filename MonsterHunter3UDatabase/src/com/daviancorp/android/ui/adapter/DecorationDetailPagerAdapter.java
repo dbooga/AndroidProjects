@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.daviancorp.android.ui.detail.ComponentListFragment;
 import com.daviancorp.android.ui.detail.DecorationDetailFragment;
-import com.daviancorp.android.ui.detail.DecorationSkillFragment;
+import com.daviancorp.android.ui.detail.ItemToSkillFragment;
 
 public class DecorationDetailPagerAdapter extends FragmentPagerAdapter {
 	
@@ -24,7 +24,7 @@ public class DecorationDetailPagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			return DecorationDetailFragment.newInstance(decorationId);
 		case 1:
-			return DecorationSkillFragment.newInstance(decorationId);
+			return ItemToSkillFragment.newInstance(decorationId, "Decoration");
 		case 2:
 			return ComponentListFragment.newInstance(decorationId);
 		default:

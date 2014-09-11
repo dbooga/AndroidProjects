@@ -9,6 +9,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +22,16 @@ import com.daviancorp.android.data.object.ItemToSkillTree;
 import com.daviancorp.android.loader.ItemToSkillTreeListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
-public class DecorationSkillFragment extends ListFragment implements
+public class ItemToSkillFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
-	private static final String ARG_DECORATION_ID = "DECORATION_ID";
+	private static final String ARG_ITEM_TO_SKILL_ID = "ITEM_TO_SKILL_ID";
+	private static final String ARG_ITEM_TO_SKILL_FROM = "ITEM_TO_SKILL_FROM";
 
-	public static DecorationSkillFragment newInstance(long decorationId) {
+	public static ItemToSkillFragment newInstance(long id, String from) {
 		Bundle args = new Bundle();
-		args.putLong(ARG_DECORATION_ID, decorationId);
-		DecorationSkillFragment f = new DecorationSkillFragment();
+		args.putLong(ARG_ITEM_TO_SKILL_ID, id);
+		args.putString(ARG_ITEM_TO_SKILL_FROM, from);
+		ItemToSkillFragment f = new ItemToSkillFragment();
 		f.setArguments(args);
 		return f;
 	}
@@ -45,9 +48,9 @@ public class DecorationSkillFragment extends ListFragment implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
-		long decorationId = args.getLong(ARG_DECORATION_ID, -1);
-
-		return new ItemToSkillTreeListCursorLoader(getActivity(), "item", decorationId, "Decoration");
+		long mId = args.getLong(ARG_ITEM_TO_SKILL_ID, -1);
+		String mFrom = args.getString(ARG_ITEM_TO_SKILL_FROM);
+		return new ItemToSkillTreeListCursorLoader(getActivity(), "item", mId, mFrom);
 	}
 
 	@Override

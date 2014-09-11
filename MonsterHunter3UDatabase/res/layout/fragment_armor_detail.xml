@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/detail_armor_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp" >
+        </ImageView>
+
+        <TextView
+            android:id="@+id/detail_armor_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp" >
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".2"
+            android:orientation="vertical"
+            android:paddingLeft="10dp" >
+
+            <TextView
+                android:id="@+id/rare_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rare:" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/max_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max:" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/sell_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sell:" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/buy_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buy:" >
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/rare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

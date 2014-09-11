@@ -58,8 +58,18 @@ public class WeaponDetailFragment extends Fragment {
 		mWeaponAffinityTextView.setText("" + mWeapon.getAffinity() + "%");
 		mWeaponDefenseTextView.setText("" + mWeapon.getDefense());
 		
-		mWeaponCreationTextView.setText("" + mWeapon.getCreationCost() + "z");
-		mWeaponUpgradeTextView.setText("" + mWeapon.getUpgradeCost() + "z");
+		String createCost = "" + mWeapon.getCreationCost() + "z";
+		String upgradeCost = "" + mWeapon.getUpgradeCost() + "z";
+		
+		if (createCost.equals("0z")) {
+			createCost = "-";
+		}
+		if (upgradeCost.equals("0z")) {
+			upgradeCost = "-";
+		}
+		
+		mWeaponCreationTextView.setText(createCost);
+		mWeaponUpgradeTextView.setText(upgradeCost);
 		
 		/* Element */
 		String element = "";

@@ -1,29 +1,29 @@
 package com.daviancorp.android.ui.list;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.object.Armor;
 import com.daviancorp.android.data.object.Item;
+import com.daviancorp.android.data.object.Quest;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.detail.ArmorDetailActivity;
 
 /**
  * Pieced together from: Android samples:
@@ -74,8 +74,6 @@ public class ArmorExpandableListFragment extends Fragment {
 		ArrayList<Armor> g5 = new ArrayList<Armor>();
 
 		for (int i = 0; i < armors.size(); i++) {
-			Log.d("armor", "Type = " + armors.get(i).getSlot() + " "
-					+ armors.get(i).getName());
 			switch (armors.get(i).getSlot()) {
 
 			case "Head":
@@ -103,7 +101,6 @@ public class ArmorExpandableListFragment extends Fragment {
 		children.add(g4);
 		children.add(g5);
 
-		Log.d("armor", "size of g1 = " + g1.size());
 	}
 
 	@Override
@@ -116,6 +113,21 @@ public class ArmorExpandableListFragment extends Fragment {
 				.findViewById(R.id.expandableListView);
 
 		elv.setAdapter(new ArmorListAdapter(slots));
+		
+		elv.setOnChildClickListener(new OnChildClickListener() {
+
+			@Override
+			public boolean onChildClick(ExpandableListView arg0, View arg1,
+					int arg2, int arg3, long id) {
+				
+				Intent i = new Intent(getActivity(), ArmorDetailActivity.class);
+				i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, (long) arg1.getTag());
+				startActivity(i);
+
+				return false;
+			}
+		});
+		
 		return v;
 	}
 
@@ -181,13 +193,12 @@ public class ArmorExpandableListFragment extends Fragment {
 			Context context = parent.getContext();
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			v = inflater.inflate(android.R.layout.activity_list_item, parent,
+			v = inflater.inflate(R.layout.list_item_with_image, parent,
 					false);
 
-			TextView armorTextView = (TextView) v
-					.findViewById(android.R.id.text1);
-			ImageView armorImageView = (ImageView) v
-					.findViewById(android.R.id.icon);
+			LinearLayout root = (LinearLayout) v.findViewById(R.id.root);
+			TextView armorTextView = (TextView) v.findViewById(R.id.name);
+			ImageView armorImageView = (ImageView) v.findViewById(R.id.icon);
 
 			armorTextView.setText(getChild(groupPosition, childPosition)
 					.toString());
@@ -212,6 +223,9 @@ public class ArmorExpandableListFragment extends Fragment {
 			}
 
 			armorImageView.setImageDrawable(armorImage);
+			
+
+			root.setTag(((Armor) getChild(groupPosition,childPosition)).getId());
 			
 			return v;
 			

@@ -88,6 +88,10 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.daviancorp.android.ui.detail.ArmorDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.daviancorp.android.ui.detail.WeaponDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
