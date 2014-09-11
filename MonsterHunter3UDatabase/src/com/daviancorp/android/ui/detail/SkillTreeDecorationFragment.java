@@ -3,6 +3,7 @@ package com.daviancorp.android.ui.detail;
 import java.io.IOException;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,11 +11,12 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.ItemToSkillTreeCursor;
@@ -51,6 +53,16 @@ public class SkillTreeDecorationFragment extends ListFragment implements
 //		View v = inflater.inflate(android.R.layout.simple_list_item_1, null);
 //		return v;
 //	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		// The id argument will be the Item ID; CursorAdapter gives us this
+		// for free
+		
+		Intent i = new Intent(getActivity(), DecorationDetailActivity.class);
+		i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, (long) v.getTag());
+		startActivity(i);
+	}
 
 
 	@Override
@@ -104,6 +116,7 @@ public class SkillTreeDecorationFragment extends ListFragment implements
 			ItemToSkillTree skill = mItemToSkillTreeCursor.getItemToSkillTree();
 
 			// Set up the text view
+			LinearLayout root = (LinearLayout) view.findViewById(R.id.listitem);
 			ImageView skillItemImageView = (ImageView) view.findViewById(R.id.item_image);
 			TextView skillItemTextView = (TextView) view.findViewById(R.id.item);
 			TextView skillAmtTextView = (TextView) view.findViewById(R.id.amt);
@@ -125,6 +138,7 @@ public class SkillTreeDecorationFragment extends ListFragment implements
 			
 			skillItemImageView.setImageDrawable(i);
 			
+			root.setTag(skill.getItem().getId());
 		}
 	}
 

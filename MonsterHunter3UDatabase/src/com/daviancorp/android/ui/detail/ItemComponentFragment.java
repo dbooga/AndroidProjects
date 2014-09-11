@@ -82,11 +82,15 @@ public class ItemComponentFragment extends ListFragment implements
 		
 		if (tagId >= 2955) {
 			i = new Intent(getActivity(), WeaponDetailActivity.class);
-			i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, (long) v.getTag());
+			i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, tagId);
+		}
+		else if (tagId >= 1314) {
+			i = new Intent(getActivity(), ArmorDetailActivity.class);
+			i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, tagId);
 		}
 		else {
 			i = new Intent(getActivity(), ItemDetailActivity.class);
-			i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, (long) v.getTag());
+			i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, tagId);
 		}
 		startActivity(i);
 	}
