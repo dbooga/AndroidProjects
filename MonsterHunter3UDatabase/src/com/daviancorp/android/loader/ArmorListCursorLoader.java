@@ -26,18 +26,14 @@ public class ArmorListCursorLoader extends SQLiteCursorLoader {
 		// Query the list of all armor
 		if ((type == null) || (type.equals("Both"))) {
 			if (slot == null) {
-				Log.d("heyo", "both");
 				return DataManager.get(getContext()).queryArmor();
 			} else {
-				Log.d("heyo", "both1");
 				return DataManager.get(getContext()).queryArmorSlot(slot);
 			}
 		} else {
 			if (slot == null) {
-				Log.d("heyo", "both2");
 				return DataManager.get(getContext()).queryArmorType(type);
 			} else {
-				Log.d("heyo", "both3");
 				return DataManager.get(getContext()).queryArmorTypeSlot(type,
 						slot);
 			}

@@ -99,6 +99,10 @@
             android:name="com.daviancorp.android.ui.detail.DecorationDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.daviancorp.android.ui.detail.LocationDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

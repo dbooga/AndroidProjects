@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -13,26 +14,30 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.daviancorp.android.data.database.LocationCursor;
 import com.daviancorp.android.data.object.Location;
 import com.daviancorp.android.loader.LocationListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.detail.LocationDetailActivity;
+import com.daviancorp.android.ui.detail.MonsterDetailActivity;
 
 public class LocationGridFragment extends Fragment implements
 		LoaderCallbacks<Cursor> {
 
-
 	private GridView mGridView;
 	private LocationGridCursorAdapter mAdapter;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -68,6 +73,18 @@ public class LocationGridFragment extends Fragment implements
 		if (mGridView != null) {
 			mGridView.setAdapter(mAdapter);
 		}
+
+		mGridView.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+
+				Intent i = new Intent(getActivity(),
+						LocationDetailActivity.class);
+				i.putExtra(LocationDetailActivity.EXTRA_LOCATION_ID, id);
+				startActivity(i);
+
+			}
+		});
 	}
 
 	@Override
@@ -90,8 +107,8 @@ public class LocationGridFragment extends Fragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater
-					.inflate(R.layout.fragment_location_griditem, parent, false);
+			return inflater.inflate(R.layout.fragment_location_griditem,
+					parent, false);
 		}
 
 		@Override
@@ -99,6 +116,9 @@ public class LocationGridFragment extends Fragment implements
 			// Get the monster for the current row
 			Location location = mLocationCursor.getLocation();
 			AssetManager manager = context.getAssets();
+
+			LinearLayout gridLayout = (LinearLayout) view
+					.findViewById(R.id.gridLayout);
 
 			// Set up the text view
 			TextView locationNameTextView = (TextView) view
@@ -109,7 +129,6 @@ public class LocationGridFragment extends Fragment implements
 			String cellText = location.getName();
 			String cellImage = "icons_location/" + location.getFileLocation();
 
-			Log.d("helpme", "" + cellImage);
 			locationNameTextView.setText(cellText);
 
 			// Read a Bitmap from Assets
@@ -121,6 +140,8 @@ public class LocationGridFragment extends Fragment implements
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+
+			gridLayout.setTag(location.getId());
 		}
 	}
 
