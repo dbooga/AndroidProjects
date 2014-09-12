@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.daviancorp.android.ui.detail.MonsterCarveFragment;
+import com.daviancorp.android.ui.detail.MonsterRewardFragment;
 import com.daviancorp.android.ui.detail.MonsterDetailFragment;
 import com.daviancorp.android.ui.detail.MonsterQuestFragment;
 
@@ -24,11 +24,11 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			return MonsterDetailFragment.newInstance(monsterId);
 		case 1:
-			return MonsterCarveFragment.newInstance(monsterId, "LR");
+			return MonsterRewardFragment.newInstance(monsterId, "LR");
 		case 2:
-			return MonsterCarveFragment.newInstance(monsterId, "HR");
+			return MonsterRewardFragment.newInstance(monsterId, "HR");
 		case 3:
-			return MonsterCarveFragment.newInstance(monsterId, "G");
+			return MonsterRewardFragment.newInstance(monsterId, "G");
 		case 4:
 			return MonsterQuestFragment.newInstance(monsterId);
 		default:
