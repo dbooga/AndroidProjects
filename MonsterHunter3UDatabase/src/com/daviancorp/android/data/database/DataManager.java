@@ -3,10 +3,8 @@ package com.daviancorp.android.data.database;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.daviancorp.android.data.object.Armor;
-import com.daviancorp.android.data.object.Carve;
 import com.daviancorp.android.data.object.Combining;
 import com.daviancorp.android.data.object.Component;
 import com.daviancorp.android.data.object.Decoration;
@@ -87,58 +85,6 @@ public class DataManager {
 
 	public ArmorCursor queryArmorTypeSlot(String type, String slot) {
 		return mHelper.queryArmorTypeSlot(type, slot);
-	}
-	
-/********************************* CARVE QUERIES ******************************************/
-	public CarveCursor queryCarveItem(long id) {
-		return mHelper.queryCarveItem(id);
-	}
-
-	public CarveCursor queryCarveMonster(long id) {
-		return mHelper.queryCarveMonster(id);
-	}
-	
-	public CarveCursor queryCarveMonsterRank(long id, String rank) {
-		return mHelper.queryCarveMonsterRank(id, rank);
-	}
-	
-	public ArrayList<Carve> queryCarveArrayItem(long id) {
-		ArrayList<Carve> carves = new ArrayList<Carve>();
-		CarveCursor cursor = mHelper.queryCarveItem(id);
-		cursor.moveToFirst();
-		
-		while(!cursor.isAfterLast()) {
-			carves.add(cursor.getCarve());
-			cursor.moveToNext();
-		}
-		cursor.close();
-		return carves;
-	}
-	
-	public ArrayList<Carve> queryCarveArrayMonster(long id) {
-		ArrayList<Carve> carves = new ArrayList<Carve>();
-		CarveCursor cursor = mHelper.queryCarveMonster(id);
-		cursor.moveToFirst();
-		
-		while(!cursor.isAfterLast()) {
-			carves.add(cursor.getCarve());
-			cursor.moveToNext();
-		}
-		cursor.close();
-		return carves;
-	}
-	
-	public ArrayList<Carve> queryCarveArrayMonsterRank(long id, String rank) {
-		ArrayList<Carve> carves = new ArrayList<Carve>();
-		CarveCursor cursor = mHelper.queryCarveMonsterRank(id, rank);
-		cursor.moveToFirst();
-		
-		while(!cursor.isAfterLast()) {
-			carves.add(cursor.getCarve());
-			cursor.moveToNext();
-		}
-		cursor.close();
-		return carves;
 	}
 	
 /********************************* COMBINING QUERIES ******************************************/

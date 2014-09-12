@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.daviancorp.android.ui.detail.ItemCarveFragment;
+import com.daviancorp.android.ui.detail.ItemMonsterFragment;
 import com.daviancorp.android.ui.detail.ItemComponentFragment;
 import com.daviancorp.android.ui.detail.ItemDetailFragment;
 import com.daviancorp.android.ui.detail.ItemLocationFragment;
@@ -28,7 +28,7 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 		case 1:
 			return ItemQuestFragment.newInstance(itemId);
 		case 2:
-			return ItemCarveFragment.newInstance(itemId);
+			return ItemMonsterFragment.newInstance(itemId);
 		case 3:
 			return ItemLocationFragment.newInstance(itemId);
 		case 4:

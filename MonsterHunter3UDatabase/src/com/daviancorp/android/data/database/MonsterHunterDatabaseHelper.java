@@ -278,97 +278,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_QB.setProjectionMap(projectionMap);
 		return _QB;
 	}
-	
-/********************************* CARVE QUERIES ******************************************/
-	
-	/*
-	 * Get all carves based on item
-	 */
-	public CarveCursor queryCarveItem(long id) {
-		
-		_Columns = null;
-		_Selection = "c." + S.COLUMN_CARVES_ITEM_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
-		
-		return new CarveCursor(wrapJoinHelper(builderCarve()));
-	}
-	
-	/*
-	 * Get all carves based on what the query is for
-	 */
-	public CarveCursor queryCarveMonster(long id) {
-		
-		_Columns = null;
-		_Selection = "c." + S.COLUMN_CARVES_MONSTER_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
-		
-		return new CarveCursor(wrapJoinHelper(builderCarve()));
-	}
-	
-	/*
-	 * Get all carves based on what the query is for
-	 */
-	public CarveCursor queryCarveMonsterRank(long id, String rank) {
-		
-		_Columns = null;
-		_Selection = "c." + S.COLUMN_CARVES_MONSTER_ID + " = ? " + "AND " + 
-				"c." + S.COLUMN_CARVES_RANK + " = ? ";
-		_SelectionArgs = new String[]{"" + id, rank};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
-		
-		return new CarveCursor(wrapJoinHelper(builderCarve()));
-	}
-
-	/*
-	 * Helper method to query for carve
-	 */
-	private SQLiteQueryBuilder builderCarve() {
-//		SELECT c._id AS _id, c.item_id, c.monster_id, c.rank, 
-//		c.location, c.num_carves, c.percentage, i.name AS iname, 
-//		m.name AS mname
-//		FROM carves AS c 
-//		LEFT OUTER JOIN items AS i ON c.item_id = i._id
-//		LEFT OUTER JOIN monsters AS m ON c.monster_id = m._id;
-
-		String c = "c";
-		String i = "i";
-		String m = "m";
-		
-		HashMap<String, String> projectionMap = new HashMap<String, String>();
-		
-		projectionMap.put("_id", c + "." + S.COLUMN_CARVES_ID + " AS " + "_id");
-		projectionMap.put(S.COLUMN_CARVES_ITEM_ID, c + "." + S.COLUMN_CARVES_ITEM_ID);
-		projectionMap.put(S.COLUMN_CARVES_MONSTER_ID, c + "." + S.COLUMN_CARVES_MONSTER_ID);
-		projectionMap.put(S.COLUMN_CARVES_RANK, c + "." + S.COLUMN_CARVES_RANK);
-		projectionMap.put(S.COLUMN_CARVES_LOCATION, c + "." + S.COLUMN_CARVES_LOCATION);
-		projectionMap.put(S.COLUMN_CARVES_NUM_CARVES, c + "." + S.COLUMN_CARVES_NUM_CARVES);
-		projectionMap.put(S.COLUMN_CARVES_PERCENTAGE, c + "." + S.COLUMN_CARVES_PERCENTAGE);
-		
-		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
-		projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
-		projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
-
-		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
-		
-		_QB.setTables(S.TABLE_CARVES + " AS c" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "c." +
-				S.COLUMN_CARVES_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_MONSTERS +
-				" AS m " + " ON " + "c." + S.COLUMN_CARVES_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID);
-
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
-	}
 
 /********************************* COMBINING QUERIES ******************************************/
 	
@@ -840,7 +749,8 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_SelectionArgs = new String[]{"" + id};
 		_GroupBy = null;
 		_Having = null;
-		_OrderBy = null;
+		_OrderBy = "m." + S.COLUMN_MONSTERS_ID + " ASC, " + "h." + S.COLUMN_HUNTING_REWARDS_RANK +
+					" DESC, " + "h." + S.COLUMN_HUNTING_REWARDS_ID + " ASC";
 		_Limit = null;
 		
 		return new HuntingRewardCursor(wrapJoinHelper(builderHuntingReward()));
@@ -1493,7 +1403,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_SelectionArgs = new String[]{"" + id};
 		_GroupBy = null;
 		_Having = null;
-		_OrderBy = null;
+		_OrderBy = "qr." + S.COLUMN_QUEST_REWARDS_PERCENTAGE + " DESC";
 		_Limit = null;
 		
 		return new QuestRewardCursor(wrapJoinHelper(builderQuestReward()));
