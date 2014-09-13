@@ -14,7 +14,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -138,7 +137,6 @@ public class MonsterGridFragment extends Fragment implements
 			String cellText = monster.getName();
 			String cellImage = "icons_monster/" + monster.getFileLocation();
 			
-			Log.d("helpme", "" + cellImage);
 			monsterNameTextView.setText(cellText);
 			
 	        // Read a Bitmap from Assets

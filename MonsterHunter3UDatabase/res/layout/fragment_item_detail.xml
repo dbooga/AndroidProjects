@@ -3,13 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <LinearLayout 
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" 
-        >
-        
+        android:orientation="horizontal" >
+
         <ImageView
             android:id="@+id/detail_item_image"
             android:layout_width="50dp"
@@ -26,10 +25,8 @@
             android:text="@+id/label"
             android:textSize="15dp" >
         </TextView>
-
     </LinearLayout>
 
-    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,64 +36,76 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".2"
+            android:layout_weight=".3"
             android:orientation="vertical"
             android:paddingLeft="10dp" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rare:" >
-            </TextView>
+                android:text="Rare:" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Max:" >
-            </TextView>
+                android:text="Max:" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buy:" >
-            </TextView>
+                android:text="Buy:" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sell:" >
-            </TextView>
+                android:text="Sell:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description:" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".8"
+            android:layout_weight=".7"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/rare"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/max"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/buy"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/sell"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </TextView>
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

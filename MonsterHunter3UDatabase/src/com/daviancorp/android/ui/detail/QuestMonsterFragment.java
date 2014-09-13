@@ -121,8 +121,12 @@ public class QuestMonsterFragment extends ListFragment implements
 					.findViewById(R.id.detail_monster_unstable);
 			
 			String cellMonsterText = monsterToQuest.getMonster().getName();
+			String cellTraitText = monsterToQuest.getMonster().getTrait(); 
 			String cellUnstableText = monsterToQuest.getUnstable();
 			
+			if (!cellTraitText.equals("")) {
+				cellMonsterText = cellMonsterText + " (" + cellTraitText + ")";
+			}
 			if (cellUnstableText.equals("no")) {
 				cellUnstableText = "";
 			}

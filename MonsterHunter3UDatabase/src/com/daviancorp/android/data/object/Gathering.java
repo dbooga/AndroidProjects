@@ -7,12 +7,7 @@ public class Gathering {
 	private Location location;
 	private String area;
 	private String site;
-	private int site_set;
-	private int site_set_percentage;
-	private int site_set_gathers_min;
-	private int site_set_gathers_max;
 	private String rank;
-	private int percentage;
 	
 	public Gathering() {
 		this.id = -1;
@@ -20,12 +15,7 @@ public class Gathering {
 		this.location = null;
 		this.area = "";
 		this.site = "";
-		this.site_set = -1;
-		this.site_set_percentage = -1;
-		this.site_set_gathers_min = -1;
-		this.site_set_gathers_max = -1;
 		this.rank = "";
-		this.percentage = -1;
 	}
 
 	public long getId() {
@@ -68,52 +58,12 @@ public class Gathering {
 		this.site = site;
 	}
 
-	public int getSiteSet() {
-		return site_set;
-	}
-
-	public void setSiteSet(int site_set) {
-		this.site_set = site_set;
-	}
-
-	public int getSiteSetPercentage() {
-		return site_set_percentage;
-	}
-
-	public void setSiteSetPercentage(int site_set_percentage) {
-		this.site_set_percentage = site_set_percentage;
-	}
-
-	public int getSiteSetGathersMin() {
-		return site_set_gathers_min;
-	}
-
-	public void setSiteSetGathersMin(int site_set_gathers_min) {
-		this.site_set_gathers_min = site_set_gathers_min;
-	}
-
-	public int getSiteSetGathersMax() {
-		return site_set_gathers_max;
-	}
-
-	public void setSiteSetGathersMax(int site_set_gathers_max) {
-		this.site_set_gathers_max = site_set_gathers_max;
-	}
-
 	public String getRank() {
 		return rank;
 	}
 
 	public void setRank(String rank) {
 		this.rank = rank;
-	}
-
-	public int getPercentage() {
-		return percentage;
-	}
-
-	public void setPercentage(int percentage) {
-		this.percentage = percentage;
 	}
 	
 }

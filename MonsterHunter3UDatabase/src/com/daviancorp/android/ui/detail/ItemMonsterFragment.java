@@ -73,8 +73,27 @@ public class ItemMonsterFragment extends ListFragment implements
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// The id argument will be the Monster ID; CursorAdapter gives us this
 		// for free
+		
+		long monsterId = (long) v.getTag();
+		
+		if (monsterId == 2) {
+			monsterId = 1;
+		}
+		else if (monsterId == 4) {
+			monsterId = 3;
+		}
+		else if ((monsterId >=6) && (monsterId <= 10)) {
+			monsterId = 5;
+		}
+		else if ((monsterId >= 12) && (monsterId <= 16)) {
+			monsterId = 11;
+		}
+		else if ((monsterId >= 18) && (monsterId <= 23)) {
+			monsterId = 17;
+		}
+		
 		Intent i = new Intent(getActivity(), MonsterDetailActivity.class);
-		i.putExtra(MonsterDetailActivity.EXTRA_MONSTER_ID, (long) v.getTag());
+		i.putExtra(MonsterDetailActivity.EXTRA_MONSTER_ID, monsterId);
 		startActivity(i);
 	}
 
@@ -113,10 +132,15 @@ public class ItemMonsterFragment extends ListFragment implements
 
 			String cellRankText = huntingReward.getRank();
 			String cellMonsterText = huntingReward.getMonster().getName();
+			String cellTraitText = huntingReward.getMonster().getTrait(); 
 			String cellMethodText = huntingReward.getCondition();
 			int cellAmountText = huntingReward.getStackSize();
 			int cellPercentageText = huntingReward.getPercentage();
 
+			if (!cellTraitText.equals("")) {
+				cellMonsterText = cellMonsterText + " (" + cellTraitText + ")";
+			}
+			
 			rankTextView.setText(cellRankText);
 			monsterTextView.setText(cellMonsterText);
 			methodTextView.setText(cellMethodText);

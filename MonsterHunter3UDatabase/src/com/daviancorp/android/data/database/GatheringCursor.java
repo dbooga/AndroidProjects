@@ -31,22 +31,12 @@ public class GatheringCursor extends CursorWrapper {
 		long id = getLong(getColumnIndex(S.COLUMN_GATHERING_ID));
 		String area = getString(getColumnIndex(S.COLUMN_GATHERING_AREA));
 		String site = getString(getColumnIndex(S.COLUMN_GATHERING_SITE));
-		int site_set = getInt(getColumnIndex(S.COLUMN_GATHERING_SITE_SET));
-		int site_set_percentage = getInt(getColumnIndex(S.COLUMN_GATHERING_SITE_SET_PERCENTAGE));
-		int site_set_gathers_min = getInt(getColumnIndex(S.COLUMN_GATHERING_SITE_SET_GATHERS_MIN));
-		int site_set_gathers_max = getInt(getColumnIndex(S.COLUMN_GATHERING_SITE_SET_GATHERS_MAX));
 		String rank = getString(getColumnIndex(S.COLUMN_GATHERING_RANK));
-		int percentage = getInt(getColumnIndex(S.COLUMN_GATHERING_PERCENTAGE));
 		
 		gathering.setId(id);
 		gathering.setArea(area);
 		gathering.setSite(site);
-		gathering.setSiteSet(site_set);
-		gathering.setSiteSetPercentage(site_set_percentage);
-		gathering.setSiteSetGathersMin(site_set_gathers_min);
-		gathering.setSiteSetGathersMax(site_set_gathers_max);
 		gathering.setRank(rank);
-		gathering.setPercentage(percentage);
 		
 		Item item = new Item();
 		

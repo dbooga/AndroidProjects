@@ -605,12 +605,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_GATHERING_LOCATION_ID, g + "." + S.COLUMN_GATHERING_LOCATION_ID);
 		projectionMap.put(S.COLUMN_GATHERING_AREA, g + "." + S.COLUMN_GATHERING_AREA);
 		projectionMap.put(S.COLUMN_GATHERING_SITE, g + "." + S.COLUMN_GATHERING_SITE);
-		projectionMap.put(S.COLUMN_GATHERING_SITE_SET, g + "." + S.COLUMN_GATHERING_SITE_SET);
-		projectionMap.put(S.COLUMN_GATHERING_SITE_SET_PERCENTAGE, g + "." + S.COLUMN_GATHERING_SITE_SET_PERCENTAGE);
-		projectionMap.put(S.COLUMN_GATHERING_SITE_SET_GATHERS_MIN, g + "." + S.COLUMN_GATHERING_SITE_SET_GATHERS_MIN);
-		projectionMap.put(S.COLUMN_GATHERING_SITE_SET_GATHERS_MAX, g + "." + S.COLUMN_GATHERING_SITE_SET_GATHERS_MAX);
 		projectionMap.put(S.COLUMN_GATHERING_RANK, g + "." + S.COLUMN_GATHERING_RANK);
-		projectionMap.put(S.COLUMN_GATHERING_PERCENTAGE, g + "." + S.COLUMN_GATHERING_PERCENTAGE);
 		
 		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
 		projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
@@ -759,11 +754,16 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Get all hunting reward items based on monster
 	 */
-	public HuntingRewardCursor queryHuntingRewardMonster(long id) {
+	public HuntingRewardCursor queryHuntingRewardMonster(long[] ids) {
+		
+		String[] string_list = new String[ids.length];
+		for(int i = 0; i < ids.length; i++){
+		    string_list[i] = String.valueOf(ids[i]);
+		}
 		
 		_Columns = null;
-		_Selection = "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
+		_Selection = "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " IN (" + makePlaceholders(ids.length) + ")";
+		_SelectionArgs = string_list;
 		_GroupBy = null;
 		_Having = null;
 		_OrderBy = null;
@@ -775,12 +775,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Get all hunting reward items based on monster and rank
 	 */
-	public HuntingRewardCursor queryHuntingRewardMonsterRank(long id, String rank) {
+	public HuntingRewardCursor queryHuntingRewardMonsterRank(long[] ids, String rank) {
+		
+		String[] string_list = new String[ids.length + 1];
+		for(int i = 0; i < ids.length; i++){
+		    string_list[i] = String.valueOf(ids[i]);
+		}
+		string_list[ids.length] = rank;
 		
 		_Columns = null;
-		_Selection = "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " = ? " + "AND " + 
-				"h." + S.COLUMN_HUNTING_REWARDS_RANK + " = ? ";
-		_SelectionArgs = new String[]{"" + id, rank};
+		_Selection = "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " IN (" + makePlaceholders(ids.length) + ")"
+				+ " AND " + "h." + S.COLUMN_HUNTING_REWARDS_RANK + " = ? ";
+		_SelectionArgs = string_list;
 		_GroupBy = null;
 		_Having = null;
 		_OrderBy = null;
@@ -817,6 +823,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
 		projectionMap.put(i + S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME + " AS " + i + S.COLUMN_ITEMS_ICON_NAME);
 		projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
+		projectionMap.put(S.COLUMN_MONSTERS_TRAIT, m + "." + S.COLUMN_MONSTERS_TRAIT);
 		projectionMap.put(m + S.COLUMN_MONSTERS_FILE_LOCATION, m + "." + S.COLUMN_MONSTERS_FILE_LOCATION + " AS " + m + S.COLUMN_MONSTERS_FILE_LOCATION);
 
 		//Create new querybuilder
@@ -1172,14 +1179,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Get all traits from same monsters
 	 */
-	public MonsterCursor queryMonsterTrait(long id) {
+	public MonsterCursor queryMonsterTrait(String name) {
 		// "SELECT * FROM monsters WHERE _id = ? AND trait != ''"
 		
 		_Distinct = true;
 		_Table = S.TABLE_MONSTERS;
 		_Columns = null;
-		_Selection = S.COLUMN_MONSTERS_ID + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " != '' ";
-		_SelectionArgs = new String[] {"" + id};
+		_Selection = S.COLUMN_MONSTERS_NAME + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " != '' ";
+		_SelectionArgs = new String[] {name};
 		_GroupBy = null;
 		_Having = null;
 		_OrderBy = null;
@@ -1269,6 +1276,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_MONSTER_TO_QUEST_UNSTABLE, mtq + "." + S.COLUMN_MONSTER_TO_QUEST_UNSTABLE);
 		
 		projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
+		projectionMap.put(S.COLUMN_MONSTERS_TRAIT, m + "." + S.COLUMN_MONSTERS_TRAIT);
 		projectionMap.put(S.COLUMN_MONSTERS_FILE_LOCATION, m + "." + S.COLUMN_MONSTERS_FILE_LOCATION);
 		projectionMap.put(q + S.COLUMN_QUESTS_NAME, q + "." + S.COLUMN_QUESTS_NAME + " AS " + q + S.COLUMN_QUESTS_NAME);
 		projectionMap.put(S.COLUMN_QUESTS_HUB, q + "." + S.COLUMN_QUESTS_HUB);

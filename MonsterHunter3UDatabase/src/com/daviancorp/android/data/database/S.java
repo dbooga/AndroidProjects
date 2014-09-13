@@ -18,16 +18,6 @@ public class S {
 	static final String COLUMN_ARMOR_HUNTER_TYPE = "hunter_type";
 	static final String COLUMN_ARMOR_NUM_SLOTS = "num_slots";
 	
-	// Carves
-	static final String TABLE_CARVES = "carves";
-	static final String COLUMN_CARVES_ID = "_id";
-	static final String COLUMN_CARVES_ITEM_ID = "item_id";
-	static final String COLUMN_CARVES_MONSTER_ID = "monster_id";
-	static final String COLUMN_CARVES_RANK = "rank";
-	static final String COLUMN_CARVES_LOCATION = "location";
-	static final String COLUMN_CARVES_NUM_CARVES = "num_carves";
-	static final String COLUMN_CARVES_PERCENTAGE = "percentage";
-	
 	// Charms
 	static final String TABLE_CHARMS = "charms";
 	static final String COLUMN_CHARMS_ID = "_id";
@@ -67,12 +57,7 @@ public class S {
 	static final String COLUMN_GATHERING_LOCATION_ID = "location_id";
 	static final String COLUMN_GATHERING_AREA = "area";
 	static final String COLUMN_GATHERING_SITE = "site";
-	static final String COLUMN_GATHERING_SITE_SET = "site_set";
-	static final String COLUMN_GATHERING_SITE_SET_PERCENTAGE = "site_set_percentage";
-	static final String COLUMN_GATHERING_SITE_SET_GATHERS_MIN = "site_set_gathers_min";
-	static final String COLUMN_GATHERING_SITE_SET_GATHERS_MAX = "site_set_gathers_max";
 	static final String COLUMN_GATHERING_RANK = "rank";
-	static final String COLUMN_GATHERING_PERCENTAGE = "percentage";
 	
 	// Hunting Fleet
 	static final String TABLE_HUNTING_FLEET = "hunting_fleet";

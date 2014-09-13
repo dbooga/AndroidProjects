@@ -34,6 +34,7 @@ public class ItemDetailFragment extends Fragment {
 	private TextView maxTextView;
 	private TextView buyTextView;
 	private TextView sellTextView;
+	private TextView descriptionTextView;
 
 	public static ItemDetailFragment newInstance(long itemId) {
 		Bundle args = new Bundle();
@@ -72,6 +73,7 @@ public class ItemDetailFragment extends Fragment {
 		maxTextView = (TextView) view.findViewById(R.id.max);
 		sellTextView = (TextView) view.findViewById(R.id.sell);
 		buyTextView = (TextView) view.findViewById(R.id.buy);
+		descriptionTextView = (TextView) view.findViewById(R.id.description);
 
 		return view;
 	}
@@ -83,6 +85,7 @@ public class ItemDetailFragment extends Fragment {
 		String cellMax = "" + mItem.getCarryCapacity();
 		String cellSell = "" + mItem.getSell() + "z";
 		String cellBuy = "" + mItem.getBuy() + "z";
+		String cellDescription = "" + mItem.getDescription();
 		
 		if (cellBuy.equals("0z")) {
 			cellBuy = "-";
@@ -96,6 +99,7 @@ public class ItemDetailFragment extends Fragment {
 		maxTextView.setText(cellMax);
 		buyTextView.setText(cellBuy);
 		sellTextView.setText(cellSell);
+		descriptionTextView.setText(cellDescription);
 		
 		// Read a Bitmap from Assets
         AssetManager manager = getActivity().getAssets();

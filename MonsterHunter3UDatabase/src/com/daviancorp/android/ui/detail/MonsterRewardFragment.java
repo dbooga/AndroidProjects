@@ -128,9 +128,14 @@ public class MonsterRewardFragment extends ListFragment implements
 
 			String cellItemText = huntingReward.getItem().getName();
 			String cellConditionText = huntingReward.getCondition();
+			String cellTraitText = huntingReward.getMonster().getTrait();
 			int cellAmountText = huntingReward.getStackSize();
 			int cellPercentageText = huntingReward.getPercentage();
 
+			if (!cellTraitText.equals("")) {
+				cellConditionText = cellConditionText + " (" + cellTraitText + ")";
+			}
+			
 			itemTextView.setText(cellItemText);
 			methodTextView.setText(cellConditionText);
 			amountTextView.setText("" + cellAmountText);
