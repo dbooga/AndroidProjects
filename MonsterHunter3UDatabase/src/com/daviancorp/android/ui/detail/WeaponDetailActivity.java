@@ -74,25 +74,6 @@ public class WeaponDetailActivity extends GenericTabActivity implements
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_wishlist_list, menu);
-		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.wishlist_add:
-				DataManager.get(this).queryAddWishlistData(1, id, 1);
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-			}
-	}
-
-	@Override
 	public void onPause() {
 		super.onPause();
 	}

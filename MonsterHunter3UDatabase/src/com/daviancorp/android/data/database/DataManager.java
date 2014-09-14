@@ -719,6 +719,14 @@ public class DataManager {
 	public void queryAddWishlist(String name) {
 		mHelper.queryAddWishlist(name);
 	}
+
+	public void queryUpdateWishlist(long id, String name) {
+		mHelper.queryUpdateWishlist(id, name);
+	}
+
+	public void queryDeleteWishlist(long id) {
+		mHelper.queryDeleteWishlist(id);
+	}
 	
 	public Wishlist getWishlist(long id) {
 		Wishlist wishlist = null;
@@ -755,5 +763,13 @@ public class DataManager {
 			
 			mHelper.queryUpdateWishlistData(id, total);
 		}
+	}
+
+	public void queryUpdateWishlist(long id, int quantity) {
+		mHelper.queryUpdateWishlistData(id, quantity);
+	}
+
+	public void queryDeleteWishlistData(long id) {
+		mHelper.queryDeleteWishlistData(id);
 	}
 }

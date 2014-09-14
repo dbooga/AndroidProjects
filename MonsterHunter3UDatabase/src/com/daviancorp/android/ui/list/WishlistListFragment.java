@@ -1,5 +1,6 @@
 package com.daviancorp.android.ui.list;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.database.WishlistCursor;
 import com.daviancorp.android.data.object.Wishlist;
 import com.daviancorp.android.loader.WishlistListCursorLoader;
@@ -29,6 +29,11 @@ import com.daviancorp.android.ui.general.AddWishlistDialogFragment;
 public class WishlistListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
+	private static final String DIALOG_WISHLIST_ADD = "wishlist_add";
+	private static final int REQUEST_ADD = 0;
+	
+	private WishlistListCursorAdapter adapter;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,7 +52,7 @@ public class WishlistListFragment extends ListFragment implements
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Create an adapter to point at this cursor
-		WishlistListCursorAdapter adapter = new WishlistListCursorAdapter(
+		adapter = new WishlistListCursorAdapter(
 				getActivity(), (WishlistCursor) cursor);
 		setListAdapter(adapter);
 
@@ -72,13 +77,26 @@ public class WishlistListFragment extends ListFragment implements
 				FragmentManager fm = getActivity()
 					.getSupportFragmentManager();
 				AddWishlistDialogFragment dialog = new AddWishlistDialogFragment();
-				dialog.show(fm, "TEST");
+				dialog.setTargetFragment(WishlistListFragment.this, REQUEST_ADD);
+				dialog.show(fm, DIALOG_WISHLIST_ADD);
 				
-				DataManager.get(getActivity()).queryAddWishlist("test4");
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 			}
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode != Activity.RESULT_OK) return;
+		if (requestCode == REQUEST_ADD) {
+			boolean add = data.getBooleanExtra(AddWishlistDialogFragment.EXTRA_ADD, false);
+			
+			if(add) {
+				getLoaderManager().getLoader( 0 ).forceLoad();
+				adapter.notifyDataSetChanged();
+			}
+		}
 	}
 	
 	@Override

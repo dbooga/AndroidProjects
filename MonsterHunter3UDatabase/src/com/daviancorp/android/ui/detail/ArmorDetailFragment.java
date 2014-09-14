@@ -12,11 +12,16 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.object.Armor;
 import com.daviancorp.android.loader.ArmorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
@@ -54,6 +59,7 @@ public class ArmorDetailFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 
 		setRetainInstance(true);
+		setHasOptionsMenu(true);
 
 		// Check for a Item ID as an argument, and find the item
 		Bundle args = getArguments();
@@ -91,6 +97,24 @@ public class ArmorDetailFragment extends Fragment {
 		dragonResTextView = (TextView) view.findViewById(R.id.dragon_res);
 		
 		return view;
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.menu_wishlist_list, menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.wishlist_add:
+				DataManager.get(getActivity()).queryAddWishlistData(1, mArmor.getId(), 1);
+				Toast.makeText(getActivity(), "Added to wishlist", Toast.LENGTH_SHORT).show();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+			}
 	}
 
 	private void updateUI() throws IOException {

@@ -8,10 +8,12 @@
     <string name="alert_button">Close</string>
     <string name="option_list">List</string>
     <string name="option_grid">Grid</string>
-    <string name="option_add">Add to wishlist</string>
-    <string name="option_delete">Delete wishlist</string>
-    <string name="option_copy">Copy wishlist</string>
-    <string name="option_rename">Rename wishlist</string>
+    <string name="option_wishlist_add">Add wishlist</string>
+    <string name="option_wishlist_delete">Delete wishlist</string>
+    <string name="option_wishlist_copy">Copy wishlist</string>
+    <string name="option_wishlist_rename">Rename wishlist</string>
+    <string name="option_wishlist_data_add">Add to wishlist</string>
+    <string name="option_wishlist_data_delete">Delete from wishlist</string>
     <string name="monsters">Monsters</string>
     <string name="items">Items</string>
     <string name="locations">Locations</string>

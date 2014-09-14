@@ -154,6 +154,11 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public void updateRecord(String table, String strFilter, ContentValues values) {
 		getWritableDatabase().update(table, values, strFilter, null);
 	}
+	
+	public boolean deleteRecord(String table, String where, String[] args) 
+	{
+	    return getWritableDatabase().delete(table, where, args) > 0;
+	}
 
 /********************************* ARMOR QUERIES ******************************************/
 	
@@ -1852,6 +1857,24 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		insertRecord(S.TABLE_WISHLIST, values);
 	}
 	
+	public void queryUpdateWishlist(long id, String name) {
+		String strFilter = S.COLUMN_WISHLIST_ID + " = "  + id;
+		
+		ContentValues values = new ContentValues();
+		values.put(S.COLUMN_WISHLIST_NAME, name);
+		
+		updateRecord(S.TABLE_WISHLIST, strFilter, values);
+	}
+	
+	public void queryDeleteWishlist(long id) {
+		String where = S.COLUMN_WISHLIST_ID + " = ?";
+		String[] args = new String[]{"" + id};
+		deleteRecord(S.TABLE_WISHLIST, where, args);
+		
+		where = S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?";
+		deleteRecord(S.TABLE_WISHLIST_DATA, where, args);
+	}
+	
 /********************************* WISHLIST DATA QUERIES ******************************************/
 
 	/*
@@ -1928,6 +1951,12 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
 		
 		updateRecord(S.TABLE_WISHLIST_DATA, strFilter, values);
+	}
+	
+	public void queryDeleteWishlistData(long item_id) {		
+		String where = S.COLUMN_WISHLIST_DATA_ITEM_ID + " = ?";
+		String[] args = new String[]{ "" + item_id };
+		deleteRecord(S.TABLE_WISHLIST_DATA, where, args);
 	}
 	
 	/*
