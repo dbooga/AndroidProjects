@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -146,6 +147,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return qb.query(getReadableDatabase(), _Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit);
 	}
 	
+	public void insertRecord(String table, ContentValues values) { 
+		getWritableDatabase().insert(table, null, values); 
+	}
+	
+	public void updateRecord(String table, String strFilter, ContentValues values) {
+		getWritableDatabase().update(table, values, strFilter, null);
+	}
+
 /********************************* ARMOR QUERIES ******************************************/
 	
 	/*
@@ -1794,4 +1803,225 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_QB.setProjectionMap(projectionMap);
 		return _QB;
 	}
+	
+/********************************* WISHLIST QUERIES ******************************************/
+	
+	/*
+	 * Get all wishlist
+	 */
+	public WishlistCursor queryWishlists() {
+
+		_Distinct = false;
+		_Table = S.TABLE_WISHLIST;
+		_Columns = null;
+		_Selection = null;
+		_SelectionArgs = null;
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+
+		return new WishlistCursor(wrapHelper());
+	}
+	
+	/*
+	 * Get a specific wishlist
+	 */
+	public WishlistCursor queryWishlist(long id) {
+
+		_Distinct = false;
+		_Table = S.TABLE_WISHLIST;
+		_Columns = null;
+		_Selection = S.COLUMN_WISHLIST_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = "1";
+		
+		return new WishlistCursor(wrapHelper());
+	}		
+
+	/*
+	 * Add a wishlist
+	 */
+	public void queryAddWishlist(String name) {
+		ContentValues values = new ContentValues();
+		values.put(S.COLUMN_WISHLIST_NAME, name);
+		
+		insertRecord(S.TABLE_WISHLIST, values);
+	}
+	
+/********************************* WISHLIST DATA QUERIES ******************************************/
+
+	/*
+	 * Get all data for a specific wishlist
+	 */
+	public WishlistDataCursor queryWishlistData(long id) {
+
+		_Columns = null;
+		_Selection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new WishlistDataCursor(wrapJoinHelper(builderWishlistData()));
+	}	
+
+
+	/*
+	 * Get all data for a specific wishlist and item
+	 */
+	public WishlistDataCursor queryWishlistData(long wd_id, long item_id) {
+
+		_Columns = null;
+		_Selection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?" + " AND " +
+				"wd." + S.COLUMN_WISHLIST_DATA_ITEM_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(wd_id), String.valueOf(item_id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new WishlistDataCursor(wrapJoinHelper(builderWishlistData()));
+	}
+	
+	/*
+	 * Get all data for a specific wishlist
+	 */
+	public WishlistDataCursor queryWishlistDataComponent(long id) {
+//		GROUP BY c.component_item_id
+//		ORDER BY c.component_item_id ASC;
+		_Columns = null;
+		_Selection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?" + " AND " + 
+				"c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < 1314";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID;
+		_Having = null;
+		_OrderBy = "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " ASC";
+		_Limit = null;
+		
+		return new WishlistDataCursor(wrapJoinHelper(builderWishlistDataComponent()));
+	}
+	
+	/*
+	 * Add a wishlist data to a specific wishlist
+	 */
+	public void queryAddWishlistData(long wishlist_id, long item_id, int quantity) {
+		ContentValues values = new ContentValues();
+		values.put(S.COLUMN_WISHLIST_DATA_WISHLIST_ID, wishlist_id);
+		values.put(S.COLUMN_WISHLIST_DATA_ITEM_ID, item_id);
+		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
+		
+		insertRecord(S.TABLE_WISHLIST_DATA, values);
+	}
+	
+	/*
+	 * Update a wishlist data to a specific wishlist
+	 */
+	public void queryUpdateWishlistData(long id, int quantity) {
+		String strFilter = S.COLUMN_WISHLIST_DATA_ID + " = "  + id;
+		
+		ContentValues values = new ContentValues();
+		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
+		
+		updateRecord(S.TABLE_WISHLIST_DATA, strFilter, values);
+	}
+	
+	/*
+	 * Helper method to query for wishlistData
+	 */
+	private SQLiteQueryBuilder builderWishlistData() {
+//		SELECT wd._id AS _id, wd.wishlist_id, wd.item_id, wd.quantity, 
+//		i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell, i.description,
+//		i.icon_name, i.armor_dupe_name_fix
+//		FROM wishlist_data AS wd 
+//		LEFT OUTER JOIN wishlist AS w ON wd.wishlist_id = w._id 
+//		LEFT OUTER JOIN	items AS i ON wd.item_id = i._id;
+
+		String wd = "wd";
+		String w = "w";
+		String i = "i";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", wd + "." + S.COLUMN_WISHLIST_DATA_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_WISHLIST_DATA_WISHLIST_ID, wd + "." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID);
+		projectionMap.put(S.COLUMN_WISHLIST_DATA_ITEM_ID, wd + "." + S.COLUMN_WISHLIST_DATA_ITEM_ID);
+		projectionMap.put(S.COLUMN_WISHLIST_DATA_QUANTITY, wd + "." + S.COLUMN_WISHLIST_DATA_QUANTITY);
+
+		projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_TYPE, i + "." + S.COLUMN_ITEMS_TYPE);
+		projectionMap.put(S.COLUMN_ITEMS_RARITY, i + "." + S.COLUMN_ITEMS_RARITY);
+		projectionMap.put(S.COLUMN_ITEMS_CARRY_CAPACITY, i + "." + S.COLUMN_ITEMS_CARRY_CAPACITY);
+		projectionMap.put(S.COLUMN_ITEMS_BUY, i + "." + S.COLUMN_ITEMS_BUY);
+		projectionMap.put(S.COLUMN_ITEMS_SELL, i + "." + S.COLUMN_ITEMS_SELL);
+		projectionMap.put(S.COLUMN_ITEMS_DESCRIPTION, i + "." + S.COLUMN_ITEMS_DESCRIPTION);
+		projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
+		
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_WISHLIST_DATA + " AS wd" + " LEFT OUTER JOIN " + S.TABLE_WISHLIST + " AS w" + " ON " +
+				"wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = " + "w." + S.COLUMN_WISHLIST_ID + " LEFT OUTER JOIN " +
+				S.TABLE_ITEMS + " AS i" + " ON " + "wd." + S.COLUMN_WISHLIST_DATA_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
+	/*
+	 * Helper method to query components for wishlistData
+	 */
+	private SQLiteQueryBuilder builderWishlistDataComponent() {
+		
+//		SELECT wd._id AS _id, c.component_item_id, i.name, 
+//		SUM(c.quantity * wd.quantity) AS cquantity, i.icon_name
+//
+//		FROM wishlist_data AS wd
+//		LEFT OUTER JOIN components AS c 
+//		ON wd.item_id = c.created_item_id 
+//		LEFT OUTER JOIN items AS i 
+//		ON c.component_item_id = i._id
+//
+//		GROUP BY c.component_item_id
+//		ORDER BY c.component_item_id ASC;
+
+		String wd = "wd";
+		String c = "c";
+		String i = "i";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", wd + "." + S.COLUMN_WISHLIST_DATA_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_WISHLIST_DATA_ITEM_ID, c + "." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID +
+				" AS " + S.COLUMN_WISHLIST_DATA_ITEM_ID);
+		projectionMap.put(S.COLUMN_WISHLIST_DATA_QUANTITY, "SUM(" + wd + "." + S.COLUMN_WISHLIST_DATA_QUANTITY +
+				"*" + c + "." + S.COLUMN_COMPONENTS_QUANTITY + ")" + " AS " + S.COLUMN_WISHLIST_DATA_QUANTITY);
+
+		projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_TYPE, i + "." + S.COLUMN_ITEMS_TYPE);
+		projectionMap.put(S.COLUMN_ITEMS_RARITY, i + "." + S.COLUMN_ITEMS_RARITY);
+		projectionMap.put(S.COLUMN_ITEMS_CARRY_CAPACITY, i + "." + S.COLUMN_ITEMS_CARRY_CAPACITY);
+		projectionMap.put(S.COLUMN_ITEMS_BUY, i + "." + S.COLUMN_ITEMS_BUY);
+		projectionMap.put(S.COLUMN_ITEMS_SELL, i + "." + S.COLUMN_ITEMS_SELL);
+		projectionMap.put(S.COLUMN_ITEMS_DESCRIPTION, i + "." + S.COLUMN_ITEMS_DESCRIPTION);
+		projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
+		
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_WISHLIST_DATA + " AS wd" + " LEFT OUTER JOIN " + S.TABLE_COMPONENTS + " AS c" + " ON " +
+				"wd." + S.COLUMN_WISHLIST_DATA_ITEM_ID + " = " + "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " LEFT OUTER JOIN " +
+				S.TABLE_ITEMS + " AS i" + " ON " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}	
 }

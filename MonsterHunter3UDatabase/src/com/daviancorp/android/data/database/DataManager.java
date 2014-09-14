@@ -23,6 +23,8 @@ import com.daviancorp.android.data.object.QuestReward;
 import com.daviancorp.android.data.object.Skill;
 import com.daviancorp.android.data.object.SkillTree;
 import com.daviancorp.android.data.object.Weapon;
+import com.daviancorp.android.data.object.Wishlist;
+import com.daviancorp.android.data.object.WishlistData;
 
 public class DataManager {
 	private static final String TAG = "DataManager";
@@ -640,7 +642,6 @@ public class DataManager {
 		return skillTree;
 	}
 	
-	
 /********************************* WEAPON QUERIES ******************************************/	
 	
 	public WeaponCursor queryWeapon() {
@@ -703,5 +704,56 @@ public class DataManager {
 
 		return mHelper.queryWeapons(idArray);
 		
+	}
+	
+/********************************* WISHLIST QUERIES ******************************************/	
+	
+	public WishlistCursor queryWishlists() {
+		return mHelper.queryWishlists();
+	}
+	
+	public WishlistCursor queryWishlist(long id) {
+		return mHelper.queryWishlist(id);
+	}
+
+	public void queryAddWishlist(String name) {
+		mHelper.queryAddWishlist(name);
+	}
+	
+	public Wishlist getWishlist(long id) {
+		Wishlist wishlist = null;
+		WishlistCursor cursor = mHelper.queryWishlist(id);
+		cursor.moveToFirst();
+		
+		if (!cursor.isAfterLast())
+			wishlist = cursor.getWishlist();
+		cursor.close();
+		return wishlist;
+	}
+	
+/********************************* WISHLIST DATA QUERIES ******************************************/	
+
+	public WishlistDataCursor queryWishlistData(long id) {
+		return mHelper.queryWishlistData(id);
+	}
+	
+	public WishlistDataCursor queryWishlistDataComponent(long id) {
+		return mHelper.queryWishlistDataComponent(id);
+	}
+
+	public void queryAddWishlistData(long wishlist_id, long item_id, int quantity) {
+		WishlistDataCursor cursor = mHelper.queryWishlistData(wishlist_id, item_id);
+		cursor.moveToFirst();
+		
+		if (cursor.isAfterLast()) {
+			mHelper.queryAddWishlistData(wishlist_id, item_id, quantity);
+		}
+		else {
+			WishlistData data = cursor.getWishlistData();
+			long id = data.getId();
+			int total = data.getQuantity() + quantity;
+			
+			mHelper.queryUpdateWishlistData(id, total);
+		}
 	}
 }

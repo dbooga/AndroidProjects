@@ -228,6 +228,16 @@ public class S {
 	static final String COLUMN_WEAPONS_NUM_SLOTS = "num_slots";
 	static final String COLUMN_WEAPONS_SHARPNESS_FILE = "sharpness_file";
 	static final String COLUMN_WEAPONS_FINAL = "final";
-	
 
+	// Wishlist
+	static final String TABLE_WISHLIST = "wishlist";
+	static final String COLUMN_WISHLIST_ID = "_id";
+	static final String COLUMN_WISHLIST_NAME = "name";
+
+	// Wishlist Data
+	static final String TABLE_WISHLIST_DATA = "wishlist_data";
+	static final String COLUMN_WISHLIST_DATA_ID = "_id";
+	static final String COLUMN_WISHLIST_DATA_WISHLIST_ID = "wishlist_id";
+	static final String COLUMN_WISHLIST_DATA_ITEM_ID = "item_id";
+	static final String COLUMN_WISHLIST_DATA_QUANTITY = "quantity";
 }

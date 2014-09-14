@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.monsterhunter3udatabase.R;
@@ -22,6 +24,8 @@ public class ArmorDetailActivity extends GenericTabActivity implements
 	private ArmorDetailPagerAdapter mAdapter;
 	private ActionBar actionBar;
 
+	private long id;
+	
 	// Tab titles
 	private String[] tabs = { "Detail", "Skills", "Components"};
 
@@ -29,7 +33,7 @@ public class ArmorDetailActivity extends GenericTabActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		long id = getIntent().getLongExtra(EXTRA_ARMOR_ID, -1);
+		id = getIntent().getLongExtra(EXTRA_ARMOR_ID, -1);
 		setTitle(DataManager.get(getApplicationContext()).getArmor(id).getName());
 
 		// Initialization
@@ -71,9 +75,20 @@ public class ArmorDetailActivity extends GenericTabActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-//		MenuInflater inflater = getMenuInflater();
-//		inflater.inflate(R.menu.main, menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_wishlist_list, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.wishlist_add:
+				DataManager.get(this).queryAddWishlistData(1, id, 1);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+			}
 	}
 
 	@Override

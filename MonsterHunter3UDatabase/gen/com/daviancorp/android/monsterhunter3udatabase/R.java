@@ -996,16 +996,20 @@ containing a value of this type.
         public static final int ic_btn_round_more_disabled=0x7f020061;
         public static final int ic_btn_round_more_normal=0x7f020062;
         public static final int ic_launcher=0x7f020063;
-        public static final int lance1=0x7f020064;
-        public static final int light_bowgun1=0x7f020065;
-        public static final int list=0x7f020066;
-        public static final int long_sword1=0x7f020067;
-        public static final int mh3=0x7f020068;
-        public static final int stat_sys_download_anim0=0x7f020069;
-        public static final int switch_axe1=0x7f02006a;
-        public static final int sword_and_shield1=0x7f02006b;
-        public static final int sym_keyboard_feedback_shift=0x7f02006c;
-        public static final int sym_keyboard_feedback_shift_locked=0x7f02006d;
+        public static final int ic_menu_add=0x7f020064;
+        public static final int ic_menu_close_clear_cancel=0x7f020065;
+        public static final int ic_menu_delete=0x7f020066;
+        public static final int ic_menu_search=0x7f020067;
+        public static final int lance1=0x7f020068;
+        public static final int light_bowgun1=0x7f020069;
+        public static final int list=0x7f02006a;
+        public static final int long_sword1=0x7f02006b;
+        public static final int mh3=0x7f02006c;
+        public static final int stat_sys_download_anim0=0x7f02006d;
+        public static final int switch_axe1=0x7f02006e;
+        public static final int sword_and_shield1=0x7f02006f;
+        public static final int sym_keyboard_feedback_shift=0x7f020070;
+        public static final int sym_keyboard_feedback_shift_locked=0x7f020071;
     }
     public static final class id {
         public static final int about=0x7f0600f1;
@@ -1250,6 +1254,7 @@ containing a value of this type.
         public static final int useLogo=0x7f060003;
         public static final int water=0x7f0600ce;
         public static final int water_res=0x7f060049;
+        public static final int wishlist_add=0x7f0600f4;
         public static final int withText=0x7f06000c;
         public static final int wyvernfire=0x7f0600c8;
     }
@@ -1362,6 +1367,7 @@ containing a value of this type.
         public static final int main=0x7f0d0000;
         public static final int menu_monster_grid=0x7f0d0001;
         public static final int menu_monster_list=0x7f0d0002;
+        public static final int menu_wishlist_list=0x7f0d0003;
     }
     public static final class raw {
         public static final int mh3u=0x7f050000;
@@ -1413,19 +1419,25 @@ containing a value of this type.
         public static final int action_settings=0x7f0b000f;
         public static final int alert_button=0x7f0b0011;
         public static final int app_name=0x7f0b000d;
-        public static final int armor=0x7f0b001c;
-        public static final int combining=0x7f0b0017;
-        public static final int decorations=0x7f0b001b;
-        public static final int hunting_fleet=0x7f0b0019;
-        public static final int items=0x7f0b0015;
-        public static final int locations=0x7f0b0016;
-        public static final int monster_image=0x7f0b001d;
-        public static final int monsters=0x7f0b0014;
+        public static final int arena_quests=0x7f0b0023;
+        public static final int armor=0x7f0b0020;
+        public static final int combining=0x7f0b001b;
+        public static final int decorations=0x7f0b001f;
+        public static final int hunting_fleet=0x7f0b001d;
+        public static final int items=0x7f0b0019;
+        public static final int locations=0x7f0b001a;
+        public static final int monster_image=0x7f0b0021;
+        public static final int monsters=0x7f0b0018;
+        public static final int option_add=0x7f0b0014;
+        public static final int option_copy=0x7f0b0016;
+        public static final int option_delete=0x7f0b0015;
         public static final int option_grid=0x7f0b0013;
         public static final int option_list=0x7f0b0012;
-        public static final int quests=0x7f0b0018;
-        public static final int skill_trees=0x7f0b001a;
-        public static final int weapons=0x7f0b001e;
+        public static final int option_rename=0x7f0b0017;
+        public static final int quests=0x7f0b001c;
+        public static final int skill_trees=0x7f0b001e;
+        public static final int weapons=0x7f0b0022;
+        public static final int wishlist=0x7f0b0024;
     }
     public static final class style {
         /** 

@@ -23,6 +23,7 @@ import com.daviancorp.android.ui.list.MonsterGridActivity;
 import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
 import com.daviancorp.android.ui.list.WeaponGridActivity;
+import com.daviancorp.android.ui.list.WishlistListActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -38,10 +39,11 @@ public class HomeFragment extends Fragment {
 	private final static int SKILLS = 7;
 	private final static int LOCATIONS = 8;
 	private final static int HUNTINGFLEET = 9;
+	private final static int WISHLISTS = 10;
 
 	static final String[] numbers = new String[] { "Monsters", "Weapons",
 			"Armors", "Quests", "Items", "Combining", "Decorations", "Skills",
-			"Locations", "Hunting Fleet" };
+			"Locations", "Hunting Fleet", "Wishlists" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -115,6 +117,11 @@ public class HomeFragment extends Fragment {
 							HuntingFleetListActivity.class);
 					startActivity(intent);
 					break;
+				case WISHLISTS:
+					intent = new Intent(getActivity(),
+							WishlistListActivity.class);
+					startActivity(intent);
+					break;					
 				}
 			}
 		});

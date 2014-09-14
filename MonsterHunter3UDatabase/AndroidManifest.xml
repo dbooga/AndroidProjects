@@ -72,6 +72,10 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.daviancorp.android.ui.list.WishlistListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.daviancorp.android.ui.detail.MonsterDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
@@ -101,6 +105,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.daviancorp.android.ui.detail.LocationDetailActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.daviancorp.android.ui.detail.WishlistDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
     </application>
