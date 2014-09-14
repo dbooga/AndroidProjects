@@ -13,17 +13,29 @@ import android.widget.EditText;
 
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.detail.WeaponDetailFragment;
 
-public class AddWishlistDialogFragment extends DialogFragment {
-	public static final String EXTRA_ADD =
-			"com.daviancorp.android.ui.general.wishlist_add";
+public class WishlistRenameDialogFragment extends DialogFragment {
+	public static final String EXTRA_RENAME =
+			"com.daviancorp.android.ui.general.wishlist_rename";
+	private static final String ARG_WISHLIST_ID = "WISHLIST_ID";
+	private static final String ARG_WISHLIST_NAME = "WISHLIST_NAME";
+
+	public static WishlistRenameDialogFragment newInstance(long id, String name) {
+		Bundle args = new Bundle();
+		args.putLong(ARG_WISHLIST_ID, id);
+		args.putString(ARG_WISHLIST_NAME, name);
+		WishlistRenameDialogFragment f = new WishlistRenameDialogFragment();
+		f.setArguments(args);
+		return f;
+	}
 	
-	private void sendResult(int resultCode, boolean add) {
+	private void sendResult(int resultCode, boolean rename) {
 		if (getTargetFragment() == null)
 			return;
 		
 		Intent i = new Intent();
-		i.putExtra(EXTRA_ADD, add);
+		i.putExtra(EXTRA_RENAME, rename);
 		
 		getTargetFragment()
 			.onActivityResult(getTargetRequestCode(), resultCode, i);
@@ -33,18 +45,19 @@ public class AddWishlistDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		
-		View addView = inflater.inflate(R.layout.dialog_add_wishlist, null);
-		final EditText nameInput = (EditText) addView.findViewById(R.id.name);
+		View addView = inflater.inflate(R.layout.dialog_rename_wishlist, null);
+		final EditText nameInput = (EditText) addView.findViewById(R.id.rename);
 		
 		return new AlertDialog.Builder(getActivity())
-			.setTitle(R.string.option_wishlist_data_add)
+			.setTitle("Rename '" + getArguments().getString(ARG_WISHLIST_NAME) + "' wishlist?")
 			.setView(addView)
 			.setNegativeButton(android.R.string.cancel, null)
 			.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 				
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
-	            	   DataManager.get(getActivity()).queryAddWishlist(nameInput.getText().toString());
+	            	   DataManager.get(getActivity()).queryUpdateWishlist(
+	            			   getArguments().getLong(ARG_WISHLIST_ID), nameInput.getText().toString());
 	            	   sendResult(Activity.RESULT_OK, true);
 	               }
 			})

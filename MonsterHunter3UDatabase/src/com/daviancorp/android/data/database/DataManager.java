@@ -727,6 +727,19 @@ public class DataManager {
 	public void queryDeleteWishlist(long id) {
 		mHelper.queryDeleteWishlist(id);
 	}
+
+	public void queryCopyWishlist(long id, String name) {
+		long newId = mHelper.queryAddWishlist(name);
+		
+		WishlistDataCursor cursor = mHelper.queryWishlistData(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			WishlistData wishlist = cursor.getWishlistData();
+			mHelper.queryAddWishlistData(newId, wishlist.getItem().getId(), wishlist.getQuantity());
+			cursor.moveToNext();
+		}
+	}
 	
 	public Wishlist getWishlist(long id) {
 		Wishlist wishlist = null;

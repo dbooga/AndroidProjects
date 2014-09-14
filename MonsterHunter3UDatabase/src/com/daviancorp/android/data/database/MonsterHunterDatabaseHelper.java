@@ -147,12 +147,12 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return qb.query(getReadableDatabase(), _Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit);
 	}
 	
-	public void insertRecord(String table, ContentValues values) { 
-		getWritableDatabase().insert(table, null, values); 
+	public long insertRecord(String table, ContentValues values) { 
+		return getWritableDatabase().insert(table, null, values); 
 	}
 	
-	public void updateRecord(String table, String strFilter, ContentValues values) {
-		getWritableDatabase().update(table, values, strFilter, null);
+	public int updateRecord(String table, String strFilter, ContentValues values) {
+		return getWritableDatabase().update(table, values, strFilter, null);
 	}
 	
 	public boolean deleteRecord(String table, String where, String[] args) 
@@ -1850,35 +1850,37 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Add a wishlist
 	 */
-	public void queryAddWishlist(String name) {
+	public long queryAddWishlist(String name) {
 		ContentValues values = new ContentValues();
 		values.put(S.COLUMN_WISHLIST_NAME, name);
 		
-		insertRecord(S.TABLE_WISHLIST, values);
+		return insertRecord(S.TABLE_WISHLIST, values);
 	}
 	
-	public void queryUpdateWishlist(long id, String name) {
+	public int queryUpdateWishlist(long id, String name) {
 		String strFilter = S.COLUMN_WISHLIST_ID + " = "  + id;
 		
 		ContentValues values = new ContentValues();
 		values.put(S.COLUMN_WISHLIST_NAME, name);
 		
-		updateRecord(S.TABLE_WISHLIST, strFilter, values);
+		return updateRecord(S.TABLE_WISHLIST, strFilter, values);
 	}
 	
-	public void queryDeleteWishlist(long id) {
+	public boolean queryDeleteWishlist(long id) {
 		String where = S.COLUMN_WISHLIST_ID + " = ?";
 		String[] args = new String[]{"" + id};
-		deleteRecord(S.TABLE_WISHLIST, where, args);
+		boolean w1 = deleteRecord(S.TABLE_WISHLIST, where, args);
 		
 		where = S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?";
-		deleteRecord(S.TABLE_WISHLIST_DATA, where, args);
+		boolean w2 = deleteRecord(S.TABLE_WISHLIST_DATA, where, args);
+		
+		return (w1 && w2);
 	}
 	
 /********************************* WISHLIST DATA QUERIES ******************************************/
 
 	/*
-	 * Get all data for a specific wishlist
+	 * Get all wishlist data for a specific wishlist
 	 */
 	public WishlistDataCursor queryWishlistData(long id) {
 
@@ -1912,7 +1914,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	/*
-	 * Get all data for a specific wishlist
+	 * Get all component data for a specific wishlist
 	 */
 	public WishlistDataCursor queryWishlistDataComponent(long id) {
 //		GROUP BY c.component_item_id
@@ -1932,31 +1934,31 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Add a wishlist data to a specific wishlist
 	 */
-	public void queryAddWishlistData(long wishlist_id, long item_id, int quantity) {
+	public long queryAddWishlistData(long wishlist_id, long item_id, int quantity) {
 		ContentValues values = new ContentValues();
 		values.put(S.COLUMN_WISHLIST_DATA_WISHLIST_ID, wishlist_id);
 		values.put(S.COLUMN_WISHLIST_DATA_ITEM_ID, item_id);
 		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
 		
-		insertRecord(S.TABLE_WISHLIST_DATA, values);
+		return insertRecord(S.TABLE_WISHLIST_DATA, values);
 	}
 	
 	/*
 	 * Update a wishlist data to a specific wishlist
 	 */
-	public void queryUpdateWishlistData(long id, int quantity) {
+	public int queryUpdateWishlistData(long id, int quantity) {
 		String strFilter = S.COLUMN_WISHLIST_DATA_ID + " = "  + id;
 		
 		ContentValues values = new ContentValues();
 		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
 		
-		updateRecord(S.TABLE_WISHLIST_DATA, strFilter, values);
+		return updateRecord(S.TABLE_WISHLIST_DATA, strFilter, values);
 	}
 	
-	public void queryDeleteWishlistData(long item_id) {		
+	public boolean queryDeleteWishlistData(long item_id) {		
 		String where = S.COLUMN_WISHLIST_DATA_ITEM_ID + " = ?";
 		String[] args = new String[]{ "" + item_id };
-		deleteRecord(S.TABLE_WISHLIST_DATA, where, args);
+		return deleteRecord(S.TABLE_WISHLIST_DATA, where, args);
 	}
 	
 	/*
