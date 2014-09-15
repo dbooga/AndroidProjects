@@ -4,11 +4,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.daviancorp.android.ui.detail.WishlistDataComponentFragment;
 import com.daviancorp.android.ui.detail.WishlistDataDetailFragment;
 
 public class WishlistDetailPagerAdapter extends FragmentPagerAdapter {
+	private static final int REQUEST_REFRESH = 0;
 	
 	private long wishlistId;
+	private WishlistDataDetailFragment mWishlistDataDetailFragment;
+	private WishlistDataComponentFragment mWishlistDataComponentFragment;
 
 	public WishlistDetailPagerAdapter(FragmentManager fm, long id) {
 		super(fm);
@@ -20,9 +24,17 @@ public class WishlistDetailPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
-			return WishlistDataDetailFragment.newInstance(wishlistId, "wishlist");
+			mWishlistDataDetailFragment = WishlistDataDetailFragment.newInstance(wishlistId);
+			if (mWishlistDataComponentFragment != null) {
+				mWishlistDataDetailFragment.setTargetFragment(mWishlistDataComponentFragment, REQUEST_REFRESH);
+			}
+			return mWishlistDataDetailFragment;
 		case 1:
-			return WishlistDataDetailFragment.newInstance(wishlistId, "component");
+			mWishlistDataComponentFragment = WishlistDataComponentFragment.newInstance(wishlistId);
+			if (mWishlistDataDetailFragment != null) {
+				mWishlistDataDetailFragment.setTargetFragment(mWishlistDataComponentFragment, REQUEST_REFRESH);
+			}
+			return mWishlistDataComponentFragment;
 		default:
 			return null;
 		}

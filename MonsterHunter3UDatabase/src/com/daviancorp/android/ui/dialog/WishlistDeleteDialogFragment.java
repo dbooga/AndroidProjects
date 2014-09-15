@@ -1,4 +1,4 @@
-package com.daviancorp.android.ui.general;
+package com.daviancorp.android.ui.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,9 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class WishlistDeleteDialogFragment extends DialogFragment {
 	public static final String EXTRA_DELETE =
@@ -38,9 +39,10 @@ public class WishlistDeleteDialogFragment extends DialogFragment {
 	}
 	
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {		
+	public Dialog onCreateDialog(Bundle savedInstanceState) {	
+		final String name = getArguments().getString(ARG_WISHLIST_NAME);
 		return new AlertDialog.Builder(getActivity())
-			.setTitle("Delete '" + getArguments().getString(ARG_WISHLIST_NAME) + "' wishlist?")
+			.setTitle("Delete '" + name + "' wishlist?")
 			.setNegativeButton(android.R.string.cancel, null)
 			.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 				
@@ -48,6 +50,8 @@ public class WishlistDeleteDialogFragment extends DialogFragment {
 	               public void onClick(DialogInterface dialog, int id) {
 	            	   DataManager.get(getActivity()).queryDeleteWishlist(
 	            			   getArguments().getLong(ARG_WISHLIST_ID));
+	            	   
+	   				   Toast.makeText(getActivity(), "Deleted '" + name + "'", Toast.LENGTH_SHORT).show();
 	            	   sendResult(Activity.RESULT_OK, true);
 	               }
 			})

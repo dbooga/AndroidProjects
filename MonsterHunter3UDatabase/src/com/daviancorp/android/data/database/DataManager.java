@@ -3,6 +3,7 @@ package com.daviancorp.android.data.database;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.daviancorp.android.data.object.Armor;
 import com.daviancorp.android.data.object.Combining;
@@ -778,8 +779,13 @@ public class DataManager {
 		}
 	}
 
-	public void queryUpdateWishlist(long id, int quantity) {
-		mHelper.queryUpdateWishlistData(id, quantity);
+	public void queryUpdateWishlistData(long id, int quantity) {
+		if (quantity > 0) {
+			mHelper.queryUpdateWishlistData(id, quantity);
+		}
+		else {
+			mHelper.queryDeleteWishlistData(id);
+		}
 	}
 
 	public void queryDeleteWishlistData(long id) {

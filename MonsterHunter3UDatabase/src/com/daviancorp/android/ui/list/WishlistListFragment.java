@@ -31,10 +31,10 @@ import com.daviancorp.android.data.object.Wishlist;
 import com.daviancorp.android.loader.WishlistListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.WishlistDetailActivity;
-import com.daviancorp.android.ui.general.WishlistAddDialogFragment;
-import com.daviancorp.android.ui.general.WishlistCopyDialogFragment;
-import com.daviancorp.android.ui.general.WishlistDeleteDialogFragment;
-import com.daviancorp.android.ui.general.WishlistRenameDialogFragment;
+import com.daviancorp.android.ui.dialog.WishlistAddDialogFragment;
+import com.daviancorp.android.ui.dialog.WishlistCopyDialogFragment;
+import com.daviancorp.android.ui.dialog.WishlistDeleteDialogFragment;
+import com.daviancorp.android.ui.dialog.WishlistRenameDialogFragment;
 
 public class WishlistListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

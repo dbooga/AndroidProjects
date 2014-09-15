@@ -1,4 +1,4 @@
-package com.daviancorp.android.ui.general;
+package com.daviancorp.android.ui.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.monsterhunter3udatabase.R;
@@ -33,7 +34,7 @@ public class WishlistAddDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		
-		View addView = inflater.inflate(R.layout.dialog_add_wishlist, null);
+		View addView = inflater.inflate(R.layout.dialog_wishlist_add, null);
 		final EditText nameInput = (EditText) addView.findViewById(R.id.name);
 		
 		return new AlertDialog.Builder(getActivity())
@@ -44,7 +45,10 @@ public class WishlistAddDialogFragment extends DialogFragment {
 				
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
-	            	   DataManager.get(getActivity()).queryAddWishlist(nameInput.getText().toString());
+	            	   String name = nameInput.getText().toString();
+	            	   DataManager.get(getActivity()).queryAddWishlist(name);
+
+	   				   Toast.makeText(getActivity(), "Added '" + name + "'", Toast.LENGTH_SHORT).show();
 	            	   sendResult(Activity.RESULT_OK, true);
 	               }
 			})

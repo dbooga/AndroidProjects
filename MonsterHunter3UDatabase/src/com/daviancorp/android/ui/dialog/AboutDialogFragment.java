@@ -1,4 +1,4 @@
-package com.daviancorp.android.ui.general;
+package com.daviancorp.android.ui.dialog;
 
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

@@ -143,7 +143,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	private Cursor wrapJoinHelper(SQLiteQueryBuilder qb) {
-//		Log.d(TAG, "qb: " + qb.buildQuery(null, null, null, null, null, null));
+//		Log.d(TAG, "qb: " + qb.buildQuery(_Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit));
 		return qb.query(getReadableDatabase(), _Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit);
 	}
 	
@@ -1883,16 +1883,21 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 * Get all wishlist data for a specific wishlist
 	 */
 	public WishlistDataCursor queryWishlistData(long id) {
-
-		_Columns = null;
-		_Selection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
 		
-		return new WishlistDataCursor(wrapJoinHelper(builderWishlistData()));
+		String[] wdColumns = null;
+		String wdSelection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?";
+		String[] wdSelectionArgs = new String[]{ String.valueOf(id) };
+		String wdGroupBy = null;
+		String wdHaving = null;
+		String wdOrderBy = null;
+		String wdLimit = null;
+		
+		// Multithread issues workaround
+		SQLiteQueryBuilder qb = builderWishlistData();
+		Cursor cursor = qb.query(
+				getReadableDatabase(), wdColumns, wdSelection, wdSelectionArgs, wdGroupBy, wdHaving, wdOrderBy, wdLimit);
+		
+		return new WishlistDataCursor(cursor);
 	}	
 
 
@@ -1901,16 +1906,21 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public WishlistDataCursor queryWishlistData(long wd_id, long item_id) {
 
-		_Columns = null;
-		_Selection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?" + " AND " +
+		String[] wdColumns = null;
+		String wdSelection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?" + " AND " +
 				"wd." + S.COLUMN_WISHLIST_DATA_ITEM_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(wd_id), String.valueOf(item_id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		String[] wdSelectionArgs = new String[]{ String.valueOf(wd_id), String.valueOf(item_id) };
+		String wdGroupBy = null;
+		String wdHaving = null;
+		String wdOrderBy = null;
+		String wdLimit = null;
+
+		// Multithread issues workaround
+		SQLiteQueryBuilder qb = builderWishlistData();
+		Cursor cursor = qb.query(
+				getReadableDatabase(), wdColumns, wdSelection, wdSelectionArgs, wdGroupBy, wdHaving, wdOrderBy, wdLimit);
 		
-		return new WishlistDataCursor(wrapJoinHelper(builderWishlistData()));
+		return new WishlistDataCursor(cursor);
 	}
 	
 	/*
@@ -1919,16 +1929,21 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public WishlistDataCursor queryWishlistDataComponent(long id) {
 //		GROUP BY c.component_item_id
 //		ORDER BY c.component_item_id ASC;
-		_Columns = null;
-		_Selection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?" + " AND " + 
+		String[] wdColumns = null;
+		String wdSelection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?" + " AND " + 
 				"c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < 1314";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID;
-		_Having = null;
-		_OrderBy = "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " ASC";
-		_Limit = null;
+		String[] wdSelectionArgs = new String[]{ String.valueOf(id) };
+		String wdGroupBy = "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID;
+		String wdHaving = null;
+		String wdOrderBy = "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " ASC";
+		String wdLimit = null;
+
+		// Multithread issues workaround
+		SQLiteQueryBuilder qb = builderWishlistDataComponent();
+		Cursor cursor = qb.query(
+				getReadableDatabase(), wdColumns, wdSelection, wdSelectionArgs, wdGroupBy, wdHaving, wdOrderBy, wdLimit);
 		
-		return new WishlistDataCursor(wrapJoinHelper(builderWishlistDataComponent()));
+		return new WishlistDataCursor(cursor);
 	}
 	
 	/*
@@ -1955,9 +1970,9 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return updateRecord(S.TABLE_WISHLIST_DATA, strFilter, values);
 	}
 	
-	public boolean queryDeleteWishlistData(long item_id) {		
-		String where = S.COLUMN_WISHLIST_DATA_ITEM_ID + " = ?";
-		String[] args = new String[]{ "" + item_id };
+	public boolean queryDeleteWishlistData(long id) {
+		String where = S.COLUMN_WISHLIST_DATA_ID + " = ?";
+		String[] args = new String[]{ "" + id };
 		return deleteRecord(S.TABLE_WISHLIST_DATA, where, args);
 	}
 	

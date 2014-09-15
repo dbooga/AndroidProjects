@@ -1,6 +1,7 @@
 package com.daviancorp.android.ui.general;
 
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
 import com.daviancorp.android.ui.list.DecorationListActivity;
