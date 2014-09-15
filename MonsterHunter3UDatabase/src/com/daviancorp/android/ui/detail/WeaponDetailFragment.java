@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
@@ -11,17 +12,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.object.Weapon;
 import com.daviancorp.android.loader.WeaponLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
 
 public class WeaponDetailFragment extends Fragment {
 	protected static final String ARG_WEAPON_ID = "WEAPON_ID";
 	protected static final int LOAD_WEAPON = 1;
-
+	
 	protected Weapon mWeapon;
 
 	protected TextView mWeaponLabelTextView, mWeaponTypeTextView,
@@ -43,7 +43,6 @@ public class WeaponDetailFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 
 		setRetainInstance(true);
-		setHasOptionsMenu(true);
 
 		// Check for a Weapon ID as an argument, and find the weapon
 		Bundle args = getArguments();
@@ -54,24 +53,6 @@ public class WeaponDetailFragment extends Fragment {
 				lm.initLoader(LOAD_WEAPON, args, new WeaponLoaderCallbacks());
 			}
 		}
-	}
-	
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.menu_wishlist_list, menu);
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.wishlist_add:
-				DataManager.get(getActivity()).queryAddWishlistData(1, mWeapon.getId(), 1);
-				Toast.makeText(getActivity(), "Added to wishlist", Toast.LENGTH_SHORT).show();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-			}
 	}
 	
 	protected void updateUI() throws IOException {

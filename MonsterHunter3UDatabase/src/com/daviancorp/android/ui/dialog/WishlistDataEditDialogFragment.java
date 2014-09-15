@@ -54,7 +54,6 @@ public class WishlistDataEditDialogFragment extends DialogFragment {
 		return new AlertDialog.Builder(getActivity())
 			.setTitle("Set quantity for '" + name + "'")
 			.setView(v)
-			.setCancelable(false)
 			.setNegativeButton(android.R.string.cancel, null)
 			.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 				
@@ -67,9 +66,15 @@ public class WishlistDataEditDialogFragment extends DialogFragment {
 	            			   quantity = 99;
 	            		   }
 	            		   
-		            	   DataManager.get(getActivity()).queryUpdateWishlistData(
-		            			   getArguments().getLong(ARG_WISHLIST_DATA_ID), quantity);
-		            	   
+	            		   if (quantity > 0) {
+			            	   DataManager.get(getActivity()).queryUpdateWishlistData(
+			            			   getArguments().getLong(ARG_WISHLIST_DATA_ID), quantity);
+	            		   }
+	            		   else {
+	            			   DataManager.get(getActivity()).queryDeleteWishlistData(
+	            					   getArguments().getLong(ARG_WISHLIST_DATA_ID));
+	            		   }
+	            		   
 		   				   Toast.makeText(getActivity(), "Edited '" + name + "'", Toast.LENGTH_SHORT).show();
 		            	   sendResult(Activity.RESULT_OK, true);
 	            	   }

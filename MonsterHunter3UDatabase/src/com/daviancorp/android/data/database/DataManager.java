@@ -780,12 +780,7 @@ public class DataManager {
 	}
 
 	public void queryUpdateWishlistData(long id, int quantity) {
-		if (quantity > 0) {
-			mHelper.queryUpdateWishlistData(id, quantity);
-		}
-		else {
-			mHelper.queryDeleteWishlistData(id);
-		}
+		mHelper.queryUpdateWishlistData(id, quantity);
 	}
 
 	public void queryDeleteWishlistData(long id) {
