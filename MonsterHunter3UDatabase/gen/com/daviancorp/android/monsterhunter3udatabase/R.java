@@ -1016,7 +1016,7 @@ containing a value of this type.
         public static final int sym_keyboard_feedback_shift_locked=0x7f020075;
     }
     public static final class id {
-        public static final int about=0x7f0600f9;
+        public static final int about=0x7f0600fa;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1164,13 +1164,14 @@ containing a value of this type.
         public static final int menu_item_copy_wishlist=0x7f0600f5;
         public static final int menu_item_delete_wishlist=0x7f0600f6;
         public static final int menu_item_delete_wishlist_data=0x7f0600f8;
+        public static final int menu_item_edit_wishlist_add=0x7f0600f9;
         public static final int menu_item_edit_wishlist_data=0x7f0600f7;
         public static final int menu_item_rename_wishlist=0x7f0600f4;
         public static final int method=0x7f06007e;
         public static final int middle=0x7f060012;
         public static final int monster=0x7f06007f;
-        public static final int monster_gridview=0x7f0600fb;
-        public static final int monster_listview=0x7f0600fa;
+        public static final int monster_gridview=0x7f0600fc;
+        public static final int monster_listview=0x7f0600fb;
         public static final int name=0x7f060040;
         public static final int never=0x7f060009;
         public static final int none=0x7f060010;
@@ -1266,7 +1267,7 @@ containing a value of this type.
         public static final int useLogo=0x7f060003;
         public static final int water=0x7f0600d1;
         public static final int water_res=0x7f06004d;
-        public static final int wishlist_add=0x7f0600fc;
+        public static final int wishlist_add=0x7f0600fd;
         public static final int withText=0x7f06000c;
         public static final int wyvernfire=0x7f0600cb;
     }
@@ -1385,10 +1386,11 @@ containing a value of this type.
     public static final class menu {
         public static final int context_wishlist=0x7f0d0000;
         public static final int context_wishlist_data=0x7f0d0001;
-        public static final int main=0x7f0d0002;
-        public static final int menu_monster_grid=0x7f0d0003;
-        public static final int menu_monster_list=0x7f0d0004;
-        public static final int menu_wishlist_list=0x7f0d0005;
+        public static final int context_wishlist_data_add=0x7f0d0002;
+        public static final int main=0x7f0d0003;
+        public static final int menu_monster_grid=0x7f0d0004;
+        public static final int menu_monster_list=0x7f0d0005;
+        public static final int menu_wishlist_list=0x7f0d0006;
     }
     public static final class raw {
         public static final int mh3u=0x7f050000;

@@ -165,9 +165,9 @@ public class WishlistDataDetailFragment extends ListFragment implements
 		
 		switch (item.getItemId()) {
 			case R.id.menu_item_edit_wishlist_data:
-				WishlistDataEditDialogFragment dialogCopy = WishlistDataEditDialogFragment.newInstance(id, name);
-				dialogCopy.setTargetFragment(WishlistDataDetailFragment.this, REQUEST_EDIT);
-				dialogCopy.show(fm, DIALOG_WISHLIST_DATA_EDIT);
+				WishlistDataEditDialogFragment dialogEdit = WishlistDataEditDialogFragment.newInstance(id, name);
+				dialogEdit.setTargetFragment(WishlistDataDetailFragment.this, REQUEST_EDIT);
+				dialogEdit.show(fm, DIALOG_WISHLIST_DATA_EDIT);
 				return true;
 			case R.id.menu_item_delete_wishlist_data:
 				WishlistDataDeleteDialogFragment dialogDelete = WishlistDataDeleteDialogFragment.newInstance(id, name);

@@ -3,97 +3,75 @@ package com.daviancorp.android.ui.list;
 import java.io.IOException;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.data.object.Weapon;
-import com.daviancorp.android.loader.WeaponListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
-import com.daviancorp.android.ui.detail.WeaponDetailActivity;
 
-public class WeaponBowListFragment extends ListFragment implements
+public class WeaponBowListFragment extends WeaponListFragment implements
 		LoaderCallbacks<Cursor> {
-	private static final String ARG_TYPE = "WEAPON_TYPE";
 
 	public static WeaponBowListFragment newInstance(String type) {
 		Bundle args = new Bundle();
-		args.putString(ARG_TYPE, type);
+		args.putString(WeaponListFragment.ARG_TYPE, type);
 		WeaponBowListFragment f = new WeaponBowListFragment();
 		f.setArguments(args);
 		return f;
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
-	}
-
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_weapon_bow_list, null);
+		super.setContextMenu(v);
 		return v;
 	}
-
+	
 	@Override
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// You only ever load the runs, so assume this is the case
-		String mType = null;
-		if (args != null) {
-			mType = args.getString(ARG_TYPE);
-		}
-
-		return new WeaponListCursorLoader(getActivity(), mType);
+	protected CursorAdapter getDetailAdapter() {
+		return (CursorAdapter) getListAdapter();
 	}
-
+	
+	@Override
+	protected Weapon getDetailWeapon(int position) {
+		WeaponBowListCursorAdapter adapter = (WeaponBowListCursorAdapter) getListAdapter();
+		return((WeaponCursor) adapter.getItem(position)).getWeapon();
+	}	
+	
+	@Override
+	protected Fragment getThisFragment() {
+		return this;
+	}
+	
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Create an adapter to point at this cursor
-		WeaponListCursorAdapter adapter = new WeaponListCursorAdapter(
+		WeaponBowListCursorAdapter adapter = new WeaponBowListCursorAdapter(
 				getActivity(), (WeaponCursor) cursor);
 		setListAdapter(adapter);
 
 	}
 
-	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-		// Stop using the cursor (via the adapter)
-		setListAdapter(null);
-	}
-	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this
-		// for free
-		Intent i = new Intent(getActivity(), WeaponDetailActivity.class);
-		i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, id);
-		startActivity(i);
-	}
-
-	private static class WeaponListCursorAdapter extends CursorAdapter {
+	private static class WeaponBowListCursorAdapter extends CursorAdapter {
 
 		private WeaponCursor mWeaponCursor;
 
-		public WeaponListCursorAdapter(Context context, WeaponCursor cursor) {
+		public WeaponBowListCursorAdapter(Context context, WeaponCursor cursor) {
 			super(context, cursor, 0);
 			mWeaponCursor = cursor;
 		}

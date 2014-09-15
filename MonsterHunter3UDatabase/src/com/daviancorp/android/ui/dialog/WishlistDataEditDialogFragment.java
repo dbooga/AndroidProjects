@@ -60,24 +60,29 @@ public class WishlistDataEditDialogFragment extends DialogFragment {
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
 	            	   String input = quantityInput.getText().toString();
-	            	   if (!input.equals("")) {
-	            		   int quantity = Integer.parseInt(input);
-	            		   if (quantity > 99) {
-	            			   quantity = 99;
-	            		   }
-	            		   
-	            		   if (quantity > 0) {
-			            	   DataManager.get(getActivity()).queryUpdateWishlistData(
-			            			   getArguments().getLong(ARG_WISHLIST_DATA_ID), quantity);
-	            		   }
-	            		   else {
-	            			   DataManager.get(getActivity()).queryDeleteWishlistData(
-	            					   getArguments().getLong(ARG_WISHLIST_DATA_ID));
-	            		   }
-	            		   
-		   				   Toast.makeText(getActivity(), "Edited '" + name + "'", Toast.LENGTH_SHORT).show();
-		            	   sendResult(Activity.RESULT_OK, true);
+	            	   if (input.equals("") || input.equals("0")) {
+		   				   Toast.makeText(getActivity(), "Please put a quantity!", 
+		   						   Toast.LENGTH_SHORT).show();
+		   				   return;
 	            	   }
+	            	   
+            		   int quantity = Integer.parseInt(input);
+            		   
+            		   if (quantity > 99) {
+            			   quantity = 99;
+            		   }
+            		   
+            		   if (quantity > 0) {
+		            	   DataManager.get(getActivity()).queryUpdateWishlistData(
+		            			   getArguments().getLong(ARG_WISHLIST_DATA_ID), quantity);
+            		   }
+            		   else {
+            			   DataManager.get(getActivity()).queryDeleteWishlistData(
+            					   getArguments().getLong(ARG_WISHLIST_DATA_ID));
+            		   }
+            		   
+	   				   Toast.makeText(getActivity(), "Edited '" + name + "'", Toast.LENGTH_SHORT).show();
+	            	   sendResult(Activity.RESULT_OK, true);
 	               }
 			})
 			.create();
