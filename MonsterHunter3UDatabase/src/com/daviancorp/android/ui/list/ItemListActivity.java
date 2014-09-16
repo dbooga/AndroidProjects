@@ -2,7 +2,6 @@ package com.daviancorp.android.ui.list;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.daviancorp.android.monsterhunter3udatabase.R;
@@ -25,8 +24,8 @@ public class ItemListActivity extends GenericActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		Fragment newFragment;
-		FragmentTransaction transaction;
+//		Fragment newFragment;
+//		FragmentTransaction transaction;
 
 		switch (item.getItemId()) {
 //		case R.id.about:

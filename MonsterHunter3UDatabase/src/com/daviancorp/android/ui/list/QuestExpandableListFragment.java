@@ -10,17 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.object.Quest;
 import com.daviancorp.android.monsterhunter3udatabase.R;
-import com.daviancorp.android.ui.detail.ItemDetailActivity;
-import com.daviancorp.android.ui.detail.MonsterDetailActivity;
 import com.daviancorp.android.ui.detail.QuestDetailActivity;
 
 /**

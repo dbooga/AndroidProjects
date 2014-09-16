@@ -10,7 +10,6 @@ import android.view.MenuItem;
 
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorExpandableListPagerAdapter;
-import com.daviancorp.android.ui.adapter.ArmorListPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 
 public class ArmorListActivity extends GenericTabActivity implements

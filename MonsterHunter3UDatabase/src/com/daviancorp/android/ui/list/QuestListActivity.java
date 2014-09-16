@@ -10,7 +10,6 @@ import android.view.MenuItem;
 
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.adapter.QuestExpandableListPagerAdapter;
-import com.daviancorp.android.ui.adapter.QuestListPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 
 public class QuestListActivity extends GenericTabActivity implements

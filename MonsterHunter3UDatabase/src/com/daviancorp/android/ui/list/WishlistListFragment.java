@@ -1,5 +1,6 @@
 package com.daviancorp.android.ui.list;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +12,6 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -25,7 +25,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.daviancorp.android.data.database.WishlistCursor;
 import com.daviancorp.android.data.object.Wishlist;
 import com.daviancorp.android.loader.WishlistListCursorLoader;
@@ -36,6 +35,7 @@ import com.daviancorp.android.ui.dialog.WishlistCopyDialogFragment;
 import com.daviancorp.android.ui.dialog.WishlistDeleteDialogFragment;
 import com.daviancorp.android.ui.dialog.WishlistRenameDialogFragment;
 
+@SuppressLint("NewApi")
 public class WishlistListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
@@ -74,7 +74,8 @@ public class WishlistListFragment extends ListFragment implements
 			// Use contextual action bar on Honeycomb and higher
 			mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 			mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-			        @Override
+			        @SuppressLint("NewApi")
+					@Override
 			        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 			            if (mActionMode != null) {
 			                return false;

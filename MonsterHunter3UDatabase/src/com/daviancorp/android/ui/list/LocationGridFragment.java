@@ -16,21 +16,19 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.daviancorp.android.data.database.LocationCursor;
 import com.daviancorp.android.data.object.Location;
 import com.daviancorp.android.loader.LocationListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.LocationDetailActivity;
-import com.daviancorp.android.ui.detail.MonsterDetailActivity;
 
 public class LocationGridFragment extends Fragment implements
 		LoaderCallbacks<Cursor> {

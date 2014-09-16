@@ -11,7 +11,6 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,7 +145,6 @@ public class HuntingFleetListFragment extends ListFragment implements
 
 			Drawable i = null;
 			String cellImage = "icons_items/" + huntingfleet.getItem().getFileLocation();
-			Log.d("heyo" , cellImage);
 			try {
 				i = Drawable.createFromStream(
 						context.getAssets().open(cellImage), null);
