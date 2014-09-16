@@ -1,5 +1,24 @@
 package com.daviancorp.android.ui.general;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 import com.daviancorp.android.ui.list.ArmorListActivity;
@@ -11,21 +30,6 @@ import com.daviancorp.android.ui.list.LocationGridActivity;
 import com.daviancorp.android.ui.list.MonsterListActivity;
 import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 /*
  * Any subclass needs to:
@@ -166,6 +170,19 @@ public abstract class GenericActivity extends SingleFragmentActivity {
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		for (int i = 0; i < menu.size(); i++) {
+			MenuItem mi = menu.getItem(i);
+			String title = mi.getTitle().toString();
+			Spannable newTitle = new SpannableString(title);
+			newTitle.setSpan(new ForegroundColorSpan(Color.WHITE), 0,
+					newTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			mi.setTitle(newTitle);
+		}
 		return true;
 	}
 
