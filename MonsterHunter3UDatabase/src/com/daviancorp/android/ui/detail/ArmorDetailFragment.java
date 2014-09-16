@@ -99,24 +99,6 @@ public class ArmorDetailFragment extends Fragment {
 		return view;
 	}
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.menu_wishlist_list, menu);
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case R.id.wishlist_add:
-				DataManager.get(getActivity()).queryAddWishlistData(1, mArmor.getId(), 1);
-				Toast.makeText(getActivity(), "Added to wishlist", Toast.LENGTH_SHORT).show();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
-			}
-	}
-
 	private void updateUI() throws IOException {
 		String cellText = mArmor.getName();
 		String cellImage = "";

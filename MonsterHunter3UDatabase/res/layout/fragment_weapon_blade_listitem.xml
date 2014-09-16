@@ -3,7 +3,8 @@
     android:id="@+id/listitem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@drawable/background_activated" >
 
     <TextView
         android:id="@+id/name"

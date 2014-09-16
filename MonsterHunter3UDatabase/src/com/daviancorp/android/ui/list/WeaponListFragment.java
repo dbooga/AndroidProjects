@@ -1,5 +1,7 @@
 package com.daviancorp.android.ui.list;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
@@ -21,11 +23,13 @@ import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 
+import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.data.object.Weapon;
 import com.daviancorp.android.loader.WeaponListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.WeaponDetailActivity;
 import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
+import com.daviancorp.android.ui.dialog.WishlistDataAddMultiDialogFragment;
 
 public abstract class WeaponListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -33,9 +37,6 @@ public abstract class WeaponListFragment extends ListFragment implements
 
 	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
 	private static final int REQUEST_ADD_MULTI = 0;
-
-	private ListView mListView;
-	private ActionMode mActionMode;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,7 @@ public abstract class WeaponListFragment extends ListFragment implements
 	}
 	
 	protected void setContextMenu(View v) {
-		mListView = (ListView) v.findViewById(android.R.id.list);
+		ListView mListView = (ListView) v.findViewById(android.R.id.list);
 		
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			// Use floating context menus on Froyo and Gingerbread
@@ -105,16 +106,32 @@ public abstract class WeaponListFragment extends ListFragment implements
 			    }
 
 			    @Override
-			    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-			    	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-					int position = info.position;
-					
+			    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {					
 			    	switch (item.getItemId()) {
-			    		case R.id.menu_item_edit_wishlist_add:
-			    			Weapon weapon = getDetailWeapon(position);
+			    		case R.id.menu_item_wishlist_add:
+			    			CursorAdapter adapter = getDetailAdapter();
+			    			ArrayList<Long> idArray = new ArrayList<Long>();
 			    			
+			    			for (int i = 0; i < adapter.getCount(); i++) {
+			    				if (getListView().isItemChecked(i)) {
+			    					idArray.add(((WeaponCursor) adapter.getItem(i)).getWeapon().getId());
+			    				}
+			    			}
+			    			
+			    			long[] ids = new long[idArray.size()];
+			    			for (int j = 0; j < idArray.size(); j++) {
+			    				ids[j] = idArray.get(j);
+			    			}
+			    			
+			    			FragmentManager fm = getActivity().getSupportFragmentManager();
+			    			
+							WishlistDataAddMultiDialogFragment dialogAdd = 
+									WishlistDataAddMultiDialogFragment.newInstance(ids);
+							dialogAdd.setTargetFragment(getThisFragment(), REQUEST_ADD_MULTI);
+							dialogAdd.show(fm, DIALOG_WISHLIST_DATA_ADD_MULTI);
+							
 			    			mode.finish();
-			    			getDetailAdapter().notifyDataSetChanged();
+			    			adapter.notifyDataSetChanged();
 			    			return true;
 			    		default:
 			    			return false;
@@ -122,12 +139,8 @@ public abstract class WeaponListFragment extends ListFragment implements
 			    }
 
 			    @Override
-			    public void onDestroyActionMode(ActionMode mode) {		        
-			        for (int i = 0; i < mListView.getCount(); i++) {
-			        	mListView.setItemChecked(i, false);
-			        }
-
-			        mActionMode = null;
+			    public void onDestroyActionMode(ActionMode mode) {		
+			    	// Required, but not used in this implementation
 			    }
 			});
 		}
@@ -149,7 +162,7 @@ public abstract class WeaponListFragment extends ListFragment implements
 		FragmentManager fm = getActivity().getSupportFragmentManager();
 		
 		switch (item.getItemId()) {
-			case R.id.menu_item_edit_wishlist_add:
+			case R.id.menu_item_wishlist_add:
 				WishlistDataAddDialogFragment dialogAdd = WishlistDataAddDialogFragment.newInstance(id);
 				dialogAdd.setTargetFragment(getThisFragment(), REQUEST_ADD_MULTI);
 				dialogAdd.show(fm, DIALOG_WISHLIST_DATA_ADD_MULTI);

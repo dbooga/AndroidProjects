@@ -1,6 +1,7 @@
 package com.daviancorp.android.ui.detail;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorDetailPagerAdapter;
+import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 
 public class ArmorDetailActivity extends GenericTabActivity implements
@@ -20,6 +22,9 @@ public class ArmorDetailActivity extends GenericTabActivity implements
 	public static final String EXTRA_ARMOR_ID =
 			"com.daviancorp.android.android.ui.detail.armor_id";
 
+	private static final String DIALOG_WISHLIST_ADD = "wishlist_add";
+	private static final int REQUEST_ADD = 0;
+	
 	private ViewPager viewPager;
 	private ArmorDetailPagerAdapter mAdapter;
 	private ActionBar actionBar;
@@ -71,7 +76,29 @@ public class ArmorDetailActivity extends GenericTabActivity implements
 			}
 		});
 	}
-
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_wishlist_list, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.wishlist_add:
+				FragmentManager fm = getSupportFragmentManager();
+				WishlistDataAddDialogFragment dialogCopy = WishlistDataAddDialogFragment
+						.newInstance(id);
+				dialogCopy.show(fm, DIALOG_WISHLIST_ADD);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+			}
+	}
+	
 	@Override
 	public void onPause() {
 		super.onPause();

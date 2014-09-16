@@ -1,17 +1,19 @@
 package com.daviancorp.android.ui.detail;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.Tab;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.adapter.DecorationDetailPagerAdapter;
-import com.daviancorp.android.ui.adapter.ItemDetailPagerAdapter;
+import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 
 public class DecorationDetailActivity extends GenericTabActivity implements
@@ -20,10 +22,15 @@ public class DecorationDetailActivity extends GenericTabActivity implements
 	public static final String EXTRA_DECORATION_ID =
 			"com.daviancorp.android.android.ui.detail.decoration_id";
 
+	private static final String DIALOG_WISHLIST_ADD = "wishlist_add";
+	private static final int REQUEST_ADD = 0;
+	
 	private ViewPager viewPager;
 	private DecorationDetailPagerAdapter mAdapter;
 	private ActionBar actionBar;
 
+	private long id;
+	
 	// Tab titles
 	private String[] tabs = { "Detail", "Skills", "Components" };
 
@@ -31,7 +38,7 @@ public class DecorationDetailActivity extends GenericTabActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		long id = getIntent().getLongExtra(EXTRA_DECORATION_ID, -1);
+		id = getIntent().getLongExtra(EXTRA_DECORATION_ID, -1);
 		setTitle(DataManager.get(getApplicationContext()).getDecoration(id).getName());
 
 		// Initialization
@@ -68,14 +75,28 @@ public class DecorationDetailActivity extends GenericTabActivity implements
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
-	}
-
+	}	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main, menu);
+		inflater.inflate(R.menu.menu_wishlist_list, menu);
 		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.wishlist_add:
+				FragmentManager fm = getSupportFragmentManager();
+				WishlistDataAddDialogFragment dialogCopy = WishlistDataAddDialogFragment
+						.newInstance(id);
+				dialogCopy.show(fm, DIALOG_WISHLIST_ADD);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+			}
 	}
 
 	@Override
