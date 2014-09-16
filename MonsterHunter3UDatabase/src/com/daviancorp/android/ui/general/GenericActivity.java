@@ -27,7 +27,7 @@ import com.daviancorp.android.ui.list.DecorationListActivity;
 import com.daviancorp.android.ui.list.HuntingFleetListActivity;
 import com.daviancorp.android.ui.list.ItemListActivity;
 import com.daviancorp.android.ui.list.LocationGridActivity;
-import com.daviancorp.android.ui.list.MonsterListActivity;
+import com.daviancorp.android.ui.list.MonsterGridActivity;
 import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
 
@@ -93,7 +93,7 @@ public abstract class GenericActivity extends SingleFragmentActivity {
 				switch (position) {
 				case MONSTERS:
 					intent = new Intent(GenericActivity.this,
-							MonsterListActivity.class);
+							MonsterGridActivity.class);
 					startActivity(intent);
 					break;
 				case WEAPONS:

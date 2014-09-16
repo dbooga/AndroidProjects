@@ -70,21 +70,21 @@ public class MonsterGridActivity extends GenericTabActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_monster_grid, menu);
+//		MenuInflater inflater = getMenuInflater();
+//		inflater.inflate(R.menu.menu_monster_grid, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent;
+//		Intent intent;
 
 		switch (item.getItemId()) {
-		case R.id.monster_listview:
-			toggle = 1;
-			intent = new Intent(this, MonsterListActivity.class);
-			startActivity(intent);
-			return true;
+//		case R.id.monster_listview:
+//			toggle = 1;
+//			intent = new Intent(this, MonsterListActivity.class);
+//			startActivity(intent);
+//			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

@@ -56,12 +56,12 @@ public class HomeFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
 		mLogo = (ImageView) v.findViewById(R.id.logo);
-		mLogo.setImageResource(R.drawable.mh3);
+		mLogo.setImageResource(R.drawable.mh3_cleaned);
 
 		gridView = (GridView) v.findViewById(R.id.grid_home);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1, numbers);
+				R.layout.fragment_home_grid_text, numbers);
 
 		gridView.setAdapter(adapter);
 
