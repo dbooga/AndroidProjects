@@ -240,4 +240,13 @@ public class S {
 	static final String COLUMN_WISHLIST_DATA_WISHLIST_ID = "wishlist_id";
 	static final String COLUMN_WISHLIST_DATA_ITEM_ID = "item_id";
 	static final String COLUMN_WISHLIST_DATA_QUANTITY = "quantity";
+	static final String COLUMN_WISHLIST_DATA_SATISFIED = "satisfied";
+
+	// Wishlist Component
+	static final String TABLE_WISHLIST_COMPONENT = "wishlist_component";
+	static final String COLUMN_WISHLIST_COMPONENT_ID = "_id";
+	static final String COLUMN_WISHLIST_COMPONENT_WISHLIST_ID = "wishlist_id";
+	static final String COLUMN_WISHLIST_COMPONENT_COMPONENT_ID = "component_id";
+	static final String COLUMN_WISHLIST_COMPONENT_QUANTITY = "quantity";
+	static final String COLUMN_WISHLIST_COMPONENT_NOTES = "notes";
 }

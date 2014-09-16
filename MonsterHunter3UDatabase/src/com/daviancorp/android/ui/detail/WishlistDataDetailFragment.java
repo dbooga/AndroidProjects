@@ -215,7 +215,7 @@ public class WishlistDataDetailFragment extends ListFragment implements
 		if (args != null) {
 			mId = args.getLong(ARG_ID);
 		}
-		return new WishlistDataListCursorLoader(getActivity(), mId, "wishlist");
+		return new WishlistDataListCursorLoader(getActivity(), mId);
 	}
 
 	@Override

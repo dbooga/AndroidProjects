@@ -28,10 +28,14 @@ public class WishlistDataCursor extends CursorWrapper {
 		WishlistData wishlistData = new WishlistData();
 		
 		long id = getLong(getColumnIndex(S.COLUMN_WISHLIST_DATA_ID));
+		long wishlist_id = getLong(getColumnIndex(S.COLUMN_WISHLIST_DATA_WISHLIST_ID));
 		int quantity = getInt(getColumnIndex(S.COLUMN_WISHLIST_DATA_QUANTITY));
+		int satisfied = getInt(getColumnIndex(S.COLUMN_WISHLIST_DATA_SATISFIED));
 		
 		wishlistData.setId(id);
+		wishlistData.setWishlistId(wishlist_id);
 		wishlistData.setQuantity(quantity);
+		wishlistData.setSatisfied(satisfied);
 
 		Item item = new Item();
 		

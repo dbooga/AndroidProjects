@@ -26,7 +26,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.ArmorCursor;
-import com.daviancorp.android.data.database.DecorationCursor;
 import com.daviancorp.android.data.object.Armor;
 import com.daviancorp.android.loader.ArmorListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
@@ -123,6 +122,7 @@ public class ArmorListFragment extends ListFragment implements
 			armorNameTextView.setText(cellText);
 		}
 	}
+	
 	/*
 	 *  Context menu
 	 */

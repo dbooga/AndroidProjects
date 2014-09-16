@@ -3,13 +3,17 @@ package com.daviancorp.android.data.object;
 public class WishlistData {
 
 	private long id;
+	private long wishlist_id;
 	private Item item;
 	private int quantity;
+	private int satisfied;
 	
 	public WishlistData() {
 		this.id = -1;
+		this.wishlist_id = -1;
 		this.item = null;
 		this.quantity = -1;
+		this.satisfied = -1;
 	}
 	
 	public long getId() {
@@ -20,6 +24,14 @@ public class WishlistData {
 		this.id = id;
 	}
 
+	public long getWishlistId() {
+		return wishlist_id;
+	}
+
+	public void setWishlistId(long wishlist_id) {
+		this.wishlist_id = wishlist_id;
+	}
+	
 	public Item getItem() {
 		return item;
 	}
@@ -34,5 +46,13 @@ public class WishlistData {
 	
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	public int getSatisfied() {
+		return satisfied;
+	}
+	
+	public void setSatisfied(int satisfied) {
+		this.satisfied = satisfied;
 	}
 }

@@ -12,7 +12,6 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.daviancorp.android.data.database.WishlistDataCursor;
-import com.daviancorp.android.data.object.WishlistData;
-import com.daviancorp.android.loader.WishlistDataListCursorLoader;
+import com.daviancorp.android.data.database.WishlistComponentCursor;
+import com.daviancorp.android.data.object.WishlistComponent;
+import com.daviancorp.android.loader.WishlistComponentListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class WishlistDataComponentFragment extends ListFragment implements
@@ -76,7 +75,7 @@ public class WishlistDataComponentFragment extends ListFragment implements
 	private void updateUI() {
 		if (started) {
 			getLoaderManager().getLoader( 0 ).forceLoad();
-			WishlistDataComponentCursorAdapter adapter = (WishlistDataComponentCursorAdapter) getListAdapter();
+			WishlistComponentCursorAdapter adapter = (WishlistComponentCursorAdapter) getListAdapter();
 			adapter.notifyDataSetChanged();
 		}
 	}
@@ -111,14 +110,14 @@ public class WishlistDataComponentFragment extends ListFragment implements
 		if (args != null) {
 			mId = args.getLong(ARG_ID);
 		}
-		return new WishlistDataListCursorLoader(getActivity(), mId, "component");
+		return new WishlistComponentListCursorLoader(getActivity(), mId);
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Create an adapter to point at this cursor
-		WishlistDataComponentCursorAdapter adapter = new WishlistDataComponentCursorAdapter(
-				getActivity(), (WishlistDataCursor) cursor);
+		WishlistComponentCursorAdapter adapter = new WishlistComponentCursorAdapter(
+				getActivity(), (WishlistComponentCursor) cursor);
 		setListAdapter(adapter);
 		started = true;
 	}
@@ -129,13 +128,13 @@ public class WishlistDataComponentFragment extends ListFragment implements
 		setListAdapter(null);
 	}
 
-	private static class WishlistDataComponentCursorAdapter extends CursorAdapter {
+	private static class WishlistComponentCursorAdapter extends CursorAdapter {
 
-		private WishlistDataCursor mWishlistDataCursor;
+		private WishlistComponentCursor mWishlistComponentCursor;
 
-		public WishlistDataComponentCursorAdapter(Context context, WishlistDataCursor cursor) {
+		public WishlistComponentCursorAdapter(Context context, WishlistComponentCursor cursor) {
 			super(context, cursor, 0);
-			mWishlistDataCursor = cursor;
+			mWishlistComponentCursor = cursor;
 		}
 
 		@Override
@@ -150,7 +149,7 @@ public class WishlistDataComponentFragment extends ListFragment implements
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
 			// Get the skill for the current row
-			WishlistData data = mWishlistDataCursor.getWishlistData();
+			WishlistComponent component = mWishlistComponentCursor.getWishlistComponent();
 
 			// Set up the text view
 			LinearLayout root = (LinearLayout) view.findViewById(R.id.listitem);
@@ -158,19 +157,19 @@ public class WishlistDataComponentFragment extends ListFragment implements
 			TextView itemTextView = (TextView) view.findViewById(R.id.item);
 			TextView amtTextView = (TextView) view.findViewById(R.id.amt);
 			
-			long id = data.getItem().getId();
-			String nameText = data.getItem().getName();
-			String amtText = "" + data.getQuantity();
+			long id = component.getItem().getId();
+			String nameText = component.getItem().getName();
+			String amtText = "" + component.getQuantity();
 			
 			itemTextView.setText(nameText);
 			amtTextView.setText(amtText);
 			
 			Drawable i = null;
 			String cellImage = "";
-			String cellRare = "" + data.getItem().getRarity();
+			String cellRare = "" + component.getItem().getRarity();
 			
 			if (id < 1314) {
-				cellImage = "icons_items/" + data.getItem().getFileLocation();
+				cellImage = "icons_items/" + component.getItem().getFileLocation();
 			} 
 			else if ((id >= 1314) && (id < 1646)) {
 				cellImage = "icons_armor/icons_head/head" + cellRare + ".png";

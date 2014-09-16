@@ -6,24 +6,36 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
+import android.view.ActionMode;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.object.Armor;
 import com.daviancorp.android.data.object.Item;
-import com.daviancorp.android.data.object.Quest;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
+import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
+import com.daviancorp.android.ui.dialog.WishlistDataAddMultiDialogFragment;
 
 /**
  * Pieced together from: Android samples:
@@ -34,13 +46,18 @@ import com.daviancorp.android.ui.detail.ArmorDetailActivity;
  * http://stackoverflow.com/questions/6495898/findviewbyid-in-fragment-android
  */
 public class ArmorExpandableListFragment extends Fragment {
-	private String mType;
 	private static final String ARG_TYPE = "ARMOR_TYPE";
-	private ArrayList<Armor> armors;
 
+	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
+	private static final int REQUEST_ADD_MULTI = 0;
+
+	private String mType;
+	private ArrayList<Armor> armors;
 	private String[] slots = { "Head", "Body", "Arms", "Waist", "Legs" };
 
 	private ArrayList<ArrayList<Armor>> children;
+	
+	private ExpandableListView elv;
 
 	public static ArmorExpandableListFragment newInstance(String type) {
 		Bundle args = new Bundle();
@@ -107,9 +124,11 @@ public class ArmorExpandableListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-
+		
 		View v = inflater.inflate(R.layout.fragment_armor_expandablelist, null);
-		ExpandableListView elv = (ExpandableListView) v
+//		setContextMenu(v);
+		
+		elv = (ExpandableListView) v
 				.findViewById(R.id.expandableListView);
 
 		elv.setAdapter(new ArmorListAdapter(slots));
@@ -243,5 +262,143 @@ public class ArmorExpandableListFragment extends Fragment {
 		}
 
 	}
+	
+	/*
+	 *  Context menu
+	 */
 
+//	@Override
+//	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+//		getActivity().getMenuInflater().inflate(R.menu.context_wishlist_data_add, menu);
+//	}
+//	
+//	protected void setContextMenu(View v) {
+//		ListView mListView = (ListView) v.findViewById(android.R.id.list);
+//		
+//		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+//			// Use floating context menus on Froyo and Gingerbread
+//			registerForContextMenu(mListView);
+//		} else {
+//			// Use contextual action bar on Honeycomb and higher
+//			mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+//			mListView.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+//				
+//				public void onItemCheckedStateChanged(ActionMode mode, int position,
+//						long id, boolean checked) {
+//					// Required, but not used in this implementation
+//				}
+//				
+//				// ActionMode.Callback methods
+//				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+//					MenuInflater inflater = mode.getMenuInflater();
+//					inflater.inflate(R.menu.context_wishlist_data_add, menu);
+//					return true;
+//				}
+//
+//			    @Override
+//			    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+//			        return false;
+//			     // Required, but not used in this implementation
+//			    }
+//
+//			    @Override
+//			    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {					
+//			    	switch (item.getItemId()) {
+//			    		case R.id.menu_item_wishlist_add:
+//			    			ArmorListAdapter adapter = (ArmorListAdapter) elv.getAdapter();
+//			    			ArrayList<Long> idArray = new ArrayList<Long>();
+//			    			
+//			    			for (int i = 0; i < adapter.getGroupCount(); i++) {
+//			    				for (int j = 0; j < adapter.getChildrenCount(i); j++) {
+////				    				if (getListView().isItemChecked(i)) {
+////				    					idArray.add(((ArmorCursor) adapter.getChild(i, j)).getArmor().getId());
+////				    				}
+//			    					Log.d("helpme", "i: " + i + ", j: " + j);
+//			    				}
+//			    			}
+//			    			
+//			    			long[] ids = new long[idArray.size()];
+//			    			for (int k = 0; k < idArray.size(); k++) {
+//			    				ids[k] = idArray.get(k);
+//			    			}
+//			    			
+//			    			FragmentManager fm = getActivity().getSupportFragmentManager();
+//			    			
+//							WishlistDataAddMultiDialogFragment dialogAdd = 
+//									WishlistDataAddMultiDialogFragment.newInstance(ids);
+//							dialogAdd.setTargetFragment(ArmorExpandableListFragment.this, REQUEST_ADD_MULTI);
+//							dialogAdd.show(fm, DIALOG_WISHLIST_DATA_ADD_MULTI);
+//							
+//			    			mode.finish();
+//			    			adapter.notifyDataSetChanged();
+//			    			return true;
+//			    		default:
+//			    			return false;
+//			    	}
+//			    }
+//
+//			    @Override
+//			    public void onDestroyActionMode(ActionMode mode) {		
+//			    	// Required, but not used in this implementation
+//			    }
+//			});
+//		}
+//	}
+//	
+//	@Override
+//	public boolean onContextItemSelected(MenuItem item) {
+//		ExpandableListView.ExpandableListContextMenuInfo info = 
+//				(ExpandableListView.ExpandableListContextMenuInfo) item.getMenuInfo();
+//		
+//		int type = ExpandableListView.getPackedPositionType(info.packedPosition);
+//	    int groupPosition = ExpandableListView.getPackedPositionGroup(info.packedPosition);
+//	    int childPosition = ExpandableListView.getPackedPositionChild(info.packedPosition);
+//	    ArmorListAdapter adapter = (ArmorListAdapter) elv.getAdapter();
+//	    
+//		Armor armor = (Armor) adapter.getChild(groupPosition, childPosition);
+//
+//		long id = armor.getId();
+//		
+//		FragmentManager fm = getActivity().getSupportFragmentManager();
+//		
+//		switch (item.getItemId()) {
+//			case R.id.menu_item_wishlist_add:
+//				WishlistDataAddDialogFragment dialogAdd = WishlistDataAddDialogFragment.newInstance(id);
+//				dialogAdd.setTargetFragment(ArmorExpandableListFragment.this, REQUEST_ADD_MULTI);
+//				dialogAdd.show(fm, DIALOG_WISHLIST_DATA_ADD_MULTI);
+//				return true;
+//		}
+//		
+//		return super.onContextItemSelected(item);
+//	}
+
+	
+//	 @Override
+//	    public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+//	      if (mActionMode != null)  {
+//	        if (expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+//	          int flatPosition = parent.getFlatListPosition(ExpandableListView.getPackedPositionForGroup(groupPosition));
+//	          parent.setItemChecked(
+//	              flatPosition,
+//	              !parent.isItemChecked(flatPosition));
+//	          return true;
+//	        }
+//	      }
+//	      return false;
+//	    }
+//	    @Override
+//	    public boolean onChildClick(ExpandableListView parent, View v,
+//	        int groupPosition, int childPosition, long id) {
+//	      if (mActionMode != null)  {
+//	        if (expandableListSelectionType == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+//	          int flatPosition = parent.getFlatListPosition(
+//	              ExpandableListView.getPackedPositionForChild(groupPosition,childPosition));
+//	          parent.setItemChecked(
+//	              flatPosition,
+//	              !parent.isItemChecked(flatPosition));
+//	        }
+//	        return true;
+//	      }
+//	      return false;
+//	    }
 }
