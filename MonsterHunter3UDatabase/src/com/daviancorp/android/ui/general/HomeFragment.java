@@ -1,8 +1,12 @@
 package com.daviancorp.android.ui.general;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.daviancorp.android.data.object.Quest;
+import com.daviancorp.android.loader.QuestLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
@@ -45,20 +51,25 @@ public class HomeFragment extends Fragment {
 			"Armors", "Quests", "Items", "Combining", "Decorations", "Skills",
 			"Locations", "Hunting Fleet", "Wishlists" };
 
+	private ProgressDialog progress;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		LoaderManager lm = getLoaderManager();
+		lm.initLoader(0, null, new DummyLoaderCallbacks());
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_home, parent, false);
-
+		
 		mLogo = (ImageView) v.findViewById(R.id.logo);
-		mLogo.setImageResource(R.drawable.mh3_cleaned);
-
 		gridView = (GridView) v.findViewById(R.id.grid_home);
+
+		mLogo.setImageResource(R.drawable.mh3_cleaned);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
 				R.layout.fragment_home_grid_text, numbers);
@@ -125,8 +136,32 @@ public class HomeFragment extends Fragment {
 				}
 			}
 		});
-
+		
 		return v;
 	}
-
+	
+	/*
+	 * For dummy query
+	 */
+	private class DummyLoaderCallbacks implements LoaderCallbacks<Quest> {
+		
+		@Override
+		public Loader<Quest> onCreateLoader(int id, Bundle args) {
+			progress = new ProgressDialog(getActivity());
+			progress.setTitle("Loading");
+			progress.setMessage("Loading database...");
+			progress.show();
+			return new QuestLoader(getActivity(), 1);
+		}
+		
+		@Override
+		public void onLoadFinished(Loader<Quest> loader, Quest dummy) {
+			progress.dismiss();
+		}
+		
+		@Override
+		public void onLoaderReset(Loader<Quest> loader) {
+			// Do nothing
+		}
+	}
 }
