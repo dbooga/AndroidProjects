@@ -6,15 +6,27 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
+import android.view.ActionMode;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -24,13 +36,19 @@ import com.daviancorp.android.data.database.WishlistComponentCursor;
 import com.daviancorp.android.data.object.WishlistComponent;
 import com.daviancorp.android.loader.WishlistComponentListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.dialog.WishlistComponentEditDialogFragment;
 
 public class WishlistDataComponentFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
 	private static final String ARG_ID = "ID";
 
+	private static final String DIALOG_WISHLIST_COMPONENT_EDIT = "wishlist_component_edit";
 	private static final int REQUEST_REFRESH = 0;
+	private static final int REQUEST_EDIT = 1;
+
+	private ListView mListView;
+	private ActionMode mActionMode;
 	
 	private boolean started;
 
@@ -50,21 +68,50 @@ public class WishlistDataComponentFragment extends ListFragment implements
 		getLoaderManager().initLoader(0, getArguments(), this);
 	}
 	
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//			Bundle savedInstanceState) {
-//		View v = inflater.inflate(android.R.layout.simple_list_item_1, null);
-//		return v;
-//	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.fragment_list_generic, container, false);
+
+		mListView = (ListView) v.findViewById(android.R.id.list);
+		
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+			// Use floating context menus on Froyo and Gingerbread
+			registerForContextMenu(mListView);
+		} else {
+			// Use contextual action bar on Honeycomb and higher
+			mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+			mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			        @Override
+			        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+			            if (mActionMode != null) {
+			                return false;
+			            }
+			
+			            mActionMode = getActivity().startActionMode(new mActionModeCallback());
+			            mActionMode.setTag(position);
+			            mListView.setItemChecked(position, true);
+			            return true;
+			        }
+			});
+		}
+		
+		return v;
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		getActivity().getMenuInflater().inflate(R.menu.context_wishlist_data_component, menu);
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode != Activity.RESULT_OK) return;
-//		if (requestCode == REQUEST_EDIT) {
-//			if(data.getBooleanExtra(WishlistAddDialogFragment.EXTRA_EDIT, false)) {
-//				updateUI();
-//			}
-//		}
+		if (requestCode == REQUEST_EDIT) {
+			if(data.getBooleanExtra(WishlistComponentEditDialogFragment.EXTRA_EDIT, false)) {
+				updateUI();
+			}
+		}
 		else if (requestCode == REQUEST_REFRESH) {
 			if(data.getBooleanExtra(WishlistDataDetailFragment.EXTRA_REFRESH, false)) {
 				updateUI();
@@ -77,6 +124,40 @@ public class WishlistDataComponentFragment extends ListFragment implements
 			getLoaderManager().getLoader( 0 ).forceLoad();
 			WishlistComponentCursorAdapter adapter = (WishlistComponentCursorAdapter) getListAdapter();
 			adapter.notifyDataSetChanged();
+		}
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		int position = info.position;
+		
+		boolean temp = onItemSelected(item, position);
+		
+		if(temp) {
+			return true;
+		}
+		else {
+			return super.onContextItemSelected(item);
+		}
+	}
+	
+	private boolean onItemSelected(MenuItem item, int position) {
+		WishlistComponentCursorAdapter adapter = (WishlistComponentCursorAdapter) getListAdapter();
+		WishlistComponent wishlistComponent = ((WishlistComponentCursor) adapter.getItem(position)).getWishlistComponent();
+		long id = wishlistComponent.getId();
+		String name = wishlistComponent.getItem().getName();
+		
+		FragmentManager fm = getActivity().getSupportFragmentManager();
+		
+		switch (item.getItemId()) {
+			case R.id.menu_item_edit_wishlist_data:
+				WishlistComponentEditDialogFragment dialogEdit = WishlistComponentEditDialogFragment.newInstance(id, name);
+				dialogEdit.setTargetFragment(WishlistDataComponentFragment.this, REQUEST_EDIT);
+				dialogEdit.show(fm, DIALOG_WISHLIST_COMPONENT_EDIT);
+				return true;
+			default:
+				return false;
 		}
 	}
 	
@@ -142,7 +223,7 @@ public class WishlistDataComponentFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_skill_armor_listitem,
+			return inflater.inflate(R.layout.fragment_wishlist_data_listitem,
 					parent, false);
 		}
 
@@ -156,13 +237,23 @@ public class WishlistDataComponentFragment extends ListFragment implements
 			ImageView itemImageView = (ImageView) view.findViewById(R.id.item_image);
 			TextView itemTextView = (TextView) view.findViewById(R.id.item);
 			TextView amtTextView = (TextView) view.findViewById(R.id.amt);
+			TextView extraTextView = (TextView) view.findViewById(R.id.extra);
 			
 			long id = component.getItem().getId();
+			int quantity = component.getQuantity();
+			int notes = component.getNotes();
+			
 			String nameText = component.getItem().getName();
-			String amtText = "" + component.getQuantity();
+			String amtText = "" + quantity;
+			String extraText = "" + notes;
 			
 			itemTextView.setText(nameText);
 			amtTextView.setText(amtText);
+			extraTextView.setText(extraText);
+
+			if (notes >= quantity) {
+				itemTextView.setTextColor(Color.RED);
+			}
 			
 			Drawable i = null;
 			String cellImage = "";
@@ -236,4 +327,33 @@ public class WishlistDataComponentFragment extends ListFragment implements
 		}
 	}
 
+	private class mActionModeCallback implements ActionMode.Callback {
+	    @Override
+	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+	        MenuInflater inflater = mode.getMenuInflater();
+	        inflater.inflate(R.menu.context_wishlist_data_component, menu);
+	        return true;
+	    }
+
+	    @Override
+	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+	        return false;
+	    }
+
+	    @Override
+	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+	    	int position = Integer.parseInt(mode.getTag().toString());
+	    	mode.finish();
+	    	return onItemSelected(item, position);
+	    }
+
+	    @Override
+	    public void onDestroyActionMode(ActionMode mode) {		        
+	        for (int i = 0; i < mListView.getCount(); i++) {
+	        	mListView.setItemChecked(i, false);
+	        }
+
+	        mActionMode = null;
+	    }
+	}
 }

@@ -1051,7 +1051,7 @@ containing a value of this type.
         public static final int tab_unselected_pressed_brachydios5=0x7f020094;
     }
     public static final class id {
-        public static final int about=0x7f0600f8;
+        public static final int about=0x7f0600f9;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1141,6 +1141,7 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f060026;
         public static final int expandableListView=0x7f06004f;
         public static final int expanded_menu=0x7f06002c;
+        public static final int extra=0x7f0600f2;
         public static final int fee=0x7f06008f;
         public static final int filler=0x7f0600ab;
         public static final int fire_res=0x7f06004a;
@@ -1194,12 +1195,12 @@ containing a value of this type.
         public static final int map_image=0x7f060081;
         public static final int map_text=0x7f060080;
         public static final int max=0x7f060068;
-        public static final int menu_item_copy_wishlist=0x7f0600f3;
-        public static final int menu_item_delete_wishlist=0x7f0600f4;
-        public static final int menu_item_delete_wishlist_data=0x7f0600f6;
-        public static final int menu_item_edit_wishlist_data=0x7f0600f5;
-        public static final int menu_item_rename_wishlist=0x7f0600f2;
-        public static final int menu_item_wishlist_add=0x7f0600f7;
+        public static final int menu_item_copy_wishlist=0x7f0600f4;
+        public static final int menu_item_delete_wishlist=0x7f0600f5;
+        public static final int menu_item_delete_wishlist_data=0x7f0600f7;
+        public static final int menu_item_edit_wishlist_data=0x7f0600f6;
+        public static final int menu_item_rename_wishlist=0x7f0600f3;
+        public static final int menu_item_wishlist_add=0x7f0600f8;
         public static final int method=0x7f06007d;
         public static final int middle=0x7f060012;
         public static final int monster=0x7f06007e;
@@ -1298,7 +1299,8 @@ containing a value of this type.
         public static final int useLogo=0x7f060003;
         public static final int water=0x7f0600d0;
         public static final int water_res=0x7f06004b;
-        public static final int wishlist_add=0x7f0600f9;
+        public static final int wishlist_add=0x7f0600fa;
+        public static final int wishlist_edit=0x7f0600fb;
         public static final int withText=0x7f06000c;
         public static final int wyvernfire=0x7f0600ca;
     }
@@ -1420,8 +1422,9 @@ containing a value of this type.
         public static final int context_wishlist=0x7f0d0000;
         public static final int context_wishlist_data=0x7f0d0001;
         public static final int context_wishlist_data_add=0x7f0d0002;
-        public static final int main=0x7f0d0003;
-        public static final int menu_wishlist_list=0x7f0d0004;
+        public static final int context_wishlist_data_component=0x7f0d0003;
+        public static final int main=0x7f0d0004;
+        public static final int menu_wishlist_list=0x7f0d0005;
     }
     public static final class raw {
         public static final int mh3u=0x7f050000;

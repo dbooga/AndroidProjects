@@ -10,7 +10,7 @@
         android:id="@+id/item_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".6"
+        android:layout_weight=".5"
         android:orientation="horizontal" >
 
         <ImageView
@@ -30,6 +30,13 @@
         android:id="@+id/amt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".4" />
+        android:gravity="center"
+        android:layout_weight=".25" />
 
+    <TextView
+        android:id="@+id/extra"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight=".25" />
 </LinearLayout>

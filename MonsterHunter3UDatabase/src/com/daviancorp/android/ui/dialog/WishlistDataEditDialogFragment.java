@@ -72,14 +72,8 @@ public class WishlistDataEditDialogFragment extends DialogFragment {
             			   quantity = 99;
             		   }
             		   
-            		   if (quantity > 0) {
-		            	   DataManager.get(getActivity()).queryUpdateWishlistData(
-		            			   getArguments().getLong(ARG_WISHLIST_DATA_ID), quantity);
-            		   }
-            		   else {
-            			   DataManager.get(getActivity()).queryDeleteWishlistData(
-            					   getArguments().getLong(ARG_WISHLIST_DATA_ID));
-            		   }
+            		   DataManager.get(getActivity()).queryUpdateWishlistData(
+            				   getArguments().getLong(ARG_WISHLIST_DATA_ID), quantity);
             		   
 	   				   Toast.makeText(getActivity(), "Edited '" + name + "'", Toast.LENGTH_SHORT).show();
 	            	   sendResult(Activity.RESULT_OK, true);

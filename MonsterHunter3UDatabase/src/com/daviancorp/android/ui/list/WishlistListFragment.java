@@ -144,6 +144,12 @@ public class WishlistListFragment extends ListFragment implements
 				dialog.show(fm, DIALOG_WISHLIST_ADD);
 				
 				return true;
+			case R.id.wishlist_edit:
+//				FragmentManager fm = getActivity().getSupportFragmentManager();
+//				WishlistAddDialogFragment dialog = new WishlistAddDialogFragment();
+//				dialog.setTargetFragment(WishlistListFragment.this, REQUEST_ADD);
+//				dialog.show(fm, DIALOG_WISHLIST_ADD);
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 			}

@@ -3,6 +3,7 @@ package com.daviancorp.android.data.database;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.daviancorp.android.data.object.Armor;
 import com.daviancorp.android.data.object.Combining;
@@ -24,6 +25,7 @@ import com.daviancorp.android.data.object.Skill;
 import com.daviancorp.android.data.object.SkillTree;
 import com.daviancorp.android.data.object.Weapon;
 import com.daviancorp.android.data.object.Wishlist;
+import com.daviancorp.android.data.object.WishlistComponent;
 import com.daviancorp.android.data.object.WishlistData;
 
 public class DataManager {
@@ -739,6 +741,17 @@ public class DataManager {
 			mHelper.queryAddWishlistData(newId, wishlist.getItem().getId(), wishlist.getQuantity());
 			cursor.moveToNext();
 		}
+		cursor.close();
+		
+		WishlistComponentCursor wcCursor = mHelper.queryWishlistComponents(id);
+		wcCursor.moveToFirst();
+
+		while(!wcCursor.isAfterLast()) {
+			WishlistComponent wishlist = wcCursor.getWishlistComponent();
+			mHelper.queryAddWishlistComponent(newId, wishlist.getItem().getId(), wishlist.getQuantity());
+			wcCursor.moveToNext();
+		}
+		wcCursor.close();
 	}
 	
 	public Wishlist getWishlist(long id) {
