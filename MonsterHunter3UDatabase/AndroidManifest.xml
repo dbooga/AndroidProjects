@@ -28,6 +28,10 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.daviancorp.android.ui.list.ArmorListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.daviancorp.android.ui.list.LocationGridActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />

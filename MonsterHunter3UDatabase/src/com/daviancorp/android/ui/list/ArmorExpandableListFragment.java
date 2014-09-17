@@ -185,10 +185,23 @@ public class ArmorExpandableListFragment extends Fragment {
 		@Override
 		public View getGroupView(int i, boolean b, View view,
 				ViewGroup viewGroup) {
-			TextView textView = new TextView(
-					ArmorExpandableListFragment.this.getActivity());
-			textView.setText(getGroup(i).toString());
-			return textView;
+//			TextView textView = new TextView(
+//					ArmorExpandableListFragment.this.getActivity());
+//			textView.setText(getGroup(i).toString());
+//			return textView;
+			
+			View v = view;
+			Context context = viewGroup.getContext();
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			v = inflater.inflate(R.layout.fragment_armor_expandablelist_group_item, viewGroup,
+					false);
+			
+			TextView armorGroupTextView = (TextView) v.findViewById(R.id.name);
+			
+			armorGroupTextView.setText(getGroup(i).toString());
+			
+			return v;
 		}
 
 		@Override
@@ -199,7 +212,7 @@ public class ArmorExpandableListFragment extends Fragment {
 			Context context = parent.getContext();
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			v = inflater.inflate(R.layout.list_item_with_image, parent,
+			v = inflater.inflate(R.layout.fragment_armor_expandablelist_child_item, parent,
 					false);
 
 			LinearLayout root = (LinearLayout) v.findViewById(R.id.root);

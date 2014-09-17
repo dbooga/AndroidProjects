@@ -6,4 +6,6 @@
     android:gravity="center"
     android:textSize="20sp"
     android:minHeight="48dip"
+    android:textColor="@color/white"
+    android:background="@color/lightpurple"
 />

@@ -7,6 +7,7 @@
 
     <ImageView
         android:id="@+id/logo"
+        android:paddingTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
@@ -16,12 +17,15 @@
 
     <GridView
         android:id="@+id/grid_home"
+        android:paddingTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight=".6"
         android:horizontalSpacing="5dp"
         android:numColumns="2"
         android:verticalSpacing="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         />
 
 </LinearLayout>
