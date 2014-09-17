@@ -1,0 +1,28 @@
+
+------------ Shared ------------
+General:	highlight headers
+		move icon + name in detail (monster/armor/quest/item/decoration)
+		add header for components (weapon/armor/decoration)
+		add header for skills (armor/decoration)
+		bold labels/main things? (eg. item names from monster carves)
+
+Home:		fix highlight
+Weapon:		fix grid + fix highlight
+		fix gunner detail (last label)
+Armor:		modify armor list (add def/slots?)
+		add multiclick
+Items:		add search
+Combining:	fix highlight
+		move % # more to left
+Decoration:	move skills to right in list
+Skills:		add header to armor/deco
+Location:	fix detail (title)
+
+
+
+------------ b ------------ 
+1	add wishlist headers
+2	add armor buy/sell
+3	add arena quest
+4	add monster damage
+5	add menu item to add to wishlist
