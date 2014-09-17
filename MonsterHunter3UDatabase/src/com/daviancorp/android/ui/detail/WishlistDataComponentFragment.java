@@ -41,6 +41,9 @@ import com.daviancorp.android.ui.dialog.WishlistComponentEditDialogFragment;
 public class WishlistDataComponentFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
+	public static final String EXTRA_COMPONENT_REFRESH =
+			"com.daviancorp.android.ui.general.wishlist_component_refresh";
+	
 	private static final String ARG_ID = "ID";
 
 	private static final String DIALOG_WISHLIST_COMPONENT_EDIT = "wishlist_component_edit";
@@ -50,7 +53,7 @@ public class WishlistDataComponentFragment extends ListFragment implements
 	private ListView mListView;
 	private ActionMode mActionMode;
 	
-	private boolean started;
+	private boolean started, fromOtherTab;
 
 	public static WishlistDataComponentFragment newInstance(long id) {
 		Bundle args = new Bundle();
@@ -113,7 +116,7 @@ public class WishlistDataComponentFragment extends ListFragment implements
 			}
 		}
 		else if (requestCode == REQUEST_REFRESH) {
-			if(data.getBooleanExtra(WishlistDataDetailFragment.EXTRA_REFRESH, false)) {
+			if(data.getBooleanExtra(WishlistDataDetailFragment.EXTRA_DETAIL_REFRESH, false)) {
 				updateUI();
 			}
 		}
@@ -124,7 +127,32 @@ public class WishlistDataComponentFragment extends ListFragment implements
 			getLoaderManager().getLoader( 0 ).forceLoad();
 			WishlistComponentCursorAdapter adapter = (WishlistComponentCursorAdapter) getListAdapter();
 			adapter.notifyDataSetChanged();
+			
+			if (!fromOtherTab) {
+				sendResult(Activity.RESULT_OK, true);
+			}
+			else {
+				fromOtherTab = false;
+			}
 		}
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateUI();
+	}
+	
+	private void sendResult(int resultCode, boolean refresh) {
+		if (getTargetFragment() == null) {
+			return;
+		}
+
+		Intent i = new Intent();
+		i.putExtra(EXTRA_COMPONENT_REFRESH, refresh);
+		
+		getTargetFragment()
+			.onActivityResult(getTargetRequestCode(), resultCode, i);
 	}
 	
 	@Override
@@ -165,23 +193,29 @@ public class WishlistDataComponentFragment extends ListFragment implements
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// The id argument will be the Item ID; CursorAdapter gives us this
 		// for free
-		
-		Intent i = null;
-		long mId = (long) v.getTag();
-		
-		if (mId < 1314) {
-			i = new Intent(getActivity(), ItemDetailActivity.class);
-			i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, mId);
+		if (mActionMode == null) {
+            mListView.setItemChecked(position, false);
+			Intent i = null;
+			long mId = (long) v.getTag();
+			
+			if (mId < 1314) {
+				i = new Intent(getActivity(), ItemDetailActivity.class);
+				i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, mId);
+			}
+			else if (mId < 2955) {
+				i = new Intent(getActivity(), ArmorDetailActivity.class);
+				i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, mId);
+			}
+			else {
+				i = new Intent(getActivity(), WeaponDetailActivity.class);
+				i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, mId);
+			}
+			startActivity(i);
 		}
-		else if (mId < 2955) {
-			i = new Intent(getActivity(), ArmorDetailActivity.class);
-			i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, mId);
+		// Contextual action bar options
+		else { 
+            mActionMode.setTag(position);
 		}
-		else {
-			i = new Intent(getActivity(), WeaponDetailActivity.class);
-			i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, mId);
-		}
-		startActivity(i);
 	}
 
 	@Override
@@ -250,7 +284,8 @@ public class WishlistDataComponentFragment extends ListFragment implements
 			itemTextView.setText(nameText);
 			amtTextView.setText(amtText);
 			extraTextView.setText(extraText);
-
+			
+			itemTextView.setTextColor(null);
 			if (notes >= quantity) {
 				itemTextView.setTextColor(Color.RED);
 			}

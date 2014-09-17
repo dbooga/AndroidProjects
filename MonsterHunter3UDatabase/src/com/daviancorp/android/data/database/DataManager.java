@@ -738,7 +738,8 @@ public class DataManager {
 		
 		while(!cursor.isAfterLast()) {
 			WishlistData wishlist = cursor.getWishlistData();
-			mHelper.queryAddWishlistData(newId, wishlist.getItem().getId(), wishlist.getQuantity());
+			mHelper.queryAddWishlistDataAll(newId, wishlist.getItem().getId(), 
+					wishlist.getQuantity(), wishlist.getSatisfied());
 			cursor.moveToNext();
 		}
 		cursor.close();
@@ -748,7 +749,8 @@ public class DataManager {
 
 		while(!wcCursor.isAfterLast()) {
 			WishlistComponent wishlist = wcCursor.getWishlistComponent();
-			mHelper.queryAddWishlistComponent(newId, wishlist.getItem().getId(), wishlist.getQuantity());
+			mHelper.queryAddWishlistComponentAll(newId, wishlist.getItem().getId(), 
+					wishlist.getQuantity(), wishlist.getNotes());
 			wcCursor.moveToNext();
 		}
 		wcCursor.close();
@@ -775,38 +777,9 @@ public class DataManager {
 		WishlistDataCursor cursor = mHelper.queryWishlistData(wishlist_id, item_id);
 		cursor.moveToFirst();
 		
-		ComponentCursor cc = mHelper.queryComponentCreated(item_id);
-		cc.moveToFirst();
-	
-		WishlistComponentCursor wc = null;
-		
 		if (cursor.isAfterLast()) {
 			// Add new entry to wishlist_data
 			mHelper.queryAddWishlistData(wishlist_id, item_id, quantity);
-
-			
-			while (!cc.isAfterLast()) {
-				long component_id = cc.getComponent().getComponent().getId();
-				int c_amt = (cc.getComponent().getQuantity()) * (quantity);
-				
-				wc = mHelper.queryWishlistComponent(wishlist_id, component_id);
-				wc.moveToFirst();
-				
-				if (wc.isAfterLast()) {
-					// Add new entry to wishlist_component
-					mHelper.queryAddWishlistComponent(wishlist_id, component_id, c_amt);
-				}
-				else {
-					// Update entry to wishlist_component
-					long wc_id = wc.getWishlistComponent().getId();
-					int old_amt = wc.getWishlistComponent().getQuantity();
-					
-					mHelper.queryUpdateWishlistComponentQuantity(wc_id, old_amt + c_amt);
-				}
-				
-				cc.moveToNext();
-			}
-			
 		}
 		else {
 			// Update existing entry
@@ -814,29 +787,39 @@ public class DataManager {
 			long id = data.getId();
 			int total = data.getQuantity() + quantity;
 			
-			mHelper.queryUpdateWishlistData(id, total);
+			mHelper.queryUpdateWishlistDataQuantity(id, total);
+		}
+		
+		helperQueryAddWishlistData(wishlist_id, item_id, quantity);
+		helperQueryUpdateWishlistSatisfied(wishlist_id);
+	}
+	
+	private void helperQueryAddWishlistData(long wishlist_id, long item_id, int quantity) {
+		ComponentCursor cc = mHelper.queryComponentCreated(item_id);
+		cc.moveToFirst();
+		
+		WishlistComponentCursor wc = null;
+		
+		while (!cc.isAfterLast()) {
+			long component_id = cc.getComponent().getComponent().getId();
+			int c_amt = (cc.getComponent().getQuantity()) * (quantity);
 			
-			while (!cc.isAfterLast()) {
-				long component_id = cc.getComponent().getComponent().getId();
-				int c_amt = (cc.getComponent().getQuantity()) * (quantity);
-				
-				wc = mHelper.queryWishlistComponent(wishlist_id, component_id);
-				wc.moveToFirst();
-				
-				if (wc.isAfterLast()) {
-					// Add new entry to wishlist_component
-					mHelper.queryAddWishlistComponent(wishlist_id, component_id, c_amt);
-				}
-				else {
-					// Update entry to wishlist_component
-					long wc_id = wc.getWishlistComponent().getId();
-					int old_amt = wc.getWishlistComponent().getQuantity();
-					
-					mHelper.queryUpdateWishlistComponentQuantity(wc_id, old_amt + c_amt);
-				}
-				
-				cc.moveToNext();
+			wc = mHelper.queryWishlistComponent(wishlist_id, component_id);
+			wc.moveToFirst();
+			
+			if (wc.isAfterLast()) {
+				// Add new entry to wishlist_component
+				mHelper.queryAddWishlistComponent(wishlist_id, component_id, c_amt);
 			}
+			else {
+				// Update entry to wishlist_component
+				long wc_id = wc.getWishlistComponent().getId();
+				int old_amt = wc.getWishlistComponent().getQuantity();
+
+				mHelper.queryUpdateWishlistComponentQuantity(wc_id, old_amt + c_amt);
+			}
+			
+			cc.moveToNext();
 		}
 	}
 
@@ -863,22 +846,17 @@ public class DataManager {
 			WishlistComponentCursor wc = mHelper.queryWishlistComponent(wishlist_id, component_id);
 			wc.moveToFirst();
 			
-			if (wc.isAfterLast()) {
-				// Add new entry to wishlist_component
-				mHelper.queryAddWishlistComponent(wishlist_id, component_id, c_amt);
-			}
-			else {
-				// Update entry to wishlist_component
-				long wc_id = wc.getWishlistComponent().getId();
-				int old_amt = wc.getWishlistComponent().getQuantity();
-				
-				mHelper.queryUpdateWishlistComponentQuantity(wc_id, old_amt + c_amt);
-			}
+			// Update entry to wishlist_component
+			long wc_id = wc.getWishlistComponent().getId();
+			int old_amt = wc.getWishlistComponent().getQuantity();
+			
+			mHelper.queryUpdateWishlistComponentQuantity(wc_id, old_amt + c_amt);
 			
 			cc.moveToNext();
 		}
 
-		mHelper.queryUpdateWishlistData(id, quantity);
+		mHelper.queryUpdateWishlistDataQuantity(id, quantity);
+		helperQueryUpdateWishlistSatisfied(wishlist_id);
 	}
 
 	public void queryDeleteWishlistData(long id) {
@@ -902,23 +880,17 @@ public class DataManager {
 			WishlistComponentCursor wc = mHelper.queryWishlistComponent(wishlist_id, component_id);
 			wc.moveToFirst();
 			
-			if (wc.isAfterLast()) {
-				// Add new entry to wishlist_component
-				mHelper.queryAddWishlistComponent(wishlist_id, component_id, c_amt);
+			// Update entry to wishlist_component
+			long wc_id = wc.getWishlistComponent().getId();
+			int old_amt = wc.getWishlistComponent().getQuantity();
+			
+			int new_amt = old_amt - c_amt;
+			
+			if (new_amt > 0) {
+				mHelper.queryUpdateWishlistComponentQuantity(wc_id, old_amt - c_amt);
 			}
 			else {
-				// Update entry to wishlist_component
-				long wc_id = wc.getWishlistComponent().getId();
-				int old_amt = wc.getWishlistComponent().getQuantity();
-				
-				int new_amt = old_amt - c_amt;
-				
-				if (new_amt > 0) {
-					mHelper.queryUpdateWishlistComponentQuantity(wc_id, old_amt - c_amt);
-				}
-				else {
-					mHelper.queryDeleteWishlistComponent(wc_id);
-				}
+				mHelper.queryDeleteWishlistComponent(wc_id);
 			}
 			
 			cc.moveToNext();
@@ -933,8 +905,69 @@ public class DataManager {
 		return mHelper.queryWishlistComponents(id);
 	}	
 	
-	public void queryUpdateWishlistComponentNotes(long id, int notes) {
+	public void queryUpdateWishlistComponentNotes(long id, int notes) {	
 		mHelper.queryUpdateWishlistComponentNotes(id, notes);
+		WishlistComponentCursor wcc = mHelper.queryWishlistComponentId(id);
+		wcc.moveToFirst();
+		long w_id = wcc.getWishlistComponent().getWishlistId();
+		
+		helperQueryUpdateWishlistSatisfied(w_id);
 	}
 	
+	private void helperQueryUpdateWishlistSatisfied(long wishlist_id) {
+		WishlistDataCursor wdc = mHelper.queryWishlistData(wishlist_id);
+		wdc.moveToFirst();
+		
+		WishlistCursor cur = mHelper.queryWishlist(wishlist_id);
+		cur.moveToFirst();
+		
+		WishlistData wd = null;
+		WishlistComponent wc = null;
+		WishlistComponentCursor wcc = null;
+		
+		Component c = null;
+		ComponentCursor cc = null;
+		
+		long created_id;
+		long component_id;
+		int required_amt;
+		int have_amt;
+		int satisfied = 1;
+		
+		while(!wdc.isAfterLast()) {
+			wd = wdc.getWishlistData();
+			created_id = wd.getItem().getId();
+			
+			cc = mHelper.queryComponentCreated(created_id);
+			cc.moveToFirst();
+			
+			while(!cc.isAfterLast()) {
+				c = cc.getComponent();
+				component_id = c.getComponent().getId();
+				
+				wcc = mHelper.queryWishlistComponent(wishlist_id, component_id);
+				wcc.moveToFirst();
+				wc = wcc.getWishlistComponent();
+				
+				required_amt = c.getQuantity();
+				have_amt = wc.getNotes();
+
+				// Check if created item has enough materials
+				if (have_amt < required_amt) {
+					satisfied = 0;
+					break;
+				}
+				
+				wcc.close();	
+				cc.moveToNext();
+			}
+			
+			cc.close();
+			
+			mHelper.queryUpdateWishlistDataSatisfied(wd.getId(), satisfied);
+			wdc.moveToNext();
+		}
+		
+		wdc.close();
+	}
 }

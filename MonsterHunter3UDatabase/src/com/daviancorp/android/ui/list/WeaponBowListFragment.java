@@ -102,6 +102,12 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 			elementtv.setCompoundDrawables(null, null, null, null);
 
 			String name = "";
+			int wFinal = weapon.getWFinal();
+			
+			if (wFinal != 0) {
+				name = "*";
+			}
+			
 			name = name + weapon.getName();
 			String attack = "" + weapon.getAttack();
 

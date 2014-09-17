@@ -419,7 +419,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		return new ComponentCursor(wrapJoinHelper(builderComponent()));
 	}
-
+	
 	/*
 	 * Helper method to query for component
 	 */
@@ -1889,7 +1889,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		String[] wdSelectionArgs = new String[]{ String.valueOf(id) };
 		String wdGroupBy = null;
 		String wdHaving = null;
-		String wdOrderBy = null;
+		String wdOrderBy = "wd." + S.COLUMN_WISHLIST_DATA_ITEM_ID + " ASC";
 		String wdLimit = null;
 		
 		// Multithread issues workaround
@@ -1957,13 +1957,37 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	/*
+	 * Add a wishlist data to a specific wishlist
+	 */
+	public long queryAddWishlistDataAll(long wishlist_id, long item_id, int quantity, int satisfied) {
+		ContentValues values = new ContentValues();
+		values.put(S.COLUMN_WISHLIST_DATA_WISHLIST_ID, wishlist_id);
+		values.put(S.COLUMN_WISHLIST_DATA_ITEM_ID, item_id);
+		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
+		values.put(S.COLUMN_WISHLIST_DATA_SATISFIED, satisfied);
+		
+		return insertRecord(S.TABLE_WISHLIST_DATA, values);
+	}
+	/*
 	 * Update a wishlist data to a specific wishlist
 	 */
-	public int queryUpdateWishlistData(long id, int quantity) {
+	public int queryUpdateWishlistDataQuantity(long id, int quantity) {
 		String strFilter = S.COLUMN_WISHLIST_DATA_ID + " = "  + id;
 		
 		ContentValues values = new ContentValues();
 		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
+		
+		return updateRecord(S.TABLE_WISHLIST_DATA, strFilter, values);
+	}	
+	
+	/*
+	 * Update a wishlist data to a specific wishlist
+	 */
+	public int queryUpdateWishlistDataSatisfied(long id, int satisfied) {
+		String strFilter = S.COLUMN_WISHLIST_DATA_ID + " = "  + id;
+		
+		ContentValues values = new ContentValues();
+		values.put(S.COLUMN_WISHLIST_DATA_SATISFIED, satisfied);
 		
 		return updateRecord(S.TABLE_WISHLIST_DATA, strFilter, values);
 	}
@@ -2031,7 +2055,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		String[] wcSelectionArgs = new String[]{ String.valueOf(id) };
 		String wcGroupBy = null;
 		String wcHaving = null;
-		String wcOrderBy = null;
+		String wcOrderBy = "wc." + S.COLUMN_WISHLIST_COMPONENT_COMPONENT_ID + " ASC";
 		String wcLimit = null;
 		
 		// Multithread issues workaround
@@ -2063,6 +2087,27 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		return new WishlistComponentCursor(cursor);
 	}
+
+	/*
+	 * Get all wishlist components for a specific id
+	 */
+	public WishlistComponentCursor queryWishlistComponentId(long id) {
+		
+		String[] wcColumns = null;
+		String wcSelection = "wc." + S.COLUMN_WISHLIST_COMPONENT_ID + " = ?";
+		String[] wcSelectionArgs = new String[]{ String.valueOf(id) };
+		String wcGroupBy = null;
+		String wcHaving = null;
+		String wcOrderBy = null;
+		String wcLimit = null;
+		
+		// Multithread issues workaround
+		SQLiteQueryBuilder qb = builderWishlistComponent();
+		Cursor cursor = qb.query(
+				getReadableDatabase(), wcColumns, wcSelection, wcSelectionArgs, wcGroupBy, wcHaving, wcOrderBy, wcLimit);
+		
+		return new WishlistComponentCursor(cursor);
+	}	
 	
 	/*
 	 * Add a wishlist component to a specific wishlist
@@ -2072,6 +2117,19 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		values.put(S.COLUMN_WISHLIST_COMPONENT_WISHLIST_ID, wishlist_id);
 		values.put(S.COLUMN_WISHLIST_COMPONENT_COMPONENT_ID, component_id);
 		values.put(S.COLUMN_WISHLIST_COMPONENT_QUANTITY, quantity);
+		
+		return insertRecord(S.TABLE_WISHLIST_COMPONENT, values);
+	}
+	
+	/*
+	 * Add a wishlist component to a specific wishlist
+	 */
+	public long queryAddWishlistComponentAll(long wishlist_id, long component_id, int quantity, int notes) {
+		ContentValues values = new ContentValues();
+		values.put(S.COLUMN_WISHLIST_COMPONENT_WISHLIST_ID, wishlist_id);
+		values.put(S.COLUMN_WISHLIST_COMPONENT_COMPONENT_ID, component_id);
+		values.put(S.COLUMN_WISHLIST_COMPONENT_QUANTITY, quantity);
+		values.put(S.COLUMN_WISHLIST_COMPONENT_NOTES, notes);
 		
 		return insertRecord(S.TABLE_WISHLIST_COMPONENT, values);
 	}

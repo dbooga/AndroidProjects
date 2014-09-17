@@ -108,6 +108,12 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 			specialtv.setText(null);
 			
 			String name = "";
+			int wFinal = weapon.getWFinal();
+			
+			if (wFinal != 0) {
+				name = "*";
+			}
+			
 			name = name + weapon.getName();
 			String attack = "" + weapon.getAttack();
 			

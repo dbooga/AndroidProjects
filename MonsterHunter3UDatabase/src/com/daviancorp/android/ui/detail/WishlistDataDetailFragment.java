@@ -14,7 +14,6 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -41,15 +40,18 @@ import com.daviancorp.android.ui.dialog.WishlistDataEditDialogFragment;
 public class WishlistDataDetailFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
-	public static final String EXTRA_REFRESH =
-			"com.daviancorp.android.ui.general.wishlist_refresh";
+	public static final String EXTRA_DETAIL_REFRESH =
+			"com.daviancorp.android.ui.general.wishlist_detail_refresh";
 	
 	private static final String ARG_ID = "ID";
 
 	private static final String DIALOG_WISHLIST_DATA_EDIT = "wishlist_data_edit";
 	private static final String DIALOG_WISHLIST_DATA_DELETE = "wishlist_data_delete";
-	private static final int REQUEST_EDIT = 0;
-	private static final int REQUEST_DELETE = 1;
+	private static final int REQUEST_REFRESH = 0;
+	private static final int REQUEST_EDIT = 1;
+	private static final int REQUEST_DELETE = 2;
+
+	private boolean started, fromOtherTab;
 	
 	private ListView mListView;
 	private ActionMode mActionMode;
@@ -109,7 +111,13 @@ public class WishlistDataDetailFragment extends ListFragment implements
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode != Activity.RESULT_OK) return;
-		if (requestCode == REQUEST_EDIT) {
+		if (requestCode == REQUEST_REFRESH) {
+			if(data.getBooleanExtra(WishlistDataComponentFragment.EXTRA_COMPONENT_REFRESH, false)) {
+				fromOtherTab = true;
+				updateUI();
+			}
+		}
+		else if (requestCode == REQUEST_EDIT) {
 			if(data.getBooleanExtra(WishlistDataEditDialogFragment.EXTRA_EDIT, false)) {
 				updateUI();
 			}
@@ -122,11 +130,24 @@ public class WishlistDataDetailFragment extends ListFragment implements
 	}
 	
 	private void updateUI() {
-		getLoaderManager().getLoader( 0 ).forceLoad();
-		WishlistDataListCursorAdapter adapter = (WishlistDataListCursorAdapter) getListAdapter();
-		adapter.notifyDataSetChanged();
-
-		sendResult(Activity.RESULT_OK, true);
+		if (started) {
+			getLoaderManager().getLoader( 0 ).forceLoad();
+			WishlistDataListCursorAdapter adapter = (WishlistDataListCursorAdapter) getListAdapter();
+			adapter.notifyDataSetChanged();
+	
+			if (!fromOtherTab) {
+				sendResult(Activity.RESULT_OK, true);
+			}
+			else {
+				fromOtherTab = false;
+			}
+		}
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateUI();
 	}
 	
 	private void sendResult(int resultCode, boolean refresh) {
@@ -135,7 +156,7 @@ public class WishlistDataDetailFragment extends ListFragment implements
 		}
 
 		Intent i = new Intent();
-		i.putExtra(EXTRA_REFRESH, refresh);
+		i.putExtra(EXTRA_DETAIL_REFRESH, refresh);
 		
 		getTargetFragment()
 			.onActivityResult(getTargetRequestCode(), resultCode, i);
@@ -226,6 +247,7 @@ public class WishlistDataDetailFragment extends ListFragment implements
 				getActivity(), (WishlistDataCursor) cursor);
 		setListAdapter(adapter);
 
+		started = true;
 	}
 
 	@Override
@@ -262,13 +284,22 @@ public class WishlistDataDetailFragment extends ListFragment implements
 			ImageView itemImageView = (ImageView) view.findViewById(R.id.item_image);
 			TextView itemTextView = (TextView) view.findViewById(R.id.item);
 			TextView amtTextView = (TextView) view.findViewById(R.id.amt);
+			TextView extraTextView = (TextView) view.findViewById(R.id.extra);
 			
 			long id = data.getItem().getId();
 			String nameText = data.getItem().getName();
 			String amtText = "" + data.getQuantity();
 			
+			String extraText = "";
+			int satisfied = data.getSatisfied();
+			
+			if (satisfied == 1) {
+				extraText = "Can make one";
+			}
+			
 			itemTextView.setText(nameText);
 			amtTextView.setText(amtText);
+			extraTextView.setText(extraText);
 			
 			Drawable i = null;
 			String cellImage = "";
