@@ -15,6 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
@@ -34,9 +35,10 @@ public class WeaponGridFragment extends Fragment {
 	private final static int HEAVY_BOWGUN = 10;
 	private final static int BOW = 11;
 
-//	static final String[] weapons = new String[] { "Great Sword", "Long Sword",
-//			"Sword and Shield", "Dual Blades", "Hammer", "Hunting Horn", "Lance", "Gunlance",
-//			"Switch Axe", "Light Bowgun", "Heavy Bowgun", "Bow" };
+	static final String[] weapons = new String[] { "Great Sword", "Long Sword",
+			"Sword and Shield", "Dual Blades", "Hammer", "Hunting Horn", "Lance", "Gunlance",
+			"Switch Axe", "Light Bowgun", "Heavy Bowgun", "Bow" };
+	
 	static final Integer[] drawables = new Integer[] { 
 		R.drawable.great_sword1, R.drawable.long_sword1, R.drawable.sword_and_shield1,
 		R.drawable.dual_blades1, R.drawable.hammer1, R.drawable.hunting_horn1,
@@ -121,11 +123,14 @@ public class WeaponGridFragment extends Fragment {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
 				convertView = getActivity().getLayoutInflater()
-						.inflate(R.layout.grid_image_item, parent, false);
+						.inflate(R.layout.fragment_weapon_grid_item, parent, false);
 			}
 
 			Integer item = getItem(position);
+			TextView textView = (TextView) convertView.findViewById(R.id.text);
 			ImageView imageView = (ImageView) convertView.findViewById(R.id.image);
+			
+			textView.setText(weapons[position]);
 			imageView.setImageResource(item);
 			
 			return convertView;

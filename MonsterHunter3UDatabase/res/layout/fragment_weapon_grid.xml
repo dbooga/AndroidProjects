@@ -8,13 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@color/darkgreen"
         android:columnWidth="100dp"
         android:gravity="center"
         android:numColumns="3"
         android:stretchMode="spacingWidthUniform"
-        android:verticalSpacing="10dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp" />
+        android:verticalSpacing="5dp" />
 
 </RelativeLayout>
