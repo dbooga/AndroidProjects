@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,8 +72,6 @@ public class QuestExpandableListFragment extends Fragment {
 		ArrayList<Quest> g8 = new ArrayList<Quest>();
 		ArrayList<Quest> g9 = new ArrayList<Quest>();
 		for (int i = 0; i < quests.size(); i++) {
-			Log.d("heyo", "Stars = " + quests.get(i).getStars() + " "
-					+ quests.get(i).getName());
 			switch (quests.get(i).getStars()) {
 
 			case "1":
@@ -118,7 +115,6 @@ public class QuestExpandableListFragment extends Fragment {
 		children.add(g8);
 		children.add(g9);
 
-		Log.d("heyo", "" + g1.size());
 	}
 
 	@Override

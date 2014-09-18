@@ -22,7 +22,6 @@ public class MonsterToQuestListCursorLoader extends SQLiteCursorLoader {
 			return DataManager.get(getContext()).queryMonsterToQuestMonster(id);
 		}
 		else if(from.equals("quest")) {
-			Log.d("helpme", "quset");
 			return DataManager.get(getContext()).queryMonsterToQuestQuest(id);
 		}
 		else {

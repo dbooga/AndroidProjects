@@ -2,7 +2,7 @@
 ------------ Shared ------------
 General:	highlight headers
 		move icon + name in detail (monster/armor/quest/item/decoration)
-		add header for components (weapon/armor/decoration)
+		add header for components (weapon/armor/decoration/item)
 		add header for skills (armor/decoration)
 		bold labels/main things? (eg. item names from monster carves)
 
@@ -17,12 +17,11 @@ Combining:	fix highlight
 Decoration:	move skills to right in list
 Skills:		add header to armor/deco
 Location:	fix detail (title)
-
+Quests:		Add location (link)
+Arena Quest:	Add location link
 
 
 ------------ b ------------ 
 1	add wishlist headers
-2	add armor buy/sell
-3	add arena quest
-4	add monster damage
-5	add menu item to add to wishlist
+2	add monster damage
+3	add menu item to add to wishlist

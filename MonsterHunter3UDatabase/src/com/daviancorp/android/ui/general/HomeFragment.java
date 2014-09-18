@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.daviancorp.android.data.object.Quest;
 import com.daviancorp.android.loader.QuestLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.ui.list.ArenaQuestListActivity;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
 import com.daviancorp.android.ui.list.DecorationListActivity;
@@ -45,11 +46,12 @@ public class HomeFragment extends Fragment {
 	private final static int SKILLS = 7;
 	private final static int LOCATIONS = 8;
 	private final static int HUNTINGFLEET = 9;
-	private final static int WISHLISTS = 10;
+	private final static int ARENAQUESTS = 10;
+	private final static int WISHLISTS = 11;
 
 	static final String[] numbers = new String[] { "Monsters", "Weapons",
 			"Armors", "Quests", "Items", "Combining", "Decorations", "Skills",
-			"Locations", "Hunting Fleet", "Wishlists" };
+			"Locations", "Hunting Fleet", "Arena Quests", "Wishlists" };
 
 	private ProgressDialog progress;
 	
@@ -126,6 +128,11 @@ public class HomeFragment extends Fragment {
 				case HUNTINGFLEET:
 					intent = new Intent(getActivity(),
 							HuntingFleetListActivity.class);
+					startActivity(intent);
+					break;
+				case ARENAQUESTS:
+					intent = new Intent(getActivity(),
+							ArenaQuestListActivity.class);
 					startActivity(intent);
 					break;
 				case WISHLISTS:

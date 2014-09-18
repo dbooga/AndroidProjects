@@ -159,7 +159,168 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	{
 	    return getWritableDatabase().delete(table, where, args) > 0;
 	}
+	
+/********************************* ARENA QUEST QUERIES ******************************************/
+	
+	/*
+	 * Get all arena quests
+	 */
+	public ArenaQuestCursor queryArenaQuests() {
+		
+		_Columns = null;
+		_Selection = null;
+		_SelectionArgs = null;
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ArenaQuestCursor(wrapJoinHelper(builderArenaQuest()));
+	}
+	
+	/*
+	 * Get a specific arena quest
+	 */
+	public ArenaQuestCursor queryArenaQuest(long id) {
+		
+		_Distinct = false;
+		_Table = S.TABLE_ARENA_QUESTS;
+		_Columns = null;
+		_Selection = "a." + S.COLUMN_ARENA_QUESTS_ID + " = ?";
+		_SelectionArgs = new String[]{ String.valueOf(id) };
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
 
+		return new ArenaQuestCursor(wrapJoinHelper(builderArenaQuest()));
+	}
+	
+	/*
+	 * Get all arena quests based on location
+	 */
+	public ArenaQuestCursor queryArenaQuestLocation(long id) {
+		
+		_Columns = null;
+		_Selection = "a." + S.COLUMN_ARENA_QUESTS_LOCATION_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ArenaQuestCursor(wrapJoinHelper(builderArenaQuest()));
+	}
+	
+	/*
+	 * Helper method to query for ArenaQuest
+	 */
+	private SQLiteQueryBuilder builderArenaQuest() {
+//		SELECT a._id AS _id, a.name AS aname, a.location_id, a.reward.,
+//		a.num_participants, a.time_s, a.time_a, a.time_b,
+//		l.name AS lname
+//		FROM arena_quests AS a
+//		LEFT OUTER JOIN locations AS l on a.location_id = l._id;
+
+		String a = "a";
+		String l = "l";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", a + "." + S.COLUMN_ARENA_QUESTS_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_ARENA_QUESTS_NAME, a + "." + S.COLUMN_ARENA_QUESTS_NAME + " AS " + a + S.COLUMN_ARENA_QUESTS_NAME);
+		projectionMap.put(S.COLUMN_ARENA_QUESTS_GOAL, a + "." + S.COLUMN_ARENA_QUESTS_GOAL);
+		projectionMap.put(S.COLUMN_ARENA_QUESTS_LOCATION_ID, a + "." + S.COLUMN_ARENA_QUESTS_LOCATION_ID);
+		projectionMap.put(S.COLUMN_ARENA_QUESTS_REWARD, a + "." + S.COLUMN_ARENA_QUESTS_REWARD);
+		projectionMap.put(S.COLUMN_ARENA_QUESTS_NUM_PARTICIPANTS, a + "." + S.COLUMN_ARENA_QUESTS_NUM_PARTICIPANTS);
+		projectionMap.put(S.COLUMN_ARENA_QUESTS_TIME_S, a + "." + S.COLUMN_ARENA_QUESTS_TIME_S);
+		projectionMap.put(S.COLUMN_ARENA_QUESTS_TIME_A, a + "." + S.COLUMN_ARENA_QUESTS_TIME_A);
+		projectionMap.put(S.COLUMN_ARENA_QUESTS_TIME_B, a + "." + S.COLUMN_ARENA_QUESTS_TIME_B);
+
+		projectionMap.put(l + S.COLUMN_LOCATIONS_NAME, l + "." + S.COLUMN_LOCATIONS_NAME + " AS " + l + S.COLUMN_LOCATIONS_NAME);
+
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_ARENA_QUESTS + " AS a" + " LEFT OUTER JOIN " + S.TABLE_LOCATIONS +
+				" AS l " + " ON " + "a." + S.COLUMN_ARENA_QUESTS_LOCATION_ID + " = " + "l." + S.COLUMN_LOCATIONS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
+/********************************* ARENA REWARD QUERIES ******************************************/
+	
+	/*
+	 * Get all reward arena quests based on item
+	 */
+	public ArenaRewardCursor queryArenaRewardItem(long id) {
+		
+		_Columns = null;
+		_Selection = "ar." + S.COLUMN_ARENA_REWARDS_ITEM_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = "ar." + S.COLUMN_ARENA_REWARDS_PERCENTAGE + " DESC";
+		_Limit = null;
+		
+		return new ArenaRewardCursor(wrapJoinHelper(builderArenaReward()));
+	}
+	
+	/*
+	 * Get all arena quest reward items based on arena quest
+	 */
+	public ArenaRewardCursor queryArenaRewardArena(long id) {
+		
+		_Columns = null;
+		_Selection = "ar." + S.COLUMN_ARENA_REWARDS_ARENA_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ArenaRewardCursor(wrapJoinHelper(builderArenaReward()));
+	}
+	
+	/*
+	 * Helper method to query for ArenaReward
+	 */
+	private SQLiteQueryBuilder builderArenaReward() {
+//		SELECT ar._id AS _id, ar.arena_id, ar.item_id, 
+//		ar.percentage, ar.stack_size,
+//		a.name AS aname, i.name AS iname
+//		FROM quest_rewards AS ar
+//		LEFT OUTER JOIN arena_quests AS a ON ar.arena_id = q._id
+//		LEFT OUTER JOIN items AS i ON ar.item_id = i._id;
+
+		String ar = "ar";
+		String i = "i";
+		String a = "a";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", ar + "." + S.COLUMN_ARENA_REWARDS_ID + " AS " + "_id");
+		projectionMap.put(S.COLUMN_ARENA_REWARDS_ITEM_ID, ar + "." + S.COLUMN_ARENA_REWARDS_ITEM_ID);
+		projectionMap.put(S.COLUMN_ARENA_REWARDS_ARENA_ID, ar + "." + S.COLUMN_ARENA_REWARDS_ARENA_ID);
+		projectionMap.put(S.COLUMN_ARENA_REWARDS_PERCENTAGE, ar + "." + S.COLUMN_ARENA_REWARDS_PERCENTAGE);
+		projectionMap.put(S.COLUMN_ARENA_REWARDS_STACK_SIZE, ar + "." + S.COLUMN_ARENA_REWARDS_STACK_SIZE);
+		
+		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
+		projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
+		projectionMap.put(a + S.COLUMN_ARENA_QUESTS_NAME, a + "." + S.COLUMN_ARENA_QUESTS_NAME + " AS " + a + S.COLUMN_ARENA_QUESTS_NAME);
+
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_ARENA_REWARDS + " AS ar" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "ar." +
+				S.COLUMN_ARENA_REWARDS_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_ARENA_QUESTS +
+				" AS a " + " ON " + "ar." + S.COLUMN_ARENA_REWARDS_ARENA_ID + " = " + "a." + S.COLUMN_ARENA_QUESTS_ID);
+
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+	
 /********************************* ARMOR QUERIES ******************************************/
 	
 	/*
@@ -949,8 +1110,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		String itst = "itst";
 		String i = "i";
 		String s = "s";
-		String a = "a";
-		String d = "d";
 		
 		HashMap<String, String> projectionMap = new HashMap<String, String>();
 		
@@ -1230,6 +1389,81 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return new MonsterDamageCursor(wrapHelper());
 	}	
 	
+/********************************* MONSTER TO ARENA QUERIES ******************************************/
+	
+	/*
+	 * Get all arena quests based on monster
+	 */
+	public MonsterToArenaCursor queryMonsterToArenaMonster(long id) {
+
+		_Distinct = true;
+		_Columns = null;
+		_Selection = "mta." + S.COLUMN_MONSTER_TO_ARENA_MONSTER_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = "a." + S.COLUMN_ARENA_QUESTS_NAME;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new MonsterToArenaCursor(wrapJoinHelper(builderMonsterToArena()));
+	}
+	
+	/*
+	 * Get all monsters based on arena quest
+	 */
+	public MonsterToArenaCursor queryMonsterToArenaArena(long id) {
+
+		_Distinct = false;
+		_Columns = null;
+		_Selection = "mta." + S.COLUMN_MONSTER_TO_ARENA_ARENA_ID + " = ? ";
+		_SelectionArgs = new String[]{"" + id};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new MonsterToArenaCursor(wrapJoinHelper(builderMonsterToArena()));
+	}
+	
+	/*
+	 * Helper method to query for MonsterToArena
+	 */
+	private SQLiteQueryBuilder builderMonsterToArena() {
+//		SELECT mta._id AS _id, mta.monster_id, mta.arena_id,
+//		m.name AS mname, a.name AS aname,
+//		FROM monster_to_arena AS mta
+//		LEFT OUTER JOIN monsters AS m ON mta.monster_id = m._id
+//		LEFT OUTER JOIN arena_quests AS a ON mta.arena_id = a._id;
+
+		String mta = "mta";
+		String m = "m";
+		String a = "a";
+		
+		HashMap<String, String> projectionMap = new HashMap<String, String>();
+		
+		projectionMap.put("_id", mta + "." + S.COLUMN_MONSTER_TO_ARENA_ID + " AS " + "_id");
+		
+		projectionMap.put(S.COLUMN_MONSTER_TO_ARENA_ID, mta + "." + S.COLUMN_MONSTER_TO_ARENA_ID);
+		projectionMap.put(S.COLUMN_MONSTER_TO_ARENA_MONSTER_ID, mta + "." + S.COLUMN_MONSTER_TO_ARENA_MONSTER_ID);
+		projectionMap.put(S.COLUMN_MONSTER_TO_ARENA_ARENA_ID, mta + "." + S.COLUMN_MONSTER_TO_ARENA_ARENA_ID);
+		
+		projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
+		projectionMap.put(S.COLUMN_MONSTERS_TRAIT, m + "." + S.COLUMN_MONSTERS_TRAIT);
+		projectionMap.put(S.COLUMN_MONSTERS_FILE_LOCATION, m + "." + S.COLUMN_MONSTERS_FILE_LOCATION);
+		projectionMap.put(a + S.COLUMN_ARENA_QUESTS_NAME, a + "." + S.COLUMN_ARENA_QUESTS_NAME + " AS " + a + S.COLUMN_ARENA_QUESTS_NAME);
+				
+		//Create new querybuilder
+		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		
+		_QB.setTables(S.TABLE_MONSTER_TO_ARENA + " AS mta" + " LEFT OUTER JOIN " + S.TABLE_MONSTERS + " AS m" + " ON " + "mta." +
+				S.COLUMN_MONSTER_TO_ARENA_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID + " LEFT OUTER JOIN " + S.TABLE_ARENA_QUESTS +
+				" AS a " + " ON " + "mta." + S.COLUMN_MONSTER_TO_ARENA_ARENA_ID + " = " + "a." + S.COLUMN_ARENA_QUESTS_ID);
+
+		_QB.setDistinct(_Distinct);
+		_QB.setProjectionMap(projectionMap);
+		return _QB;
+	}
+		
 /********************************* MONSTER TO QUEST QUERIES ******************************************/
 	
 	/*

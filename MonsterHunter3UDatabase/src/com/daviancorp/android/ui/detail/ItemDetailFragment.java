@@ -94,6 +94,10 @@ public class ItemDetailFragment extends Fragment {
 			cellSell = "-";
 		}
 		
+		if (cellDescription.equals("null")) {
+			cellDescription = "";
+		}
+		
 		mItemLabelTextView.setText(cellText);
 		rareTextView.setText(cellRare);
 		maxTextView.setText(cellMax);

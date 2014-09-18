@@ -3,8 +3,9 @@ package com.daviancorp.android.data.database;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.daviancorp.android.data.object.ArenaQuest;
+import com.daviancorp.android.data.object.ArenaReward;
 import com.daviancorp.android.data.object.Armor;
 import com.daviancorp.android.data.object.Combining;
 import com.daviancorp.android.data.object.Component;
@@ -18,6 +19,7 @@ import com.daviancorp.android.data.object.Location;
 import com.daviancorp.android.data.object.MogaWoodsReward;
 import com.daviancorp.android.data.object.Monster;
 import com.daviancorp.android.data.object.MonsterDamage;
+import com.daviancorp.android.data.object.MonsterToArena;
 import com.daviancorp.android.data.object.MonsterToQuest;
 import com.daviancorp.android.data.object.Quest;
 import com.daviancorp.android.data.object.QuestReward;
@@ -47,6 +49,58 @@ public class DataManager {
 			sDataManager = new DataManager(c.getApplicationContext());
 		}
 		return sDataManager;
+	}
+	
+/********************************* ARENA QUESTS QUERIES ******************************************/	
+	
+	public ArenaQuestCursor queryArenaQuests() {
+		return mHelper.queryArenaQuests();
+	}
+	
+	public ArenaQuest getArenaQuest(long id) {
+		ArenaQuest arenaQuest = null;
+		ArenaQuestCursor cursor = mHelper.queryArenaQuest(id);
+		cursor.moveToFirst();
+		
+		if (!cursor.isAfterLast())
+			arenaQuest = cursor.getArenaQuest();
+		cursor.close();
+		return arenaQuest;
+	}
+	
+/********************************* ARENA REWARD QUERIES ******************************************/
+	public ArenaRewardCursor queryArenaRewardItem(long id) {
+		return mHelper.queryArenaRewardItem(id);
+	}
+
+	public ArenaRewardCursor queryArenaRewardArena(long id) {
+		return mHelper.queryArenaRewardArena(id);
+	}
+	
+	public ArrayList<ArenaReward> queryArenaRewardArrayItem(long id) {
+		ArrayList<ArenaReward> rewards = new ArrayList<ArenaReward>();
+		ArenaRewardCursor cursor = mHelper.queryArenaRewardItem(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			rewards.add(cursor.getArenaReward());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return rewards;
+	}
+	
+	public ArrayList<ArenaReward> queryArenaRewardArrayArena(long id) {
+		ArrayList<ArenaReward> rewards = new ArrayList<ArenaReward>();
+		ArenaRewardCursor cursor = mHelper.queryArenaRewardArena(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			rewards.add(cursor.getArenaReward());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return rewards;
 	}
 	
 /********************************* ARMOR QUERIES ******************************************/	
@@ -496,6 +550,41 @@ public class DataManager {
 		return damages;
 	}	
 	
+/********************************* MONSTER TO ARENA QUERIES ******************************************/
+	public MonsterToArenaCursor queryMonsterToArenaMonster(long id) {
+		return mHelper.queryMonsterToArenaMonster(id);
+	}
+
+	public MonsterToArenaCursor queryMonsterToArenaArena(long id) {
+		return mHelper.queryMonsterToArenaArena(id);
+	}
+	
+	public ArrayList<MonsterToArena> queryMonsterToArenaArrayMonster(long id) {
+		ArrayList<MonsterToArena> mta = new ArrayList<MonsterToArena>();
+		MonsterToArenaCursor cursor = mHelper.queryMonsterToArenaMonster(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			mta.add(cursor.getMonsterToArena());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return mta;
+	}
+	
+	public ArrayList<MonsterToArena> queryMonsterToArenaArrayArena(long id) {
+		ArrayList<MonsterToArena> mta = new ArrayList<MonsterToArena>();
+		MonsterToArenaCursor cursor = mHelper.queryMonsterToArenaArena(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			mta.add(cursor.getMonsterToArena());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return mta;
+	}
+		
 /********************************* MONSTER TO QUEST QUERIES ******************************************/
 	public MonsterToQuestCursor queryMonsterToQuestMonster(long id) {
 		return mHelper.queryMonsterToQuestMonster(id);

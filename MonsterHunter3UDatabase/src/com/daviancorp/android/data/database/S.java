@@ -2,6 +2,26 @@ package com.daviancorp.android.data.database;
 
 
 public class S {
+
+	// Arena Quests
+	static final String TABLE_ARENA_QUESTS = "arena_quests";
+	static final String COLUMN_ARENA_QUESTS_ID = "_id";
+	static final String COLUMN_ARENA_QUESTS_NAME = "name";
+	static final String COLUMN_ARENA_QUESTS_GOAL = "goal";
+	static final String COLUMN_ARENA_QUESTS_LOCATION_ID = "location_id";
+	static final String COLUMN_ARENA_QUESTS_REWARD = "reward";
+	static final String COLUMN_ARENA_QUESTS_NUM_PARTICIPANTS = "num_participants";
+	static final String COLUMN_ARENA_QUESTS_TIME_S = "time_s";
+	static final String COLUMN_ARENA_QUESTS_TIME_A = "time_a";
+	static final String COLUMN_ARENA_QUESTS_TIME_B = "time_b";
+
+	// Arena Rewards
+	static final String TABLE_ARENA_REWARDS = "arena_rewards";
+	static final String COLUMN_ARENA_REWARDS_ID = "_id";
+	static final String COLUMN_ARENA_REWARDS_ARENA_ID = "arena_id";
+	static final String COLUMN_ARENA_REWARDS_ITEM_ID = "item_id";
+	static final String COLUMN_ARENA_REWARDS_PERCENTAGE = "percentage";
+	static final String COLUMN_ARENA_REWARDS_STACK_SIZE = "stack_size";
 	
 	// Armor
 	static final String TABLE_ARMOR = "armor";
@@ -17,7 +37,7 @@ public class S {
 	static final String COLUMN_ARMOR_GENDER = "gender";
 	static final String COLUMN_ARMOR_HUNTER_TYPE = "hunter_type";
 	static final String COLUMN_ARMOR_NUM_SLOTS = "num_slots";
-	
+
 	// Charms
 	static final String TABLE_CHARMS = "charms";
 	static final String COLUMN_CHARMS_ID = "_id";
@@ -139,6 +159,12 @@ public class S {
 	static final String COLUMN_MONSTER_DAMAGE_THUNDER = "thunder";
 	static final String COLUMN_MONSTER_DAMAGE_DRAGON = "dragon";
 	static final String COLUMN_MONSTER_DAMAGE_KO = "ko";
+
+	// Monster to Arena
+	static final String TABLE_MONSTER_TO_ARENA = "monster_to_arena";
+	static final String COLUMN_MONSTER_TO_ARENA_ID = "_id";
+	static final String COLUMN_MONSTER_TO_ARENA_MONSTER_ID = "monster_id";
+	static final String COLUMN_MONSTER_TO_ARENA_ARENA_ID = "arena_id";
 	
 	// Monster to Quest
 	static final String TABLE_MONSTER_TO_QUEST = "monster_to_quest";
