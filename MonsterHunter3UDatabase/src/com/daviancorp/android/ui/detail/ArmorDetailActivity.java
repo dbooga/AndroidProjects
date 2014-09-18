@@ -30,6 +30,7 @@ public class ArmorDetailActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	private long id;
+	private String name;
 	
 	// Tab titles
 	private String[] tabs = { "Detail", "Skills", "Components"};
@@ -39,8 +40,8 @@ public class ArmorDetailActivity extends GenericTabActivity implements
 		super.onCreate(savedInstanceState);
 		
 		id = getIntent().getLongExtra(EXTRA_ARMOR_ID, -1);
-		setTitle(DataManager.get(getApplicationContext()).getArmor(id).getName());
-
+		name = DataManager.get(getApplicationContext()).getArmor(id).getName();
+		setTitle(name);
 		// Initialization
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		mAdapter = new ArmorDetailPagerAdapter(getSupportFragmentManager(), id);
@@ -91,7 +92,7 @@ public class ArmorDetailActivity extends GenericTabActivity implements
 			case R.id.wishlist_add:
 				FragmentManager fm = getSupportFragmentManager();
 				WishlistDataAddDialogFragment dialogCopy = WishlistDataAddDialogFragment
-						.newInstance(id);
+						.newInstance(id, name);
 				dialogCopy.show(fm, DIALOG_WISHLIST_ADD);
 				return true;
 			default:

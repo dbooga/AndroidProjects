@@ -7,6 +7,7 @@ public class WishlistData {
 	private Item item;
 	private int quantity;
 	private int satisfied;
+	private String path;
 	
 	public WishlistData() {
 		this.id = -1;
@@ -14,6 +15,7 @@ public class WishlistData {
 		this.item = null;
 		this.quantity = -1;
 		this.satisfied = -1;
+		this.path = "";
 	}
 	
 	public long getId() {
@@ -54,5 +56,13 @@ public class WishlistData {
 	
 	public void setSatisfied(int satisfied) {
 		this.satisfied = satisfied;
+	}
+	
+	public String getPath() {
+		return path;
+	}
+	
+	public void setPath(String path) {
+		this.path = path;
 	}
 }

@@ -158,12 +158,13 @@ public abstract class WeaponListFragment extends ListFragment implements
 		
 		Weapon weapon = getDetailWeapon(position);
 		long id = weapon.getId();
+		String name = weapon.getName();
 		
 		FragmentManager fm = getActivity().getSupportFragmentManager();
 		
 		switch (item.getItemId()) {
 			case R.id.menu_item_wishlist_add:
-				WishlistDataAddDialogFragment dialogAdd = WishlistDataAddDialogFragment.newInstance(id);
+				WishlistDataAddDialogFragment dialogAdd = WishlistDataAddDialogFragment.newInstance(id, name);
 				dialogAdd.setTargetFragment(getThisFragment(), REQUEST_ADD_MULTI);
 				dialogAdd.show(fm, DIALOG_WISHLIST_DATA_ADD_MULTI);
 				return true;

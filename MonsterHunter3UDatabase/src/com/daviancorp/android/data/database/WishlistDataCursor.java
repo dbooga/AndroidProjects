@@ -31,11 +31,13 @@ public class WishlistDataCursor extends CursorWrapper {
 		long wishlist_id = getLong(getColumnIndex(S.COLUMN_WISHLIST_DATA_WISHLIST_ID));
 		int quantity = getInt(getColumnIndex(S.COLUMN_WISHLIST_DATA_QUANTITY));
 		int satisfied = getInt(getColumnIndex(S.COLUMN_WISHLIST_DATA_SATISFIED));
+		String path = getString(getColumnIndex(S.COLUMN_WISHLIST_DATA_PATH));
 		
 		wishlistData.setId(id);
 		wishlistData.setWishlistId(wishlist_id);
 		wishlistData.setQuantity(quantity);
 		wishlistData.setSatisfied(satisfied);
+		wishlistData.setPath(path);
 
 		Item item = new Item();
 		
@@ -45,7 +47,7 @@ public class WishlistDataCursor extends CursorWrapper {
 			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
 			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
 //			int carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
-//			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
+		int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
 //			String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
 			String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
@@ -57,7 +59,7 @@ public class WishlistDataCursor extends CursorWrapper {
 			item.setType(type);
 			item.setRarity(rarity);
 //			item.setCarryCapacity(carry_capacity);
-//			item.setBuy(buy);
+		item.setBuy(buy);
 //			item.setSell(sell);
 //			item.setDescription(description);
 			item.setFileLocation(fileLocation);

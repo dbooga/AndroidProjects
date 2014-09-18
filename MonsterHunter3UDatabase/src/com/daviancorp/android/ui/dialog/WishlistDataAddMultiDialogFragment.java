@@ -60,7 +60,7 @@ public class WishlistDataAddMultiDialogFragment extends DialogFragment {
 	            	   long[] ids = args.getLongArray(ARG_WISHLIST_DATA_IDS);
 	            	   
 	            	   for (int i = 0; i < ids.length; i++) {
-	            		   DataManager.get(getActivity()).queryAddWishlistData(wishlistId, ids[i], 1);
+	            		   DataManager.get(getActivity()).queryAddWishlistData(wishlistId, ids[i], 1, null);
 	            	   }
 	            	   
 	   				   Toast.makeText(getActivity(), 

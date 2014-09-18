@@ -582,6 +582,24 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	/*
+	 * Get all components for a created item and type
+	 */
+	public ComponentCursor queryComponentCreatedType(long id, String type) {
+		
+		_Columns = null;
+		_Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? " +
+				" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < 1314" +
+				" AND " + "c." + S.COLUMN_COMPONENTS_TYPE + " = ?";
+		_SelectionArgs = new String[]{"" + id, type};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ComponentCursor(wrapJoinHelper(builderComponent()));
+	}
+	
+	/*
 	 * Helper method to query for component
 	 */
 	private SQLiteQueryBuilder builderComponent() {
@@ -2159,12 +2177,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Get all data for a specific wishlist and item
 	 */
-	public WishlistDataCursor queryWishlistData(long wd_id, long item_id) {
+	public WishlistDataCursor queryWishlistData(long wd_id, long item_id, String path) {
 
 		String[] wdColumns = null;
-		String wdSelection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?" + " AND " +
-				"wd." + S.COLUMN_WISHLIST_DATA_ITEM_ID + " = ?";
-		String[] wdSelectionArgs = new String[]{ String.valueOf(wd_id), String.valueOf(item_id) };
+		String wdSelection = "wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = ?" + 
+				" AND " + "wd." + S.COLUMN_WISHLIST_DATA_ITEM_ID + " = ?" +
+				" AND " + "wd." + S.COLUMN_WISHLIST_DATA_PATH + " = ?";
+		String[] wdSelectionArgs = new String[]{ String.valueOf(wd_id), String.valueOf(item_id), path };
 		String wdGroupBy = null;
 		String wdHaving = null;
 		String wdOrderBy = null;
@@ -2181,27 +2200,32 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Add a wishlist data to a specific wishlist
 	 */
-	public long queryAddWishlistData(long wishlist_id, long item_id, int quantity) {
+	public long queryAddWishlistData(long wishlist_id, long item_id, 
+			int quantity, String path) {
 		ContentValues values = new ContentValues();
 		values.put(S.COLUMN_WISHLIST_DATA_WISHLIST_ID, wishlist_id);
 		values.put(S.COLUMN_WISHLIST_DATA_ITEM_ID, item_id);
 		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
+		values.put(S.COLUMN_WISHLIST_DATA_PATH, path);
 		
 		return insertRecord(S.TABLE_WISHLIST_DATA, values);
 	}
 	
 	/*
-	 * Add a wishlist data to a specific wishlist
+	 * Add a wishlist data to a specific wishlist for copying
 	 */
-	public long queryAddWishlistDataAll(long wishlist_id, long item_id, int quantity, int satisfied) {
+	public long queryAddWishlistDataAll(long wishlist_id, long item_id, 
+			int quantity, int satisfied, String path) {
 		ContentValues values = new ContentValues();
 		values.put(S.COLUMN_WISHLIST_DATA_WISHLIST_ID, wishlist_id);
 		values.put(S.COLUMN_WISHLIST_DATA_ITEM_ID, item_id);
 		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
 		values.put(S.COLUMN_WISHLIST_DATA_SATISFIED, satisfied);
+		values.put(S.COLUMN_WISHLIST_DATA_PATH, path);
 		
 		return insertRecord(S.TABLE_WISHLIST_DATA, values);
 	}
+	
 	/*
 	 * Update a wishlist data to a specific wishlist
 	 */
@@ -2236,7 +2260,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 * Helper method to query for wishlistData
 	 */
 	private SQLiteQueryBuilder builderWishlistData() {
-//		SELECT wd._id AS _id, wd.wishlist_id, wd.item_id, wd.quantity, wd.satisfied
+//		SELECT wd._id AS _id, wd.wishlist_id, wd.item_id, wd.quantity, wd.satisfied, wd.path
 //		i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell, i.description,
 //		i.icon_name, i.armor_dupe_name_fix
 //		FROM wishlist_data AS wd 
@@ -2254,6 +2278,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_WISHLIST_DATA_ITEM_ID, wd + "." + S.COLUMN_WISHLIST_DATA_ITEM_ID);
 		projectionMap.put(S.COLUMN_WISHLIST_DATA_QUANTITY, wd + "." + S.COLUMN_WISHLIST_DATA_QUANTITY);
 		projectionMap.put(S.COLUMN_WISHLIST_DATA_SATISFIED, wd + "." + S.COLUMN_WISHLIST_DATA_SATISFIED);
+		projectionMap.put(S.COLUMN_WISHLIST_DATA_PATH, wd + "." + S.COLUMN_WISHLIST_DATA_PATH);
 
 		projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
 		projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);

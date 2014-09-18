@@ -210,9 +210,13 @@ public class WishlistDataDetailFragment extends ListFragment implements
 			Intent i = null;
 			long mId = (long) v.getTag();
 			
-			if (mId < 1314) {
+			if (mId < 1118) {
 				i = new Intent(getActivity(), ItemDetailActivity.class);
 				i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, mId);
+			}
+			else if (mId < 1314) {
+				i = new Intent(getActivity(), DecorationDetailActivity.class);
+				i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, mId);
 			}
 			else if (mId < 2955) {
 				i = new Intent(getActivity(), ArmorDetailActivity.class);

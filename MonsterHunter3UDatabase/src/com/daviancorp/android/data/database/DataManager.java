@@ -170,6 +170,9 @@ public class DataManager {
 		return mHelper.queryComponentComponent(id);
 	}
 
+	public ComponentCursor queryComponentCreatedType(long id, String type) {
+		return mHelper.queryComponentCreatedType(id, type);
+	}
 	
 	public ArrayList<Component> queryComponentArrayCreated(long id) {
 		ArrayList<Component> components = new ArrayList<Component>();
@@ -195,6 +198,25 @@ public class DataManager {
 		}
 		cursor.close();
 		return components;
+	}
+
+	public ArrayList<String> queryComponentCreateImprove(long id) {
+		ComponentCursor cursor = mHelper.queryComponentCreated(id);
+		cursor.moveToFirst();
+		
+		ArrayList<String> paths = new ArrayList<String>();
+		
+		while (!cursor.isAfterLast()) {
+			String type = cursor.getComponent().getType();
+			
+			if(!paths.contains(type)) {
+				paths.add(type);
+			}
+			
+			cursor.moveToNext();
+		}
+		
+		return paths;
 	}
 	
 /********************************* DECORATION QUERIES ******************************************/
@@ -820,29 +842,29 @@ public class DataManager {
 	}
 
 	public void queryCopyWishlist(long id, String name) {
-		long newId = mHelper.queryAddWishlist(name);
-		
-		WishlistDataCursor cursor = mHelper.queryWishlistData(id);
-		cursor.moveToFirst();
-		
-		while(!cursor.isAfterLast()) {
-			WishlistData wishlist = cursor.getWishlistData();
-			mHelper.queryAddWishlistDataAll(newId, wishlist.getItem().getId(), 
-					wishlist.getQuantity(), wishlist.getSatisfied());
-			cursor.moveToNext();
-		}
-		cursor.close();
-		
-		WishlistComponentCursor wcCursor = mHelper.queryWishlistComponents(id);
-		wcCursor.moveToFirst();
-
-		while(!wcCursor.isAfterLast()) {
-			WishlistComponent wishlist = wcCursor.getWishlistComponent();
-			mHelper.queryAddWishlistComponentAll(newId, wishlist.getItem().getId(), 
-					wishlist.getQuantity(), wishlist.getNotes());
-			wcCursor.moveToNext();
-		}
-		wcCursor.close();
+//		long newId = mHelper.queryAddWishlist(name);
+//		
+//		WishlistDataCursor cursor = mHelper.queryWishlistData(id);
+//		cursor.moveToFirst();
+//		
+//		while(!cursor.isAfterLast()) {
+//			WishlistData wishlist = cursor.getWishlistData();
+//			mHelper.queryAddWishlistDataAll(newId, wishlist.getItem().getId(), 
+//					wishlist.getQuantity(), wishlist.getSatisfied());
+//			cursor.moveToNext();
+//		}
+//		cursor.close();
+//		
+//		WishlistComponentCursor wcCursor = mHelper.queryWishlistComponents(id);
+//		wcCursor.moveToFirst();
+//
+//		while(!wcCursor.isAfterLast()) {
+//			WishlistComponent wishlist = wcCursor.getWishlistComponent();
+//			mHelper.queryAddWishlistComponentAll(newId, wishlist.getItem().getId(), 
+//					wishlist.getQuantity(), wishlist.getNotes());
+//			wcCursor.moveToNext();
+//		}
+//		wcCursor.close();
 	}
 	
 	public Wishlist getWishlist(long id) {
@@ -862,13 +884,14 @@ public class DataManager {
 		return mHelper.queryWishlistData(id);
 	}
 
-	public void queryAddWishlistData(long wishlist_id, long item_id, int quantity) {
-		WishlistDataCursor cursor = mHelper.queryWishlistData(wishlist_id, item_id);
+	public void queryAddWishlistData(long wishlist_id, long item_id, int quantity, String path) {
+
+		WishlistDataCursor cursor = mHelper.queryWishlistData(wishlist_id, item_id, path);
 		cursor.moveToFirst();
-		
+
 		if (cursor.isAfterLast()) {
 			// Add new entry to wishlist_data
-			mHelper.queryAddWishlistData(wishlist_id, item_id, quantity);
+			mHelper.queryAddWishlistData(wishlist_id, item_id, quantity, path);
 		}
 		else {
 			// Update existing entry
@@ -878,13 +901,13 @@ public class DataManager {
 			
 			mHelper.queryUpdateWishlistDataQuantity(id, total);
 		}
-		
-		helperQueryAddWishlistData(wishlist_id, item_id, quantity);
+
+		helperQueryAddWishlistData(wishlist_id, item_id, quantity, path);
 		helperQueryUpdateWishlistSatisfied(wishlist_id);
 	}
 	
-	private void helperQueryAddWishlistData(long wishlist_id, long item_id, int quantity) {
-		ComponentCursor cc = mHelper.queryComponentCreated(item_id);
+	private void helperQueryAddWishlistData(long wishlist_id, long item_id, int quantity, String path) {
+		ComponentCursor cc = mHelper.queryComponentCreatedType(item_id, path);
 		cc.moveToFirst();
 		
 		WishlistComponentCursor wc = null;
@@ -922,10 +945,11 @@ public class DataManager {
 		long wishlist_id = wd.getWishlistId();
 		long item_id = wd.getItem().getId();
 		int wd_old_quantity = wd.getQuantity();
+		String path = wd.getPath();
 		
 		int diff_quantity = quantity - wd_old_quantity;
 		
-		ComponentCursor cc = mHelper.queryComponentCreated(item_id);
+		ComponentCursor cc = mHelper.queryComponentCreatedType(item_id, path);
 		cc.moveToFirst();
 		
 		while (!cc.isAfterLast()) {
@@ -958,8 +982,9 @@ public class DataManager {
 		long wishlist_id = wd.getWishlistId();
 		long item_id = wd.getItem().getId();
 		int wd_old_quantity = wd.getQuantity();
+		String path = wd.getPath();
 		
-		ComponentCursor cc = mHelper.queryComponentCreated(item_id);
+		ComponentCursor cc = mHelper.queryComponentCreatedType(item_id, path);
 		cc.moveToFirst();
 		
 		while (!cc.isAfterLast()) {
@@ -986,6 +1011,40 @@ public class DataManager {
 		}
 		
 		mHelper.queryDeleteWishlistData(id);
+	}
+	
+	
+	public int queryWishlistPrice(long id) {
+		int total = 0;
+		WishlistDataCursor wdc = mHelper.queryWishlistData(id);
+		wdc.moveToFirst();
+		
+		int buy = 0;
+		int quantity = 0;
+		
+		while(!wdc.isAfterLast()) {
+			WishlistData wd = wdc.getWishlistData();
+			Item i = wd.getItem();
+			if ((i.getType()).equals("Weapon")) {
+				WeaponCursor wc = mHelper.queryWeapon(i.getId());
+				wc.moveToFirst();
+				
+//				buy = wc.getWeapon().get
+			}
+			else {
+				buy = wd.getItem().getBuy();
+			}
+			
+			if (buy == -1) {
+				buy = 0;
+			}
+			
+			quantity = wd.getQuantity();
+			
+			total = total + (buy * quantity);
+		}
+		
+		return total;
 	}
 	
 /********************************* WISHLIST COMPONENT QUERIES ******************************************/	
@@ -1017,6 +1076,7 @@ public class DataManager {
 		Component c = null;
 		ComponentCursor cc = null;
 		
+		String path;
 		long created_id;
 		long component_id;
 		int required_amt;
@@ -1026,8 +1086,9 @@ public class DataManager {
 		while(!wdc.isAfterLast()) {
 			wd = wdc.getWishlistData();
 			created_id = wd.getItem().getId();
+			path = wd.getPath();
 			
-			cc = mHelper.queryComponentCreated(created_id);
+			cc = mHelper.queryComponentCreatedType(created_id, path);
 			cc.moveToFirst();
 			
 			while(!cc.isAfterLast()) {

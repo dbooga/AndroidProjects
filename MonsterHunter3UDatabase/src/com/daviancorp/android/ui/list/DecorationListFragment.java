@@ -243,12 +243,13 @@ public class DecorationListFragment extends ListFragment implements
 		Decoration decoration = ((DecorationCursor) adapter.getItem(position)).getDecoration();
 
 		long id = decoration.getId();
+		String name = decoration.getName();
 		
 		FragmentManager fm = getActivity().getSupportFragmentManager();
 		
 		switch (item.getItemId()) {
 			case R.id.menu_item_wishlist_add:
-				WishlistDataAddDialogFragment dialogAdd = WishlistDataAddDialogFragment.newInstance(id);
+				WishlistDataAddDialogFragment dialogAdd = WishlistDataAddDialogFragment.newInstance(id, name);
 				dialogAdd.setTargetFragment(DecorationListFragment.this, REQUEST_ADD_MULTI);
 				dialogAdd.show(fm, DIALOG_WISHLIST_DATA_ADD_MULTI);
 				return true;

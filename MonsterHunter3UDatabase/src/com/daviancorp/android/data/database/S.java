@@ -267,6 +267,7 @@ public class S {
 	static final String COLUMN_WISHLIST_DATA_ITEM_ID = "item_id";
 	static final String COLUMN_WISHLIST_DATA_QUANTITY = "quantity";
 	static final String COLUMN_WISHLIST_DATA_SATISFIED = "satisfied";
+	static final String COLUMN_WISHLIST_DATA_PATH = "path";
 
 	// Wishlist Component
 	static final String TABLE_WISHLIST_COMPONENT = "wishlist_component";

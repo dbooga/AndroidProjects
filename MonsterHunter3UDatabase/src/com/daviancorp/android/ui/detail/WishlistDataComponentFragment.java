@@ -285,7 +285,7 @@ public class WishlistDataComponentFragment extends ListFragment implements
 			amtTextView.setText(amtText);
 			extraTextView.setText(extraText);
 			
-			itemTextView.setTextColor(null);
+			itemTextView.setTextColor(Color.BLACK);
 			if (notes >= quantity) {
 				itemTextView.setTextColor(Color.RED);
 			}

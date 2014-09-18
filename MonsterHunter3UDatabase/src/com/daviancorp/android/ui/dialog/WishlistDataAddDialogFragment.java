@@ -1,10 +1,15 @@
 package com.daviancorp.android.ui.dialog;
 
+import java.util.ArrayList;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -18,14 +23,23 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 public class WishlistDataAddDialogFragment extends DialogFragment {
 	public static final String EXTRA_ADD =
 			"com.daviancorp.android.ui.general.wishlist_data_add";
+
+	private static final int REQUEST_PATH = 1;
 	
 	private static final String ARG_WISHLIST_DATA_ID = "WISHLIST_DATA_ID";
+	private static final String ARG_WISHLIST_DATA_WEAPON_NAME = "WISHLIST_DATA_WEAPON_NAME";
+	private static final String DIALOG_WISHLIST_COMPONENT_PATH = "wishlist_component_path";
+	
 	private long wishlistId = -1;
 	private String wishlistName = "";
+	
+	private long item_id;
+	private int quantity;
 
-	public static WishlistDataAddDialogFragment newInstance(long id) {
+	public static WishlistDataAddDialogFragment newInstance(long id, String name) {
 		Bundle args = new Bundle();
 		args.putLong(ARG_WISHLIST_DATA_ID, id);
+		args.putString(ARG_WISHLIST_DATA_WEAPON_NAME, name);
 		WishlistDataAddDialogFragment f = new WishlistDataAddDialogFragment();
 		f.setArguments(args);
 		return f;
@@ -74,24 +88,43 @@ public class WishlistDataAddDialogFragment extends DialogFragment {
 		   				   return;
 	            	   }
 	            	   
-	            	   int quantity = Integer.parseInt(input);
+	            	   quantity = Integer.parseInt(input);
 	            	   
 	         		   if (quantity > 99) {
 	         			   quantity = 99;
 	         		   }
 		            		   
-		            	   
 	            	   Bundle args = getArguments();
-	            	   DataManager.get(getActivity()).queryAddWishlistData(
-	            			   wishlistId,
-	            			   args.getLong(ARG_WISHLIST_DATA_ID),
-	            			   quantity);
+	            	   item_id = args.getLong(ARG_WISHLIST_DATA_ID);
 	            	   
-	   				   Toast.makeText(getActivity(), 
-	   						   "Added to '" + wishlistName + "' wishlist", 
-	   						   Toast.LENGTH_SHORT).show();
+	            	   ArrayList<String> paths = DataManager.get(getActivity()).queryComponentCreateImprove(item_id);
+	            	   
+	            	   if (paths.size() > 1) {
+	            		   String weaponName = args.getString(ARG_WISHLIST_DATA_WEAPON_NAME);
+
+	            			FragmentManager fm = getActivity().getSupportFragmentManager();
+		       				WishlistComponentPathDialogFragment dialogPath = 
+		       						WishlistComponentPathDialogFragment.newInstance(wishlistName, weaponName, paths);
+		       				dialogPath.setTargetFragment(WishlistDataAddDialogFragment.this, REQUEST_PATH);
+		       				dialogPath.show(fm, DIALOG_WISHLIST_COMPONENT_PATH);
+	            	   }
+	            	   else {
+	            		   DataManager.get(getActivity()).queryAddWishlistData(
+	            				   wishlistId, item_id, quantity, paths.get(0));
+	            			Toast.makeText(getActivity(), "Added to '" + wishlistName + "' wishlist", 
+	         					   Toast.LENGTH_SHORT).show();
+	            	   }
 	   			 	}
 			})
 			.create();
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode != Activity.RESULT_OK) return;
+		if (requestCode == REQUEST_PATH) {
+			String path = data.getStringExtra(WishlistComponentPathDialogFragment.EXTRA_PATH);
+			DataManager.get(getActivity()).queryAddWishlistData(wishlistId, item_id, quantity, path);
+		}
 	}
 }

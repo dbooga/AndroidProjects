@@ -31,7 +31,8 @@ public class WeaponDetailActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 	
 	private long id;
-
+	private String name;
+	
 	// Tab titles
 	private String[] tabs = { "Detail", "Family Tree", "Components"};
 
@@ -40,8 +41,8 @@ public class WeaponDetailActivity extends GenericTabActivity implements
 		super.onCreate(savedInstanceState);
 		
 		id = getIntent().getLongExtra(EXTRA_WEAPON_ID, -1);
-		setTitle(DataManager.get(getApplicationContext()).getWeapon(id).getName());
-
+		name = DataManager.get(getApplicationContext()).getWeapon(id).getName();
+		setTitle(name);
 		// Initialization
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		mAdapter = new WeaponDetailPagerAdapter(getSupportFragmentManager(), id);
@@ -92,7 +93,7 @@ public class WeaponDetailActivity extends GenericTabActivity implements
 			case R.id.wishlist_add:
 				FragmentManager fm = getSupportFragmentManager();
 				WishlistDataAddDialogFragment dialogCopy = WishlistDataAddDialogFragment
-						.newInstance(id);
+						.newInstance(id, name);
 				dialogCopy.show(fm, DIALOG_WISHLIST_ADD);
 				return true;
 			default:

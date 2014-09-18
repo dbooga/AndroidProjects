@@ -6,13 +6,10 @@ General:	highlight headers
 		add header for skills (armor/decoration)
 		bold labels/main things? (eg. item names from monster carves)
 
-Home:		fix highlight
-Weapon:		fix grid + fix highlight
-		fix gunner detail (last label)
+Weapon:		fix gunner detail (last label)
 Armor:		modify armor list (add def/slots?)
 		add multiclick
-Items:		add search
-Combining:	fix highlight
+Combining:	***FIX HIGHLIGHT***
 		move % # more to left
 Decoration:	move skills to right in list
 Skills:		add header to armor/deco
@@ -22,6 +19,8 @@ Arena Quest:	Add location link
 
 
 ------------ b ------------ 
-1	add wishlist headers
-2	add monster damage
-3	add menu item to add to wishlist
+1	fix wishlist component (multi-add)
+2	add wishlist headers
+3	add monster damage
+4	add menu item to add to wishlist
+5	add search to items
