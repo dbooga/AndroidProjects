@@ -7,5 +7,5 @@
     android:textSize="20sp"
     android:minHeight="48dip"
     android:textColor="@color/white"
-    android:background="@color/lightpurple"
+    android:background="@drawable/clicked_states"
 />

@@ -119,6 +119,7 @@ public class WeaponGridFragment extends Fragment {
 			super(getActivity(), 0, items);
 		}
 		
+		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {

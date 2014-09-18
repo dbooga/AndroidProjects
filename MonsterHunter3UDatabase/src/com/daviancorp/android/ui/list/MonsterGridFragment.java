@@ -112,6 +112,7 @@ public class MonsterGridFragment extends Fragment implements
 			mMonsterCursor = cursor;
 		}
 
+
 		@Override
 		public View newView(Context context, Cursor cursor, ViewGroup parent) {
 			// Use a layout inflater to get a row view

@@ -193,6 +193,11 @@ public class CombiningListFragment extends ListFragment implements
 			itemlayout2.setOnClickListener(new ItemClickListener(context, item.getItem2().getId()));
 			itemlayout3.setOnClickListener(new ItemClickListener(context, item.getCreatedItem().getId()));
 		}
+		
+		@Override
+		public boolean isEnabled(int position) {
+			return false;
+		}
 
 		private static class ItemClickListener implements OnClickListener {
 			private Context c;
@@ -212,10 +217,7 @@ public class CombiningListFragment extends ListFragment implements
 			}
 		}
 
-		@Override
-		public boolean isEnabled(int position) {
-			return false;
-		}
+
 
 	}
 
