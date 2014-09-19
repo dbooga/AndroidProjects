@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.database.SkillTreeCursor;
 import com.daviancorp.android.data.object.SkillTree;
 import com.daviancorp.android.loader.SkillTreeListCursorLoader;
+import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
 
 public class SkillTreeListFragment extends ListFragment implements
@@ -74,7 +75,7 @@ public class SkillTreeListFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(android.R.layout.simple_list_item_1,
+			return inflater.inflate(R.layout.fragment_skilltree_listitem,
 					parent, false);
 		}
 
@@ -84,7 +85,7 @@ public class SkillTreeListFragment extends ListFragment implements
 			SkillTree skilltree = mSkillTreeCursor.getSkillTree();
 
 			// Set up the text view
-			TextView skilltreeNameTextView = (TextView) view;
+			TextView skilltreeNameTextView = (TextView) view.findViewById(R.id.item);
 			String cellText = skilltree.getName();
 			skilltreeNameTextView.setText(cellText);
 			

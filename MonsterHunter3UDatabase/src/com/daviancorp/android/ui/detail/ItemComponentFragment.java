@@ -46,12 +46,12 @@ public class ItemComponentFragment extends ListFragment implements
 		getLoaderManager().initLoader(0, getArguments(), this);
 	}
 	
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//			Bundle savedInstanceState) {
-//		View v = inflater.inflate(android.R.layout.simple_list_item_1, null);
-//		return v;
-//	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.fragment_component_list, null);
+		return v;
+	}
 
 
 	@Override

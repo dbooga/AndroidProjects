@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.database.ArenaQuestCursor;
 import com.daviancorp.android.data.object.ArenaQuest;
 import com.daviancorp.android.loader.ArenaQuestListCursorLoader;
+import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.ArenaQuestDetailActivity;
 
 public class ArenaQuestListFragment extends ListFragment implements
@@ -74,7 +75,7 @@ public class ArenaQuestListFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(android.R.layout.simple_list_item_1,
+			return inflater.inflate(R.layout.fragment_arena_quest_listitem,
 					parent, false);
 		}
 
@@ -84,7 +85,7 @@ public class ArenaQuestListFragment extends ListFragment implements
 			ArenaQuest arenaQuest = mArenaQuestCursor.getArenaQuest();
 
 			// Set up the text view
-			TextView mainTextView = (TextView) view;
+			TextView mainTextView = (TextView) view.findViewById(R.id.item);
 			String cellText = arenaQuest.getName();
 			mainTextView.setText(cellText);
 			

@@ -43,6 +43,13 @@ public class ItemToSkillFragment extends ListFragment implements
 		// Initialize the loader to load the list of runs
 		getLoaderManager().initLoader(0, getArguments(), this);
 	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.fragment_decoration_skill_list, null);
+		return v;
+	}
 
 	@SuppressLint("NewApi")
 	@Override

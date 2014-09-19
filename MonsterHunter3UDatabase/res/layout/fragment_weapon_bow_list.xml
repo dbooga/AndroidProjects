@@ -8,6 +8,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/lightpurple"
         android:orientation="horizontal" >
 
         <TextView
@@ -16,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3"
             android:gravity="center"
-            android:text="Weapon" />
+            android:text="Weapon"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header2"
@@ -24,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".15"
             android:gravity="center"
-            android:text="Attack" />
+            android:text="Atk"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header3"
@@ -32,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".15"
             android:gravity="center"
-            android:text="Element" />
+            android:text="Ele"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header4"
@@ -40,7 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".14"
             android:gravity="center"
-            android:text=" Slot" />
+            android:text=" Slot"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header5"
@@ -48,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".13"
             android:gravity="center"
-            android:text="Aff" />
+            android:text="Aff"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header6"
@@ -56,29 +62,33 @@
             android:layout_height="wrap_content"
             android:layout_weight=".13"
             android:gravity="center"
-            android:text="Def" />
+            android:text="Def"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/lightpurple"
         android:orientation="horizontal" >
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".33"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".07"
             android:layout_marginLeft="5dp"
+            android:layout_weight=".07"
             android:gravity="center"
-            android:text="Arc" />
+            android:text="Arc"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header8"
@@ -86,7 +96,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".35"
             android:gravity="center"
-            android:text="Charges" />
+            android:text="Charges"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header9"
@@ -94,7 +105,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".25"
             android:gravity="center"
-            android:text="Coatings" />
+            android:text="Coatings"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <ListView

@@ -8,6 +8,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/lightpurple"
         android:orientation="horizontal" >
 
         <TextView
@@ -16,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".5"
             android:gravity="center"
-            android:text="Reward" />
+            android:text="Reward"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header3"
@@ -24,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".25"
             android:gravity="center"
-            android:text="#" />
+            android:text="#"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header4"
@@ -32,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".25"
             android:gravity="center"
-            android:text="%" />
+            android:text="%"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <ListView
