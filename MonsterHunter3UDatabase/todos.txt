@@ -1,19 +1,11 @@
 
 ------------ Shared ------------
-General:	highlight headers
-		move icon + name in detail (monster/armor/quest/item/decoration)
-		add header for components (weapon/armor/decoration/item)
-		add header for skills (armor/decoration)
+General:	make all highlights consistent?
 		bold labels/main things? (eg. item names from monster carves)
 
 Weapon:		fix gunner detail (last label)
 Armor:		modify armor list (add def/slots?)
 		add multiclick
-Combining:	***FIX HIGHLIGHT***
-		move % # more to left
-Decoration:	move skills to right in list
-Skills:		add header to armor/deco
-Location:	fix detail (title)
 Quests:		Add location (link)
 Arena Quest:	Add location link
 
