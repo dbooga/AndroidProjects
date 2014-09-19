@@ -47,12 +47,12 @@ public class SkillTreeDecorationFragment extends ListFragment implements
 		getLoaderManager().initLoader(0, getArguments(), this);
 	}
 	
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//			Bundle savedInstanceState) {
-//		View v = inflater.inflate(android.R.layout.simple_list_item_1, null);
-//		return v;
-//	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.fragment_skill_armor_list, null);
+		return v;
+	}
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {

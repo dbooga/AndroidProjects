@@ -2,7 +2,7 @@ package com.daviancorp.android.ui.list;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -29,7 +29,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.daviancorp.android.data.database.DecorationCursor;
 import com.daviancorp.android.data.object.Decoration;
 import com.daviancorp.android.loader.DecorationListCursorLoader;
@@ -38,6 +37,7 @@ import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
 import com.daviancorp.android.ui.dialog.WishlistDataAddMultiDialogFragment;
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class DecorationListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
@@ -55,10 +55,11 @@ public class DecorationListFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = super.onCreateView(inflater, container, savedInstanceState);
+		View v = inflater.inflate(R.layout.fragment_decoration_list, null);
 		setContextMenu(v);
 		return v;
 	}
+
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
