@@ -15,7 +15,6 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -32,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.database.WishlistComponentCursor;
 import com.daviancorp.android.data.object.WishlistComponent;
 import com.daviancorp.android.loader.WishlistComponentListCursorLoader;
@@ -50,7 +50,9 @@ public class WishlistDataComponentFragment extends ListFragment implements
 	private static final int REQUEST_REFRESH = 0;
 	private static final int REQUEST_EDIT = 1;
 
+	private long wishlistId;
 	private ListView mListView;
+	private TextView mHeaderTextView, mItemTypeTextView, mQuantityTypeTextView, mExtraTypeTextView;
 	private ActionMode mActionMode;
 	
 	private boolean started, fromOtherTab;
@@ -74,9 +76,17 @@ public class WishlistDataComponentFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_list_generic, container, false);
+		View v = inflater.inflate(R.layout.fragment_wishlist_component_list, container, false);
 
 		mListView = (ListView) v.findViewById(android.R.id.list);
+		mHeaderTextView = (TextView) v.findViewById(R.id.header);
+		mItemTypeTextView = (TextView) v.findViewById(R.id.item_type);
+		mQuantityTypeTextView = (TextView) v.findViewById(R.id.quantity_type);
+		mExtraTypeTextView = (TextView) v.findViewById(R.id.extra_type);
+
+		mItemTypeTextView.setText("Item");
+		mQuantityTypeTextView.setText("Required");
+		mExtraTypeTextView.setText("Have");
 		
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			// Use floating context menus on Froyo and Gingerbread
@@ -221,11 +231,11 @@ public class WishlistDataComponentFragment extends ListFragment implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
-		long mId = -1;
+		wishlistId = -1;
 		if (args != null) {
-			mId = args.getLong(ARG_ID);
+			wishlistId = args.getLong(ARG_ID);
 		}
-		return new WishlistComponentListCursorLoader(getActivity(), mId);
+		return new WishlistComponentListCursorLoader(getActivity(), wishlistId);
 	}
 
 	@Override
@@ -235,6 +245,10 @@ public class WishlistDataComponentFragment extends ListFragment implements
 				getActivity(), (WishlistComponentCursor) cursor);
 		setListAdapter(adapter);
 		started = true;
+		
+		// Show the total price
+		int totalPrice = DataManager.get(getActivity()).queryWishlistPrice(wishlistId);
+		mHeaderTextView.setText("Total Cost:   " + totalPrice + "z");
 	}
 
 	@Override

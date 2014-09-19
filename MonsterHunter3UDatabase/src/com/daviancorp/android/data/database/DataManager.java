@@ -1023,17 +1023,24 @@ public class DataManager {
 		WishlistDataCursor wdc = mHelper.queryWishlistData(id);
 		wdc.moveToFirst();
 		
-		int buy = 0;
+		int buy;
 		int quantity = 0;
 		
 		while(!wdc.isAfterLast()) {
+			buy = -1;
 			WishlistData wd = wdc.getWishlistData();
 			Item i = wd.getItem();
+			String type = wd.getPath();
+			
 			if ((i.getType()).equals("Weapon")) {
 				WeaponCursor wc = mHelper.queryWeapon(i.getId());
 				wc.moveToFirst();
 				
-//				buy = wc.getWeapon().get
+				if (type.equals("Create"))
+					buy = wc.getWeapon().getCreationCost();
+				else if (type.equals("Improve")) {
+					buy = wc.getWeapon().getUpgradeCost();
+				}
 			}
 			else {
 				buy = wd.getItem().getBuy();
@@ -1044,8 +1051,9 @@ public class DataManager {
 			}
 			
 			quantity = wd.getQuantity();
-			
 			total = total + (buy * quantity);
+			
+			wdc.moveToNext();
 		}
 		
 		return total;

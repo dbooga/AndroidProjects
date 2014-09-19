@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class WishlistDataDetailFragment extends ListFragment implements
 	private boolean started, fromOtherTab;
 	
 	private ListView mListView;
+	private TextView mHeaderTextView, mItemTypeTextView, mQuantityTypeTextView, mExtraTypeTextView;
 	private ActionMode mActionMode;
 	
 	public static WishlistDataDetailFragment newInstance(long id) {
@@ -75,9 +77,20 @@ public class WishlistDataDetailFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_list_generic, container, false);
+		View v = inflater.inflate(R.layout.fragment_wishlist_component_list, container, false);
 
 		mListView = (ListView) v.findViewById(android.R.id.list);
+		mHeaderTextView = (TextView) v.findViewById(R.id.header);
+		mItemTypeTextView = (TextView) v.findViewById(R.id.item_type);
+		mQuantityTypeTextView = (TextView) v.findViewById(R.id.quantity_type);
+		mExtraTypeTextView = (TextView) v.findViewById(R.id.extra_type);
+
+		mHeaderTextView.setText("Red highlight = Can make one");
+		mHeaderTextView.setTextColor(Color.RED);
+		
+		mItemTypeTextView.setText("Item");
+		mQuantityTypeTextView.setText("Quantity");
+		mExtraTypeTextView.setText("Method");
 		
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			// Use floating context menus on Froyo and Gingerbread
@@ -294,12 +307,14 @@ public class WishlistDataDetailFragment extends ListFragment implements
 			String nameText = data.getItem().getName();
 			String amtText = "" + data.getQuantity();
 			
-			String extraText = "";
+			String extraText = data.getPath();
 			int satisfied = data.getSatisfied();
-			
+
+			itemTextView.setTextColor(Color.BLACK);
 			if (satisfied == 1) {
-				extraText = "Can make one";
+				itemTextView.setTextColor(Color.RED);
 			}
+			
 			
 			itemTextView.setText(nameText);
 			amtTextView.setText(amtText);

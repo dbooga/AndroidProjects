@@ -1062,7 +1062,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int a_rank=0x7f060048;
-        public static final int about=0x7f0600ff;
+        public static final int about=0x7f060102;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1153,7 +1153,8 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f060026;
         public static final int expandableListView=0x7f060063;
         public static final int expanded_menu=0x7f06002c;
-        public static final int extra=0x7f0600f8;
+        public static final int extra=0x7f0600fb;
+        public static final int extra_type=0x7f0600fa;
         public static final int fee=0x7f060094;
         public static final int filler=0x7f0600b0;
         public static final int fire_res=0x7f06005e;
@@ -1197,6 +1198,7 @@ containing a value of this type.
         public static final int item_text1=0x7f06006b;
         public static final int item_text2=0x7f06006e;
         public static final int item_text3=0x7f060068;
+        public static final int item_type=0x7f0600f8;
         public static final int label=0x7f060081;
         public static final int level=0x7f06007e;
         public static final int listMode=0x7f060001;
@@ -1208,12 +1210,12 @@ containing a value of this type.
         public static final int map_image=0x7f06008a;
         public static final int map_text=0x7f060089;
         public static final int max=0x7f060073;
-        public static final int menu_item_copy_wishlist=0x7f0600fa;
-        public static final int menu_item_delete_wishlist=0x7f0600fb;
-        public static final int menu_item_delete_wishlist_data=0x7f0600fd;
-        public static final int menu_item_edit_wishlist_data=0x7f0600fc;
-        public static final int menu_item_rename_wishlist=0x7f0600f9;
-        public static final int menu_item_wishlist_add=0x7f0600fe;
+        public static final int menu_item_copy_wishlist=0x7f0600fd;
+        public static final int menu_item_delete_wishlist=0x7f0600fe;
+        public static final int menu_item_delete_wishlist_data=0x7f060100;
+        public static final int menu_item_edit_wishlist_data=0x7f0600ff;
+        public static final int menu_item_rename_wishlist=0x7f0600fc;
+        public static final int menu_item_wishlist_add=0x7f060101;
         public static final int method=0x7f060086;
         public static final int middle=0x7f060012;
         public static final int monster=0x7f060087;
@@ -1250,6 +1252,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
         public static final int pts=0x7f060096;
+        public static final int quantity_type=0x7f0600f9;
         public static final int quest=0x7f060043;
         public static final int quest_location=0x7f060092;
         public static final int quest_name=0x7f060090;
@@ -1315,8 +1318,8 @@ containing a value of this type.
         public static final int useLogo=0x7f060003;
         public static final int water=0x7f0600d5;
         public static final int water_res=0x7f06005f;
-        public static final int wishlist_add=0x7f060100;
-        public static final int wishlist_edit=0x7f060101;
+        public static final int wishlist_add=0x7f060103;
+        public static final int wishlist_edit=0x7f060104;
         public static final int withText=0x7f06000c;
         public static final int wyvernfire=0x7f0600cf;
     }
@@ -1439,9 +1442,10 @@ containing a value of this type.
         public static final int fragment_weapon_grid=0x7f03005a;
         public static final int fragment_weapon_grid_item=0x7f03005b;
         public static final int fragment_weapon_tree=0x7f03005c;
-        public static final int fragment_wishlist_data_listitem=0x7f03005d;
-        public static final int grid_image_item=0x7f03005e;
-        public static final int support_simple_spinner_dropdown_item=0x7f03005f;
+        public static final int fragment_wishlist_component_list=0x7f03005d;
+        public static final int fragment_wishlist_data_listitem=0x7f03005e;
+        public static final int grid_image_item=0x7f03005f;
+        public static final int support_simple_spinner_dropdown_item=0x7f030060;
     }
     public static final class menu {
         public static final int context_wishlist=0x7f0d0000;
