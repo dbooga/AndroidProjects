@@ -109,7 +109,7 @@ public class CombiningListFragment extends ListFragment implements
 				temp = temp + "-" + max;
 			}
 			
-			String percentage = "" + percent + "% " + temp; 
+			String percentage = "" + percent + "%"; 
 
 			TextView itemtv1 = (TextView) v.findViewById(R.id.item_text1);
 			TextView itemtv2 = (TextView) v.findViewById(R.id.item_text2);
@@ -124,6 +124,7 @@ public class CombiningListFragment extends ListFragment implements
 			LinearLayout itemlayout3 = (LinearLayout) v.findViewById(R.id.item3);
 			
 			TextView percenttv = (TextView) v.findViewById(R.id.percentage);
+			TextView amttv = (TextView) v.findViewById(R.id.amt);
 
 			Drawable i1 = null;
 			Drawable i2 = null;
@@ -145,50 +146,16 @@ public class CombiningListFragment extends ListFragment implements
 			itemiv3.setImageDrawable(i3);
 			
 			percenttv.setText(percentage);
+			amttv.setText(temp);
 			
 			itemtv1.setText(item1);
 			itemtv2.setText(item2);
 			itemtv3.setText(item3);
 			
-//			int[] attrs = new int[] { android.R.attr.selectableItemBackground };
-//			
-//			TypedArray a = context.getTheme().obtainStyledAttributes(attrs);
-//			
-//			Drawable d = a.getDrawable(0);
+//			itemlayout1.setBackgroundResource(android.R.drawable.list_selector_background);
+//			itemlayout2.setBackgroundResource(android.R.drawable.list_selector_background);
+//			itemlayout3.setBackgroundResource(android.R.drawable.list_selector_background);
 
-//			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN ){
-//				itemtv1.setBackground(d);
-//				itemtv2.setBackground(d);
-//				itemtv3.setBackground(d);
-//			}
-//			else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ){
-//				itemtv1.setBackgroundDrawable(d);
-//				itemtv2.setBackgroundDrawable(d);
-//				itemtv3.setBackgroundDrawable(d);
-//			}
-//			else{
-//				itemtv1.setBackgroundResource(android.R.drawable.list_selector_background);
-//				itemtv2.setBackgroundResource(android.R.drawable.list_selector_background);
-//				itemtv3.setBackgroundResource(android.R.drawable.list_selector_background);
-//				
-//				itemiv1.setBackgroundResource(android.R.drawable.list_selector_background);
-//				itemiv2.setBackgroundResource(android.R.drawable.list_selector_background);
-//				itemiv3.setBackgroundResource(android.R.drawable.list_selector_background);
-			
-			itemlayout1.setBackgroundResource(android.R.drawable.list_selector_background);
-			itemlayout2.setBackgroundResource(android.R.drawable.list_selector_background);
-			itemlayout3.setBackgroundResource(android.R.drawable.list_selector_background);
-//			}
-//			a.recycle();
-			
-//			itemtv1.setOnClickListener(new ItemClickListener(context, item.getItem1().getId()));
-//			itemtv2.setOnClickListener(new ItemClickListener(context, item.getItem2().getId()));
-//			itemtv3.setOnClickListener(new ItemClickListener(context, item.getCreatedItem().getId()));
-//			
-//			itemiv1.setOnClickListener(new ItemClickListener(context, item.getItem1().getId()));
-//			itemiv2.setOnClickListener(new ItemClickListener(context, item.getItem2().getId()));
-//			itemiv3.setOnClickListener(new ItemClickListener(context, item.getCreatedItem().getId()));
-			
 			itemlayout1.setOnClickListener(new ItemClickListener(context, item.getItem1().getId()));
 			itemlayout2.setOnClickListener(new ItemClickListener(context, item.getItem2().getId()));
 			itemlayout3.setOnClickListener(new ItemClickListener(context, item.getCreatedItem().getId()));

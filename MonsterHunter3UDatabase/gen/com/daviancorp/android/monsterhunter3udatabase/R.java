@@ -858,12 +858,13 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f070002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f08000c;
+        public static final int abc_search_url_text_holo=0x7f08000d;
         public static final int abc_search_url_text_normal=0x7f080000;
         public static final int abc_search_url_text_pressed=0x7f080002;
         public static final int abc_search_url_text_selected=0x7f080001;
         public static final int black=0x7f080004;
         public static final int darkgreen=0x7f080005;
+        public static final int highlight=0x7f08000c;
         /**  A really bright Holo shade of blue 
          */
         public static final int holo_blue_bright=0x7f08000a;
@@ -1105,7 +1106,7 @@ containing a value of this type.
         public static final int btn_cab_done_pressed_brachydios5=0x7f020063;
         public static final int cab_background_bottom_brachydios5=0x7f020064;
         public static final int cab_background_top_brachydios5=0x7f020065;
-        public static final int clicked_states=0x7f020066;
+        public static final int combining_clicked_states=0x7f020066;
         public static final int copy=0x7f020067;
         public static final int drawer=0x7f020068;
         public static final int dual_blades1=0x7f020069;
@@ -1155,6 +1156,7 @@ containing a value of this type.
         public static final int tab_unselected_focused_brachydios5=0x7f020095;
         public static final int tab_unselected_pressed_brachydios5=0x7f020096;
         public static final int transparent_states=0x7f020097;
+        public static final int weapon_clicked_states=0x7f020098;
     }
     public static final class id {
         public static final int a_rank=0x7f060048;
@@ -1201,8 +1203,8 @@ containing a value of this type.
         public static final int description=0x7f060082;
         public static final int detail_armor_image=0x7f060057;
         public static final int detail_armor_label=0x7f060058;
-        public static final int detail_decoration_image=0x7f060071;
-        public static final int detail_decoration_label=0x7f060072;
+        public static final int detail_decoration_image=0x7f060072;
+        public static final int detail_decoration_label=0x7f060073;
         public static final int detail_item_image=0x7f06007f;
         public static final int detail_item_label=0x7f060080;
         public static final int detail_monster_image=0x7f06004c;
@@ -1259,7 +1261,7 @@ containing a value of this type.
         public static final int freeze=0x7f0600e2;
         public static final int goal=0x7f06004a;
         public static final int gridLayout=0x7f06008c;
-        public static final int grid_home=0x7f06007c;
+        public static final int grid_home=0x7f06007d;
         public static final int grid_item_image=0x7f06008d;
         public static final int grid_item_label=0x7f06008e;
         public static final int grid_locations=0x7f06008b;
@@ -1269,7 +1271,7 @@ containing a value of this type.
         public static final int header2=0x7f060065;
         public static final int header3=0x7f060050;
         public static final int header4=0x7f060051;
-        public static final int header5=0x7f06007d;
+        public static final int header5=0x7f060066;
         public static final int header6=0x7f0600a7;
         public static final int header7=0x7f0600c0;
         public static final int header8=0x7f0600c1;
@@ -1283,17 +1285,17 @@ containing a value of this type.
         public static final int image=0x7f060027;
         public static final int input_search=0x7f060088;
         public static final int item=0x7f060054;
-        public static final int item1=0x7f060069;
-        public static final int item2=0x7f06006c;
-        public static final int item3=0x7f060066;
+        public static final int item1=0x7f06006a;
+        public static final int item2=0x7f06006d;
+        public static final int item3=0x7f060067;
         public static final int item_image=0x7f060053;
-        public static final int item_img1=0x7f06006a;
-        public static final int item_img2=0x7f06006d;
-        public static final int item_img3=0x7f060067;
+        public static final int item_img1=0x7f06006b;
+        public static final int item_img2=0x7f06006e;
+        public static final int item_img3=0x7f060068;
         public static final int item_layout=0x7f060052;
-        public static final int item_text1=0x7f06006b;
-        public static final int item_text2=0x7f06006e;
-        public static final int item_text3=0x7f060068;
+        public static final int item_text1=0x7f06006c;
+        public static final int item_text2=0x7f06006f;
+        public static final int item_text3=0x7f060069;
         public static final int item_type=0x7f0600f8;
         public static final int label=0x7f060081;
         public static final int level=0x7f06007e;
@@ -1301,11 +1303,11 @@ containing a value of this type.
         public static final int list_item=0x7f060029;
         public static final int listitem=0x7f06004b;
         public static final int location=0x7f060044;
-        public static final int logo=0x7f06007b;
+        public static final int logo=0x7f06007c;
         public static final int map=0x7f060083;
         public static final int map_image=0x7f06008a;
         public static final int map_text=0x7f060089;
-        public static final int max=0x7f060073;
+        public static final int max=0x7f060074;
         public static final int menu_item_copy_wishlist=0x7f0600fd;
         public static final int menu_item_delete_wishlist=0x7f0600fe;
         public static final int menu_item_delete_wishlist_data=0x7f060100;
@@ -1340,7 +1342,7 @@ containing a value of this type.
         public static final int pierce1=0x7f0600d0;
         public static final int pierce2=0x7f0600d1;
         public static final int pierce3=0x7f0600d2;
-        public static final int point=0x7f06007a;
+        public static final int point=0x7f06007b;
         public static final int poison=0x7f0600ba;
         public static final int poison1=0x7f0600cc;
         public static final int poison2=0x7f0600cd;
@@ -1374,17 +1376,17 @@ containing a value of this type.
         public static final int search_plate=0x7f060036;
         public static final int search_src_text=0x7f060037;
         public static final int search_voice_btn=0x7f06003b;
-        public static final int sell=0x7f060074;
+        public static final int sell=0x7f060075;
         public static final int sharpness=0x7f0600b2;
         public static final int shortcut=0x7f06002e;
         public static final int showCustom=0x7f060007;
         public static final int showHome=0x7f060004;
         public static final int showTitle=0x7f060006;
-        public static final int skill=0x7f060079;
-        public static final int skill1=0x7f060075;
-        public static final int skill1_amt=0x7f060076;
-        public static final int skill2=0x7f060077;
-        public static final int skill2_amt=0x7f060078;
+        public static final int skill=0x7f06007a;
+        public static final int skill1=0x7f060076;
+        public static final int skill1_amt=0x7f060077;
+        public static final int skill2=0x7f060078;
+        public static final int skill2_amt=0x7f060079;
         public static final int sleep=0x7f0600bc;
         public static final int sleep1=0x7f0600d9;
         public static final int sleep2=0x7f0600da;
@@ -1409,7 +1411,7 @@ containing a value of this type.
         public static final int title=0x7f06002b;
         public static final int top_action_bar=0x7f060020;
         public static final int tranq=0x7f0600ed;
-        public static final int type=0x7f06006f;
+        public static final int type=0x7f060071;
         public static final int up=0x7f060021;
         public static final int useLogo=0x7f060003;
         public static final int water=0x7f0600d5;

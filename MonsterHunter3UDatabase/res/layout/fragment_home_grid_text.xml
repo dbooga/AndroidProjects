@@ -7,5 +7,5 @@
     android:textSize="20sp"
     android:minHeight="48dip"
     android:textColor="@color/white"
-    android:background="@drawable/clicked_states"
+    android:background="@drawable/weapon_clicked_states"
 />
