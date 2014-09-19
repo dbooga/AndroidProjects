@@ -1068,7 +1068,27 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_Limit = "1";
 		
 		return new ItemCursor(wrapHelper());
+	}		
+	
+	/*
+	 * Get items based on search text
+	 */
+	public ItemCursor queryItemSearch(String search) {
+		// "SELECT * FROM items WHERE name LIKE %?%"
+		
+		_Distinct = false;
+		_Table = S.TABLE_ITEMS;
+		_Columns = null;
+		_Selection = S.COLUMN_ITEMS_NAME + " LIKE ?";
+		_SelectionArgs = new String[]{ '%' + search  + '%'};
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+		
+		return new ItemCursor(wrapHelper());
 	}	
+	
 	
 /********************************* ITEM TO SKILL TREE QUERIES ******************************************/
 	

@@ -408,6 +408,10 @@ public class DataManager {
 		return item;
 	}
 	
+	public ItemCursor queryItemSearch(String search) {
+		return mHelper.queryItemSearch(search);
+	}
+	
 /********************************* ITEM TO SKILL TREE QUERIES ******************************************/
 	public ItemToSkillTreeCursor queryItemToSkillTreeItem(long id) {
 		return mHelper.queryItemToSkillTreeItem(id);

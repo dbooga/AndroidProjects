@@ -23,4 +23,3 @@ Arena Quest:	Add location link
 2	add wishlist headers
 3	add monster damage
 4	add menu item to add to wishlist
-5	add search to items

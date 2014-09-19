@@ -11,9 +11,13 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,32 +25,68 @@ import android.widget.TextView;
 import com.daviancorp.android.data.database.ItemCursor;
 import com.daviancorp.android.data.object.Item;
 import com.daviancorp.android.loader.ItemListCursorLoader;
+import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.ItemDetailActivity;
 
 public class ItemListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
+	private ItemListCursorAdapter mAdapter;
+	private String mFilter;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
 		getLoaderManager().initLoader(0, null, this);
+		
+		mFilter = "";
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.fragment_list_search, null);
+		
+		EditText inputSearch = (EditText) v.findViewById(R.id.input_search);
+		inputSearch.addTextChangedListener(new TextWatcher() {
+		     
+		    @Override
+		    public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+		        // When user changed the Text
+		    	mFilter = cs.toString();
+		    	getLoaderManager().restartLoader(0, null, ItemListFragment.this);
+		    	Log.d("helpme", "adapter2");
+		    }
+		     
+		    @Override
+		    public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+		            int arg3) {
+		        // TODO Auto-generated method stub
+		         
+		    }
+		     
+		    @Override
+		    public void afterTextChanged(Editable arg0) {
+		        // TODO Auto-generated method stub                          
+		    }
+		});
+		
+		return v;
 	}
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
-		return new ItemListCursorLoader(getActivity());
+		return new ItemListCursorLoader(getActivity(), mFilter);
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Create an adapter to point at this cursor
-		ItemListCursorAdapter adapter = new ItemListCursorAdapter(
-				getActivity(), (ItemCursor) cursor);
-		setListAdapter(adapter);
-
+		mAdapter = new ItemListCursorAdapter(getActivity(), (ItemCursor) cursor);
+		setListAdapter(mAdapter);
 	}
 
 	@Override
@@ -86,6 +126,7 @@ public class ItemListFragment extends ListFragment implements
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
 			// Get the item for the current row
+			Log.d("helpme", "bindView:" + cursor.getCount());
 			Item item = mItemCursor.getItem();
 
 			// Set up the text view
