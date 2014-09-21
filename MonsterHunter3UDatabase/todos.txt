@@ -12,5 +12,4 @@ Arena Quest:	Add location link
 
 ------------ b ------------ 
 1	fix wishlist component (multi-add)
-2	add monster damage
-3	add menu item to add to wishlist
+2	add menu item to add to wishlist

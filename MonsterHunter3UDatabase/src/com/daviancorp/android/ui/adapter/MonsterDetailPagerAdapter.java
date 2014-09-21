@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.daviancorp.android.ui.detail.MonsterRewardFragment;
 import com.daviancorp.android.ui.detail.MonsterDetailFragment;
 import com.daviancorp.android.ui.detail.MonsterQuestFragment;
+import com.daviancorp.android.ui.detail.MonsterRewardFragment;
 
 public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 	
