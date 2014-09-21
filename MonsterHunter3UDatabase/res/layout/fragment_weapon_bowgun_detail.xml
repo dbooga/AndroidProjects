@@ -163,7 +163,7 @@
             android:id="@+id/detail_weapon_defense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        
+
         <TextView
             android:id="@+id/detail_weapon_creation"
             android:layout_width="wrap_content"
@@ -326,8 +326,7 @@
                     android:layout_weight="0.05"
                     android:gravity="center"
                     android:text="" />
-                
-                
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -350,7 +349,7 @@
                     android:gravity="center"
                     android:text="" />
             </TableRow>
-            
+
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
@@ -423,7 +422,7 @@
                     android:layout_weight="0.05"
                     android:gravity="center"
                     android:text="" />
-                
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -438,7 +437,7 @@
                     android:layout_weight="0.05"
                     android:gravity="center"
                     android:text="" />
-                
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -446,7 +445,7 @@
                     android:gravity="center"
                     android:text="" />
             </TableRow>
-            
+
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
@@ -637,8 +636,8 @@
                     android:layout_weight="0.05"
                     android:gravity="center"
                     android:text="" />
-            </TableRow>  
-            
+            </TableRow>
+
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
@@ -733,8 +732,8 @@
                     android:layout_weight="0.05"
                     android:gravity="center"
                     android:text="" />
-            </TableRow>  
-            
+            </TableRow>
+
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
@@ -805,33 +804,108 @@
                     android:layout_weight="0.05"
                     android:gravity="center"
                     android:text="" />
-            </TableRow>  
+            </TableRow>
         </TableLayout>
-        
-        <TextView
-            android:id="@+id/special1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        
-        <TextView
-            android:id="@+id/special2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        
-        <TextView
-            android:id="@+id/special3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        
-        <TextView
-            android:id="@+id/special4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        
-        <TextView
-            android:id="@+id/special5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/special1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3" />
+
+                <TextView
+                    android:id="@+id/value1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_weight="0.7" />
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/special2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3" />
+
+                <TextView
+                    android:id="@+id/value2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_weight="0.7" />
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/special3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3" />
+
+                <TextView
+                    android:id="@+id/value3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_weight="0.7" />
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/special4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3" />
+
+                <TextView
+                    android:id="@+id/value4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_weight="0.7" />
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/special5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3" />
+
+                <TextView
+                    android:id="@+id/value5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_weight="0.7" />
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 
 </LinearLayout>

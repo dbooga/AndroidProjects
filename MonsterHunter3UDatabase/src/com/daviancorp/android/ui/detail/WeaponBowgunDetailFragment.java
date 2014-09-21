@@ -22,7 +22,8 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 			mExhaust1, mExhaust2, mSlicing, mWyvernfire, mSlime, mRecov1, mRecov2,
 			mDemon, mArmor, mPaint, mTranq;
 	
-	private TextView mSpecial1, mSpecial2, mSpecial3, mSpecial4, mSpecial5;
+	private TextView mSpecial1, mSpecial2, mSpecial3, mSpecial4, mSpecial5,
+			mValue1, mValue2, mValue3, mValue4, mValue5;
 	
 	public static WeaponBowgunDetailFragment newInstance(long weaponId) {
 		Bundle args = new Bundle();
@@ -114,6 +115,12 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 		mSpecial4 = (TextView) view.findViewById(R.id.special4);
 		mSpecial5 = (TextView) view.findViewById(R.id.special5);
 		
+		mValue1 = (TextView) view.findViewById(R.id.value1);
+		mValue2 = (TextView) view.findViewById(R.id.value2);
+		mValue3 = (TextView) view.findViewById(R.id.value3);
+		mValue4 = (TextView) view.findViewById(R.id.value4);
+		mValue5 = (TextView) view.findViewById(R.id.value5);
+		
 		return view;
 	}
 
@@ -142,19 +149,29 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 		int numSpecial = specials.length;
 		
 		if (numSpecial >= 1) {
-			mSpecial1.setText(specials[0]);
+			String[] tempSpecial = specials[0].split(" ");
+			mSpecial1.setText(tempSpecial[0]);
+			mValue1.setText(tempSpecial[1]);
 		}
 		if (numSpecial >= 2) {
-			mSpecial2.setText(specials[1]);
+			String[] tempSpecial = specials[1].split(" ");
+			mSpecial2.setText(tempSpecial[0]);
+			mValue2.setText(tempSpecial[1]);
 		}
 		if (numSpecial >= 3) {
-			mSpecial3.setText(specials[2]);
+			String[] tempSpecial = specials[2].split(" ");
+			mSpecial3.setText(tempSpecial[0]);
+			mValue3.setText(tempSpecial[1]);
 		}
 		if (numSpecial >= 4) {
-			mSpecial4.setText(specials[3]);
+			String[] tempSpecial = specials[3].split(" ");
+			mSpecial4.setText(tempSpecial[0]);
+			mValue4.setText(tempSpecial[1]);
 		}
 		if (numSpecial >= 5) {
-			mSpecial5.setText(specials[4]);
+			String[] tempSpecial = specials[4].split(" ");
+			mSpecial5.setText(tempSpecial[0]);
+			mValue5.setText(tempSpecial[1]);
 		}
 	}
 	

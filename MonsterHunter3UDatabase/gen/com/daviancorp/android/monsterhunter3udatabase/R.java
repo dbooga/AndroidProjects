@@ -1072,7 +1072,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int a_rank=0x7f060048;
-        public static final int about=0x7f060110;
+        public static final int about=0x7f060115;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1093,7 +1093,7 @@ containing a value of this type.
         public static final int arc=0x7f0600d4;
         public static final int area=0x7f060085;
         public static final int armor=0x7f0600f2;
-        public static final int arrow=0x7f060105;
+        public static final int arrow=0x7f06010a;
         public static final int attack=0x7f0600b9;
         public static final int awaken=0x7f0600ba;
         public static final int b_rank=0x7f060049;
@@ -1171,8 +1171,8 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f060026;
         public static final int expandableListView=0x7f060063;
         public static final int expanded_menu=0x7f06002c;
-        public static final int extra=0x7f060109;
-        public static final int extra_type=0x7f060108;
+        public static final int extra=0x7f06010e;
+        public static final int extra_type=0x7f06010d;
         public static final int fee=0x7f0600a5;
         public static final int filler=0x7f0600c1;
         public static final int fire=0x7f060094;
@@ -1219,7 +1219,7 @@ containing a value of this type.
         public static final int item_text1=0x7f06006c;
         public static final int item_text2=0x7f06006f;
         public static final int item_text3=0x7f060069;
-        public static final int item_type=0x7f060106;
+        public static final int item_type=0x7f06010b;
         public static final int ko=0x7f060092;
         public static final int label=0x7f060081;
         public static final int level=0x7f06007e;
@@ -1232,12 +1232,12 @@ containing a value of this type.
         public static final int map_image=0x7f06008a;
         public static final int map_text=0x7f060089;
         public static final int max=0x7f060074;
-        public static final int menu_item_copy_wishlist=0x7f06010b;
-        public static final int menu_item_delete_wishlist=0x7f06010c;
-        public static final int menu_item_delete_wishlist_data=0x7f06010e;
-        public static final int menu_item_edit_wishlist_data=0x7f06010d;
-        public static final int menu_item_rename_wishlist=0x7f06010a;
-        public static final int menu_item_wishlist_add=0x7f06010f;
+        public static final int menu_item_copy_wishlist=0x7f060110;
+        public static final int menu_item_delete_wishlist=0x7f060111;
+        public static final int menu_item_delete_wishlist_data=0x7f060113;
+        public static final int menu_item_edit_wishlist_data=0x7f060112;
+        public static final int menu_item_rename_wishlist=0x7f06010f;
+        public static final int menu_item_wishlist_add=0x7f060114;
         public static final int method=0x7f060086;
         public static final int middle=0x7f060012;
         public static final int monster=0x7f060087;
@@ -1274,7 +1274,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
         public static final int pts=0x7f0600a7;
-        public static final int quantity_type=0x7f060107;
+        public static final int quantity_type=0x7f06010c;
         public static final int quest=0x7f060043;
         public static final int quest_location=0x7f0600a3;
         public static final int quest_name=0x7f0600a1;
@@ -1282,10 +1282,10 @@ containing a value of this type.
         public static final int radio=0x7f06002f;
         public static final int rank=0x7f060084;
         public static final int rare=0x7f06005c;
-        public static final int recoil=0x7f060102;
+        public static final int recoil=0x7f060107;
         public static final int recov1=0x7f0600f8;
         public static final int recov2=0x7f0600f9;
-        public static final int reload=0x7f060101;
+        public static final int reload=0x7f060106;
         public static final int rename=0x7f060041;
         public static final int reward=0x7f060045;
         public static final int root=0x7f060064;
@@ -1320,17 +1320,17 @@ containing a value of this type.
         public static final int slot=0x7f06005b;
         public static final int special=0x7f0600bd;
         public static final int special1=0x7f0600fc;
-        public static final int special2=0x7f0600fd;
-        public static final int special3=0x7f0600fe;
-        public static final int special4=0x7f0600ff;
-        public static final int special5=0x7f060100;
+        public static final int special2=0x7f0600fe;
+        public static final int special3=0x7f060100;
+        public static final int special4=0x7f060102;
+        public static final int special5=0x7f060104;
         public static final int split_action_bar=0x7f06001e;
-        public static final int steady=0x7f060103;
+        public static final int steady=0x7f060108;
         public static final int sub1=0x7f0600ef;
         public static final int sub2=0x7f0600f0;
         public static final int submit_area=0x7f060039;
         public static final int tabMode=0x7f060002;
-        public static final int text=0x7f060104;
+        public static final int text=0x7f060109;
         public static final int thunder=0x7f060097;
         public static final int thunder_res=0x7f060061;
         public static final int title=0x7f06002b;
@@ -1339,11 +1339,16 @@ containing a value of this type.
         public static final int type=0x7f060071;
         public static final int up=0x7f060021;
         public static final int useLogo=0x7f060003;
+        public static final int value1=0x7f0600fd;
+        public static final int value2=0x7f0600ff;
+        public static final int value3=0x7f060101;
+        public static final int value4=0x7f060103;
+        public static final int value5=0x7f060105;
         public static final int water=0x7f060095;
         public static final int water_res=0x7f06005f;
         public static final int weapon_damage=0x7f060093;
-        public static final int wishlist_add=0x7f060111;
-        public static final int wishlist_edit=0x7f060112;
+        public static final int wishlist_add=0x7f060116;
+        public static final int wishlist_edit=0x7f060117;
         public static final int withText=0x7f06000c;
         public static final int wyvernfire=0x7f0600e0;
     }
