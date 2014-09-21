@@ -700,7 +700,9 @@ int menu context_wishlist_data 0x7f0d0001
 int menu context_wishlist_data_add 0x7f0d0002
 int menu context_wishlist_data_component 0x7f0d0003
 int menu main 0x7f0d0004
-int menu menu_wishlist_list 0x7f0d0005
+int menu menu_wishlist_add 0x7f0d0005
+int menu menu_wishlist_edit 0x7f0d0006
+int menu menu_wishlist_list 0x7f0d0007
 int raw mh3u 0x7f050000
 int raw mh3u1 0x7f050001
 int string abc_action_bar_home_description 0x7f0b0001

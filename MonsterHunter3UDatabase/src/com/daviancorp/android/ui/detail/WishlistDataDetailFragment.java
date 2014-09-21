@@ -70,6 +70,8 @@ public class WishlistDataDetailFragment extends ListFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setHasOptionsMenu(true);
+		
 		// Initialize the loader to load the list of runs
 		getLoaderManager().initLoader(0, getArguments(), this);
 	}
@@ -114,6 +116,27 @@ public class WishlistDataDetailFragment extends ListFragment implements
 		}
 		
 		return v;
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.menu_wishlist_edit, menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.wishlist_edit:
+				if (mListView.getAdapter().getCount() > 0) {
+					mActionMode = getActivity().startActionMode(new mActionModeCallback());
+		            mActionMode.setTag(0);
+					mListView.setItemChecked(0, true);
+				}
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+			}
 	}
 
 	@Override

@@ -82,7 +82,7 @@ public class ArmorDetailActivity extends GenericTabActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_wishlist_list, menu);
+		inflater.inflate(R.menu.menu_wishlist_add, menu);
 		return true;
 	}
 	

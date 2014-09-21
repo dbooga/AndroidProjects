@@ -4,6 +4,7 @@ General:	make all highlights consistent?
 		bold labels/main things? (eg. item names from monster carves)
 		clean logs
 		comment
+		home button?
 
 Armor:		modify armor list (add def/slots?)
 		add multiclick

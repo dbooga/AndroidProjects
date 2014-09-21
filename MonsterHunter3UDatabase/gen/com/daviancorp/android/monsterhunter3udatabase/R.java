@@ -1489,7 +1489,9 @@ containing a value of this type.
         public static final int context_wishlist_data_add=0x7f0d0002;
         public static final int context_wishlist_data_component=0x7f0d0003;
         public static final int main=0x7f0d0004;
-        public static final int menu_wishlist_list=0x7f0d0005;
+        public static final int menu_wishlist_add=0x7f0d0005;
+        public static final int menu_wishlist_edit=0x7f0d0006;
+        public static final int menu_wishlist_list=0x7f0d0007;
     }
     public static final class raw {
         public static final int mh3u=0x7f050000;

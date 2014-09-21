@@ -145,10 +145,11 @@ public class WishlistListFragment extends ListFragment implements
 				
 				return true;
 			case R.id.wishlist_edit:
-//				FragmentManager fm = getActivity().getSupportFragmentManager();
-//				WishlistAddDialogFragment dialog = new WishlistAddDialogFragment();
-//				dialog.setTargetFragment(WishlistListFragment.this, REQUEST_ADD);
-//				dialog.show(fm, DIALOG_WISHLIST_ADD);
+				if (mListView.getAdapter().getCount() > 0) {
+					mActionMode = getActivity().startActionMode(new mActionModeCallback());
+		            mActionMode.setTag(0);
+					mListView.setItemChecked(0, true);
+				}
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
