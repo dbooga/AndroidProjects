@@ -5,13 +5,10 @@ General:	make all highlights consistent?
 		clean logs
 		comment
 		home button?
+		add search in other lists?
+		home grid height
+		copy menu icon - white
+		app name
 
+Weapon:		grid images
 Armor:		modify armor list (add def/slots?)
-		add multiclick
-Quests:		Add location (link)
-Arena Quest:	Add location link
-
-
------------- b ------------ 
-1	fix wishlist component (multi-add)
-2	add menu item to add to wishlist

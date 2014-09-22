@@ -37,7 +37,7 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_weapon_bow_list, null);
-		super.setContextMenu(v);
+//		super.setContextMenu(v);
 		return v;
 	}
 	

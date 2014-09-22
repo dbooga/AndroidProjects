@@ -73,6 +73,16 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		populateDatabase(db);
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// Implement schema changes and data message here when upgrading
+		populateDatabase(db);
+	}
+	
+	private void populateDatabase(SQLiteDatabase db) {
 		String text;
 		
 		try {
@@ -115,12 +125,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 			Log.d("helpme", "ascii: " + t);
 			throw e;
 		}
-	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// Implement schema changes and data massage here when upgrading
-
 	}
 	
 	private String makePlaceholders(int len) {

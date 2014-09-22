@@ -35,8 +35,8 @@ import com.daviancorp.android.ui.detail.ArmorDetailActivity;
 public class ArmorExpandableListFragment extends Fragment {
 	private static final String ARG_TYPE = "ARMOR_TYPE";
 
-	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
-	private static final int REQUEST_ADD_MULTI = 0;
+//	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
+//	private static final int REQUEST_ADD_MULTI = 0;
 
 	private String mType;
 	private ArrayList<Armor> armors;
