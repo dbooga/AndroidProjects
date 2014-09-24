@@ -6,13 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.database.DataManager;
@@ -32,11 +32,11 @@ public class QuestExpandableListFragment extends Fragment {
 	private String mHub;
 	private static final String ARG_HUB = "QUEST_HUB";
 	private ArrayList<Quest> quests;
-	private String[] village = { "1 ", "2 ", "3 ", "4 ",
-			"5 ", "6 ", "7 ", "8 ", "9 " };
+	private String[] village = { "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ",
+			"8 ", "9 " };
 
-	private String[] port_dlc = { "1 ", "2 ", "3 ", "4 ",
-			"5 ", "6 ", "7 ", "8 " };
+	private String[] port_dlc = { "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ",
+			"8 " };
 
 	private ArrayList<ArrayList<Quest>> children;
 
@@ -136,10 +136,10 @@ public class QuestExpandableListFragment extends Fragment {
 			@Override
 			public boolean onChildClick(ExpandableListView arg0, View arg1,
 					int arg2, int arg3, long id) {
-				
-				
+
 				Intent i = new Intent(getActivity(), QuestDetailActivity.class);
-				i.putExtra(QuestDetailActivity.EXTRA_QUEST_ID, (long) arg1.getTag());
+				i.putExtra(QuestDetailActivity.EXTRA_QUEST_ID,
+						(long) arg1.getTag());
 				startActivity(i);
 
 				return false;
@@ -198,35 +198,47 @@ public class QuestExpandableListFragment extends Fragment {
 		@Override
 		public View getGroupView(int i, boolean b, View view,
 				ViewGroup viewGroup) {
-//			TextView textView = new TextView(
-//					QuestExpandableListFragment.this.getActivity());
-//			textView.setText(getGroup(i).toString());
-//			return textView;
-			
+			// TextView textView = new TextView(
+			// QuestExpandableListFragment.this.getActivity());
+			// textView.setText(getGroup(i).toString());
+			// return textView;
+
 			View v = view;
 			Context context = viewGroup.getContext();
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			v = inflater.inflate(R.layout.fragment_quest_expandablelist_group_item, viewGroup,
-					false);
-			
+			v = inflater.inflate(
+					R.layout.fragment_quest_expandablelist_group_item,
+					viewGroup, false);
+
 			TextView armorGroupTextView = (TextView) v.findViewById(R.id.name);
-			
+
 			armorGroupTextView.setText(getGroup(i).toString());
-			
+
 			return v;
 		}
 
 		@Override
 		public View getChildView(int i, int i1, boolean b, View view,
 				ViewGroup viewGroup) {
-			TextView textView = new TextView(
-					QuestExpandableListFragment.this.getActivity());
-			textView.setText(getChild(i, i1).toString());
-			textView.setPadding(20, 0, 0, 0);
-			
-			textView.setTag(((Quest) getChild(i,i1)).getId());
-			return textView;
+			// TextView textView = new TextView(
+			// QuestExpandableListFragment.this.getActivity());
+
+			View v = view;
+			Context context = viewGroup.getContext();
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			v = inflater.inflate(
+					R.layout.fragment_quest_expandablelist_child_item,
+					viewGroup, false);
+
+			TextView questChildTextView = (TextView) v.findViewById(R.id.name);
+			LinearLayout root = (LinearLayout) v.findViewById(R.id.root);
+
+			questChildTextView.setText(getChild(i, i1).toString());
+
+			root.setTag(((Quest) getChild(i, i1)).getId());
+			return v;
 		}
 
 		@Override

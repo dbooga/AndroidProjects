@@ -119,7 +119,7 @@ public class ItemListFragment extends ListFragment implements
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-			return inflater.inflate(android.R.layout.activity_list_item,
+			return inflater.inflate(R.layout.fragment_item_listitem,
 					parent, false);
 		}
 
@@ -131,9 +131,9 @@ public class ItemListFragment extends ListFragment implements
 
 			// Set up the text view
 			TextView itemNameTextView = (TextView) view
-					.findViewById(android.R.id.text1);
+					.findViewById(R.id.text1);
 			ImageView itemImageView = (ImageView) view
-					.findViewById(android.R.id.icon);
+					.findViewById(R.id.icon);
 
 			String cellText = item.getName();
 			String cellImage = "icons_items/" + item.getFileLocation();

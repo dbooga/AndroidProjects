@@ -1,152 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android" 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" 
-    android:padding="10dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="vertical"
+        android:padding="10dp" >
 
-        <ImageView
-            android:id="@+id/detail_monster_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@string/monster_image" />
-
-        <TextView
-            android:id="@+id/detail_monster_label"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@+id/label"
-            android:textSize="15sp" >
-        </TextView>
-    </LinearLayout>
-    
-    <View
-	    android:layout_width="match_parent"
-	    android:layout_height="1dp"
-	    android:layout_marginTop="4dp"
-	    android:background="@android:color/darker_gray"/>
+            android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+            <ImageView
+                android:id="@+id/detail_monster_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="10dp"
+                android:contentDescription="@string/monster_image" />
 
-        <TextView
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/detail_monster_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:text="@+id/label"
+                android:textSize="20sp"
+                android:textStyle="bold" >
+            </TextView>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-    		android:textStyle="bold"
-            android:text="Area" />
+            android:orientation="horizontal" >
 
-        <ImageView
-            android:id="@+id/cut"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.1"
-            android:contentDescription="@string/monster_image" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Area"
+                android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/impact"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.1"
-            android:contentDescription="@string/monster_image" />
+            <ImageView
+                android:id="@+id/cut"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@string/monster_image" />
 
-        <ImageView
-            android:id="@+id/shot"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.1"
-            android:contentDescription="@string/monster_image" />
+            <ImageView
+                android:id="@+id/impact"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@string/monster_image" />
 
-        <ImageView
-            android:id="@+id/ko"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.1"
-            android:contentDescription="@string/monster_image" />
+            <ImageView
+                android:id="@+id/shot"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@string/monster_image" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.1" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/ko"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@string/monster_image" />
 
-    <TableLayout
-        android:id="@+id/weapon_damage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </TableLayout>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1" />
+        </LinearLayout>
 
-    <View
-	    android:layout_width="match_parent"
-	    android:layout_height="1dp"
-	    android:background="@android:color/darker_gray"/>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        <TableLayout
+            android:id="@+id/weapon_damage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </TableLayout>
 
-        <TextView
-            android:layout_width="0dp"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-    		android:textStyle="bold"
-            android:text="Area" />
+            android:orientation="horizontal" >
 
-        <ImageView
-            android:id="@+id/fire"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.1"
-            android:contentDescription="@string/monster_image" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Area"
+                android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/water"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.1"
-            android:contentDescription="@string/monster_image" />
+            <ImageView
+                android:id="@+id/fire"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@string/monster_image" />
 
-        <ImageView
-            android:id="@+id/ice"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.1"
-            android:contentDescription="@string/monster_image" />
+            <ImageView
+                android:id="@+id/water"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@string/monster_image" />
 
-        <ImageView
-            android:id="@+id/thunder"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.1"
-            android:contentDescription="@string/monster_image" />
+            <ImageView
+                android:id="@+id/ice"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@string/monster_image" />
 
-        <ImageView
-            android:id="@+id/dragon"
-            android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_weight="0.1"
-            android:contentDescription="@string/monster_image" />
+            <ImageView
+                android:id="@+id/thunder"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@string/monster_image" />
+
+            <ImageView
+                android:id="@+id/dragon"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.1"
+                android:contentDescription="@string/monster_image" />
+        </LinearLayout>
+
+        <TableLayout
+            android:id="@+id/elemental_damage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </TableLayout>
     </LinearLayout>
 
-    <TableLayout
-        android:id="@+id/elemental_damage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </TableLayout>
-
-</LinearLayout>
 </ScrollView>

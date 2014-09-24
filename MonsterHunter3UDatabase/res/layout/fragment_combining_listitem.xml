@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".28"
-        android:background="@drawable/combining_clicked_states"
+        android:background="@drawable/generic_clicked_states"
         android:orientation="vertical" >
 
         <ImageView
@@ -32,7 +32,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".28"
-        android:background="@drawable/combining_clicked_states"
+        android:background="@drawable/generic_clicked_states"
         android:orientation="vertical" >
 
         <ImageView
@@ -54,7 +54,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".28"
-        android:background="@drawable/combining_clicked_states"
+        android:background="@drawable/generic_clicked_states"
         android:orientation="vertical" >
 
         <ImageView
