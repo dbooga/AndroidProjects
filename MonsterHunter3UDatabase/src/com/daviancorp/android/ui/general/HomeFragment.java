@@ -9,12 +9,10 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.daviancorp.android.data.object.Quest;
 import com.daviancorp.android.loader.QuestLoader;
@@ -35,23 +33,8 @@ import com.daviancorp.android.ui.list.WishlistListActivity;
 public class HomeFragment extends Fragment {
 
 	private ImageView mLogo;
-	private GridView gridView;
-	private final static int MONSTERS = 0;
-	private final static int WEAPONS = 1;
-	private final static int ARMORS = 2;
-	private final static int QUESTS = 3;
-	private final static int ITEMS = 4;
-	private final static int COMBINING = 5;
-	private final static int DECORATIONS = 6;
-	private final static int SKILLS = 7;
-	private final static int LOCATIONS = 8;
-	private final static int HUNTINGFLEET = 9;
-	private final static int ARENAQUESTS = 10;
-	private final static int WISHLISTS = 11;
-
-	static final String[] numbers = new String[] { "Monsters", "Weapons",
-			"Armors", "Quests", "Items", "Combining", "Decorations", "Skills",
-			"Locations", "Hunting Fleet", "Arena Quests", "Wishlists" };
+	private TextView mMonsters, mWeapons, mArmors, mQuests, mItems, mCombining,
+		mDecorations, mSkillTrees, mLocations, mHuntingFleet, mArenaQuests, mWishlists;
 
 	private ProgressDialog progress;
 	
@@ -69,80 +52,117 @@ public class HomeFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_home, parent, false);
 		
 		mLogo = (ImageView) v.findViewById(R.id.logo);
-		gridView = (GridView) v.findViewById(R.id.grid_home);
-
 		mLogo.setImageResource(R.drawable.mh3_cleaned);
+		
+		mMonsters = (TextView) v.findViewById(R.id.monsters);
+		mWeapons = (TextView) v.findViewById(R.id.weapons);
+		mArmors = (TextView) v.findViewById(R.id.armors);
+		mQuests = (TextView) v.findViewById(R.id.quests);
+		mItems = (TextView) v.findViewById(R.id.items);
+		mCombining = (TextView) v.findViewById(R.id.combining);
+		mDecorations = (TextView) v.findViewById(R.id.decorations);
+		mSkillTrees = (TextView) v.findViewById(R.id.skilltrees);
+		mLocations = (TextView) v.findViewById(R.id.locations);
+		mHuntingFleet = (TextView) v.findViewById(R.id.hunting_fleet);
+		mArenaQuests = (TextView) v.findViewById(R.id.arena_quests);
+		mWishlists = (TextView) v.findViewById(R.id.wishlists);
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-				R.layout.fragment_home_grid_text, numbers);
-
-		gridView.setAdapter(adapter);
-
-		gridView.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
-
-				Intent intent;
-
-				switch (position) {
-				case MONSTERS:
-					intent = new Intent(getActivity(),MonsterGridActivity.class);
-					startActivity(intent);
-					break;
-				case WEAPONS:
-					intent = new Intent(getActivity(), WeaponGridActivity.class);
-					startActivity(intent);
-					break;
-				case ARMORS:
-					intent = new Intent(getActivity(), ArmorListActivity.class);
-					startActivity(intent);
-					break;
-				case QUESTS:
-					intent = new Intent(getActivity(), QuestListActivity.class);
-					startActivity(intent);
-					break;
-				case ITEMS:
-					intent = new Intent(getActivity(), ItemListActivity.class);
-					startActivity(intent);
-					break;
-				case COMBINING:
-					intent = new Intent(getActivity(),
-							CombiningListActivity.class);
-					startActivity(intent);
-					break;
-				case DECORATIONS:
-					intent = new Intent(getActivity(),
-							DecorationListActivity.class);
-					startActivity(intent);
-					break;
-				case SKILLS:
-					intent = new Intent(getActivity(),
-							SkillTreeListActivity.class);
-					startActivity(intent);
-					break;
-				case LOCATIONS:
-					intent = new Intent(getActivity(),
-							LocationGridActivity.class);
-					startActivity(intent);
-					break;
-				case HUNTINGFLEET:
-					intent = new Intent(getActivity(),
-							HuntingFleetListActivity.class);
-					startActivity(intent);
-					break;
-				case ARENAQUESTS:
-					intent = new Intent(getActivity(),
-							ArenaQuestListActivity.class);
-					startActivity(intent);
-					break;
-				case WISHLISTS:
-					intent = new Intent(getActivity(),
-							WishlistListActivity.class);
-					startActivity(intent);
-					break;					
-				}
+		mMonsters.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(),MonsterGridActivity.class);
+				startActivity(intent);
 			}
 		});
+
+		mWeapons.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), WeaponGridActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		mArmors.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), ArmorListActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		mQuests.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), QuestListActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		mItems.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), ItemListActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		mCombining.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), CombiningListActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		mDecorations.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), DecorationListActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		mSkillTrees.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), SkillTreeListActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		mLocations.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), LocationGridActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		mHuntingFleet.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), HuntingFleetListActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		mArenaQuests.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), ArenaQuestListActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		mWishlists.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), WishlistListActivity.class);
+				startActivity(intent);
+			}
+		});
+
 		
 		return v;
 	}
