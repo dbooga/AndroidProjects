@@ -7,21 +7,22 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
         android:background="@drawable/weapon_clicked_states" >
     </ImageView>
 
     <TextView
         android:id="@+id/text"
-        android:layout_width="110dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:gravity="center"
         android:background="@drawable/transparent_states"
+        android:gravity="center"
         android:textColorHighlight="@color/transparent"
-        android:textSize="10sp" >
+        android:textSize="10sp"
+        android:textStyle="bold" >
     </TextView>
 
 </LinearLayout>

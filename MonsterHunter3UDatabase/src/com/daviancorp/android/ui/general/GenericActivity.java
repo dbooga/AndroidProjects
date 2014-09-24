@@ -44,6 +44,7 @@ public abstract class GenericActivity extends SingleFragmentActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			Intent intent = new Intent(GenericActivity.this, HomeActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 			startActivity(intent);
 			return true;
 		case R.id.about:

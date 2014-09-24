@@ -102,6 +102,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 			text = new String(buffer);
 		} catch (IOException e) {
 			// Should never happen!
+			Log.d("helpme", "exception");
 			throw new RuntimeException(e);
 		}
 
