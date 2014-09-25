@@ -35,7 +35,7 @@ public class SkillTreeDetailFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
+		getLoaderManager().initLoader(R.id.skill_tree_detail_fragment, getArguments(), this);
 	}
 	
 	@Override

@@ -12,7 +12,6 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,7 @@ public class MonsterRewardFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
+		getLoaderManager().initLoader(R.id.monster_reward_fragment, getArguments(), this);
 	}
 
 	@Override

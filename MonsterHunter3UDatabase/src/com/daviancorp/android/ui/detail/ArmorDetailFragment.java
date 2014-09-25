@@ -28,7 +28,6 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class ArmorDetailFragment extends Fragment {
 	private static final String ARG_ARMOR_ID = "ARMOR_ID";
-	private static final int LOAD_ARMOR = 1;
 
 	private Armor mArmor;
 
@@ -67,7 +66,7 @@ public class ArmorDetailFragment extends Fragment {
 			long armorId = args.getLong(ARG_ARMOR_ID, -1);
 			if (armorId != -1) {
 				LoaderManager lm = getLoaderManager();
-				lm.initLoader(LOAD_ARMOR, args,
+				lm.initLoader(R.id.armor_detail_fragment, args,
 						new ArmorLoaderCallbacks());
 			}
 		}

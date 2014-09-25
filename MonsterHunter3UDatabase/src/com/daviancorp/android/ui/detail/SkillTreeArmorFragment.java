@@ -11,7 +11,6 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +45,27 @@ public class SkillTreeArmorFragment extends ListFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		int loaderId = 0;
+		String mType = getArguments().getString(ARG_TYPE);
+		
+		if (mType.equals("Head")) {
+			loaderId = R.id.skill_tree_armor_fragment_head;
+		}
+		else if (mType.equals("Body")) {
+			loaderId = R.id.skill_tree_armor_fragment_body;
+		}
+		else if (mType.equals("Arms")) {
+			loaderId = R.id.skill_tree_armor_fragment_arms;
+		}
+		else if (mType.equals("Waist")) {
+			loaderId = R.id.skill_tree_armor_fragment_waist;
+		}
+		else if (mType.equals("Legs")) {
+			loaderId = R.id.skill_tree_armor_fragment_legs;
+		}
+		
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
+		getLoaderManager().initLoader(loaderId, getArguments(), this);
 	}
 	
 	@Override

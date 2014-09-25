@@ -28,7 +28,7 @@ public class ArenaQuestListFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, null, this);
+		getLoaderManager().initLoader(R.id.arena_quest_list_fragment, null, this);
 	}
 
 	@Override

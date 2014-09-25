@@ -16,7 +16,6 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class ArenaQuestDetailFragment extends Fragment {
 	private static final String ARG_ARENA_QUEST_ID = "ARENA_QUEST_ID";
-	private static final int LOAD_ARENA_QUEST = 1;
 	
 	private ArenaQuest mArenaQuest;
 	
@@ -47,7 +46,7 @@ public class ArenaQuestDetailFragment extends Fragment {
 			long questId = args.getLong(ARG_ARENA_QUEST_ID, -1);
 			if (questId != -1) {
 				LoaderManager lm = getLoaderManager();
-				lm.initLoader(LOAD_ARENA_QUEST, args, new ArenaQuestLoaderCallbacks());
+				lm.initLoader(R.id.arena_quest_detail_fragment, args, new ArenaQuestLoaderCallbacks());
 			}
 		}
 	}

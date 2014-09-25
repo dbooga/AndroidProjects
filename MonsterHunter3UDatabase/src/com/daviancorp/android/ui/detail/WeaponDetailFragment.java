@@ -20,7 +20,6 @@ import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
 
 public class WeaponDetailFragment extends Fragment {
 	protected static final String ARG_WEAPON_ID = "WEAPON_ID";
-	protected static final int LOAD_WEAPON = 1;
 	
 	protected Weapon mWeapon;
 
@@ -50,7 +49,7 @@ public class WeaponDetailFragment extends Fragment {
 			long weaponId = args.getLong(ARG_WEAPON_ID, -1);
 			if (weaponId != -1) {
 				LoaderManager lm = getLoaderManager();
-				lm.initLoader(LOAD_WEAPON, args, new WeaponLoaderCallbacks());
+				lm.initLoader(R.id.weapon_detail_fragment, args, new WeaponLoaderCallbacks());
 			}
 		}
 	}

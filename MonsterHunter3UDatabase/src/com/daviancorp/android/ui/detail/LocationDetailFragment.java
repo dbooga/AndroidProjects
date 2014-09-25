@@ -24,7 +24,6 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class LocationDetailFragment extends Fragment {
 	private static final String ARG_LOCATION_ID = "LOCATION_ID";
-	private static final int LOAD_LOCATION = 1;
 	
 	private Location mLocation;
 	
@@ -51,7 +50,7 @@ public class LocationDetailFragment extends Fragment {
 			long locationId = args.getLong(ARG_LOCATION_ID, -1);
 			if (locationId != -1) {
 				LoaderManager lm = getLoaderManager();
-				lm.initLoader(LOAD_LOCATION, args, new LocationLoaderCallbacks());
+				lm.initLoader(R.id.location_detail_fragment, args, new LocationLoaderCallbacks());
 			}
 		}
 	}

@@ -39,7 +39,7 @@ public class ItemListFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, null, this);
+		getLoaderManager().initLoader(R.id.item_list_fragment, null, this);
 		
 		mFilter = "";
 	}

@@ -23,7 +23,6 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class DecorationDetailFragment extends Fragment {
 	private static final String ARG_DECORATION_ID = "DECORATION_ID";
-	private static final int LOAD_DECORATION = 1;
 
 	private Decoration mDecoration;
 
@@ -54,7 +53,7 @@ public class DecorationDetailFragment extends Fragment {
 			long decorationId = args.getLong(ARG_DECORATION_ID, -1);
 			if (decorationId != -1) {
 				LoaderManager lm = getLoaderManager();
-				lm.initLoader(LOAD_DECORATION, args,
+				lm.initLoader(R.id.decoration_detail_fragment, args,
 						new DecorationLoaderCallbacks());
 			}
 		}

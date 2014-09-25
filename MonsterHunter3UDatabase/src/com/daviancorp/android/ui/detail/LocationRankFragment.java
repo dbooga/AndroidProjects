@@ -11,7 +11,6 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,9 +42,22 @@ public class LocationRankFragment extends ListFragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
+		int loaderId = 0;
+		String mRank = getArguments().getString(ARG_RANK);
+		
+		if (mRank.equals("LR")) {
+			loaderId = R.id.location_rank_fragment_low;
+		}
+		else if (mRank.equals("HR")) {
+			loaderId = R.id.location_rank_fragment_high;
+		}
+		else if (mRank.equals("G")) {
+			loaderId = R.id.location_rank_fragment_g;
+		}
+		
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
+		getLoaderManager().initLoader(loaderId, getArguments(), this);
 	}
 
 	@Override

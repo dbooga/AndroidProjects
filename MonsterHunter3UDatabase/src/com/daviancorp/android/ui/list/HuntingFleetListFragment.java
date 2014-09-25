@@ -45,7 +45,7 @@ public class HuntingFleetListFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
+		getLoaderManager().initLoader(R.id.hunting_fleet_list_fragment, getArguments(), this);
 	}
 	
 	@Override

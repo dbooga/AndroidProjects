@@ -49,7 +49,7 @@ public class MonsterGridFragment extends Fragment implements
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
+		getLoaderManager().initLoader(R.id.monster_grid_fragment, getArguments(), this);
 	}
 
 	@Override

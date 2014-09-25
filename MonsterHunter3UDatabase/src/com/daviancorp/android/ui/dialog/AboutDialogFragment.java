@@ -21,7 +21,7 @@ public class AboutDialogFragment extends DialogFragment {
 		
 		message.setText(s);
 		message.setMovementMethod(LinkMovementMethod.getInstance());;
-		message.setPadding(50, 10, 2, 10);
+		message.setPadding(20, 10, 20, 10);
 		message.setTextSize(18);
 		
 		return new AlertDialog.Builder(getActivity())

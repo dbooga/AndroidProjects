@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,6 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class ItemDetailFragment extends Fragment {
 	private static final String ARG_ITEM_ID = "ITEM_ID";
-	private static final int LOAD_ITEM = 1;
 	
 	private Item mItem;
 	
@@ -56,7 +54,7 @@ public class ItemDetailFragment extends Fragment {
 			long itemId = args.getLong(ARG_ITEM_ID, -1);
 			if (itemId != -1) {
 				LoaderManager lm = getLoaderManager();
-				lm.initLoader(LOAD_ITEM, args, new ItemLoaderCallbacks());
+				lm.initLoader(R.id.item_detail_fragment, args, new ItemLoaderCallbacks());
 			}
 		}
 	}

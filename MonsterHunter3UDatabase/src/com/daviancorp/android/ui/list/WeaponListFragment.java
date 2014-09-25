@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.daviancorp.android.data.object.Weapon;
 import com.daviancorp.android.loader.WeaponListCursorLoader;
+import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.WeaponDetailActivity;
 
 public abstract class WeaponListFragment extends ListFragment implements
@@ -27,7 +28,7 @@ public abstract class WeaponListFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
+		getLoaderManager().initLoader(R.id.weapon_list_fragment, getArguments(), this);
 	}
 
 	

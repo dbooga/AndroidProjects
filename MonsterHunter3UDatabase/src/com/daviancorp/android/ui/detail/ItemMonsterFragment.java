@@ -36,7 +36,7 @@ public class ItemMonsterFragment extends ListFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
+		getLoaderManager().initLoader(R.id.item_monster_fragment, getArguments(), this);
 	}
 	
 	@Override

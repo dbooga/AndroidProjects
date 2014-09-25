@@ -73,7 +73,7 @@ public class WishlistDataDetailFragment extends ListFragment implements
 		setHasOptionsMenu(true);
 		
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
+		getLoaderManager().initLoader(R.id.wishlist_data_detail_fragment, getArguments(), this);
 	}
 	
 	@Override

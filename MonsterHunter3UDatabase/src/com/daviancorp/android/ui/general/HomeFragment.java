@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		
 		LoaderManager lm = getLoaderManager();
-		lm.initLoader(0, null, new DummyLoaderCallbacks());
+		lm.initLoader(R.id.home_fragment, null, new DummyLoaderCallbacks());
 	}
 
 	@Override

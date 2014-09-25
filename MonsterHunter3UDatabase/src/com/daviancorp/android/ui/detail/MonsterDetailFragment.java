@@ -28,7 +28,6 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class MonsterDetailFragment extends Fragment {
 	private static final String ARG_MONSTER_ID = "MONSTER_ID";
-	private static final int LOAD_MONSTER = 1;
 
 	private Bundle mBundle;
 	
@@ -62,7 +61,7 @@ public class MonsterDetailFragment extends Fragment {
 			long monsterId = args.getLong(ARG_MONSTER_ID, -1);
 			if (monsterId != -1) {
 				LoaderManager lm = getLoaderManager();
-				lm.initLoader(LOAD_MONSTER, args, new MonsterLoaderCallbacks());
+				lm.initLoader(R.id.monster_detail_fragment, args, new MonsterLoaderCallbacks());
 			}
 		}
 	}

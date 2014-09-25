@@ -41,7 +41,7 @@ public class LocationGridFragment extends Fragment implements
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(0, getArguments(), this);
+		getLoaderManager().initLoader(R.id.location_grid_fragment, getArguments(), this);
 	}
 
 	@Override

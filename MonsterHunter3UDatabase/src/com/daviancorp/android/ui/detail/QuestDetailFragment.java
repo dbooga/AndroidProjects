@@ -17,7 +17,6 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class QuestDetailFragment extends Fragment {
 	private static final String ARG_QUEST_ID = "QUEST_ID";
-	private static final int LOAD_QUEST = 1;
 	
 	private Quest mQuest;
 	
@@ -46,7 +45,7 @@ public class QuestDetailFragment extends Fragment {
 			long questId = args.getLong(ARG_QUEST_ID, -1);
 			if (questId != -1) {
 				LoaderManager lm = getLoaderManager();
-				lm.initLoader(LOAD_QUEST, args, new QuestLoaderCallbacks());
+				lm.initLoader(R.id.quest_detail_fragment, args, new QuestLoaderCallbacks());
 			}
 		}
 	}
