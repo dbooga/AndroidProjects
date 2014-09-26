@@ -1,12 +1,15 @@
 package com.daviancorp.android.data.database;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
@@ -74,6 +77,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		populateDatabase(db);
+		db.execSQL("INSERT INTO 'wishlist' (`_id`, `name`) VALUES (1, 'My Wishlist');");
 	}
 
 	@Override
@@ -83,50 +87,100 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	private void populateDatabase(SQLiteDatabase db) {
-		String text;
-		
-		try {
-			InputStream is = mContext.getResources().openRawResource(
+		 String sqlStatement = "";
+		 String currLine = null;
+		    boolean inOnCreate = true;
+
+		    // if called from onCreate() db is open and inTransaction, else getWritableDatabase()
+		    if(db == null) {
+		        inOnCreate = false;
+		        db = this.getWritableDatabase();
+		    }
+
+	    	InputStream is = mContext.getResources().openRawResource(
 					R.raw.mh3u);
-			// We guarantee that the available method returns the total
-			// size of the asset... of course, this does mean that a single
-			// asset can't be more than 2 gigs.
-			int size = is.available();
+		    try {
+		    	BufferedReader reader = new BufferedReader(new InputStreamReader(is));	
+		    	
+		        while ((currLine = reader.readLine()) != null) {
+		        	sqlStatement = sqlStatement + currLine;
+		            // trim, so we can look for ';'
+		            sqlStatement.trim();
+		            if(!sqlStatement.endsWith(";")) {
+		                continue;   // line breaks in file, get whole statement
+		            }
+		            if(!sqlStatement.startsWith("DROP") && !sqlStatement.startsWith("CREATE")
+		            		&& !sqlStatement.startsWith("INSERT") && !sqlStatement.startsWith("  INSERT")) {
+		            	sqlStatement = "";
+		            	continue;
+		            }
+		            try {
+		            	Log.d("helpme", "String: " + sqlStatement);
+	                    db.execSQL(sqlStatement);
+	                    sqlStatement = "";
+	                } catch (SQLException e) {
+	                    throw(new Error("Error executing SQL " + sqlStatement));
+	                }   // try/catch
+		        }   // while()
+		    } catch (IOException e) {
+		    	
+				Log.d("helpme", "String: " + sqlStatement);
+				
+		        throw(new Error("Error reading SQL file"));
+		    } finally {
+		        try { is.close(); } catch (Throwable ignore) {}
+		    }
 
-			// Read the entire asset into a local byte buffer.
-			byte[] buffer = new byte[size];
-			is.read(buffer);
-			is.close();
-
-			// Convert the buffer into a string.
-			text = new String(buffer);
-		} catch (IOException e) {
-			// Should never happen!
-			Log.d("helpme", "exception");
-			throw new RuntimeException(e);
-		}
-
-		String[] str = text.split(";");
-		String temp = "";
-		String before = "";
-		
-		try {
-			for (String s : str) {
-				temp = s;
-				if (!s.equals("") && !s.startsWith("-") && !s.startsWith("/")
-						&& !s.startsWith("\n") && !s.startsWith("\r")) {
-					db.execSQL(s);
-				}
-				before = s;
-			}
-		} catch (Exception e) {
-			int t = (int) temp.charAt(0);
-			Log.d("helpme", "Before: " + before);
-			Log.d("helpme", "String: " + temp);
-			Log.d("helpme", "ascii: " + t);
-			throw e;
-		}
+		    if(!inOnCreate) {
+		        db.close();
+		    }
 	}
+	
+//	private void populateDatabase(SQLiteDatabase db) {
+//		String text;
+//		
+//		try {
+//			InputStream is = mContext.getResources().openRawResource(
+//					R.raw.mh3u);
+//			// We guarantee that the available method returns the total
+//			// size of the asset... of course, this does mean that a single
+//			// asset can't be more than 2 gigs.
+//			int size = is.available();
+//
+//			// Read the entire asset into a local byte buffer.
+//			byte[] buffer = new byte[size];
+//			is.read(buffer);
+//			is.close();
+//
+//			// Convert the buffer into a string.
+//			text = new String(buffer);
+//		} catch (IOException e) {
+//			// Should never happen!
+//			Log.d("helpme", "exception");
+//			throw new RuntimeException(e);
+//		}
+//
+//		String[] str = text.split(";");
+//		String temp = "";
+//		String before = "";
+//		
+//		try {
+//			for (String s : str) {
+//				temp = s;
+//				if (!s.equals("") && !s.startsWith("-") && !s.startsWith("/")
+//						&& !s.startsWith("\n") && !s.startsWith("\r")) {
+//					db.execSQL(s);
+//				}
+//				before = s;
+//			}
+//		} catch (Exception e) {
+//			int t = (int) temp.charAt(0);
+//			Log.d("helpme", "Before: " + before);
+//			Log.d("helpme", "String: " + temp);
+//			Log.d("helpme", "ascii: " + t);
+//			throw e;
+//		}
+//	}
 	
 	private String makePlaceholders(int len) {
 	    if (len < 1) {
