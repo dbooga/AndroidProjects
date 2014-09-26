@@ -13,7 +13,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,6 @@ public class ItemListFragment extends ListFragment implements
 		        // When user changed the Text
 		    	mFilter = cs.toString();
 		    	getLoaderManager().restartLoader(0, null, ItemListFragment.this);
-		    	Log.d("helpme", "adapter2");
 		    }
 		     
 		    @Override
@@ -126,7 +124,6 @@ public class ItemListFragment extends ListFragment implements
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
 			// Get the item for the current row
-			Log.d("helpme", "bindView:" + cursor.getCount());
 			Item item = mItemCursor.getItem();
 
 			// Set up the text view

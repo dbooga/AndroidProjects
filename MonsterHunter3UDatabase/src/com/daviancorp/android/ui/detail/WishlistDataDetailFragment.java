@@ -172,7 +172,7 @@ public class WishlistDataDetailFragment extends ListFragment implements
 	
 	private void updateUI() {
 		if (started) {
-			getLoaderManager().getLoader( 0 ).forceLoad();
+			getLoaderManager().getLoader( R.id.wishlist_data_detail_fragment ).forceLoad();
 			WishlistDataListCursorAdapter adapter = (WishlistDataListCursorAdapter) getListAdapter();
 			adapter.notifyDataSetChanged();
 	

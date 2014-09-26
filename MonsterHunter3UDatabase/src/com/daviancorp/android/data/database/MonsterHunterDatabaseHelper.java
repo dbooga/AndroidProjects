@@ -101,8 +101,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 					R.raw.mh3u);
 		    try {
 		    	BufferedReader reader = new BufferedReader(new InputStreamReader(is));	
+		    	int line = 1;	  
 		    	
 		        while ((currLine = reader.readLine()) != null) {
+		        	line++;
 		        	sqlStatement = sqlStatement + currLine;
 		            // trim, so we can look for ';'
 		            sqlStatement.trim();
@@ -115,16 +117,16 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		            	continue;
 		            }
 		            try {
-		            	Log.d("helpme", "String: " + sqlStatement);
 	                    db.execSQL(sqlStatement);
 	                    sqlStatement = "";
 	                } catch (SQLException e) {
+		            	Log.d("helpme", "Error " + line + ":" + sqlStatement);
 	                    throw(new Error("Error executing SQL " + sqlStatement));
 	                }   // try/catch
 		        }   // while()
 		    } catch (IOException e) {
 		    	
-				Log.d("helpme", "String: " + sqlStatement);
+				Log.d("helpme", "IOException");
 				
 		        throw(new Error("Error reading SQL file"));
 		    } finally {

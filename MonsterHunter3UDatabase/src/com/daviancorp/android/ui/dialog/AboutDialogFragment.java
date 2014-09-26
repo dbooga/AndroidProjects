@@ -2,6 +2,9 @@ package com.daviancorp.android.ui.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.SpannableString;
@@ -16,7 +19,7 @@ public class AboutDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-		Log.d("heyo", "oncreatedialog");
+		Log.d("helpme", "oncreatedialog");
 		final TextView message = new TextView(getActivity());
 
 		final SpannableString s = new SpannableString(getActivity().getText(
