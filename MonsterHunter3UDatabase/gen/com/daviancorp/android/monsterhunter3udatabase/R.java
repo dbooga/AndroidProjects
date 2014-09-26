@@ -1653,7 +1653,6 @@ containing a value of this type.
     }
     public static final class raw {
         public static final int mh3u=0x7f050000;
-        public static final int mh3u1=0x7f050001;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1700,34 +1699,35 @@ containing a value of this type.
         public static final int about_message=0x7f0b0010;
         public static final int action_settings=0x7f0b000f;
         public static final int alert_button=0x7f0b0011;
+        public static final int alert_rate=0x7f0b0012;
         public static final int app_name=0x7f0b000d;
-        public static final int arena_quests=0x7f0b002a;
-        public static final int armor=0x7f0b0026;
-        public static final int cancel=0x7f0b0012;
-        public static final int combining=0x7f0b0021;
-        public static final int decorations=0x7f0b0025;
-        public static final int hunting_fleet=0x7f0b0023;
-        public static final int icon_name=0x7f0b002c;
-        public static final int items=0x7f0b001f;
-        public static final int locations=0x7f0b0020;
-        public static final int monster_damage=0x7f0b0028;
-        public static final int monster_image=0x7f0b0027;
-        public static final int monsters=0x7f0b001e;
-        public static final int option_grid=0x7f0b0015;
-        public static final int option_list=0x7f0b0014;
-        public static final int option_wishlist_add=0x7f0b0016;
-        public static final int option_wishlist_copy=0x7f0b0018;
-        public static final int option_wishlist_data_add=0x7f0b001a;
-        public static final int option_wishlist_data_delete=0x7f0b001c;
-        public static final int option_wishlist_data_edit=0x7f0b001b;
-        public static final int option_wishlist_delete=0x7f0b0017;
-        public static final int option_wishlist_rename=0x7f0b0019;
-        public static final int quests=0x7f0b0022;
-        public static final int search_title=0x7f0b001d;
-        public static final int skill_trees=0x7f0b0024;
-        public static final int submit=0x7f0b0013;
-        public static final int weapons=0x7f0b0029;
-        public static final int wishlist=0x7f0b002b;
+        public static final int arena_quests=0x7f0b002b;
+        public static final int armor=0x7f0b0027;
+        public static final int cancel=0x7f0b0013;
+        public static final int combining=0x7f0b0022;
+        public static final int decorations=0x7f0b0026;
+        public static final int hunting_fleet=0x7f0b0024;
+        public static final int icon_name=0x7f0b002d;
+        public static final int items=0x7f0b0020;
+        public static final int locations=0x7f0b0021;
+        public static final int monster_damage=0x7f0b0029;
+        public static final int monster_image=0x7f0b0028;
+        public static final int monsters=0x7f0b001f;
+        public static final int option_grid=0x7f0b0016;
+        public static final int option_list=0x7f0b0015;
+        public static final int option_wishlist_add=0x7f0b0017;
+        public static final int option_wishlist_copy=0x7f0b0019;
+        public static final int option_wishlist_data_add=0x7f0b001b;
+        public static final int option_wishlist_data_delete=0x7f0b001d;
+        public static final int option_wishlist_data_edit=0x7f0b001c;
+        public static final int option_wishlist_delete=0x7f0b0018;
+        public static final int option_wishlist_rename=0x7f0b001a;
+        public static final int quests=0x7f0b0023;
+        public static final int search_title=0x7f0b001e;
+        public static final int skill_trees=0x7f0b0025;
+        public static final int submit=0x7f0b0014;
+        public static final int weapons=0x7f0b002a;
+        public static final int wishlist=0x7f0b002c;
     }
     public static final class style {
         public static final int ActionBar_Solid_Brachydios5=0x7f0c008e;
